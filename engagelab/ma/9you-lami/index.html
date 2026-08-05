@@ -1,0 +1,849 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EngageLab MA · 久游 Lami Mahjong 东南亚棋牌平台增长方案</title>
+  <style>
+    :root {
+      --bg: #ffffff;
+      --bg-soft: #f7f8fa;
+      --bg-elev: #ffffff;
+      --border: #e5e7eb;
+      --border-strong: #d1d5db;
+      --text: #111827;
+      --text-2: #374151;
+      --text-3: #6b7280;
+      --text-4: #9ca3af;
+      --accent: #2563eb;
+      --accent-soft: #dbeafe;
+      --success: #16a34a;
+      --success-soft: #dcfce7;
+      --warning: #d97706;
+      --warning-soft: #fef3c7;
+      --info: #0369a1;
+      --info-soft: #e0f2fe;
+      --danger: #dc2626;
+      --danger-soft: #fee2e2;
+      --radius: 10px;
+      --radius-sm: 6px;
+      --shadow: 0 1px 2px rgba(16, 24, 40, 0.04);
+    }
+
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; background: var(--bg-soft); color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC",
+        "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", sans-serif;
+      line-height: 1.6; -webkit-font-smoothing: antialiased; font-size: 15px; }
+
+    main { max-width: 1180px; margin: 0 auto; padding: 32px 28px 80px; }
+
+    h1 { font-size: 30px; font-weight: 700; margin: 0 0 8px; letter-spacing: -0.01em; color: var(--text); }
+    h2 { font-size: 22px; font-weight: 700; margin: 0 0 12px; letter-spacing: -0.005em; color: var(--text); }
+    h3 { font-size: 17px; font-weight: 600; margin: 0 0 10px; color: var(--text); }
+    p { margin: 0 0 8px; color: var(--text-2); }
+    .muted { color: var(--text-3); }
+    .small { font-size: 13px; }
+    .bold { font-weight: 600; }
+
+    .section { background: var(--bg-elev); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 24px 26px; margin-bottom: 20px; }
+    .section-plain { padding: 6px 2px 18px; margin-bottom: 12px; }
+    .divider { height: 1px; background: var(--border); margin: 16px 0; border: none; }
+
+    .hero { background: linear-gradient(180deg, #fff 0%, #f0fdf4 100%);
+      border: 1px solid var(--border); border-radius: 14px; padding: 28px 30px;
+      margin-bottom: 24px; }
+    .hero-pills { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 14px; }
+    .hero-subtitle { color: var(--text-3); font-size: 15px; max-width: 900px; margin: 8px 0 18px; }
+
+    .pill { display: inline-flex; align-items: center; padding: 2px 10px;
+      font-size: 12px; border-radius: 999px; border: 1px solid var(--border-strong);
+      color: var(--text-2); background: #fff; font-weight: 500; }
+    .pill-accent { background: var(--accent-soft); border-color: var(--accent); color: var(--accent); }
+    .pill-info { background: var(--info-soft); border-color: var(--info); color: var(--info); }
+    .pill-success { background: var(--success-soft); border-color: var(--success); color: var(--success); }
+    .pill-warn { background: var(--warning-soft); border-color: var(--warning); color: var(--warning); }
+
+    .grid { display: grid; gap: 16px; }
+    .grid-4 { grid-template-columns: repeat(4, 1fr); }
+    .grid-3 { grid-template-columns: repeat(3, 1fr); }
+    .grid-2 { grid-template-columns: repeat(2, 1fr); }
+    .grid-5 { grid-template-columns: repeat(5, 1fr); }
+    .grid-1-2 { grid-template-columns: 1fr 2fr; }
+    .grid-2-1 { grid-template-columns: 1.4fr 1fr; }
+    .grid-12-1 { grid-template-columns: 1.2fr 1fr; }
+    .row { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+
+    .stat { padding: 14px 16px; background: var(--bg-elev); border: 1px solid var(--border);
+      border-radius: var(--radius); }
+    .stat-value { font-size: 26px; font-weight: 700; letter-spacing: -0.01em; color: var(--text);
+      line-height: 1.15; }
+    .stat-value.success { color: var(--success); }
+    .stat-value.info { color: var(--info); }
+    .stat-value.warn { color: var(--warning); }
+
+    .stat-label { font-size: 12px; color: var(--text-3); margin-top: 4px; }
+
+    .card { background: var(--bg-elev); border: 1px solid var(--border);
+      border-radius: var(--radius); overflow: hidden; }
+    .card-header { padding: 10px 16px; border-bottom: 1px solid var(--border);
+      background: #fafbfc; font-size: 13px; font-weight: 600; color: var(--text-2); }
+    .card-body { padding: 16px; }
+    .card-body.p-sm { padding: 12px; }
+    .card-body ul { margin: 0; padding-left: 18px; }
+    .card-body li { margin-bottom: 4px; font-size: 13.5px; color: var(--text-2); }
+
+    .callout { padding: 12px 14px; border-radius: var(--radius-sm);
+      border: 1px solid var(--border); border-left-width: 3px; background: var(--bg-soft); }
+    .callout-title { font-weight: 600; margin-bottom: 4px; font-size: 14px; }
+    .callout-body { font-size: 13px; color: var(--text-2); }
+    .callout-body p { font-size: 13px; color: var(--text-2); margin: 0 0 4px; }
+    .callout.info { border-left-color: var(--info); background: var(--info-soft); }
+    .callout.info .callout-title { color: var(--info); }
+    .callout.success { border-left-color: var(--success); background: var(--success-soft); }
+    .callout.success .callout-title { color: var(--success); }
+    .callout.warn { border-left-color: var(--warning); background: var(--warning-soft); }
+    .callout.warn .callout-title { color: var(--warning); }
+    .callout.neutral { border-left-color: var(--text-3); }
+
+    table { width: 100%; border-collapse: collapse; font-size: 13.5px;
+      background: var(--bg-elev); border: 1px solid var(--border); border-radius: var(--radius);
+      overflow: hidden; }
+    th, td { padding: 10px 12px; text-align: left; border-bottom: 1px solid var(--border);
+      color: var(--text-2); vertical-align: middle; }
+    th { background: #fafbfc; font-weight: 600; font-size: 12.5px; color: var(--text-3);
+      letter-spacing: 0.01em; text-transform: uppercase; }
+    tr:last-child td { border-bottom: 0; }
+    tr.tone-success td { background: rgba(22, 163, 74, 0.04); }
+    tr.tone-info td { background: rgba(3, 105, 161, 0.04); }
+
+    .signal-row { display: flex; gap: 10px; padding: 10px 0;
+      border-bottom: 1px solid var(--border); align-items: center; }
+    .signal-row:last-child { border-bottom: 0; }
+    .signal-row .left { flex: 1; min-width: 0; }
+    .signal-row .label { font-size: 13px; font-weight: 600; }
+    .signal-row .hint { font-size: 12px; color: var(--text-3); }
+    .signal-row .value { font-weight: 700; color: var(--text); font-size: 14px; white-space: nowrap; }
+
+    .chart { width: 100%; }
+    .chart svg { width: 100%; height: auto; display: block; }
+    .chart-legend { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--border); }
+    .chart-legend .leg-item { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--text-3); }
+    .chart-legend .dot { width: 10px; height: 10px; border-radius: 2px; }
+
+    .dag-wrap { overflow-x: auto; padding: 8px 2px; }
+    .dag-wrap svg { display: block; margin: 0 auto; }
+
+    .toc-bar { position: sticky; top: 0; background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(8px); border-bottom: 1px solid var(--border);
+      z-index: 10; padding: 10px 28px; margin: -32px -28px 24px;
+      font-size: 12.5px; }
+    .toc-bar .toc-inner { max-width: 1180px; margin: 0 auto; display: flex; gap: 14px;
+      align-items: center; overflow-x: auto; }
+    .toc-bar a { color: var(--text-3); text-decoration: none; white-space: nowrap; padding: 4px 2px; }
+    .toc-bar a:hover { color: var(--accent); }
+    .toc-bar .brand { font-weight: 700; color: var(--text); }
+
+    @page { size: A4; margin: 14mm; }
+    @media print {
+      body { background: #fff; }
+      main { max-width: none; padding: 0; }
+      .toc-bar { display: none; }
+      .section, .card, .hero { page-break-inside: avoid; box-shadow: none; }
+      h2 { page-break-after: avoid; }
+      .hero { break-before: avoid; }
+      .dag-wrap { overflow: visible; }
+      .dag-wrap svg { max-width: 100%; }
+    }
+
+    .spacer-sm { height: 6px; }
+    .spacer-md { height: 12px; }
+
+    .step-num { display: inline-flex; align-items: center; justify-content: center;
+      width: 22px; height: 22px; border-radius: 50%; background: var(--accent-soft);
+      color: var(--accent); font-weight: 700; font-size: 12px; margin-right: 8px; }
+
+    footer.site-footer { margin-top: 36px; padding-top: 16px; border-top: 1px solid var(--border);
+      font-size: 12px; color: var(--text-4); text-align: center; }
+  
+  .back-home {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    color: rgba(255,255,255,0.65);
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 500;
+    padding: 4px 10px 4px 6px;
+    border-radius: 6px;
+    border: 1px solid rgba(255,255,255,0.18);
+    margin-right: 16px;
+    white-space: nowrap;
+    transition: all 0.2s ease;
+    flex-shrink: 0;
+  }
+  .back-home:hover {
+    color: #fff;
+    background: rgba(255,255,255,0.12);
+    border-color: rgba(255,255,255,0.35);
+  }
+  .back-home svg {
+    width: 14px;
+    height: 14px;
+    opacity: 0.8;
+  }
+</style>
+</head>
+<body>
+  <nav class="toc-bar">
+    <div class="toc-inner">
+      <a class="back-home" href="../">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+        返回首页
+      </a>
+      <span class="brand">EngageLab MA · Lami Mahjong 东南亚增长方案</span>
+      <a href="#s-market">市场机会</a>
+      <a href="#s-funnel">用户漏斗</a>
+      <a href="#s-why">为什么 EngageLab</a>
+      <a href="#s-scenarios">场景总览</a>
+      <a href="#s-journey">旅程编排</a>
+      <a href="#s-channel">东南亚渠道选型</a>
+      <a href="#s-compliance">合规安全</a>
+      <a href="#s-plan">测试计划</a>
+    </div>
+  </nav>
+
+  <main>
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-pills">
+        <span class="pill pill-success">Social Casino · 棋牌竞技平台</span>
+        <span class="pill">东南亚 · 马来西亚</span>
+        <span class="pill">EN / 马来语 / 中文</span>
+        <span class="pill pill-info">多游戏合集大厅</span>
+      </div>
+      <h1>EngageLab MA · 久游 Lami Mahjong 东南亚棋牌平台增长方案</h1>
+      <p class="hero-subtitle">
+        Lami Mahjong 是久游网面向东南亚的棋牌游戏平台——Lami 麻将、Big Two、德州、百人牛牛等经典玩法合集，配合公会、私人房、周赛与段位赛的社交与竞技体系。
+        本方案把"买量进来的一次性玩家"升级为"从首充到复充、从沉默到回归的自动化生命周期运营"，
+        以 <span class="bold">首充黄金期、充值挽回、金币耗尽挽回、沉睡分层召回、赛事段位运营、公会社交召回</span> 六大旅程切入，
+        统一编排 <span class="bold">App Push + WhatsApp + SMS/OTP + Email</span> 四条通道。
+      </p>
+      <div class="row">
+        <span class="pill pill-accent">极光 / App Push（iOS + Android）</span>
+        <span class="pill pill-accent">WhatsApp（东南亚主力）</span>
+        <span class="pill pill-accent">SMS · OTP 丝滑注册</span>
+        <span class="pill pill-accent">Email</span>
+      </div>
+    </section>
+
+    <!-- 一、市场机会 -->
+    <section id="s-market" class="section">
+      <h2>一、为什么东南亚棋牌平台必须做生命周期自动化运营</h2>
+      <div class="grid grid-4" style="margin-bottom:16px">
+        <div class="stat"><div class="stat-value info">东南亚</div><div class="stat-label">马来西亚为核心，辐射东南亚华人 + 本地市场</div></div>
+        <div class="stat"><div class="stat-value">多合集</div><div class="stat-label">Lami / Big Two / 德州 / 百人牛牛等一站式大厅</div></div>
+        <div class="stat"><div class="stat-value warn">金币经济</div><div class="stat-label">金币/钻石/VIP 内购驱动，转化窗口极短</div></div>
+        <div class="stat"><div class="stat-value success">双端</div><div class="stat-label">iOS / Android 双端已上架，App Push 全覆盖</div></div>
+      </div>
+      <p class="muted small">注：以上为客户现状与产品公开信息；下文所有转化率、提升幅度为 social casino 行业估算区间，落地以实测为准。本方案面向 social casino（休闲棋牌，虚拟货币、非真钱赌博，18+）。</p>
+      <hr class="divider" />
+      <div class="grid grid-2">
+        <div class="callout neutral"><div class="callout-title">痛点 1 · 获客贵、首充窗口短</div><div class="callout-body"><p>买量成本持续走高，新用户若没在注册后 72h 内完成首充，转化率断崖下滑，投放 ROI 被稀释。</p></div></div>
+        <div class="callout info"><div class="callout-title">解法 · 首充黄金期自动化旅程</div><div class="callout-body"><p>注册即触发新手礼引导，按"是否首充/是否完成新手局"分层，Push→WhatsApp→SMS 梯级追单，把首充窗口用满。</p></div></div>
+        <div class="callout neutral"><div class="callout-title">痛点 2 · 金币耗尽即流失</div><div class="callout-body"><p>棋牌的核心留存点在"金币"。玩家一旦破产（金币不足开局），没有及时的充值/救济引导就直接离场。</p></div></div>
+        <div class="callout info"><div class="callout-title">解法 · 金币耗尽挽回旅程</div><div class="callout-body"><p>金币低于门槛即时触发：付费用户推充值加赠、非付费推免费救济金，把"破产离场"转成"回桌复充"。</p></div></div>
+        <div class="callout neutral"><div class="callout-title">痛点 3 · 沉默流失快、群发无效</div><div class="callout-body"><p>棋牌玩家沉默后回归意愿快速衰减；一刀切群发既低效又伤推送权限，无法按沉默深度差异化召回。</p></div></div>
+        <div class="callout info"><div class="callout-title">解法 · 沉睡分层召回 + 渠道递进</div><div class="callout-body"><p>按 3/7/14/30 天分层，段位掉分预警 + 回归礼；渠道成本递进 App Push→WhatsApp→SMS，深度流失才上短信。</p></div></div>
+        <div class="callout neutral"><div class="callout-title">痛点 4 · 社交/赛事资产没被运营</div><div class="callout-body"><p>公会、私人房、周赛、段位赛是棋牌平台最强的留存抓手，但缺乏自动化触达，赛事运营靠人工、社交召回靠自然。</p></div></div>
+        <div class="callout info"><div class="callout-title">解法 · 赛事段位 + 公会社交旅程</div><div class="callout-body"><p>赛事开赛/临近结束按排名冲榜提醒；公会战集结、好友@你、私人房一键进，把社交关系转成回流动力。</p></div></div>
+      </div>
+    </section>
+
+    <!-- 二、用户漏斗 -->
+    <section id="s-funnel" class="section">
+      <h2>二、用户漏斗：从首充到复充，每层都有增长空间</h2>
+      <p class="muted small">下图为 social casino 行业估算区间对比，用于说明各环节的自动化增长空间，非久游实测数据。</p>
+      <div class="chart" id="chart-funnel"></div>
+    </section>
+
+    <!-- 三、为什么 EngageLab -->
+    <section id="s-why" class="section">
+      <h2>三、为什么选择 EngageLab MA</h2>
+      <div class="grid grid-3">
+        <div class="card"><div class="card-header">全渠道一体化编排</div><div class="card-body p-sm"><ul>
+          <li>App Push（iOS + Android）、WhatsApp、SMS、OTP、Email 同一平台可视化编排</li>
+          <li>一条旅程内多通道互补、渠道成本递进、按属性分流</li>
+        </ul></div></div>
+        <div class="card"><div class="card-header">WhatsApp · 东南亚主力通道</div><div class="card-body p-sm"><ul>
+          <li>马来西亚/东南亚渗透极高，高价值召回、公会、私人房、大R 关怀首选</li>
+          <li>Meta 官方 Business API，模板合规</li>
+        </ul></div></div>
+        <div class="card"><div class="card-header">OTP · Silent Auth 丝滑注册</div><div class="card-body p-sm"><ul>
+          <li>号码一键验证，降注册流失；覆盖东南亚多运营商，SMS OTP 兜底</li>
+        </ul></div></div>
+        <div class="card"><div class="card-header">CDP 统一身份（EUID）</div><div class="card-body p-sm"><ul>
+          <li>跨多游戏（Lami/德州/百人牛牛…）行为归一到一个玩家画像</li>
+          <li>金币/充值/段位/公会属性支撑分群与个性化</li>
+        </ul></div></div>
+        <div class="card"><div class="card-header">AI 多语言 · 高可靠底座</div><div class="card-body p-sm"><ul>
+          <li>英文/马来语/中文一套旅程自动适配，多语言文案一键生成</li>
+          <li>App Push 走 FCM / APNs / 极光通道，东南亚低延迟送达</li>
+        </ul></div></div>
+        <div class="card"><div class="card-header">合规 · Social Casino 适配</div><div class="card-body p-sm"><ul>
+          <li>18+ 校验、虚拟货币非真钱赌博框定；手机号哈希、PII 脱敏</li>
+          <li>马来西亚 PDPA / GDPR / 频控护栏 / 记录留存</li>
+        </ul></div></div>
+      </div>
+    </section>
+
+    <!-- 四、场景总览 -->
+    <section id="s-scenarios" class="section">
+      <h2>四、高 ROI 运营场景总览</h2>
+      <table>
+        <thead><tr><th>#</th><th>场景</th><th>生命周期阶段</th><th>核心触发</th><th>渠道组合</th><th>预期提升（估算）</th></tr></thead>
+        <tbody>
+          <tr class="tone-info"><td>J1</td><td>新用户迎新 + 首充黄金期</td><td>激活 / 首次付费</td><td>注册成功</td><td>App Push → WhatsApp → SMS</td><td>首充转化 +5~12%</td></tr>
+          <tr><td>J2</td><td>充值挽回（弃单）</td><td>付费转化</td><td>点击充值未完成</td><td>App Push（分钟级）+ WhatsApp</td><td>挽回转化 +15~25%</td></tr>
+          <tr class="tone-success"><td>J3</td><td>金币耗尽 / 破产挽回</td><td>复充 / 留存</td><td>金币低于开局门槛</td><td>应用内 + App Push + WhatsApp</td><td>回桌率 +20~35%</td></tr>
+          <tr><td>J4</td><td>沉睡玩家分层召回</td><td>流失召回</td><td>最后登录 &gt;3 天</td><td>App Push → WhatsApp → SMS</td><td>召回率 +20~40%</td></tr>
+          <tr class="tone-success"><td>J5</td><td>周赛 / 段位赛赛事运营</td><td>活跃 / 留存</td><td>赛事开赛 / 临近结束</td><td>App Push + WhatsApp + Email</td><td>赛事参与 +12~25%</td></tr>
+          <tr><td>J6</td><td>公会 / 私人房社交召回</td><td>社交留存</td><td>公会活动 / 好友邀请</td><td>App Push + WhatsApp</td><td>回访率 +25~45%</td></tr>
+        </tbody>
+      </table>
+      <p class="muted small" style="margin-top:8px">提升幅度为 social casino 行业公开区间估算，用于排期与目标设定，最终以 4 周测试实测为准。</p>
+    </section>
+
+    <!-- 五、核心旅程详细编排 -->
+    <section id="s-journey" class="section-plain">
+      <h2>五、核心旅程详细编排</h2>
+
+      <div class="section" style="margin-top:16px;">
+        <h3>旅程 1：新用户迎新 + 首充黄金期</h3>
+        <div class="grid grid-2-1">
+          <div class="dag-wrap" id="dag-j1"></div>
+          <div>
+            <div class="callout neutral" style="margin-bottom:12px"><div class="callout-title">业务痛点</div><div class="callout-body"><p>新用户 72h 内不首充，转化率断崖下滑，买量 ROI 被稀释。</p></div></div>
+            <div class="callout info" style="margin-bottom:12px"><div class="callout-title">旅程组件配置</div><div class="callout-body">
+              <p><strong>进入条件：</strong>事件：新用户注册成功</p>
+              <p><strong>提前退出：</strong>事件：完成首充</p>
+              <p><strong>渠道递进：</strong>App Push → WhatsApp → SMS（成本由低到高）</p>
+              <p><strong>转化统计：</strong>事件：首充成功，监听 3 天</p>
+              <p><strong>可发送时间：</strong>刚注册活跃窗口不加限制；24h 后触达前加时段</p>
+            </div></div>
+            <div class="callout success"><div class="callout-title">预期效益</div><div class="callout-body"><p>首充转化 +5~12%（估算）；把首充黄金期用满，提升买量 ROI。</p></div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <h3>旅程 2：充值挽回（弃单）</h3>
+        <div class="grid grid-2-1">
+          <div class="dag-wrap" id="dag-j2"></div>
+          <div>
+            <div class="callout neutral" style="margin-bottom:12px"><div class="callout-title">业务痛点</div><div class="callout-body"><p>玩家点了充值/进了商城却没完成支付，临门一脚流失。</p></div></div>
+            <div class="callout info" style="margin-bottom:12px"><div class="callout-title">旅程组件配置</div><div class="callout-body">
+              <p><strong>进入条件：</strong>事件：点击充值/进入商城未支付</p>
+              <p><strong>提前退出：</strong>事件：支付成功</p>
+              <p><strong>机制：</strong>15min 内 Push 分钟级追回 → 2h 后 WhatsApp 客服协助+加赠</p>
+              <p><strong>转化统计：</strong>事件：支付成功，监听 1 天</p>
+            </div></div>
+            <div class="callout success"><div class="callout-title">预期效益</div><div class="callout-body"><p>挽回转化 +15~25%（估算）；分钟级触达是弃单挽回关键。</p></div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <h3>旅程 3：金币耗尽 / 破产挽回</h3>
+        <div class="grid grid-2-1">
+          <div class="dag-wrap" id="dag-j3"></div>
+          <div>
+            <div class="callout neutral" style="margin-bottom:12px"><div class="callout-title">业务痛点</div><div class="callout-body"><p>金币是棋牌核心留存点，玩家破产（金币不足开局）后无引导就直接离场。</p></div></div>
+            <div class="callout info" style="margin-bottom:12px"><div class="callout-title">旅程组件配置</div><div class="callout-body">
+              <p><strong>进入条件：</strong>事件：金币余额低于开局门槛</p>
+              <p><strong>提前退出：</strong>事件：充值成功 / 领取救济金回桌</p>
+              <p><strong>分支：</strong>属性：是否付费用户（付费推充值加赠 / 非付费推免费救济）</p>
+              <p><strong>转化统计：</strong>事件：回桌开局，监听 1 天</p>
+            </div></div>
+            <div class="callout success"><div class="callout-title">预期效益</div><div class="callout-body"><p>回桌率 +20~35%（估算）；即时应用内消息在破产瞬间转化效率最高。</p></div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <h3>旅程 4：沉睡玩家分层召回</h3>
+        <div class="grid grid-2-1">
+          <div class="dag-wrap" id="dag-j4"></div>
+          <div>
+            <div class="callout neutral" style="margin-bottom:12px"><div class="callout-title">业务痛点</div><div class="callout-body"><p>棋牌玩家沉默后回归意愿快速衰减，群发一刀切既低效又伤权限。</p></div></div>
+            <div class="callout info" style="margin-bottom:12px"><div class="callout-title">旅程组件配置</div><div class="callout-body">
+              <p><strong>进入条件：</strong>属性：最后登录距今 &gt;3 天</p>
+              <p><strong>分支：</strong>属性：沉默深度 3-6 / 7-14 / 15-30 天</p>
+              <p><strong>提前退出：</strong>事件：回归登录</p>
+              <p><strong>再次进入：</strong>可，间隔 15 天</p>
+            </div></div>
+            <div class="callout success"><div class="callout-title">预期效益</div><div class="callout-body"><p>召回率 +20~40%（估算）；段位掉分预警是棋牌特有的高效召回钩子。</p></div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <h3>旅程 5：周赛 / 段位赛赛事运营</h3>
+        <div class="grid grid-2-1">
+          <div class="dag-wrap" id="dag-j5"></div>
+          <div>
+            <div class="callout neutral" style="margin-bottom:12px"><div class="callout-title">业务痛点</div><div class="callout-body"><p>周赛、段位赛是最强活跃抓手，但赛事运营靠人工、冲榜提醒缺失。</p></div></div>
+            <div class="callout info" style="margin-bottom:12px"><div class="callout-title">旅程组件配置</div><div class="callout-body">
+              <p><strong>进入条件：</strong>事件：周赛/段位赛开赛</p>
+              <p><strong>等待：</strong>等待至赛事临近结束（如剩 6h）再按排名分流</p>
+              <p><strong>分支：</strong>属性：当前排名/晋级进度（前列 / 接近晋级 / 未参与）</p>
+              <p><strong>转化统计：</strong>事件：参赛/晋级，监听赛事周期</p>
+            </div></div>
+            <div class="callout success"><div class="callout-title">预期效益</div><div class="callout-body"><p>赛事参与 +12~25%（估算）；赛后 Email 战报承接下一赛季运营。</p></div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <h3>旅程 6：公会 / 私人房社交召回</h3>
+        <div class="grid grid-2-1">
+          <div class="dag-wrap" id="dag-j6"></div>
+          <div>
+            <div class="callout neutral" style="margin-bottom:12px"><div class="callout-title">业务痛点</div><div class="callout-body"><p>公会、私人房、好友关系是最强留存资产，却没有自动化触达去激活。</p></div></div>
+            <div class="callout info" style="margin-bottom:12px"><div class="callout-title">旅程组件配置</div><div class="callout-body">
+              <p><strong>进入条件：</strong>事件：公会活动开启 / 好友邀请 / 私人房邀请</p>
+              <p><strong>分支：</strong>属性：是否公会成员（公会战集结 / 好友开黑）</p>
+              <p><strong>提前退出：</strong>事件：进房 / 参战</p>
+              <p><strong>可发送时间：</strong>本地黄金时段 终端时区</p>
+            </div></div>
+            <div class="callout success"><div class="callout-title">预期效益</div><div class="callout-body"><p>回访率 +25~45%（估算）；WhatsApp「牌友@你+一键进房」社交召回力最强。</p></div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 六、东南亚渠道选型 -->
+    <section id="s-channel" class="section-plain">
+      <h2>六、东南亚渠道选型参考</h2>
+      <div class="section">
+        <p class="muted small">东南亚（马来西亚）渠道适配相对值（示意，非精确数据）：与欧美不同，WhatsApp 在东南亚渗透极高、是社交召回主力；App Push 双端实时触达；SMS/OTP 兜底；Email 偏存量与账单。</p>
+        <div class="chart" id="chart-channel"></div>
+        <div class="grid grid-2" style="margin-top:14px">
+          <div class="callout info"><div class="callout-title">主力通道</div><div class="callout-body"><p>WhatsApp（东南亚渗透高，高价值召回/公会/私人房/大R）、App Push（iOS+Android 实时行为触达）、SMS/OTP（丝滑注册+关键兜底）。</p></div></div>
+          <div class="callout neutral"><div class="callout-title">补充</div><div class="callout-body"><p>Email 用于赛季战报、账单与存量运营；后续可评估 Telegram/LINE 覆盖特定社群。</p></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 七、合规与安全 -->
+    <section id="s-compliance" class="section">
+      <h2>七、合规与安全</h2>
+      <div class="grid grid-3">
+        <div class="card"><div class="card-header">Social Casino 合规框定</div><div class="card-body p-sm"><ul><li>18+ 年龄校验，独立频控，不向未成年投放</li><li>虚拟货币（金币/钻石）非真钱赌博、无实物价值，触达文案统一口径</li><li>符合 App Store / Google Play social casino 政策</li></ul></div></div>
+        <div class="card"><div class="card-header">区域 / 数据法规</div><div class="card-body p-sm"><ul><li>马来西亚 PDPA、GDPR：数据删除/导出/同意管理</li><li>WhatsApp 用 Meta 官方模板合规审核</li><li>已通过 GDPR、SOC 2 认证</li></ul></div></div>
+        <div class="card"><div class="card-header">数据与触达护栏</div><div class="card-body p-sm"><ul><li>全链路 TLS 加密、手机号哈希、PII 脱敏、RBAC 权限</li><li>频控去重、勿扰时段、终端时区发送、记录留存（如 60 天）</li></ul></div></div>
+      </div>
+    </section>
+
+    <!-- 八、测试计划 -->
+    <section id="s-plan" class="section">
+      <h2>八、测试计划（4 周）</h2>
+      <table>
+        <thead><tr><th>周次</th><th>阶段</th><th>核心工作</th><th>验收指标</th></tr></thead>
+        <tbody>
+          <tr><td>第 1 周</td><td>启动 · 数据打通</td><td>确认埋点（注册、首充、点击充值、金币余额、赛事、公会/私人房、登录）；SDK 接入；EUID 身份映射</td><td>事件入库率 ≥95%</td></tr>
+          <tr><td>第 2 周</td><td>核心旅程上线</td><td>J1 首充黄金期 + J3 金币耗尽挽回（2 条，小流量）；多语言文案配置</td><td>旅程触发成功率 ≥98%</td></tr>
+          <tr><td>第 3 周</td><td>扩量 · A/B</td><td>J2/J4/J6 全量；付费/非付费分层验证；文案与时段 A/B</td><td>Push 点击率 ≥6%；样本量 ≥1 万</td></tr>
+          <tr><td>第 4 周</td><td>复盘 · 扩面</td><td>J5 赛事段位运营上线；输出 uplift 报告与后续场景路线（含 VIP/大R 复充）</td><td>首充/复充/召回各环节 uplift 可量化</td></tr>
+        </tbody>
+      </table>
+      <div class="callout success" style="margin-top:14px"><div class="callout-title">投入</div><div class="callout-body"><p>测试期授权费 $0，配置 2 人专属服务团队支撑埋点、旅程与多语言文案交付。</p></div></div>
+    </section>
+
+    <footer class="site-footer">EngageLab MA · 久游 Lami Mahjong 东南亚棋牌平台增长方案 — 内部方案，转化/提升数据为行业估算或公开参考，落地以实测为准。面向 social casino（休闲棋牌·虚拟货币非真钱赌博·18+）。</footer>
+  </main>
+
+  <script>
+  (function(){
+    // ========== Shared helpers ==========
+    const COLORS = {
+      accent: '#2563eb', info: '#0369a1', success: '#16a34a',
+      warning: '#d97706', neutral: '#94a3b8', muted: '#cbd5e1',
+      text: '#374151', textMute: '#9ca3af', grid: '#e5e7eb',
+    };
+    function svgEl(w, h) {
+      const s = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+      s.setAttribute('viewBox', '0 0 ' + w + ' ' + h);
+      s.setAttribute('width', '100%');
+      s.setAttribute('preserveAspectRatio', 'xMidYMid meet');
+      return s;
+    }
+    function el(tag, attrs) {
+      const e = document.createElementNS('http://www.w3.org/2000/svg', tag);
+      for (const k in attrs) e.setAttribute(k, attrs[k]);
+      return e;
+    }
+
+    // ========== Bar Chart ==========
+    function drawBarChart(mount, opts) {
+      const { categories, series, valueSuffix = '', height = 240 } = opts;
+      const W = 600, H = height, PAD_L = 44, PAD_R = 16, PAD_T = 12, PAD_B = 56;
+      const innerW = W - PAD_L - PAD_R, innerH = H - PAD_T - PAD_B;
+      const max = Math.max(...series.flatMap(s => s.data), 1);
+      const niceMax = Math.ceil(max / 20) * 20 || 100;
+      const groupCount = categories.length;
+      const barsPerGroup = series.length;
+      const groupW = innerW / groupCount;
+      const barW = Math.min(22, (groupW - 12) / barsPerGroup);
+      const s = svgEl(W, H);
+      for (let i = 0; i <= 4; i++) {
+        const v = (niceMax / 4) * i;
+        const y = PAD_T + innerH - (v / niceMax) * innerH;
+        s.appendChild(el('line', { x1: PAD_L, x2: W - PAD_R, y1: y, y2: y, stroke: COLORS.grid, 'stroke-width': 1 }));
+        const t = el('text', { x: PAD_L - 6, y: y + 4, 'text-anchor': 'end', 'font-size': 10, fill: COLORS.textMute });
+        t.textContent = Math.round(v) + valueSuffix;
+        s.appendChild(t);
+      }
+      categories.forEach((cat, ci) => {
+        const gx = PAD_L + groupW * ci;
+        series.forEach((se, si) => {
+          const v = se.data[ci] || 0;
+          const h = (v / niceMax) * innerH;
+          const x = gx + (groupW - barW * barsPerGroup) / 2 + si * barW;
+          const y = PAD_T + innerH - h;
+          const color = COLORS[se.tone] || COLORS.neutral;
+          s.appendChild(el('rect', { x, y, width: barW - 2, height: h, fill: color, rx: 2 }));
+          if (v > 0) {
+            const label = el('text', { x: x + (barW - 2) / 2, y: y - 2, 'text-anchor': 'middle', 'font-size': 8, fill: COLORS.text });
+            label.textContent = v + valueSuffix;
+            s.appendChild(label);
+          }
+        });
+        const t = el('text', { x: gx + groupW / 2, y: H - PAD_B + 14, 'text-anchor': 'middle', 'font-size': 10, fill: COLORS.text });
+        t.textContent = cat;
+        s.appendChild(t);
+      });
+      // Legend
+      let legX = PAD_L;
+      series.forEach((se) => {
+        const color = COLORS[se.tone] || COLORS.accent;
+        s.appendChild(el('rect', { x: legX, y: H - 18, width: 10, height: 10, rx: 2, fill: color }));
+        const t = el('text', { x: legX + 14, y: H - 10, 'font-size': 10, fill: COLORS.text });
+        t.textContent = se.name;
+        s.appendChild(t);
+        legX += 14 + (se.name.length * 7) + 16;
+      });
+      mount.innerHTML = '';
+      mount.appendChild(s);
+    }
+
+    // ========== Journey DAG renderer (same as fintech/security solution) ==========
+    const KIND_STYLE = {
+      entry:    { fill: '#f1f5f9', stroke: '#94a3b8', text: '#111827' },
+      wait:     { fill: '#fafafa', stroke: '#d1d5db', text: '#6b7280' },
+      branch:   { fill: '#f9fafb', stroke: '#475569', text: '#111827' },
+      channel:  { fill: '#dbeafe', stroke: '#2563eb', text: '#1e3a8a' },
+      sendtime: { fill: '#fef3c7', stroke: '#d97706', text: '#92400e' },
+      exitOk:   { fill: '#dcfce7', stroke: '#16a34a', text: '#14532d' },
+      exitEnd:  { fill: '#f3f4f6', stroke: '#9ca3af', text: '#4b5563' },
+    };
+
+    function drawJourney(mount, nodes, edges) {
+      const NODE_W = 176, NODE_H = 62, RANK_GAP = 42, NODE_GAP = 22;
+      const rankOf = {}, incoming = {};
+      nodes.forEach(n => { rankOf[n.id] = 0; incoming[n.id] = []; });
+      edges.forEach(e => { incoming[e.to].push(e.from); });
+      let changed = true;
+      while (changed) {
+        changed = false;
+        edges.forEach(e => {
+          if (rankOf[e.to] < rankOf[e.from] + 1) { rankOf[e.to] = rankOf[e.from] + 1; changed = true; }
+        });
+      }
+      const maxRank = Math.max(...Object.values(rankOf));
+      const ranks = [];
+      for (let r = 0; r <= maxRank; r++) ranks.push([]);
+      nodes.forEach(n => { ranks[rankOf[n.id]].push(n); });
+      const pos = {};
+      const rankWidths = ranks.map(r => r.length * NODE_W + (r.length - 1) * NODE_GAP);
+      const maxWidth = Math.max(...rankWidths, 400);
+      ranks.forEach((rankNodes, r) => {
+        const withAnchor = rankNodes.map(n => {
+          const parents = incoming[n.id].map(p => pos[p] ? pos[p].x + NODE_W / 2 : null).filter(x => x !== null);
+          const anchor = parents.length ? parents.reduce((a, b) => a + b, 0) / parents.length : null;
+          return { node: n, anchor };
+        });
+        withAnchor.sort((a, b) => {
+          if (a.anchor === null && b.anchor === null) return 0;
+          if (a.anchor === null) return 1;
+          if (b.anchor === null) return -1;
+          return a.anchor - b.anchor;
+        });
+        const totalW = withAnchor.length * NODE_W + (withAnchor.length - 1) * NODE_GAP;
+        const startX = (maxWidth - totalW) / 2 + 20;
+        withAnchor.forEach((it, i) => {
+          pos[it.node.id] = { x: startX + i * (NODE_W + NODE_GAP), y: 20 + r * (NODE_H + RANK_GAP) };
+        });
+      });
+      for (let pass = 0; pass < 3; pass++) {
+        ranks.forEach(rankNodes => {
+          const sorted = rankNodes.slice().sort((a, b) => pos[a.id].x - pos[b.id].x);
+          for (let i = 1; i < sorted.length; i++) {
+            const prev = pos[sorted[i - 1].id], cur = pos[sorted[i].id];
+            if (cur.x < prev.x + NODE_W + NODE_GAP) cur.x = prev.x + NODE_W + NODE_GAP;
+          }
+        });
+      }
+      const width = Math.max(...Object.values(pos).map(p => p.x)) + NODE_W + 20;
+      const height = Math.max(...Object.values(pos).map(p => p.y)) + NODE_H + 24;
+      const s = svgEl(width, height);
+      s.setAttribute('width', width);
+      s.setAttribute('height', height);
+      s.style.maxWidth = '100%';
+      s.style.height = 'auto';
+      const defs = el('defs');
+      const marker = el('marker', { id: 'arrow', viewBox: '0 0 10 10', refX: 9, refY: 5, markerWidth: 6, markerHeight: 6, orient: 'auto-start-reverse' });
+      marker.appendChild(el('path', { d: 'M 0 0 L 10 5 L 0 10 z', fill: '#94a3b8' }));
+      defs.appendChild(marker);
+      s.appendChild(defs);
+      edges.forEach(e => {
+        const from = pos[e.from], to = pos[e.to];
+        if (!from || !to) return;
+        const x1 = from.x + NODE_W / 2, y1 = from.y + NODE_H;
+        const x2 = to.x + NODE_W / 2, y2 = to.y;
+        const cy = (y1 + y2) / 2;
+        const d = 'M' + x1 + ',' + y1 + ' C' + x1 + ',' + cy + ' ' + x2 + ',' + cy + ' ' + x2 + ',' + y2;
+        s.appendChild(el('path', { d, fill: 'none', stroke: '#94a3b8', 'stroke-width': 1.25, 'marker-end': 'url(#arrow)' }));
+        if (e.label) {
+          const mx = (x1 + x2) / 2, my = cy;
+          const w = Math.max(e.label.length * 9 + 10, 28);
+          s.appendChild(el('rect', { x: mx - w / 2, y: my - 10, width: w, height: 18, rx: 4, fill: '#ffffff', stroke: '#e5e7eb' }));
+          const t = el('text', { x: mx, y: my + 3, 'text-anchor': 'middle', 'font-size': 11, fill: '#475569' });
+          t.textContent = e.label;
+          s.appendChild(t);
+        }
+      });
+      nodes.forEach(n => {
+        const p = pos[n.id];
+        const k = KIND_STYLE[n.kind] || KIND_STYLE.entry;
+        s.appendChild(el('rect', { x: p.x, y: p.y, width: NODE_W, height: NODE_H, rx: 10, fill: k.fill, stroke: k.stroke, 'stroke-width': n.kind === 'channel' ? 1.4 : 1 }));
+        const titleY = n.sub ? p.y + 24 : p.y + NODE_H / 2 + 4;
+        const title = el('text', { x: p.x + NODE_W / 2, y: titleY, 'text-anchor': 'middle', 'font-size': 12.5, 'font-weight': 600, fill: k.text });
+        title.textContent = n.title;
+        s.appendChild(title);
+        if (n.sub) {
+          const sub = el('text', { x: p.x + NODE_W / 2, y: p.y + 42, 'text-anchor': 'middle', 'font-size': 11, fill: k.text, opacity: 0.82 });
+          sub.textContent = n.sub;
+          s.appendChild(sub);
+        }
+      });
+      mount.innerHTML = '';
+      mount.appendChild(s);
+    }
+
+    // ===== 漏斗对比：当前基准 vs MA 优化后（social casino 行业估算） =====
+    drawBarChart(document.getElementById('chart-funnel'), {
+      categories: ['注册→首充', '首充→次留D1', '复充率', '沉睡召回率', '赛事参与率'],
+      series: [
+        { name: '当前基准（估算）',    data: [8, 35, 22, 15, 20],  tone: 'neutral' },
+        { name: 'MA 自动化后（估算）', data: [16, 45, 34, 38, 40], tone: 'success' },
+      ],
+      valueSuffix: '%', height: 260,
+    });
+
+    // ===== 东南亚（马来西亚）渠道适配相对值（示意） =====
+    drawBarChart(document.getElementById('chart-channel'), {
+      categories: ['WhatsApp', 'App Push(iOS+Android)', 'SMS / OTP', 'Email', 'Telegram'],
+      series: [
+        { name: '东南亚触达适配（相对值·示意）', data: [92, 80, 78, 45, 35], tone: 'info' },
+      ],
+      valueSuffix: '', height: 220,
+    });
+
+    // ===== J1：新用户迎新 + 首充黄金期（渠道递进 Push→WhatsApp→SMS）=====
+    drawJourney(document.getElementById('dag-j1'),
+      [
+        { id: 'start', kind: 'entry',    title: '开始',       sub: '事件: 新用户注册成功' },
+        { id: 'push0', kind: 'channel',  title: 'App Push',   sub: '欢迎礼+新手金币' },
+        { id: 'w1',    kind: 'wait',     title: '等待事件',   sub: '24h 内等待: 完成首充' },
+        { id: 'ok0',   kind: 'exitOk',   title: '结束（已首充）', sub: '完成首充' },
+        { id: 'st1',   kind: 'sendtime', title: '可发送时间', sub: '本地黄金时段 终端时区' },
+        { id: 'push1', kind: 'channel',  title: 'App Push',   sub: '首充双倍礼包·限时' },
+        { id: 'w2',    kind: 'wait',     title: '等待事件',   sub: '24h 内等待: 完成首充' },
+        { id: 'ok1',   kind: 'exitOk',   title: '结束（已首充）', sub: '完成首充' },
+        { id: 'wa1',   kind: 'channel',  title: 'WhatsApp',   sub: '专属客服+首充豪礼提醒' },
+        { id: 'w3',    kind: 'wait',     title: '等待事件',   sub: '24h 内等待: 完成首充' },
+        { id: 'ok2',   kind: 'exitOk',   title: '结束（已首充）', sub: '完成首充' },
+        { id: 'sms1',  kind: 'channel',  title: 'SMS',        sub: '首充礼包今日到期' },
+        { id: 'end',   kind: 'exitEnd',  title: '结束',       sub: '转沉睡召回旅程' },
+      ],
+      [
+        { from: 'start', to: 'push0' }, { from: 'push0', to: 'w1' },
+        { from: 'w1', to: 'ok0', label: '已首充' },
+        { from: 'w1', to: 'st1', label: '未首充' },
+        { from: 'st1', to: 'push1' }, { from: 'push1', to: 'w2' },
+        { from: 'w2', to: 'ok1', label: '已首充' },
+        { from: 'w2', to: 'wa1', label: '未首充' },
+        { from: 'wa1', to: 'w3' },
+        { from: 'w3', to: 'ok2', label: '已首充' },
+        { from: 'w3', to: 'sms1', label: '未首充' },
+        { from: 'sms1', to: 'end' },
+      ]
+    );
+
+    // ===== J2：充值挽回（弃单）=====
+    drawJourney(document.getElementById('dag-j2'),
+      [
+        { id: 'start', kind: 'entry',    title: '开始',       sub: '事件: 点击充值/进商城未支付' },
+        { id: 'w1',    kind: 'wait',     title: '等待事件',   sub: '15min 内等待: 是否支付' },
+        { id: 'ok0',   kind: 'exitOk',   title: '结束（已支付）', sub: '自行完成支付' },
+        { id: 'push1', kind: 'channel',  title: 'App Push',   sub: '差一步到账·限时加赠20%' },
+        { id: 'w2',    kind: 'wait',     title: '等待事件',   sub: '2h 内等待: 是否支付' },
+        { id: 'ok1',   kind: 'exitOk',   title: '结束（已支付）', sub: '完成支付' },
+        { id: 'st1',   kind: 'sendtime', title: '可发送时间', sub: '本地黄金时段 终端时区' },
+        { id: 'wa1',   kind: 'channel',  title: 'WhatsApp',   sub: '专属客服协助+加赠礼包' },
+        { id: 'w3',    kind: 'wait',     title: '等待事件',   sub: '24h 内等待: 是否支付' },
+        { id: 'ok2',   kind: 'exitOk',   title: '结束（已支付）', sub: '完成支付' },
+        { id: 'end',   kind: 'exitEnd',  title: '结束',       sub: '结束' },
+      ],
+      [
+        { from: 'start', to: 'w1' },
+        { from: 'w1', to: 'ok0',   label: '已支付' },
+        { from: 'w1', to: 'push1', label: '未支付' },
+        { from: 'push1', to: 'w2' },
+        { from: 'w2', to: 'ok1', label: '已支付' },
+        { from: 'w2', to: 'st1', label: '未支付' },
+        { from: 'st1', to: 'wa1' }, { from: 'wa1', to: 'w3' },
+        { from: 'w3', to: 'ok2', label: '已支付' },
+        { from: 'w3', to: 'end', label: '未支付' },
+      ]
+    );
+
+    // ===== J3：金币耗尽/破产挽回 =====
+    drawJourney(document.getElementById('dag-j3'),
+      [
+        { id: 'start',  kind: 'entry',   title: '开始',        sub: '事件: 金币低于开局门槛' },
+        { id: 'inapp',  kind: 'channel', title: '应用内消息',  sub: '金币不足·免费领救济金' },
+        { id: 'w1',     kind: 'wait',    title: '等待事件',    sub: '10min 内等待: 是否回桌' },
+        { id: 'ok0',    kind: 'exitOk',  title: '结束（已回桌）', sub: '充值/领救济回桌' },
+        { id: 'br1',    kind: 'branch',  title: '条件分支',    sub: '属性: 是否付费用户' },
+        { id: 'pushp',  kind: 'channel', title: 'App Push',    sub: '(付费) 限时加赠+回本礼包' },
+        { id: 'pushf',  kind: 'channel', title: 'App Push',    sub: '(非付费) 看广告/签到免费领币' },
+        { id: 'w2',     kind: 'wait',    title: '等待事件',    sub: '2h 内等待: 是否回桌' },
+        { id: 'ok1',    kind: 'exitOk',  title: '结束（已回桌）', sub: '回桌开局' },
+        { id: 'wa1',    kind: 'channel', title: 'WhatsApp',    sub: '救济礼包+回归福利' },
+        { id: 'w3',     kind: 'wait',    title: '等待事件',    sub: '24h 内等待: 是否回桌' },
+        { id: 'ok2',    kind: 'exitOk',  title: '结束（已回桌）', sub: '回桌开局' },
+        { id: 'end',    kind: 'exitEnd', title: '结束',        sub: '转沉睡召回旅程' },
+      ],
+      [
+        { from: 'start', to: 'inapp' }, { from: 'inapp', to: 'w1' },
+        { from: 'w1', to: 'ok0', label: '已回桌' },
+        { from: 'w1', to: 'br1', label: '未回桌' },
+        { from: 'br1', to: 'pushp', label: '付费' },
+        { from: 'br1', to: 'pushf', label: '非付费' },
+        { from: 'pushp', to: 'w2' }, { from: 'pushf', to: 'w2' },
+        { from: 'w2', to: 'ok1', label: '已回桌' },
+        { from: 'w2', to: 'wa1', label: '未回桌' },
+        { from: 'wa1', to: 'w3' },
+        { from: 'w3', to: 'ok2', label: '已回桌' },
+        { from: 'w3', to: 'end', label: '未回桌' },
+      ]
+    );
+
+    // ===== J4：沉睡玩家分层召回 =====
+    drawJourney(document.getElementById('dag-j4'),
+      [
+        { id: 'start', kind: 'entry',   title: '开始',        sub: '属性: 最后登录距今>3天' },
+        { id: 'br1',   kind: 'branch',  title: '条件分支',    sub: '属性: 沉默深度' },
+        { id: 'p3',    kind: 'channel', title: 'App Push',    sub: '(3-6天) 牌友在等你+登录金币' },
+        { id: 'p7',    kind: 'channel', title: 'App Push',    sub: '(7-14天) 段位掉分预警+回归礼' },
+        { id: 'wa30',  kind: 'channel', title: 'WhatsApp',    sub: '(15-30天) 大额回归礼+专属客服' },
+        { id: 'w1',    kind: 'wait',    title: '等待事件',    sub: '3天内等待: 是否回归' },
+        { id: 'w2',    kind: 'wait',    title: '等待事件',    sub: '3天内等待: 是否回归' },
+        { id: 'w3',    kind: 'wait',    title: '等待事件',    sub: '3天内等待: 是否回归' },
+        { id: 'ok',    kind: 'exitOk',  title: '结束（已回归）', sub: '回归登录' },
+        { id: 'sf',    kind: 'channel', title: 'SMS',         sub: '(深度) 专属回归码+豪礼' },
+        { id: 'w4',    kind: 'wait',    title: '等待事件',    sub: '5天内等待: 是否回归' },
+        { id: 'ok2',   kind: 'exitOk',  title: '结束（已回归）', sub: '回归登录' },
+        { id: 'end',   kind: 'exitEnd', title: '结束',        sub: '标记深度流失' },
+      ],
+      [
+        { from: 'start', to: 'br1' },
+        { from: 'br1', to: 'p3',   label: '3-6天' },
+        { from: 'br1', to: 'p7',   label: '7-14天' },
+        { from: 'br1', to: 'wa30', label: '15-30天' },
+        { from: 'p3', to: 'w1' }, { from: 'p7', to: 'w2' }, { from: 'wa30', to: 'w3' },
+        { from: 'w1', to: 'ok', label: '已回归' },
+        { from: 'w2', to: 'ok', label: '已回归' },
+        { from: 'w3', to: 'ok', label: '已回归' },
+        { from: 'w1', to: 'sf', label: '未回归' },
+        { from: 'w2', to: 'sf', label: '未回归' },
+        { from: 'w3', to: 'sf', label: '未回归' },
+        { from: 'sf', to: 'w4' },
+        { from: 'w4', to: 'ok2', label: '已回归' },
+        { from: 'w4', to: 'end', label: '未回归' },
+      ]
+    );
+
+    // ===== J5：周赛/段位赛赛事运营 =====
+    drawJourney(document.getElementById('dag-j5'),
+      [
+        { id: 'start',  kind: 'entry',   title: '开始',        sub: '事件: 周赛/段位赛开赛' },
+        { id: 'st1',    kind: 'sendtime',title: '可发送时间',  sub: '本地黄金时段 终端时区' },
+        { id: 'push1',  kind: 'channel', title: 'App Push',    sub: '金币赛开赛·冲榜赢豪礼' },
+        { id: 'w1',     kind: 'wait',    title: '等待',        sub: '等待至赛事剩 6h' },
+        { id: 'br1',    kind: 'branch',  title: '条件分支',    sub: '属性: 当前排名/晋级进度' },
+        { id: 'ptop',   kind: 'channel', title: 'App Push',    sub: '(前列) 再赢N场锁定名次' },
+        { id: 'wamid',  kind: 'channel', title: 'WhatsApp',    sub: '(接近晋级) 冲刺礼包+专属提醒' },
+        { id: 'plow',   kind: 'channel', title: 'App Push',    sub: '(未参与) 最后6h参赛领奖' },
+        { id: 'w2',     kind: 'wait',    title: '等待事件',    sub: '赛事结束前: 是否参赛' },
+        { id: 'em1',    kind: 'channel', title: 'Email',       sub: '赛季战报+下赛季预告' },
+        { id: 'ok',     kind: 'exitOk',  title: '结束（已参赛）', sub: '战报已发' },
+        { id: 'end',    kind: 'exitEnd', title: '结束',        sub: '未参赛结束' },
+      ],
+      [
+        { from: 'start', to: 'st1' }, { from: 'st1', to: 'push1' }, { from: 'push1', to: 'w1' }, { from: 'w1', to: 'br1' },
+        { from: 'br1', to: 'ptop',  label: '前列' },
+        { from: 'br1', to: 'wamid', label: '接近晋级' },
+        { from: 'br1', to: 'plow',  label: '未参与' },
+        { from: 'ptop', to: 'w2' }, { from: 'wamid', to: 'w2' }, { from: 'plow', to: 'w2' },
+        { from: 'w2', to: 'em1', label: '已参赛' },
+        { from: 'w2', to: 'end', label: '未参赛' },
+        { from: 'em1', to: 'ok' },
+      ]
+    );
+
+    // ===== J6：公会/私人房社交召回 =====
+    drawJourney(document.getElementById('dag-j6'),
+      [
+        { id: 'start', kind: 'entry',    title: '开始',       sub: '事件: 公会活动/好友/私人房邀请' },
+        { id: 'br1',   kind: 'branch',   title: '条件分支',   sub: '属性: 是否公会成员' },
+        { id: 'pg',    kind: 'channel',  title: 'App Push',   sub: '(公会) 公会战开启+集结令' },
+        { id: 'pn',    kind: 'channel',  title: 'App Push',   sub: '(非公会) 好友邀你开黑+私人房' },
+        { id: 'w1',    kind: 'wait',     title: '等待事件',   sub: '6h 内等待: 是否进房/参战' },
+        { id: 'ok0',   kind: 'exitOk',   title: '结束（已参与）', sub: '进房/参战' },
+        { id: 'st1',   kind: 'sendtime', title: '可发送时间', sub: '本地黄金时段 终端时区' },
+        { id: 'wa1',   kind: 'channel',  title: 'WhatsApp',   sub: '牌友@你+私人房一键进' },
+        { id: 'w2',    kind: 'wait',     title: '等待事件',   sub: '24h 内等待: 是否参与' },
+        { id: 'ok1',   kind: 'exitOk',   title: '结束（已参与）', sub: '进房/参战' },
+        { id: 'end',   kind: 'exitEnd',  title: '结束',       sub: '转沉睡召回旅程' },
+      ],
+      [
+        { from: 'start', to: 'br1' },
+        { from: 'br1', to: 'pg', label: '公会成员' },
+        { from: 'br1', to: 'pn', label: '非公会' },
+        { from: 'pg', to: 'w1' }, { from: 'pn', to: 'w1' },
+        { from: 'w1', to: 'ok0', label: '已参与' },
+        { from: 'w1', to: 'st1', label: '未参与' },
+        { from: 'st1', to: 'wa1' }, { from: 'wa1', to: 'w2' },
+        { from: 'w2', to: 'ok1', label: '已参与' },
+        { from: 'w2', to: 'end', label: '未参与' },
+      ]
+    );
+
+  })();
+  </script>
+</body>
+</html>
