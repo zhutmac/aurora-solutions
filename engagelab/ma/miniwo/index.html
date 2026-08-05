@@ -227,13 +227,13 @@
       <p class="hero-subtitle">
         Miniwo 是"多人剧情 × 社交 × 创作"的新一代互动内容平台——用户与虚拟角色共同生活、创作故事，实时生成动画与漫画。
         本方案把"等候名单里的一串邮箱"升级为"每位用户从注册到订阅的自动化生命周期运营"，
-        以 <span class="bold">OTP 丝滑注册、首角上传 Aha、故事卡分享裂变、每日世界唤醒、AI 额度订阅转化</span> 为核心旅程，
+        以 <span class="bold">OTP 一键认证、首角上传 Aha、故事卡分享裂变、每日世界唤醒、AI 额度订阅转化</span> 为核心旅程，
         统一编排 <span class="bold">极光 / App 推送（iOS + Android）+ 国际短信 / OTP + 国际邮件</span> 三条通道。
       </p>
       <div class="row">
         <span class="pill pill-accent">极光 / App Push（iOS + Android）</span>
         <span class="pill pill-accent">国际短信 SMS</span>
-        <span class="pill pill-accent">OTP · Silent Auth 丝滑注册</span>
+        <span class="pill pill-accent">OTP · Silent Auth 一键认证</span>
         <span class="pill pill-accent">国际邮件 Email</span>
       </div>
     </section>
@@ -255,7 +255,7 @@
           <div class="callout-body"><p>等候名单收集的是邮箱，但注册要走号码验证；缺乏自动化衔接，大量 Waitlist 用户拿到邀请后并未完成注册就流失。</p></div>
         </div>
         <div class="callout info">
-          <div class="callout-title">解法 · OTP 丝滑注册 + 邮件发码旅程</div>
+          <div class="callout-title">解法 · OTP 一键认证 + 邮件发码旅程</div>
           <div class="callout-body"><p>Email 分层预热养熟 → 发码即触达 → Silent Auth / OTP 一键完成号码验证，把"邮箱"顺滑接到"注册用户"。</p></div>
         </div>
         <div class="callout neutral">
@@ -300,7 +300,7 @@
           <li>极光 / App Push（iOS + Android）、国际短信 SMS、OTP、国际邮件、Web Push 同一平台可视化编排</li>
           <li>一条旅程内多通道互补、按属性分流</li>
         </ul></div></div>
-        <div class="card"><div class="card-header">OTP · Silent Auth 丝滑注册</div><div class="card-body p-sm"><ul>
+        <div class="card"><div class="card-header">OTP · Silent Auth 一键认证</div><div class="card-body p-sm"><ul>
           <li>号码一键验证，用户仅输号码后台完成校验，减少验证码摩擦</li>
           <li>覆盖北美多运营商，降低注册流失，SMS OTP 兜底</li>
         </ul></div></div>
@@ -330,7 +330,7 @@
         <thead><tr><th>#</th><th>场景</th><th>生命周期阶段</th><th>核心触发</th><th>渠道组合</th><th>预期提升（估算）</th></tr></thead>
         <tbody>
           <tr class="tone-info"><td>J1</td><td>Waitlist 分层预热 → 发码激活</td><td>获客 / 激活</td><td>加入等候名单</td><td>Email → SMS 兜底</td><td>Waitlist 激活率 +10~20%</td></tr>
-          <tr><td>J2</td><td>OTP 丝滑注册 + 首角上传引导</td><td>注册激活</td><td>启动注册</td><td>OTP/SMS + App Push + Email</td><td>注册完成 +15~25% / 上传率 +15~25%</td></tr>
+          <tr><td>J2</td><td>OTP 一键认证 + 首角上传引导</td><td>注册激活</td><td>启动注册</td><td>OTP/SMS + App Push + Email</td><td>注册完成 +15~25% / 上传率 +15~25%</td></tr>
           <tr class="tone-success"><td>J3</td><td>首卡 Aha 催化 + 故事卡分享裂变</td><td>Aha / UGC 传播</td><td>生成首张故事卡</td><td>App Push + Email</td><td>分享率 +20~35%</td></tr>
           <tr><td>J4</td><td>每日 Life Loop 世界唤醒</td><td>留存 / 日活</td><td>世界产生新事件</td><td>App Push（iOS + Android）</td><td>DAU/MAU +8~15%</td></tr>
           <tr class="tone-success"><td>J5</td><td>AI 生成额度耗尽 → 订阅转化</td><td>付费转化</td><td>生成额度归零</td><td>应用内 + Email + App Push</td><td>订阅转化 +3~7%</td></tr>
@@ -365,7 +365,7 @@
 
       <!-- J2 -->
       <div class="section">
-        <h3>旅程 2：OTP 丝滑注册 + 首角上传引导</h3>
+        <h3>旅程 2：OTP 一键认证 + 首角上传引导</h3>
         <div class="grid grid-2-1">
           <div class="dag-wrap" id="dag-j2"></div>
           <div>
@@ -466,7 +466,7 @@
         <p class="muted small">北美市场渠道适配相对值（示意，非精确数据）：WhatsApp 在北美渗透低，Email/SMS 是主力，App Push 双端覆盖后为实时行为触达的首选。</p>
         <div class="chart" id="chart-channel"></div>
         <div class="grid grid-2" style="margin-top:14px">
-          <div class="callout info"><div class="callout-title">主力通道</div><div class="callout-body"><p>App Push（iOS + Android，实时行为触达）、Email（拉新+存量，北美进箱率与合规成熟）、SMS/OTP（丝滑注册 + 关键兜底）。</p></div></div>
+          <div class="callout info"><div class="callout-title">主力通道</div><div class="callout-body"><p>App Push（iOS + Android，实时行为触达）、Email（拉新+存量，北美进箱率与合规成熟）、SMS/OTP（一键认证 + 关键兜底）。</p></div></div>
           <div class="callout neutral"><div class="callout-title">补充与暂缓</div><div class="callout-body"><p>Web Push 可覆盖官网访客、扩大触点；WhatsApp 北美非首选，暂不铺设，后续视区域增长再评估。</p></div></div>
         </div>
       </div>
@@ -725,11 +725,11 @@
       ]
     );
 
-    // ===== J2：OTP 丝滑注册 + 首角上传引导（App Push 双端 → Email 补触达）=====
+    // ===== J2：OTP 一键认证 + 首角上传引导（App Push 双端 → Email 补触达）=====
     drawJourney(document.getElementById('dag-j2'),
       [
         { id: 'start', kind: 'entry',    title: '开始',        sub: '事件: 启动注册' },
-        { id: 'otp',   kind: 'channel',  title: 'OTP 验证',    sub: 'Silent Auth 丝滑注册' },
+        { id: 'otp',   kind: 'channel',  title: 'OTP 验证',    sub: 'Silent Auth 一键认证' },
         { id: 'w1',    kind: 'wait',     title: '等待事件',    sub: '30min 内等待: 首角上传' },
         { id: 'ok0',   kind: 'exitOk',   title: '结束（已上传）', sub: '完成首角上传' },
         { id: 'push1', kind: 'channel',  title: 'App Push',    sub: '上传照片带角色进世界' },
