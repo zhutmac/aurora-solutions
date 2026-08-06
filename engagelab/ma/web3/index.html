@@ -1,0 +1,843 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EngageLab MA · Web3 行业增长方案（交易 · 钱包 · GameFi）</title>
+  <style>
+    :root {
+      --bg: #ffffff;
+      --bg-soft: #f7f8fa;
+      --bg-elev: #ffffff;
+      --border: #e5e7eb;
+      --border-strong: #d1d5db;
+      --text: #111827;
+      --text-2: #374151;
+      --text-3: #6b7280;
+      --text-4: #9ca3af;
+      --accent: #2563eb;
+      --accent-soft: #dbeafe;
+      --success: #16a34a;
+      --success-soft: #dcfce7;
+      --warning: #d97706;
+      --warning-soft: #fef3c7;
+      --info: #0369a1;
+      --info-soft: #e0f2fe;
+      --danger: #dc2626;
+      --danger-soft: #fee2e2;
+      --radius: 10px;
+      --radius-sm: 6px;
+      --shadow: 0 1px 2px rgba(16, 24, 40, 0.04);
+    }
+
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; background: var(--bg-soft); color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC",
+        "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", sans-serif;
+      line-height: 1.6; -webkit-font-smoothing: antialiased; font-size: 15px; }
+
+    main { max-width: 1180px; margin: 0 auto; padding: 32px 28px 80px; }
+
+    h1 { font-size: 30px; font-weight: 700; margin: 0 0 8px; letter-spacing: -0.01em; color: var(--text); }
+    h2 { font-size: 22px; font-weight: 700; margin: 0 0 12px; letter-spacing: -0.005em; color: var(--text); }
+    h3 { font-size: 17px; font-weight: 600; margin: 0 0 10px; color: var(--text); }
+    p { margin: 0 0 8px; color: var(--text-2); }
+    .muted { color: var(--text-3); }
+    .small { font-size: 13px; }
+    .bold { font-weight: 600; }
+
+    .section { background: var(--bg-elev); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 24px 26px; margin-bottom: 20px; }
+    .section-plain { padding: 6px 2px 18px; margin-bottom: 12px; }
+    .divider { height: 1px; background: var(--border); margin: 16px 0; border: none; }
+
+    .hero { background: linear-gradient(180deg, #fff 0%, #f0fdf4 100%);
+      border: 1px solid var(--border); border-radius: 14px; padding: 28px 30px;
+      margin-bottom: 24px; }
+    .hero-pills { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 14px; }
+    .hero-subtitle { color: var(--text-3); font-size: 15px; max-width: 900px; margin: 8px 0 18px; }
+
+    .pill { display: inline-flex; align-items: center; padding: 2px 10px;
+      font-size: 12px; border-radius: 999px; border: 1px solid var(--border-strong);
+      color: var(--text-2); background: #fff; font-weight: 500; }
+    .pill-accent { background: var(--accent-soft); border-color: var(--accent); color: var(--accent); }
+    .pill-info { background: var(--info-soft); border-color: var(--info); color: var(--info); }
+    .pill-success { background: var(--success-soft); border-color: var(--success); color: var(--success); }
+    .pill-warn { background: var(--warning-soft); border-color: var(--warning); color: var(--warning); }
+
+    .grid { display: grid; gap: 16px; }
+    .grid-4 { grid-template-columns: repeat(4, 1fr); }
+    .grid-3 { grid-template-columns: repeat(3, 1fr); }
+    .grid-2 { grid-template-columns: repeat(2, 1fr); }
+    .grid-5 { grid-template-columns: repeat(5, 1fr); }
+    .grid-1-2 { grid-template-columns: 1fr 2fr; }
+    .grid-2-1 { grid-template-columns: 1.4fr 1fr; }
+    .grid-12-1 { grid-template-columns: 1.2fr 1fr; }
+    .row { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+
+    .stat { padding: 14px 16px; background: var(--bg-elev); border: 1px solid var(--border);
+      border-radius: var(--radius); }
+    .stat-value { font-size: 26px; font-weight: 700; letter-spacing: -0.01em; color: var(--text);
+      line-height: 1.15; }
+    .stat-value.success { color: var(--success); }
+    .stat-value.info { color: var(--info); }
+    .stat-value.warn { color: var(--warning); }
+
+    .stat-label { font-size: 12px; color: var(--text-3); margin-top: 4px; }
+
+    .card { background: var(--bg-elev); border: 1px solid var(--border);
+      border-radius: var(--radius); overflow: hidden; }
+    .card-header { padding: 10px 16px; border-bottom: 1px solid var(--border);
+      background: #fafbfc; font-size: 13px; font-weight: 600; color: var(--text-2); }
+    .card-body { padding: 16px; }
+    .card-body.p-sm { padding: 12px; }
+    .card-body ul { margin: 0; padding-left: 18px; }
+    .card-body li { margin-bottom: 4px; font-size: 13.5px; color: var(--text-2); }
+
+    .callout { padding: 12px 14px; border-radius: var(--radius-sm);
+      border: 1px solid var(--border); border-left-width: 3px; background: var(--bg-soft); }
+    .callout-title { font-weight: 600; margin-bottom: 4px; font-size: 14px; }
+    .callout-body { font-size: 13px; color: var(--text-2); }
+    .callout-body p { font-size: 13px; color: var(--text-2); margin: 0 0 4px; }
+    .callout.info { border-left-color: var(--info); background: var(--info-soft); }
+    .callout.info .callout-title { color: var(--info); }
+    .callout.success { border-left-color: var(--success); background: var(--success-soft); }
+    .callout.success .callout-title { color: var(--success); }
+    .callout.warn { border-left-color: var(--warning); background: var(--warning-soft); }
+    .callout.warn .callout-title { color: var(--warning); }
+    .callout.neutral { border-left-color: var(--text-3); }
+
+    table { width: 100%; border-collapse: collapse; font-size: 13.5px;
+      background: var(--bg-elev); border: 1px solid var(--border); border-radius: var(--radius);
+      overflow: hidden; }
+    th, td { padding: 10px 12px; text-align: left; border-bottom: 1px solid var(--border);
+      color: var(--text-2); vertical-align: middle; }
+    th { background: #fafbfc; font-weight: 600; font-size: 12.5px; color: var(--text-3);
+      letter-spacing: 0.01em; text-transform: uppercase; }
+    tr:last-child td { border-bottom: 0; }
+    tr.tone-success td { background: rgba(22, 163, 74, 0.04); }
+    tr.tone-info td { background: rgba(3, 105, 161, 0.04); }
+
+    .signal-row { display: flex; gap: 10px; padding: 10px 0;
+      border-bottom: 1px solid var(--border); align-items: center; }
+    .signal-row:last-child { border-bottom: 0; }
+    .signal-row .left { flex: 1; min-width: 0; }
+    .signal-row .label { font-size: 13px; font-weight: 600; }
+    .signal-row .hint { font-size: 12px; color: var(--text-3); }
+    .signal-row .value { font-weight: 700; color: var(--text); font-size: 14px; white-space: nowrap; }
+
+    .chart { width: 100%; }
+    .chart svg { width: 100%; height: auto; display: block; }
+    .chart-legend { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--border); }
+    .chart-legend .leg-item { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--text-3); }
+    .chart-legend .dot { width: 10px; height: 10px; border-radius: 2px; }
+
+    .dag-wrap { overflow-x: auto; padding: 8px 2px; }
+    .dag-wrap svg { display: block; margin: 0 auto; }
+
+    .toc-bar { position: sticky; top: 0; background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(8px); border-bottom: 1px solid var(--border);
+      z-index: 10; padding: 10px 28px; margin: -32px -28px 24px;
+      font-size: 12.5px; }
+    .toc-bar .toc-inner { max-width: 1180px; margin: 0 auto; display: flex; gap: 14px;
+      align-items: center; overflow-x: auto; }
+    .toc-bar a { color: var(--text-3); text-decoration: none; white-space: nowrap; padding: 4px 2px; }
+    .toc-bar a:hover { color: var(--accent); }
+    .toc-bar .brand { font-weight: 700; color: var(--text); }
+
+    @page { size: A4; margin: 14mm; }
+    @media print {
+      body { background: #fff; }
+      main { max-width: none; padding: 0; }
+      .toc-bar { display: none; }
+      .section, .card, .hero { page-break-inside: avoid; box-shadow: none; }
+      h2 { page-break-after: avoid; }
+      .hero { break-before: avoid; }
+      .dag-wrap { overflow: visible; }
+      .dag-wrap svg { max-width: 100%; }
+    }
+
+    .spacer-sm { height: 6px; }
+    .spacer-md { height: 12px; }
+
+    .step-num { display: inline-flex; align-items: center; justify-content: center;
+      width: 22px; height: 22px; border-radius: 50%; background: var(--accent-soft);
+      color: var(--accent); font-weight: 700; font-size: 12px; margin-right: 8px; }
+
+    footer.site-footer { margin-top: 36px; padding-top: 16px; border-top: 1px solid var(--border);
+      font-size: 12px; color: var(--text-4); text-align: center; }
+  
+  .back-home {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    color: rgba(255,255,255,0.65);
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 500;
+    padding: 4px 10px 4px 6px;
+    border-radius: 6px;
+    border: 1px solid rgba(255,255,255,0.18);
+    margin-right: 16px;
+    white-space: nowrap;
+    transition: all 0.2s ease;
+    flex-shrink: 0;
+  }
+  .back-home:hover {
+    color: #fff;
+    background: rgba(255,255,255,0.12);
+    border-color: rgba(255,255,255,0.35);
+  }
+  .back-home svg {
+    width: 14px;
+    height: 14px;
+    opacity: 0.8;
+  }
+</style>
+</head>
+<body>
+  <nav class="toc-bar">
+    <div class="toc-inner">
+      <a class="back-home" href="../">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+        返回首页
+      </a>
+      <span class="brand">EngageLab MA · Web3 行业增长方案</span>
+      <a href="#s-market">市场机会</a>
+      <a href="#s-funnel">用户漏斗</a>
+      <a href="#s-why">为什么 EngageLab</a>
+      <a href="#s-scenarios">场景总览</a>
+      <a href="#s-journey">旅程编排</a>
+      <a href="#s-channel">渠道选型</a>
+      <a href="#s-compliance">合规安全</a>
+      <a href="#s-plan">测试计划</a>
+    </div>
+  </nav>
+
+  <main>
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-pills">
+        <span class="pill pill-success">Web3 · 交易 / 钱包 / GameFi</span>
+        <span class="pill">全球 · 新兴市场为主</span>
+        <span class="pill">强合规 · 强安全 · 行情驱动</span>
+      </div>
+      <h1>EngageLab MA · Web3 行业增长方案</h1>
+      <p class="hero-subtitle">
+        面向出海 / 全球化的 Web3 交易平台、钱包与 GameFi——用户路径清晰（开户 → 身份验证 → 首次入金 → 首笔交互 → 复交易 → 流失），且强合规、强安全、行情驱动。
+        本方案把"买量与空投拉来的一次性地址"升级为"从 KYC 到复交易、从沉默到唤醒的自动化生命周期运营"，
+        以 <span class="bold">开户+KYC、首次入金首交互、行情驱动唤醒、沉睡资产召回、安全信任触达、邀请裂变空投</span> 六大旅程切入，
+        统一编排 <span class="bold">Email + App Push + SMS/OTP + WhatsApp</span> 四条通道。
+      </p>
+      <div class="row">
+        <span class="pill pill-accent">Email（主力）</span>
+        <span class="pill pill-accent">极光 / App Push（iOS + Android）</span>
+        <span class="pill pill-accent">SMS · OTP 一键认证</span>
+        <span class="pill pill-accent">WhatsApp</span>
+        <span class="pill pill-info">Telegram（即将支持 · 社群）</span>
+      </div>
+    </section>
+
+    <!-- 一、市场机会 -->
+    <section id="s-market" class="section">
+      <h2>一、为什么 Web3 平台必须做生命周期自动化运营</h2>
+      <div class="grid grid-4" style="margin-bottom:16px">
+        <div class="stat"><div class="stat-value info">全球</div><div class="stat-label">新兴市场（东南亚/拉美/非洲/中东）为增量主力</div></div>
+        <div class="stat"><div class="stat-value warn">KYC 命门</div><div class="stat-label">注册后不过验证就无法交易，最大漏损点</div></div>
+        <div class="stat"><div class="stat-value">行情驱动</div><div class="stat-label">价格波动直接拉动交易活跃，需实时触达</div></div>
+        <div class="stat"><div class="stat-value danger">强安全</div><div class="stat-label">防钓鱼 / 提币确认 / 2FA 是信任与留存基础</div></div>
+      </div>
+      <p class="muted small">注：下文所有转化率、提升幅度为 Web3 / crypto 行业估算区间，落地以实测为准。本方案面向合规交易平台/钱包的增长运营，不构成投资建议、不推荐具体币种。</p>
+      <hr class="divider" />
+      <div class="grid grid-2">
+        <div class="callout neutral"><div class="callout-title">痛点 1 · KYC/身份完成率低</div><div class="callout-body"><p>注册后卡在身份验证（交易所 KYC / 钱包创建备份），不完成就无法交易，大量用户在此流失。</p></div></div>
+        <div class="callout info"><div class="callout-title">解法 · 开户+KYC 催办旅程</div><div class="callout-body"><p>注册即触发身份验证引导，Push→Email→WhatsApp→SMS 分层催办，把验证漏损降到最低。</p></div></div>
+        <div class="callout neutral"><div class="callout-title">痛点 2 · 入金/首笔交互窗口短</div><div class="callout-body"><p>身份完成却不入金、不下第一单/首笔链上交互，早期不激活基本留不住。</p></div></div>
+        <div class="callout info"><div class="callout-title">解法 · 首次入金首交互黄金期</div><div class="callout-body"><p>身份通过即触发，手续费券/新手礼驱动，按"已入金未交易 / 未入金"分层引导。</p></div></div>
+        <div class="callout neutral"><div class="callout-title">痛点 3 · 行情来了却没唤醒</div><div class="callout-body"><p>大行情波动是最强交易触发点，但缺乏实时事件触达，沉默用户与持仓用户都错过。</p></div></div>
+        <div class="callout info"><div class="callout-title">解法 · 行情驱动唤醒旅程</div><div class="callout-body"><p>价格波动事件即时触发，按持仓/自选分流，把行情转成交易活跃（Web3 独有场景）。</p></div></div>
+        <div class="callout neutral"><div class="callout-title">痛点 4 · 安全信任缺失、获客贵</div><div class="callout-body"><p>钓鱼、异常登录、提币风险影响留存与口碑；邀请返佣、空投活动靠人工，裂变没做起来。</p></div></div>
+        <div class="callout info"><div class="callout-title">解法 · 安全信任 + 邀请裂变旅程</div><div class="callout-body"><p>OTP 二次确认 / 防钓鱼提示建立信任降流失；邀请返佣、空投任务自动化拉动低成本增长。</p></div></div>
+      </div>
+    </section>
+
+    <!-- 二、用户漏斗 -->
+    <section id="s-funnel" class="section">
+      <h2>二、用户漏斗：从 KYC 到复交易，每层都有增长空间</h2>
+      <p class="muted small">下图为 Web3 / crypto 行业估算区间对比，用于说明各环节的自动化增长空间，非实测数据。KYC 与首笔交易是两个最大漏损点。</p>
+      <div class="chart" id="chart-funnel"></div>
+    </section>
+
+    <!-- 三、为什么 EngageLab -->
+    <section id="s-why" class="section">
+      <h2>三、为什么选择 EngageLab MA</h2>
+      <div class="grid grid-3">
+        <div class="card"><div class="card-header">全渠道一体化编排</div><div class="card-body p-sm"><ul>
+          <li>Email、App Push（iOS+Android）、SMS、OTP、WhatsApp 同一平台可视化编排</li>
+          <li>一条旅程内多通道互补、渠道成本递进、按属性分流</li>
+        </ul></div></div>
+        <div class="card"><div class="card-header">OTP · 安全触达刚需</div><div class="card-body p-sm"><ul>
+          <li>注册验证、2FA、提币二次确认、异常登录：OTP 一键认证覆盖多运营商</li>
+          <li>SMS/WhatsApp/Email/Voice 多通道 OTP 自动兜底</li>
+        </ul></div></div>
+        <div class="card"><div class="card-header">CDP 统一身份（EUID）</div><div class="card-body p-sm"><ul>
+          <li>邮箱 / 手机号 / 设备 / 账户 ID 合并为一个用户画像</li>
+          <li>KYC 状态、持仓、交易、活动属性支撑分群与个性化</li>
+        </ul></div></div>
+        <div class="card"><div class="card-header">实时事件触发 · 行情驱动</div><div class="card-body p-sm"><ul>
+          <li>价格波动、入金、提币等事件秒级触发旅程</li>
+          <li>100 万条/秒并发、响应 &lt;200ms，行情时效性有保障</li>
+        </ul></div></div>
+        <div class="card"><div class="card-header">AI 多语言 · 全球送达</div><div class="card-body p-sm"><ul>
+          <li>多语言文案一键生成，一套旅程覆盖多国</li>
+          <li>邮件进箱率优化、独立 IP；App Push 走 FCM/APNs/极光通道</li>
+        </ul></div></div>
+        <div class="card"><div class="card-header">合规 · Web3 安全适配</div><div class="card-body p-sm"><ul>
+          <li>KYC/AML 触达、不构成投资建议+高风险提示口径</li>
+          <li>防钓鱼（仅官方域名）、手机号哈希、PII 脱敏、GDPR/SOC 2</li>
+        </ul></div></div>
+      </div>
+    </section>
+
+    <!-- 四、场景总览 -->
+    <section id="s-scenarios" class="section">
+      <h2>四、高 ROI 运营场景总览</h2>
+      <table>
+        <thead><tr><th>#</th><th>场景</th><th>生命周期阶段</th><th>核心触发</th><th>渠道组合</th><th>预期提升（估算）</th></tr></thead>
+        <tbody>
+          <tr class="tone-info"><td>J1</td><td>开户激活 + 身份/KYC 完成催办</td><td>激活</td><td>注册成功</td><td>App Push → Email → WhatsApp → SMS</td><td>KYC 完成 +10~20%</td></tr>
+          <tr><td>J2</td><td>首次入金 + 首笔链上交互黄金期</td><td>首次转化</td><td>身份/KYC 通过</td><td>App Push + Email + WhatsApp</td><td>首笔交易 +8~15%</td></tr>
+          <tr class="tone-success"><td>J3</td><td>行情驱动交易唤醒</td><td>活跃 / 复交易</td><td>价格波动事件（±5%）</td><td>App Push + Email</td><td>交易活跃 +15~30%</td></tr>
+          <tr><td>J4</td><td>沉睡 / 有资产未活跃召回</td><td>流失召回</td><td>最后活跃 &gt;7 天</td><td>App Push → Email → WhatsApp → SMS</td><td>召回率 +20~40%</td></tr>
+          <tr class="tone-success"><td>J5</td><td>安全信任触达</td><td>信任 / 留存</td><td>异常登录 / 提币 / 新设备</td><td>SMS/OTP + App Push + Email</td><td>可疑操作确认率 +30%↑</td></tr>
+          <tr><td>J6</td><td>邀请裂变 / 空投任务活动</td><td>裂变增长</td><td>活动开启 / 邀请达标</td><td>App Push + Email + WhatsApp</td><td>邀请注册 +15~25%</td></tr>
+        </tbody>
+      </table>
+      <p class="muted small" style="margin-top:8px">提升幅度为 Web3 行业公开区间估算，用于排期与目标设定，最终以 4 周测试实测为准。</p>
+    </section>
+
+    <!-- 五、核心旅程详细编排 -->
+    <section id="s-journey" class="section-plain">
+      <h2>五、核心旅程详细编排</h2>
+
+      <div class="section" style="margin-top:16px;">
+        <h3>旅程 1：开户激活 + 身份/KYC 完成催办</h3>
+        <div class="grid grid-2-1">
+          <div class="dag-wrap" id="dag-j1"></div>
+          <div>
+            <div class="callout neutral" style="margin-bottom:12px"><div class="callout-title">业务痛点</div><div class="callout-body"><p>注册后卡在身份验证（交易所 KYC / 钱包创建备份），不完成就无法交易，最大漏损点。</p></div></div>
+            <div class="callout info" style="margin-bottom:12px"><div class="callout-title">旅程组件配置</div><div class="callout-body">
+              <p><strong>进入条件：</strong>事件：注册成功</p>
+              <p><strong>提前退出：</strong>事件：身份/KYC 完成</p>
+              <p><strong>渠道递进：</strong>App Push → Email → WhatsApp → SMS（成本由低到高）</p>
+              <p><strong>转化统计：</strong>事件：KYC 完成，监听 3 天</p>
+              <p><strong>可发送时间：</strong>刚注册活跃窗口不加限制；后续触达前加时段</p>
+            </div></div>
+            <div class="callout success"><div class="callout-title">预期效益</div><div class="callout-body"><p>KYC 完成 +10~20%（估算）；把验证漏损降到最低，是全链路增长的前提。</p></div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <h3>旅程 2：首次入金 + 首笔链上交互黄金期</h3>
+        <div class="grid grid-2-1">
+          <div class="dag-wrap" id="dag-j2"></div>
+          <div>
+            <div class="callout neutral" style="margin-bottom:12px"><div class="callout-title">业务痛点</div><div class="callout-body"><p>身份完成却不入金、不下第一单/首笔交互，早期不激活基本留不住。</p></div></div>
+            <div class="callout info" style="margin-bottom:12px"><div class="callout-title">旅程组件配置</div><div class="callout-body">
+              <p><strong>进入条件：</strong>事件：身份/KYC 通过</p>
+              <p><strong>提前退出：</strong>事件：完成首笔交易/交互</p>
+              <p><strong>分支：</strong>属性：已入金未交易 / 未入金</p>
+              <p><strong>转化统计：</strong>事件：首笔交易，监听 3 天</p>
+            </div></div>
+            <div class="callout success"><div class="callout-title">预期效益</div><div class="callout-body"><p>首笔交易 +8~15%（估算）；手续费券/新手礼是首笔转化关键钩子。</p></div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <h3>旅程 3：行情驱动交易唤醒（Web3 独有）</h3>
+        <div class="grid grid-2-1">
+          <div class="dag-wrap" id="dag-j3"></div>
+          <div>
+            <div class="callout neutral" style="margin-bottom:12px"><div class="callout-title">业务痛点</div><div class="callout-body"><p>大行情波动是最强交易触发点，但缺乏实时事件触达，持仓与沉默用户都错过。</p></div></div>
+            <div class="callout info" style="margin-bottom:12px"><div class="callout-title">旅程组件配置</div><div class="callout-body">
+              <p><strong>进入条件：</strong>事件：价格波动（如 BTC/自选币 ±5%）</p>
+              <p><strong>分支：</strong>属性：是否持仓/自选该币种</p>
+              <p><strong>时效：</strong>行情类即时下发，不加时段限制</p>
+              <p><strong>转化统计：</strong>事件：打开/交易，监听 6h</p>
+            </div></div>
+            <div class="callout success"><div class="callout-title">预期效益</div><div class="callout-body"><p>交易活跃 +15~30%（估算）；持仓/自选用户个性化文案打开率显著高于泛推。</p></div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <h3>旅程 4：沉睡 / 有资产未活跃召回</h3>
+        <div class="grid grid-2-1">
+          <div class="dag-wrap" id="dag-j4"></div>
+          <div>
+            <div class="callout neutral" style="margin-bottom:12px"><div class="callout-title">业务痛点</div><div class="callout-body"><p>沉默用户回归意愿快速衰减；"有余额未动"的用户是最值得召回的高价值群体。</p></div></div>
+            <div class="callout info" style="margin-bottom:12px"><div class="callout-title">旅程组件配置</div><div class="callout-body">
+              <p><strong>进入条件：</strong>属性：最后活跃距今 &gt;7 天</p>
+              <p><strong>分支：</strong>属性：沉默深度 7-14 / 15-29 / ≥30 天 + 是否有余额</p>
+              <p><strong>提前退出：</strong>事件：回归活跃</p>
+              <p><strong>再次进入：</strong>可，间隔 15 天</p>
+            </div></div>
+            <div class="callout success"><div class="callout-title">预期效益</div><div class="callout-body"><p>召回率 +20~40%（估算）；渠道成本递进 Push→Email→WhatsApp→SMS。</p></div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <h3>旅程 5：安全信任触达</h3>
+        <div class="grid grid-2-1">
+          <div class="dag-wrap" id="dag-j5"></div>
+          <div>
+            <div class="callout neutral" style="margin-bottom:12px"><div class="callout-title">业务痛点</div><div class="callout-body"><p>钓鱼、异常登录、提币风险影响留存与口碑；安全触达不及时会造成资产与信任双重损失。</p></div></div>
+            <div class="callout info" style="margin-bottom:12px"><div class="callout-title">旅程组件配置</div><div class="callout-body">
+              <p><strong>进入条件：</strong>事件：异常登录 / 提币 / 新设备 / 授权请求</p>
+              <p><strong>分支：</strong>属性：事件类型（提币登录用 OTP，新设备用 Push）</p>
+              <p><strong>提前退出：</strong>事件：用户确认 / 冻结操作</p>
+              <p><strong>防钓鱼：</strong>触达链接仅指向官方已验证域名</p>
+            </div></div>
+            <div class="callout success"><div class="callout-title">预期效益</div><div class="callout-body"><p>可疑操作确认率提升、盗号/钓鱼损失下降；安全体验是 Web3 口碑与留存的基石。</p></div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <h3>旅程 6：邀请裂变 / 空投任务活动</h3>
+        <div class="grid grid-2-1">
+          <div class="dag-wrap" id="dag-j6"></div>
+          <div>
+            <div class="callout neutral" style="margin-bottom:12px"><div class="callout-title">业务痛点</div><div class="callout-body"><p>邀请返佣、空投任务是 Web3 最强低成本增长手段，但靠人工运营、进度提醒缺失。</p></div></div>
+            <div class="callout info" style="margin-bottom:12px"><div class="callout-title">旅程组件配置</div><div class="callout-body">
+              <p><strong>进入条件：</strong>事件：空投/邀请活动开启</p>
+              <p><strong>分支：</strong>属性：是否已参与（未参与拉新 / 已参与冲刺）</p>
+              <p><strong>提前退出：</strong>事件：完成任务 / 邀请达标</p>
+              <p><strong>可发送时间：</strong>本地黄金时段 终端时区</p>
+            </div></div>
+            <div class="callout success"><div class="callout-title">预期效益</div><div class="callout-body"><p>邀请注册 +15~25%（估算）；返佣到账/名额将满的实时提醒最能催动裂变。</p></div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 六、渠道选型 -->
+    <section id="s-channel" class="section-plain">
+      <h2>六、全球 / 新兴市场渠道选型参考</h2>
+      <div class="section">
+        <p class="muted small">Web3 渠道适配相对值（示意，非精确数据）：Email 是 crypto 主力（KYC/交易/安全/资讯），App Push 承接行情实时触达，SMS/OTP 是安全刚需，WhatsApp 在新兴市场高价值召回；Telegram 为社群主阵地（EngageLab 即将支持）。</p>
+        <div class="chart" id="chart-channel"></div>
+        <div class="grid grid-2" style="margin-top:14px">
+          <div class="callout info"><div class="callout-title">主力通道</div><div class="callout-body"><p>Email（KYC/交易/安全/资讯/存量）、App Push（行情与实时行为触发）、SMS/OTP（注册/2FA/提币安全刚需）、WhatsApp（新兴市场高价值召回与客服）。</p></div></div>
+          <div class="callout neutral"><div class="callout-title">路线图</div><div class="callout-body"><p>Telegram（EngageLab 即将支持）是 Web3 社群主阵地，接入后可承接社群播报、活动与客服，与现有旅程无缝叠加。</p></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 七、合规与安全 -->
+    <section id="s-compliance" class="section">
+      <h2>七、合规与安全（Web3 强化）</h2>
+      <div class="grid grid-3">
+        <div class="card"><div class="card-header">合规口径</div><div class="card-body p-sm"><ul><li>KYC / AML 触达，各地监管牌照差异化内容</li><li>统一"不构成投资建议 + 高风险提示"免责口径</li><li>不推荐具体币种、不做投资诱导</li></ul></div></div>
+        <div class="card"><div class="card-header">账户与资金安全</div><div class="card-body p-sm"><ul><li>OTP / 2FA、异常登录提醒、提币二次确认</li><li>防钓鱼：官方触达仅指向已验证域名/链接</li><li>手机号哈希、PII 脱敏、RBAC 权限</li></ul></div></div>
+        <div class="card"><div class="card-header">数据与触达护栏</div><div class="card-body p-sm"><ul><li>GDPR / CCPA：数据删除/导出/同意管理</li><li>频控去重、勿扰时段、终端时区发送</li><li>已通过 GDPR、SOC 2 认证，记录留存（如 60 天）</li></ul></div></div>
+      </div>
+    </section>
+
+    <!-- 八、测试计划 -->
+    <section id="s-plan" class="section">
+      <h2>八、测试计划（4 周）</h2>
+      <table>
+        <thead><tr><th>周次</th><th>阶段</th><th>核心工作</th><th>验收指标</th></tr></thead>
+        <tbody>
+          <tr><td>第 1 周</td><td>启动 · 数据打通</td><td>确认埋点（注册、KYC、入金、交易、价格波动、提币/登录、活动）；SDK 接入；EUID 身份映射</td><td>事件入库率 ≥95%</td></tr>
+          <tr><td>第 2 周</td><td>核心旅程上线</td><td>J1 KYC 催办 + J2 首入金首交易（2 条，小流量）；多语言文案配置</td><td>旅程触发成功率 ≥98%</td></tr>
+          <tr><td>第 3 周</td><td>扩量 · A/B</td><td>J3 行情唤醒 + J4 沉睡召回 + J5 安全触达全量；持仓/沉默分层验证；A/B</td><td>Push 点击率 ≥6%；样本量 ≥1 万</td></tr>
+          <tr><td>第 4 周</td><td>复盘 · 扩面</td><td>J6 邀请裂变/空投上线；输出 uplift 报告与后续路线（含 Telegram 接入）</td><td>KYC/入金/交易/召回各环节 uplift 可量化</td></tr>
+        </tbody>
+      </table>
+      <div class="callout success" style="margin-top:14px"><div class="callout-title">投入</div><div class="callout-body"><p>测试期授权费 $0，配置 2 人专属服务团队支撑埋点、旅程与多语言文案交付。</p></div></div>
+    </section>
+
+    <footer class="site-footer">EngageLab MA · Web3 行业增长方案（交易 · 钱包 · GameFi）— 内部方案，转化/提升数据为行业估算或公开参考，落地以实测为准。面向合规平台增长运营，不构成投资建议、不推荐具体币种。</footer>
+  </main>
+
+  <script>
+  (function(){
+    // ========== Shared helpers ==========
+    const COLORS = {
+      accent: '#2563eb', info: '#0369a1', success: '#16a34a',
+      warning: '#d97706', neutral: '#94a3b8', muted: '#cbd5e1',
+      text: '#374151', textMute: '#9ca3af', grid: '#e5e7eb',
+    };
+    function svgEl(w, h) {
+      const s = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+      s.setAttribute('viewBox', '0 0 ' + w + ' ' + h);
+      s.setAttribute('width', '100%');
+      s.setAttribute('preserveAspectRatio', 'xMidYMid meet');
+      return s;
+    }
+    function el(tag, attrs) {
+      const e = document.createElementNS('http://www.w3.org/2000/svg', tag);
+      for (const k in attrs) e.setAttribute(k, attrs[k]);
+      return e;
+    }
+
+    // ========== Bar Chart ==========
+    function drawBarChart(mount, opts) {
+      const { categories, series, valueSuffix = '', height = 240 } = opts;
+      const W = 600, H = height, PAD_L = 44, PAD_R = 16, PAD_T = 12, PAD_B = 56;
+      const innerW = W - PAD_L - PAD_R, innerH = H - PAD_T - PAD_B;
+      const max = Math.max(...series.flatMap(s => s.data), 1);
+      const niceMax = Math.ceil(max / 20) * 20 || 100;
+      const groupCount = categories.length;
+      const barsPerGroup = series.length;
+      const groupW = innerW / groupCount;
+      const barW = Math.min(22, (groupW - 12) / barsPerGroup);
+      const s = svgEl(W, H);
+      for (let i = 0; i <= 4; i++) {
+        const v = (niceMax / 4) * i;
+        const y = PAD_T + innerH - (v / niceMax) * innerH;
+        s.appendChild(el('line', { x1: PAD_L, x2: W - PAD_R, y1: y, y2: y, stroke: COLORS.grid, 'stroke-width': 1 }));
+        const t = el('text', { x: PAD_L - 6, y: y + 4, 'text-anchor': 'end', 'font-size': 10, fill: COLORS.textMute });
+        t.textContent = Math.round(v) + valueSuffix;
+        s.appendChild(t);
+      }
+      categories.forEach((cat, ci) => {
+        const gx = PAD_L + groupW * ci;
+        series.forEach((se, si) => {
+          const v = se.data[ci] || 0;
+          const h = (v / niceMax) * innerH;
+          const x = gx + (groupW - barW * barsPerGroup) / 2 + si * barW;
+          const y = PAD_T + innerH - h;
+          const color = COLORS[se.tone] || COLORS.neutral;
+          s.appendChild(el('rect', { x, y, width: barW - 2, height: h, fill: color, rx: 2 }));
+          if (v > 0) {
+            const label = el('text', { x: x + (barW - 2) / 2, y: y - 2, 'text-anchor': 'middle', 'font-size': 8, fill: COLORS.text });
+            label.textContent = v + valueSuffix;
+            s.appendChild(label);
+          }
+        });
+        const t = el('text', { x: gx + groupW / 2, y: H - PAD_B + 14, 'text-anchor': 'middle', 'font-size': 10, fill: COLORS.text });
+        t.textContent = cat;
+        s.appendChild(t);
+      });
+      // Legend
+      let legX = PAD_L;
+      series.forEach((se) => {
+        const color = COLORS[se.tone] || COLORS.accent;
+        s.appendChild(el('rect', { x: legX, y: H - 18, width: 10, height: 10, rx: 2, fill: color }));
+        const t = el('text', { x: legX + 14, y: H - 10, 'font-size': 10, fill: COLORS.text });
+        t.textContent = se.name;
+        s.appendChild(t);
+        legX += 14 + (se.name.length * 7) + 16;
+      });
+      mount.innerHTML = '';
+      mount.appendChild(s);
+    }
+
+    // ========== Journey DAG renderer (same as fintech/security solution) ==========
+    const KIND_STYLE = {
+      entry:    { fill: '#f1f5f9', stroke: '#94a3b8', text: '#111827' },
+      wait:     { fill: '#fafafa', stroke: '#d1d5db', text: '#6b7280' },
+      branch:   { fill: '#f9fafb', stroke: '#475569', text: '#111827' },
+      channel:  { fill: '#dbeafe', stroke: '#2563eb', text: '#1e3a8a' },
+      sendtime: { fill: '#fef3c7', stroke: '#d97706', text: '#92400e' },
+      exitOk:   { fill: '#dcfce7', stroke: '#16a34a', text: '#14532d' },
+      exitEnd:  { fill: '#f3f4f6', stroke: '#9ca3af', text: '#4b5563' },
+    };
+
+    function drawJourney(mount, nodes, edges) {
+      const NODE_W = 176, NODE_H = 62, RANK_GAP = 42, NODE_GAP = 22;
+      const rankOf = {}, incoming = {};
+      nodes.forEach(n => { rankOf[n.id] = 0; incoming[n.id] = []; });
+      edges.forEach(e => { incoming[e.to].push(e.from); });
+      let changed = true;
+      while (changed) {
+        changed = false;
+        edges.forEach(e => {
+          if (rankOf[e.to] < rankOf[e.from] + 1) { rankOf[e.to] = rankOf[e.from] + 1; changed = true; }
+        });
+      }
+      const maxRank = Math.max(...Object.values(rankOf));
+      const ranks = [];
+      for (let r = 0; r <= maxRank; r++) ranks.push([]);
+      nodes.forEach(n => { ranks[rankOf[n.id]].push(n); });
+      const pos = {};
+      const rankWidths = ranks.map(r => r.length * NODE_W + (r.length - 1) * NODE_GAP);
+      const maxWidth = Math.max(...rankWidths, 400);
+      ranks.forEach((rankNodes, r) => {
+        const withAnchor = rankNodes.map(n => {
+          const parents = incoming[n.id].map(p => pos[p] ? pos[p].x + NODE_W / 2 : null).filter(x => x !== null);
+          const anchor = parents.length ? parents.reduce((a, b) => a + b, 0) / parents.length : null;
+          return { node: n, anchor };
+        });
+        withAnchor.sort((a, b) => {
+          if (a.anchor === null && b.anchor === null) return 0;
+          if (a.anchor === null) return 1;
+          if (b.anchor === null) return -1;
+          return a.anchor - b.anchor;
+        });
+        const totalW = withAnchor.length * NODE_W + (withAnchor.length - 1) * NODE_GAP;
+        const startX = (maxWidth - totalW) / 2 + 20;
+        withAnchor.forEach((it, i) => {
+          pos[it.node.id] = { x: startX + i * (NODE_W + NODE_GAP), y: 20 + r * (NODE_H + RANK_GAP) };
+        });
+      });
+      for (let pass = 0; pass < 3; pass++) {
+        ranks.forEach(rankNodes => {
+          const sorted = rankNodes.slice().sort((a, b) => pos[a.id].x - pos[b.id].x);
+          for (let i = 1; i < sorted.length; i++) {
+            const prev = pos[sorted[i - 1].id], cur = pos[sorted[i].id];
+            if (cur.x < prev.x + NODE_W + NODE_GAP) cur.x = prev.x + NODE_W + NODE_GAP;
+          }
+        });
+      }
+      const width = Math.max(...Object.values(pos).map(p => p.x)) + NODE_W + 20;
+      const height = Math.max(...Object.values(pos).map(p => p.y)) + NODE_H + 24;
+      const s = svgEl(width, height);
+      s.setAttribute('width', width);
+      s.setAttribute('height', height);
+      s.style.maxWidth = '100%';
+      s.style.height = 'auto';
+      const defs = el('defs');
+      const marker = el('marker', { id: 'arrow', viewBox: '0 0 10 10', refX: 9, refY: 5, markerWidth: 6, markerHeight: 6, orient: 'auto-start-reverse' });
+      marker.appendChild(el('path', { d: 'M 0 0 L 10 5 L 0 10 z', fill: '#94a3b8' }));
+      defs.appendChild(marker);
+      s.appendChild(defs);
+      edges.forEach(e => {
+        const from = pos[e.from], to = pos[e.to];
+        if (!from || !to) return;
+        const x1 = from.x + NODE_W / 2, y1 = from.y + NODE_H;
+        const x2 = to.x + NODE_W / 2, y2 = to.y;
+        const cy = (y1 + y2) / 2;
+        const d = 'M' + x1 + ',' + y1 + ' C' + x1 + ',' + cy + ' ' + x2 + ',' + cy + ' ' + x2 + ',' + y2;
+        s.appendChild(el('path', { d, fill: 'none', stroke: '#94a3b8', 'stroke-width': 1.25, 'marker-end': 'url(#arrow)' }));
+        if (e.label) {
+          const mx = (x1 + x2) / 2, my = cy;
+          const w = Math.max(e.label.length * 9 + 10, 28);
+          s.appendChild(el('rect', { x: mx - w / 2, y: my - 10, width: w, height: 18, rx: 4, fill: '#ffffff', stroke: '#e5e7eb' }));
+          const t = el('text', { x: mx, y: my + 3, 'text-anchor': 'middle', 'font-size': 11, fill: '#475569' });
+          t.textContent = e.label;
+          s.appendChild(t);
+        }
+      });
+      nodes.forEach(n => {
+        const p = pos[n.id];
+        const k = KIND_STYLE[n.kind] || KIND_STYLE.entry;
+        s.appendChild(el('rect', { x: p.x, y: p.y, width: NODE_W, height: NODE_H, rx: 10, fill: k.fill, stroke: k.stroke, 'stroke-width': n.kind === 'channel' ? 1.4 : 1 }));
+        const titleY = n.sub ? p.y + 24 : p.y + NODE_H / 2 + 4;
+        const title = el('text', { x: p.x + NODE_W / 2, y: titleY, 'text-anchor': 'middle', 'font-size': 12.5, 'font-weight': 600, fill: k.text });
+        title.textContent = n.title;
+        s.appendChild(title);
+        if (n.sub) {
+          const sub = el('text', { x: p.x + NODE_W / 2, y: p.y + 42, 'text-anchor': 'middle', 'font-size': 11, fill: k.text, opacity: 0.82 });
+          sub.textContent = n.sub;
+          s.appendChild(sub);
+        }
+      });
+      mount.innerHTML = '';
+      mount.appendChild(s);
+    }
+
+    // ===== 漏斗对比：当前基准 vs MA 优化后（Web3 行业估算） =====
+    drawBarChart(document.getElementById('chart-funnel'), {
+      categories: ['注册→KYC完成', 'KYC→首次入金', '入金→首笔交易', '首笔→复交易', '沉睡召回率'],
+      series: [
+        { name: '当前基准（估算）',    data: [40, 45, 50, 30, 15], tone: 'neutral' },
+        { name: 'MA 自动化后（估算）', data: [55, 58, 65, 45, 35], tone: 'success' },
+      ],
+      valueSuffix: '%', height: 260,
+    });
+
+    // ===== Web3 渠道适配相对值（示意） =====
+    drawBarChart(document.getElementById('chart-channel'), {
+      categories: ['Email', 'App Push', 'SMS / OTP', 'WhatsApp', 'Telegram(即将)'],
+      series: [
+        { name: 'Web3 触达适配（相对值·示意）', data: [90, 80, 78, 62, 55], tone: 'info' },
+      ],
+      valueSuffix: '', height: 220,
+    });
+
+    // ===== J1：开户激活 + 身份/KYC 完成催办（渠道递进 Push→Email→WhatsApp→SMS）=====
+    drawJourney(document.getElementById('dag-j1'),
+      [
+        { id: 'start', kind: 'entry',    title: '开始',       sub: '事件: 注册成功' },
+        { id: 'push0', kind: 'channel',  title: 'App Push',   sub: '完成身份验证·解锁全部功能' },
+        { id: 'w1',    kind: 'wait',     title: '等待事件',   sub: '24h 内等待: 完成 KYC' },
+        { id: 'ok0',   kind: 'exitOk',   title: '结束（已完成）', sub: '身份/KYC 完成' },
+        { id: 'st1',   kind: 'sendtime', title: '可发送时间', sub: '本地黄金时段 终端时区' },
+        { id: 'em1',   kind: 'channel',  title: 'Email',      sub: '3步完成KYC·图文指引' },
+        { id: 'w2',    kind: 'wait',     title: '等待事件',   sub: '24h 内等待: 完成 KYC' },
+        { id: 'ok1',   kind: 'exitOk',   title: '结束（已完成）', sub: '身份/KYC 完成' },
+        { id: 'wa1',   kind: 'channel',  title: 'WhatsApp',   sub: '专属客服协助过审' },
+        { id: 'w3',    kind: 'wait',     title: '等待事件',   sub: '24h 内等待: 完成 KYC' },
+        { id: 'ok2',   kind: 'exitOk',   title: '结束（已完成）', sub: '身份/KYC 完成' },
+        { id: 'sms1',  kind: 'channel',  title: 'SMS',        sub: '新手礼将过期·完成验证领取' },
+        { id: 'end',   kind: 'exitEnd',  title: '结束',       sub: '转沉睡召回旅程' },
+      ],
+      [
+        { from: 'start', to: 'push0' }, { from: 'push0', to: 'w1' },
+        { from: 'w1', to: 'ok0', label: '已完成' },
+        { from: 'w1', to: 'st1', label: '未完成' },
+        { from: 'st1', to: 'em1' }, { from: 'em1', to: 'w2' },
+        { from: 'w2', to: 'ok1', label: '已完成' },
+        { from: 'w2', to: 'wa1', label: '未完成' },
+        { from: 'wa1', to: 'w3' },
+        { from: 'w3', to: 'ok2', label: '已完成' },
+        { from: 'w3', to: 'sms1', label: '未完成' },
+        { from: 'sms1', to: 'end' },
+      ]
+    );
+
+    // ===== J2：首次入金 + 首笔链上交互黄金期 =====
+    drawJourney(document.getElementById('dag-j2'),
+      [
+        { id: 'start', kind: 'entry',    title: '开始',       sub: '事件: 身份/KYC 通过' },
+        { id: 'push0', kind: 'channel',  title: 'App Push',   sub: '入金即领手续费券+新手礼' },
+        { id: 'w1',    kind: 'wait',     title: '等待事件',   sub: '24h 内等待: 首次入金/交互' },
+        { id: 'ok0',   kind: 'exitOk',   title: '结束（已完成）', sub: '完成首笔交易/交互' },
+        { id: 'br1',   kind: 'branch',   title: '条件分支',   sub: '属性: 已入金未交易 / 未入金' },
+        { id: 'pushd', kind: 'channel',  title: 'App Push',   sub: '(已入金) 首笔交易返手续费' },
+        { id: 'emn',   kind: 'channel',  title: 'Email',      sub: '(未入金) 入金教程+安全提示' },
+        { id: 'w2',    kind: 'wait',     title: '等待事件',   sub: '48h 内等待: 首笔交互' },
+        { id: 'ok1',   kind: 'exitOk',   title: '结束（已完成）', sub: '完成首笔交易/交互' },
+        { id: 'st1',   kind: 'sendtime', title: '可发送时间', sub: '本地黄金时段 终端时区' },
+        { id: 'wa1',   kind: 'channel',  title: 'WhatsApp',   sub: '专属礼包+客服协助' },
+        { id: 'w3',    kind: 'wait',     title: '等待事件',   sub: '24h 内等待: 首笔交互' },
+        { id: 'ok2',   kind: 'exitOk',   title: '结束（已完成）', sub: '完成首笔交易/交互' },
+        { id: 'end',   kind: 'exitEnd',  title: '结束',       sub: '转行情唤醒/沉睡召回' },
+      ],
+      [
+        { from: 'start', to: 'push0' }, { from: 'push0', to: 'w1' },
+        { from: 'w1', to: 'ok0', label: '已完成' },
+        { from: 'w1', to: 'br1', label: '未完成' },
+        { from: 'br1', to: 'pushd', label: '已入金未交易' },
+        { from: 'br1', to: 'emn',   label: '未入金' },
+        { from: 'pushd', to: 'w2' }, { from: 'emn', to: 'w2' },
+        { from: 'w2', to: 'ok1', label: '已完成' },
+        { from: 'w2', to: 'st1', label: '未完成' },
+        { from: 'st1', to: 'wa1' }, { from: 'wa1', to: 'w3' },
+        { from: 'w3', to: 'ok2', label: '已完成' },
+        { from: 'w3', to: 'end', label: '未完成' },
+      ]
+    );
+
+    // ===== J3：行情驱动交易唤醒 =====
+    drawJourney(document.getElementById('dag-j3'),
+      [
+        { id: 'start', kind: 'entry',   title: '开始',        sub: '事件: 价格波动 ±5%' },
+        { id: 'br1',   kind: 'branch',  title: '条件分支',    sub: '属性: 是否持仓/自选该币' },
+        { id: 'ph',    kind: 'channel', title: 'App Push',    sub: '(持仓/自选){coin}异动·查看' },
+        { id: 'pg',    kind: 'channel', title: 'App Push',    sub: '(其他) 市场大波动·热门榜' },
+        { id: 'w1',    kind: 'wait',    title: '等待事件',    sub: '6h 内等待: 打开/交易' },
+        { id: 'ok',    kind: 'exitOk',  title: '结束（已活跃）', sub: '打开/交易' },
+        { id: 'em1',   kind: 'channel', title: 'Email',       sub: '行情简报+交易入口' },
+        { id: 'end',   kind: 'exitEnd', title: '结束',        sub: '结束' },
+      ],
+      [
+        { from: 'start', to: 'br1' },
+        { from: 'br1', to: 'ph', label: '持仓/自选' },
+        { from: 'br1', to: 'pg', label: '其他' },
+        { from: 'ph', to: 'w1' }, { from: 'pg', to: 'w1' },
+        { from: 'w1', to: 'ok',  label: '已交易' },
+        { from: 'w1', to: 'em1', label: '未响应' },
+        { from: 'em1', to: 'end' },
+      ]
+    );
+
+    // ===== J4：沉睡 / 有资产未活跃召回 =====
+    drawJourney(document.getElementById('dag-j4'),
+      [
+        { id: 'start', kind: 'entry',   title: '开始',        sub: '属性: 最后活跃 >7天' },
+        { id: 'br1',   kind: 'branch',  title: '条件分支',    sub: '属性: 沉默深度 + 是否有余额' },
+        { id: 'p7',    kind: 'channel', title: 'App Push',    sub: '(7-14天) 你的资产在等你·行情速览' },
+        { id: 'em14',  kind: 'channel', title: 'Email',       sub: '(15-29天) 账户摘要+回归福利' },
+        { id: 'wa30',  kind: 'channel', title: 'WhatsApp',    sub: '(≥30天) 专属回归礼+客服' },
+        { id: 'w1',    kind: 'wait',    title: '等待事件',    sub: '3天内等待: 是否回归' },
+        { id: 'w2',    kind: 'wait',    title: '等待事件',    sub: '3天内等待: 是否回归' },
+        { id: 'w3',    kind: 'wait',    title: '等待事件',    sub: '3天内等待: 是否回归' },
+        { id: 'ok',    kind: 'exitOk',  title: '结束（已回归）', sub: '回归活跃' },
+        { id: 'sf',    kind: 'channel', title: 'SMS',         sub: '(深度) 账户安全提醒+回归' },
+        { id: 'w4',    kind: 'wait',    title: '等待事件',    sub: '5天内等待: 是否回归' },
+        { id: 'ok2',   kind: 'exitOk',  title: '结束（已回归）', sub: '回归活跃' },
+        { id: 'end',   kind: 'exitEnd', title: '结束',        sub: '标记深度流失' },
+      ],
+      [
+        { from: 'start', to: 'br1' },
+        { from: 'br1', to: 'p7',   label: '7-14天' },
+        { from: 'br1', to: 'em14', label: '15-29天' },
+        { from: 'br1', to: 'wa30', label: '≥30天' },
+        { from: 'p7', to: 'w1' }, { from: 'em14', to: 'w2' }, { from: 'wa30', to: 'w3' },
+        { from: 'w1', to: 'ok', label: '已回归' },
+        { from: 'w2', to: 'ok', label: '已回归' },
+        { from: 'w3', to: 'ok', label: '已回归' },
+        { from: 'w1', to: 'sf', label: '未回归' },
+        { from: 'w2', to: 'sf', label: '未回归' },
+        { from: 'w3', to: 'sf', label: '未回归' },
+        { from: 'sf', to: 'w4' },
+        { from: 'w4', to: 'ok2', label: '已回归' },
+        { from: 'w4', to: 'end', label: '未回归' },
+      ]
+    );
+
+    // ===== J5：安全信任触达 =====
+    drawJourney(document.getElementById('dag-j5'),
+      [
+        { id: 'start', kind: 'entry',   title: '开始',       sub: '事件: 异常登录/提币/新设备' },
+        { id: 'br1',   kind: 'branch',  title: '条件分支',   sub: '属性: 事件类型' },
+        { id: 'otp',   kind: 'channel', title: 'SMS / OTP',  sub: '(提币/登录) 一键认证·二次确认' },
+        { id: 'push1', kind: 'channel', title: 'App Push',   sub: '(新设备) 非本人请立即冻结' },
+        { id: 'em1',   kind: 'channel', title: 'Email',      sub: '(其他) 安全提醒·仅官方域名' },
+        { id: 'w1',    kind: 'wait',    title: '等待事件',   sub: '15min 内等待: 用户确认' },
+        { id: 'ok',    kind: 'exitOk',  title: '结束（已确认）', sub: '确认/冻结完成' },
+        { id: 'end',   kind: 'exitEnd', title: '结束',       sub: '记录+风控跟进' },
+      ],
+      [
+        { from: 'start', to: 'br1' },
+        { from: 'br1', to: 'otp',   label: '提币/登录' },
+        { from: 'br1', to: 'push1', label: '新设备' },
+        { from: 'br1', to: 'em1',   label: '其他' },
+        { from: 'otp', to: 'w1' }, { from: 'push1', to: 'w1' }, { from: 'em1', to: 'w1' },
+        { from: 'w1', to: 'ok',  label: '已确认' },
+        { from: 'w1', to: 'end', label: '未响应' },
+      ]
+    );
+
+    // ===== J6：邀请裂变 / 空投任务活动 =====
+    drawJourney(document.getElementById('dag-j6'),
+      [
+        { id: 'start', kind: 'entry',    title: '开始',       sub: '事件: 空投/邀请活动开启' },
+        { id: 'br1',   kind: 'branch',   title: '条件分支',   sub: '属性: 是否已参与' },
+        { id: 'pi',    kind: 'channel',  title: 'App Push',   sub: '(未参与) 邀请好友得返佣+空投' },
+        { id: 'pp',    kind: 'channel',  title: 'App Push',   sub: '(已参与) 任务X/Y·冲刺领空投' },
+        { id: 'em1',   kind: 'channel',  title: 'Email',      sub: '活动规则+专属邀请链接' },
+        { id: 'w1',    kind: 'wait',     title: '等待事件',   sub: '3天内等待: 完成/邀请达标' },
+        { id: 'ok',    kind: 'exitOk',   title: '结束（已完成）', sub: '完成/达标' },
+        { id: 'st1',   kind: 'sendtime', title: '可发送时间', sub: '本地黄金时段 终端时区' },
+        { id: 'wa1',   kind: 'channel',  title: 'WhatsApp',   sub: '返佣到账/名额将满提醒' },
+        { id: 'w2',    kind: 'wait',     title: '等待事件',   sub: '活动结束前: 是否完成' },
+        { id: 'ok2',   kind: 'exitOk',   title: '结束（已完成）', sub: '完成/达标' },
+        { id: 'end',   kind: 'exitEnd',  title: '结束',       sub: '活动结束归档' },
+      ],
+      [
+        { from: 'start', to: 'br1' },
+        { from: 'br1', to: 'pi', label: '未参与' },
+        { from: 'br1', to: 'pp', label: '已参与' },
+        { from: 'pi', to: 'em1' }, { from: 'pp', to: 'em1' },
+        { from: 'em1', to: 'w1' },
+        { from: 'w1', to: 'ok',  label: '已完成' },
+        { from: 'w1', to: 'st1', label: '未完成' },
+        { from: 'st1', to: 'wa1' }, { from: 'wa1', to: 'w2' },
+        { from: 'w2', to: 'ok2', label: '已完成' },
+        { from: 'w2', to: 'end', label: '未完成' },
+      ]
+    );
+
+  })();
+  </script>
+</body>
+</html>
