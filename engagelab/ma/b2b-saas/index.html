@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EngageLab MA · B2B SaaS（PLG 产品驱动增长）方案</title>
+  <style>
+    :root {
+      --bg: #ffffff;
+      --bg-soft: #f7f8fa;
+      --bg-elev: #ffffff;
+      --border: #e5e7eb;
+      --border-strong: #d1d5db;
+      --text: #111827;
+      --text-2: #374151;
+      --text-3: #6b7280;
+      --text-4: #9ca3af;
+      --accent: #2563eb;
+      --accent-soft: #dbeafe;
+      --success: #16a34a;
+      --success-soft: #dcfce7;
+      --warning: #d97706;
+      --warning-soft: #fef3c7;
+      --info: #0369a1;
+      --info-soft: #e0f2fe;
+      --danger: #dc2626;
+      --danger-soft: #fee2e2;
+      --radius: 10px;
+      --radius-sm: 6px;
+      --shadow: 0 1px 2px rgba(16, 24, 40, 0.04);
+    }
+
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; background: var(--bg-soft); color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC",
+        "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", sans-serif;
+      line-height: 1.6; -webkit-font-smoothing: antialiased; font-size: 15px; }
+
+    main { max-width: 1180px; margin: 0 auto; padding: 32px 28px 80px; }
+
+    h1 { font-size: 30px; font-weight: 700; margin: 0 0 8px; letter-spacing: -0.01em; color: var(--text); }
+    h2 { font-size: 22px; font-weight: 700; margin: 0 0 12px; letter-spacing: -0.005em; color: var(--text); }
+    h3 { font-size: 17px; font-weight: 600; margin: 0 0 10px; color: var(--text); }
+    p { margin: 0 0 8px; color: var(--text-2); }
+    .muted { color: var(--text-3); }
+    .small { font-size: 13px; }
+    .bold { font-weight: 600; }
+
+    .section { background: var(--bg-elev); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 24px 26px; margin-bottom: 20px; }
+    .section-plain { padding: 6px 2px 18px; margin-bottom: 12px; }
+    .divider { height: 1px; background: var(--border); margin: 16px 0; border: none; }
+
+    .hero { background: linear-gradient(180deg, #fff 0%, #f0fdf4 100%);
+      border: 1px solid var(--border); border-radius: 14px; padding: 28px 30px;
+      margin-bottom: 24px; }
+    .hero-pills { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 14px; }
+    .hero-subtitle { color: var(--text-3); font-size: 15px; max-width: 900px; margin: 8px 0 18px; }
+
+    .pill { display: inline-flex; align-items: center; padding: 2px 10px;
+      font-size: 12px; border-radius: 999px; border: 1px solid var(--border-strong);
+      color: var(--text-2); background: #fff; font-weight: 500; }
+    .pill-accent { background: var(--accent-soft); border-color: var(--accent); color: var(--accent); }
+    .pill-info { background: var(--info-soft); border-color: var(--info); color: var(--info); }
+    .pill-success { background: var(--success-soft); border-color: var(--success); color: var(--success); }
+    .pill-warn { background: var(--warning-soft); border-color: var(--warning); color: var(--warning); }
+
+    .grid { display: grid; gap: 16px; }
+    .grid-4 { grid-template-columns: repeat(4, 1fr); }
+    .grid-3 { grid-template-columns: repeat(3, 1fr); }
+    .grid-2 { grid-template-columns: repeat(2, 1fr); }
+    .grid-5 { grid-template-columns: repeat(5, 1fr); }
+    .grid-1-2 { grid-template-columns: 1fr 2fr; }
+    .grid-2-1 { grid-template-columns: 1.4fr 1fr; }
+    .grid-12-1 { grid-template-columns: 1.2fr 1fr; }
+    .row { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+
+    .stat { padding: 14px 16px; background: var(--bg-elev); border: 1px solid var(--border);
+      border-radius: var(--radius); }
+    .stat-value { font-size: 26px; font-weight: 700; letter-spacing: -0.01em; color: var(--text);
+      line-height: 1.15; }
+    .stat-value.success { color: var(--success); }
+    .stat-value.info { color: var(--info); }
+    .stat-value.warn { color: var(--warning); }
+
+    .stat-label { font-size: 12px; color: var(--text-3); margin-top: 4px; }
+
+    .card { background: var(--bg-elev); border: 1px solid var(--border);
+      border-radius: var(--radius); overflow: hidden; }
+    .card-header { padding: 10px 16px; border-bottom: 1px solid var(--border);
+      background: #fafbfc; font-size: 13px; font-weight: 600; color: var(--text-2); }
+    .card-body { padding: 16px; }
+    .card-body.p-sm { padding: 12px; }
+    .card-body ul { margin: 0; padding-left: 18px; }
+    .card-body li { margin-bottom: 4px; font-size: 13.5px; color: var(--text-2); }
+
+    .callout { padding: 12px 14px; border-radius: var(--radius-sm);
+      border: 1px solid var(--border); border-left-width: 3px; background: var(--bg-soft); }
+    .callout-title { font-weight: 600; margin-bottom: 4px; font-size: 14px; }
+    .callout-body { font-size: 13px; color: var(--text-2); }
+    .callout-body p { font-size: 13px; color: var(--text-2); margin: 0 0 4px; }
+    .callout.info { border-left-color: var(--info); background: var(--info-soft); }
+    .callout.info .callout-title { color: var(--info); }
+    .callout.success { border-left-color: var(--success); background: var(--success-soft); }
+    .callout.success .callout-title { color: var(--success); }
+    .callout.warn { border-left-color: var(--warning); background: var(--warning-soft); }
+    .callout.warn .callout-title { color: var(--warning); }
+    .callout.neutral { border-left-color: var(--text-3); }
+
+    table { width: 100%; border-collapse: collapse; font-size: 13.5px;
+      background: var(--bg-elev); border: 1px solid var(--border); border-radius: var(--radius);
+      overflow: hidden; }
+    th, td { padding: 10px 12px; text-align: left; border-bottom: 1px solid var(--border);
+      color: var(--text-2); vertical-align: middle; }
+    th { background: #fafbfc; font-weight: 600; font-size: 12.5px; color: var(--text-3);
+      letter-spacing: 0.01em; text-transform: uppercase; }
+    tr:last-child td { border-bottom: 0; }
+    tr.tone-success td { background: rgba(22, 163, 74, 0.04); }
+    tr.tone-info td { background: rgba(3, 105, 161, 0.04); }
+
+    .signal-row { display: flex; gap: 10px; padding: 10px 0;
+      border-bottom: 1px solid var(--border); align-items: center; }
+    .signal-row:last-child { border-bottom: 0; }
+    .signal-row .left { flex: 1; min-width: 0; }
+    .signal-row .label { font-size: 13px; font-weight: 600; }
+    .signal-row .hint { font-size: 12px; color: var(--text-3); }
+    .signal-row .value { font-weight: 700; color: var(--text); font-size: 14px; white-space: nowrap; }
+
+    .chart { width: 100%; }
+    .chart svg { width: 100%; height: auto; display: block; }
+    .chart-legend { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--border); }
+    .chart-legend .leg-item { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--text-3); }
+    .chart-legend .dot { width: 10px; height: 10px; border-radius: 2px; }
+
+    .dag-wrap { overflow-x: auto; padding: 8px 2px; }
+    .dag-wrap svg { display: block; margin: 0 auto; }
+
+    .toc-bar { position: sticky; top: 0; background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(8px); border-bottom: 1px solid var(--border);
+      z-index: 10; padding: 10px 28px; margin: -32px -28px 24px;
+      font-size: 12.5px; }
+    .toc-bar .toc-inner { max-width: 1180px; margin: 0 auto; display: flex; gap: 14px;
+      align-items: center; overflow-x: auto; }
+    .toc-bar a { color: var(--text-3); text-decoration: none; white-space: nowrap; padding: 4px 2px; }
+    .toc-bar a:hover { color: var(--accent); }
+    .toc-bar .brand { font-weight: 700; color: var(--text); }
+
+    @page { size: A4; margin: 14mm; }
+    @media print {
+      body { background: #fff; }
+      main { max-width: none; padding: 0; }
+      .toc-bar { display: none; }
+      .section, .card, .hero { page-break-inside: avoid; box-shadow: none; }
+      h2 { page-break-after: avoid; }
+      .hero { break-before: avoid; }
+      .dag-wrap { overflow: visible; }
+      .dag-wrap svg { max-width: 100%; }
+    }
+
+    .spacer-sm { height: 6px; }
+    .spacer-md { height: 12px; }
+
+    .step-num { display: inline-flex; align-items: center; justify-content: center;
+      width: 22px; height: 22px; border-radius: 50%; background: var(--accent-soft);
+      color: var(--accent); font-weight: 700; font-size: 12px; margin-right: 8px; }
+
+    footer.site-footer { margin-top: 36px; padding-top: 16px; border-top: 1px solid var(--border);
+      font-size: 12px; color: var(--text-4); text-align: center; }
+  
+  .back-home {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    color: rgba(255,255,255,0.65);
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 500;
+    padding: 4px 10px 4px 6px;
+    border-radius: 6px;
+    border: 1px solid rgba(255,255,255,0.18);
+    margin-right: 16px;
+    white-space: nowrap;
+    transition: all 0.2s ease;
+    flex-shrink: 0;
+  }
+  .back-home:hover {
+    color: #fff;
+    background: rgba(255,255,255,0.12);
+    border-color: rgba(255,255,255,0.35);
+  }
+  .back-home svg {
+    width: 14px;
+    height: 14px;
+    opacity: 0.8;
+  }
+</style>
+</head>
+<body>
+  <nav class="toc-bar">
+    <div class="toc-inner">
+      <a class="back-home" href="../">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+        返回首页
+      </a>
+      <span class="brand">EngageLab MA · B2B SaaS（PLG）方案</span>
+      <a href="#s-market">市场机会</a><a href="#s-funnel">用户漏斗</a><a href="#s-why">为什么 EngageLab</a>
+      <a href="#s-scenarios">场景总览</a><a href="#s-journey">旅程编排</a><a href="#s-channel">渠道选型</a>
+      <a href="#s-compliance">合规安全</a><a href="#s-plan">测试计划</a>
+    </div>
+  </nav>
+  <main>
+    <section class="hero">
+      <div class="hero-pills">
+        <span class="pill pill-success">B2B SaaS · PLG 产品驱动增长</span>
+        <span class="pill">全球 · 欧美为主</span>
+        <span class="pill pill-info">账户级运营 · 非个人消费</span>
+      </div>
+      <h1>EngageLab MA · B2B SaaS（PLG 产品驱动增长）方案</h1>
+      <p class="hero-subtitle">
+        PLG 的增长本质是"让产品自己完成销售"——注册后未激活关键动作就不会付费、团队没协作起来就会流失、席位不扩张就没有净留存。
+        与 C 端最大的不同是：<span class="bold">运营对象是"账户/团队"而非单个用户</span>，触达要区分管理员与成员角色。
+        本方案以 <span class="bold">Onboarding 激活、Aha 里程碑推进、团队协作扩散、试用转付费、席位扩张与增购、续费与流失预警</span> 六大旅程切入，
+        统一编排 <span class="bold">Email（主力）+ 应用内 + Web Push + App Push</span> 四类通道。
+      </p>
+      <div class="row">
+        <span class="pill pill-accent">Email（B2B 绝对主力）</span>
+        <span class="pill pill-accent">应用内消息 / 引导</span>
+        <span class="pill pill-accent">Web Push</span>
+        <span class="pill pill-accent">App Push（如有移动端）</span>
+      </div>
+    </section>
+
+    <section id="s-market" class="section">
+      <h2>一、为什么 PLG SaaS 必须做账户级自动化运营</h2>
+      <div class="grid grid-4" style="margin-bottom:16px">
+        <div class="stat"><div class="stat-value warn">激活是命门</div><div class="stat-label">未完成关键激活动作的账户，几乎不会转付费</div></div>
+        <div class="stat"><div class="stat-value info">账户级视角</div><div class="stat-label">运营对象是团队/工作区，而非单个用户</div></div>
+        <div class="stat"><div class="stat-value">角色差异</div><div class="stat-label">管理员看账单与席位，成员看功能与协作</div></div>
+        <div class="stat"><div class="stat-value success">NDR 决定估值</div><div class="stat-label">席位扩张与增购带来的净收入留存是核心指标</div></div>
+      </div>
+      <p class="muted small">注：下文所有转化率、提升幅度为 B2B SaaS 行业估算区间，落地以实测为准。本方案面向 PLG（自助注册试用）模式，销售驱动（SLG）场景需结合 CRM 另行设计。</p>
+      <hr class="divider" />
+      <div class="grid grid-2">
+        <div class="callout neutral"><div class="callout-title">痛点 1 · 注册了不激活</div><div class="callout-body"><p>用户注册后不完成"关键激活动作"（建项目/连数据源/邀成员），产品价值没被感知，试用期白白流逝。</p></div></div>
+        <div class="callout info"><div class="callout-title">解法 · Onboarding 激活旅程</div><div class="callout-body"><p>按已完成的 setup 步骤精准推进下一步，应用内引导 + Email 教程组合，把激活率拉起来。</p></div></div>
+        <div class="callout neutral"><div class="callout-title">痛点 2 · 单人使用、团队没扩散</div><div class="callout-body"><p>只有一个人在用的账户留存极差；团队协作起来才会形成组织级依赖。</p></div></div>
+        <div class="callout info"><div class="callout-title">解法 · 团队协作扩散旅程</div><div class="callout-body"><p>向管理员推邀请成员的价值与一键邀请；向被邀成员推首次协作引导，形成多人使用惯性。</p></div></div>
+        <div class="callout neutral"><div class="callout-title">痛点 3 · 试用到期不转化</div><div class="callout-body"><p>试用结束时缺乏基于使用深度的分层引导，高价值账户与低活跃账户被一视同仁。</p></div></div>
+        <div class="callout info"><div class="callout-title">解法 · 试用转付费分层旅程</div><div class="callout-body"><p>按账户健康度分层：高活跃直推年付方案并抄送管理员，低活跃先补激活与用例教育。</p></div></div>
+        <div class="callout neutral"><div class="callout-title">痛点 4 · 流失无预警、席位不增长</div><div class="callout-body"><p>活跃度下滑到续费才发现已来不及；用量接近上限时没有及时的扩容引导，NDR 上不去。</p></div></div>
+        <div class="callout info"><div class="callout-title">解法 · 健康度预警 + 席位扩张</div><div class="callout-body"><p>账户活跃度下滑即预警并触达（必要时转 CSM 人工）；用量达阈值即时推席位/套餐升级。</p></div></div>
+      </div>
+    </section>
+
+    <section id="s-funnel" class="section">
+      <h2>二、账户漏斗：从注册到净留存，每层都有增长空间</h2>
+      <p class="muted small">下图为 B2B SaaS（PLG）行业估算区间对比，非实测数据。</p>
+      <div class="chart" id="chart-funnel"></div>
+    </section>
+
+    <section id="s-why" class="section">
+      <h2>三、为什么选择 EngageLab MA</h2>
+      <div class="grid grid-3">
+        <div class="card"><div class="card-header">账户级 + 角色分层</div><div class="card-body p-sm"><ul><li>账户 ID 作为分群维度，管理员 / 成员差异化触达</li><li>账单与席位类只发管理员，功能类发全员</li></ul></div></div>
+        <div class="card"><div class="card-header">Email · B2B 绝对主力</div><div class="card-body p-sm"><ul><li>企业场景邮件是标准工作通道，进箱率优化与独立 IP</li><li>承载教程、报表、账单、合同类长内容</li></ul></div></div>
+        <div class="card"><div class="card-header">产品内行为触发</div><div class="card-body p-sm"><ul><li>setup 步骤、用量阈值、协作事件秒级触发旅程</li><li>应用内引导与 Email 组合，触达不打断工作流</li></ul></div></div>
+        <div class="card"><div class="card-header">CDP 统一身份（EUID）</div><div class="card-body p-sm"><ul><li>账户健康度、席位数、用量、订阅状态统一为属性</li><li>支撑基于账户健康分的自动化预警</li></ul></div></div>
+        <div class="card"><div class="card-header">与 CSM / CRM 协同</div><div class="card-body p-sm"><ul><li>自动化承接长尾账户，高价值账户可转人工跟进</li><li>触达记录回传，销售与客户成功共享上下文</li></ul></div></div>
+        <div class="card"><div class="card-header">合规 · 企业级要求</div><div class="card-body p-sm"><ul><li>GDPR/CCPA、SOC 2，企业客户采购必查项</li><li>数据驻留、审计留痕、RBAC 权限</li></ul></div></div>
+      </div>
+    </section>
+
+    <section id="s-scenarios" class="section">
+      <h2>四、高 ROI 运营场景总览</h2>
+      <table>
+        <thead><tr><th>#</th><th>场景</th><th>生命周期阶段</th><th>核心触发</th><th>渠道组合</th><th>预期提升（估算）</th></tr></thead>
+        <tbody>
+          <tr class="tone-info"><td>J1</td><td>Onboarding 激活推进</td><td>激活</td><td>注册 / 创建工作区</td><td>应用内 + Email</td><td>激活率 +20~35%</td></tr>
+          <tr class="tone-success"><td>J2</td><td>Aha 里程碑达成引导</td><td>激活 / 留存</td><td>完成 setup 未达里程碑</td><td>应用内 + Email + Web Push</td><td>里程碑达成 +15~30%</td></tr>
+          <tr><td>J3</td><td>团队协作扩散（邀请成员）</td><td>扩散 / 留存</td><td>账户仅 1 名活跃成员</td><td>Email（管理员）+ 应用内</td><td>多人账户占比 +20~40%</td></tr>
+          <tr class="tone-success"><td>J4</td><td>试用到期转付费</td><td>付费转化</td><td>试用 T-7 / T-3 / T-1</td><td>Email + 应用内 + Web Push</td><td>试用转付费 +20~35%</td></tr>
+          <tr><td>J5</td><td>席位扩张 / 套餐升级</td><td>增购 / NDR</td><td>用量或席位达阈值</td><td>应用内 + Email（管理员）</td><td>NDR +5~15%</td></tr>
+          <tr><td>J6</td><td>健康度预警 + 续费保障</td><td>续费 / 防流失</td><td>活跃度下滑 / 续费前 30 天</td><td>Email + 应用内 + CSM 转人工</td><td>续费率 +8~15%</td></tr>
+        </tbody>
+      </table>
+      <p class="muted small" style="margin-top:8px">提升幅度为行业公开区间估算，最终以 4 周测试实测为准。</p>
+    </section>
+
+    <section id="s-journey" class="section-plain">
+      <h2>五、核心旅程详细编排</h2>
+      <div class="section" style="margin-top:16px;">
+        <h3>旅程 1：Onboarding 激活推进</h3>
+        <div class="grid grid-2-1"><div class="dag-wrap" id="dag-j1"></div><div>
+          <div class="callout neutral" style="margin-bottom:12px"><div class="callout-title">业务痛点</div><div class="callout-body"><p>注册后不完成关键 setup（建项目/连数据源），产品价值没被感知，试用期白白流逝。</p></div></div>
+          <div class="callout info" style="margin-bottom:12px"><div class="callout-title">旅程组件配置</div><div class="callout-body">
+            <p><strong>进入条件：</strong>事件：注册 / 创建工作区</p>
+            <p><strong>分支：</strong>属性：已完成的 setup 步骤（精准推进下一步）</p>
+            <p><strong>提前退出：</strong>事件：完成关键激活动作</p>
+            <p><strong>渠道：</strong>应用内引导优先（不打断工作流），Email 补教程</p>
+          </div></div>
+          <div class="callout success"><div class="callout-title">预期效益</div><div class="callout-body"><p>激活率 +20~35%（估算）；按已完成步骤精准推进，远优于统一欢迎序列。</p></div></div>
+        </div></div>
+      </div>
+      <div class="section">
+        <h3>旅程 2：Aha 里程碑达成引导</h3>
+        <div class="grid grid-2-1"><div class="dag-wrap" id="dag-j2"></div><div>
+          <div class="callout neutral" style="margin-bottom:12px"><div class="callout-title">业务痛点</div><div class="callout-body"><p>完成基础配置但没体验到核心价值（生成首份报表/跑通首个流程），仍会流失。</p></div></div>
+          <div class="callout info" style="margin-bottom:12px"><div class="callout-title">旅程组件配置</div><div class="callout-body">
+            <p><strong>进入条件：</strong>属性：完成 setup 但未达 Aha 里程碑</p>
+            <p><strong>提前退出：</strong>事件：达成里程碑</p>
+            <p><strong>内容：</strong>用例模板、行业最佳实践、3 分钟视频演示</p>
+            <p><strong>频控：</strong>每周 ≤2 封 Email，避免打扰工作场景</p>
+          </div></div>
+          <div class="callout success"><div class="callout-title">预期效益</div><div class="callout-body"><p>里程碑达成 +15~30%（估算）；Aha 是 PLG 转付费的最强前置指标。</p></div></div>
+        </div></div>
+      </div>
+      <div class="section">
+        <h3>旅程 3：团队协作扩散（邀请成员）</h3>
+        <div class="grid grid-2-1"><div class="dag-wrap" id="dag-j3"></div><div>
+          <div class="callout neutral" style="margin-bottom:12px"><div class="callout-title">业务痛点</div><div class="callout-body"><p>只有一个人在用的账户留存极差，无法形成组织级依赖，续费风险高。</p></div></div>
+          <div class="callout info" style="margin-bottom:12px"><div class="callout-title">旅程组件配置</div><div class="callout-body">
+            <p><strong>进入条件：</strong>属性：账户活跃成员数 = 1</p>
+            <p><strong>角色分流：</strong>管理员推"邀请成员"价值与一键邀请；被邀成员推首次协作引导</p>
+            <p><strong>提前退出：</strong>事件：账户新增活跃成员</p>
+            <p><strong>转化统计：</strong>事件：成员接受邀请并激活，监听 14 天</p>
+          </div></div>
+          <div class="callout success"><div class="callout-title">预期效益</div><div class="callout-body"><p>多人账户占比 +20~40%（估算）；多人协作账户的续费率显著高于单人账户。</p></div></div>
+        </div></div>
+      </div>
+      <div class="section">
+        <h3>旅程 4：试用到期转付费</h3>
+        <div class="grid grid-2-1"><div class="dag-wrap" id="dag-j4"></div><div>
+          <div class="callout neutral" style="margin-bottom:12px"><div class="callout-title">业务痛点</div><div class="callout-body"><p>试用结束时高价值账户与低活跃账户被一视同仁，转化效率低。</p></div></div>
+          <div class="callout info" style="margin-bottom:12px"><div class="callout-title">旅程组件配置</div><div class="callout-body">
+            <p><strong>进入条件：</strong>属性：试用到期前 7 天</p>
+            <p><strong>分支：</strong>属性：账户健康度（高活跃 / 低活跃）</p>
+            <p><strong>角色：</strong>付费与账单类定向管理员（决策人）</p>
+            <p><strong>递进：</strong>T-7 → T-3 → T-1，高价值账户可转 CSM 人工</p>
+          </div></div>
+          <div class="callout success"><div class="callout-title">预期效益</div><div class="callout-body"><p>试用转付费 +20~35%（估算）；"你的团队本月已节省 X 小时"的用量数据是最强说服力。</p></div></div>
+        </div></div>
+      </div>
+      <div class="section">
+        <h3>旅程 5：席位扩张 / 套餐升级</h3>
+        <div class="grid grid-2-1"><div class="dag-wrap" id="dag-j5"></div><div>
+          <div class="callout neutral" style="margin-bottom:12px"><div class="callout-title">业务痛点</div><div class="callout-body"><p>用量接近上限时没有及时扩容引导，既影响体验也损失增购收入，NDR 上不去。</p></div></div>
+          <div class="callout info" style="margin-bottom:12px"><div class="callout-title">旅程组件配置</div><div class="callout-body">
+            <p><strong>进入条件：</strong>事件：用量/席位达套餐阈值（如 80%）</p>
+            <p><strong>分支：</strong>属性：超限类型（席位不足 / 用量超限）</p>
+            <p><strong>角色：</strong>定向管理员（有采购决策权）</p>
+            <p><strong>提前退出：</strong>事件：完成升级 / 加购席位</p>
+          </div></div>
+          <div class="callout success"><div class="callout-title">预期效益</div><div class="callout-body"><p>NDR +5~15%（估算）；用量触顶瞬间是增购意愿最强的时刻。</p></div></div>
+        </div></div>
+      </div>
+      <div class="section">
+        <h3>旅程 6：健康度预警 + 续费保障</h3>
+        <div class="grid grid-2-1"><div class="dag-wrap" id="dag-j6"></div><div>
+          <div class="callout neutral" style="margin-bottom:12px"><div class="callout-title">业务痛点</div><div class="callout-body"><p>活跃度下滑到续费节点才发现已来不及，流失预警缺失是 B2B 最大隐患。</p></div></div>
+          <div class="callout info" style="margin-bottom:12px"><div class="callout-title">旅程组件配置</div><div class="callout-body">
+            <p><strong>进入条件：</strong>属性：账户活跃度环比下滑 / 续费前 30 天</p>
+            <p><strong>分支：</strong>属性：账户价值与健康度（高价值转 CSM 人工 / 长尾走自动化）</p>
+            <p><strong>提前退出：</strong>事件：活跃度恢复 / 完成续费</p>
+            <p><strong>协同：</strong>预警同步给 CSM/CRM，人工与自动化分工</p>
+          </div></div>
+          <div class="callout success"><div class="callout-title">预期效益</div><div class="callout-body"><p>续费率 +8~15%（估算）；提前 30 天预警给了挽救窗口，长尾账户由自动化全覆盖。</p></div></div>
+        </div></div>
+      </div>
+    </section>
+
+    <section id="s-channel" class="section-plain">
+      <h2>六、渠道选型参考</h2>
+      <div class="section">
+        <p class="muted small">B2B SaaS 渠道适配相对值（示意）：与 C 端截然不同——Email 是企业场景的标准工作通道（绝对主力），应用内引导不打断工作流，Web Push 覆盖 Web 端用户，SMS/WhatsApp 在 B2B 中使用极少（仅安全验证）。</p>
+        <div class="chart" id="chart-channel"></div>
+        <div class="grid grid-2" style="margin-top:14px">
+          <div class="callout info"><div class="callout-title">主力通道</div><div class="callout-body"><p>Email（教程、报表、账单、续费，B2B 标准工作通道）+ 应用内消息（产品内引导，转化路径最短）。</p></div></div>
+          <div class="callout warn"><div class="callout-title">角色分层是关键</div><div class="callout-body"><p>账单、席位、续费类只发管理员；功能、教程、协作类发全员。发错对象会造成困扰甚至投诉。</p></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="s-compliance" class="section">
+      <h2>七、合规与安全（企业级）</h2>
+      <div class="grid grid-3">
+        <div class="card"><div class="card-header">企业采购必查项</div><div class="card-body p-sm"><ul><li>GDPR / SOC 2 Type II 认证</li><li>数据驻留与跨境传输合规</li><li>DPA 数据处理协议支持</li></ul></div></div>
+        <div class="card"><div class="card-header">数据与权限</div><div class="card-body p-sm"><ul><li>全链路 TLS、PII 脱敏、RBAC 权限</li><li>账户级数据隔离，审计留痕可导出</li><li>客户数据删除 / 导出接口</li></ul></div></div>
+        <div class="card"><div class="card-header">触达护栏</div><div class="card-body p-sm"><ul><li>营销类 CAN-SPAM 一键退订与偏好中心</li><li>产品/服务类通知独立于营销退订</li><li>工作时段发送、每周频控（B2B 更敏感）</li></ul></div></div>
+      </div>
+    </section>
+
+    <section id="s-plan" class="section">
+      <h2>八、测试计划（4 周）</h2>
+      <table>
+        <thead><tr><th>周次</th><th>阶段</th><th>核心工作</th><th>验收指标</th></tr></thead>
+        <tbody>
+          <tr><td>第 1 周</td><td>启动 · 数据打通</td><td>确认埋点（注册、setup 步骤、Aha 里程碑、成员邀请、用量、订阅状态）；账户与角色映射</td><td>事件入库率 ≥95%；账户级归属准确</td></tr>
+          <tr><td>第 2 周</td><td>核心旅程上线</td><td>J1 Onboarding + J4 试用转付费（2 条，小流量）；角色分流配置</td><td>旅程触发成功率 ≥98%；角色投放零错发</td></tr>
+          <tr><td>第 3 周</td><td>扩量 · A/B</td><td>J2 Aha 里程碑 + J3 团队扩散全量；应用内 vs Email 组合 A/B</td><td>邮件打开率达标；激活率 uplift 显现</td></tr>
+          <tr><td>第 4 周</td><td>复盘 · 扩面</td><td>J5 席位扩张 + J6 健康度预警上线；与 CSM 流程对接</td><td>激活/转付费/NDR uplift 可量化</td></tr>
+        </tbody>
+      </table>
+      <div class="callout success" style="margin-top:14px"><div class="callout-title">投入</div><div class="callout-body"><p>测试期授权费 $0，配置 2 人专属服务团队支撑埋点、账户级建模与旅程交付。</p></div></div>
+    </section>
+    <footer class="site-footer">EngageLab MA · B2B SaaS（PLG 产品驱动增长）方案 — 内部方案，转化/提升数据为行业估算或公开参考，落地以实测为准。面向 PLG 自助模式，销售驱动场景需结合 CRM 另行设计。</footer>
+  </main>
+  <script>
+  (function(){
+    // ========== Shared helpers ==========
+    const COLORS = {
+      accent: '#2563eb', info: '#0369a1', success: '#16a34a',
+      warning: '#d97706', neutral: '#94a3b8', muted: '#cbd5e1',
+      text: '#374151', textMute: '#9ca3af', grid: '#e5e7eb',
+    };
+    function svgEl(w, h) {
+      const s = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+      s.setAttribute('viewBox', '0 0 ' + w + ' ' + h);
+      s.setAttribute('width', '100%');
+      s.setAttribute('preserveAspectRatio', 'xMidYMid meet');
+      return s;
+    }
+    function el(tag, attrs) {
+      const e = document.createElementNS('http://www.w3.org/2000/svg', tag);
+      for (const k in attrs) e.setAttribute(k, attrs[k]);
+      return e;
+    }
+
+    // ========== Bar Chart ==========
+    function drawBarChart(mount, opts) {
+      const { categories, series, valueSuffix = '', height = 240 } = opts;
+      const W = 600, H = height, PAD_L = 44, PAD_R = 16, PAD_T = 12, PAD_B = 56;
+      const innerW = W - PAD_L - PAD_R, innerH = H - PAD_T - PAD_B;
+      const max = Math.max(...series.flatMap(s => s.data), 1);
+      const niceMax = Math.ceil(max / 20) * 20 || 100;
+      const groupCount = categories.length;
+      const barsPerGroup = series.length;
+      const groupW = innerW / groupCount;
+      const barW = Math.min(22, (groupW - 12) / barsPerGroup);
+      const s = svgEl(W, H);
+      for (let i = 0; i <= 4; i++) {
+        const v = (niceMax / 4) * i;
+        const y = PAD_T + innerH - (v / niceMax) * innerH;
+        s.appendChild(el('line', { x1: PAD_L, x2: W - PAD_R, y1: y, y2: y, stroke: COLORS.grid, 'stroke-width': 1 }));
+        const t = el('text', { x: PAD_L - 6, y: y + 4, 'text-anchor': 'end', 'font-size': 10, fill: COLORS.textMute });
+        t.textContent = Math.round(v) + valueSuffix;
+        s.appendChild(t);
+      }
+      categories.forEach((cat, ci) => {
+        const gx = PAD_L + groupW * ci;
+        series.forEach((se, si) => {
+          const v = se.data[ci] || 0;
+          const h = (v / niceMax) * innerH;
+          const x = gx + (groupW - barW * barsPerGroup) / 2 + si * barW;
+          const y = PAD_T + innerH - h;
+          const color = COLORS[se.tone] || COLORS.neutral;
+          s.appendChild(el('rect', { x, y, width: barW - 2, height: h, fill: color, rx: 2 }));
+          if (v > 0) {
+            const label = el('text', { x: x + (barW - 2) / 2, y: y - 2, 'text-anchor': 'middle', 'font-size': 8, fill: COLORS.text });
+            label.textContent = v + valueSuffix;
+            s.appendChild(label);
+          }
+        });
+        const t = el('text', { x: gx + groupW / 2, y: H - PAD_B + 14, 'text-anchor': 'middle', 'font-size': 10, fill: COLORS.text });
+        t.textContent = cat;
+        s.appendChild(t);
+      });
+      // Legend
+      let legX = PAD_L;
+      series.forEach((se) => {
+        const color = COLORS[se.tone] || COLORS.accent;
+        s.appendChild(el('rect', { x: legX, y: H - 18, width: 10, height: 10, rx: 2, fill: color }));
+        const t = el('text', { x: legX + 14, y: H - 10, 'font-size': 10, fill: COLORS.text });
+        t.textContent = se.name;
+        s.appendChild(t);
+        legX += 14 + (se.name.length * 7) + 16;
+      });
+      mount.innerHTML = '';
+      mount.appendChild(s);
+    }
+
+    // ========== Journey DAG renderer (same as fintech/security solution) ==========
+    const KIND_STYLE = {
+      entry:    { fill: '#f1f5f9', stroke: '#94a3b8', text: '#111827' },
+      wait:     { fill: '#fafafa', stroke: '#d1d5db', text: '#6b7280' },
+      branch:   { fill: '#f9fafb', stroke: '#475569', text: '#111827' },
+      channel:  { fill: '#dbeafe', stroke: '#2563eb', text: '#1e3a8a' },
+      sendtime: { fill: '#fef3c7', stroke: '#d97706', text: '#92400e' },
+      exitOk:   { fill: '#dcfce7', stroke: '#16a34a', text: '#14532d' },
+      exitEnd:  { fill: '#f3f4f6', stroke: '#9ca3af', text: '#4b5563' },
+    };
+
+    function drawJourney(mount, nodes, edges) {
+      const NODE_W = 176, NODE_H = 62, RANK_GAP = 42, NODE_GAP = 22;
+      const rankOf = {}, incoming = {};
+      nodes.forEach(n => { rankOf[n.id] = 0; incoming[n.id] = []; });
+      edges.forEach(e => { incoming[e.to].push(e.from); });
+      let changed = true;
+      while (changed) {
+        changed = false;
+        edges.forEach(e => {
+          if (rankOf[e.to] < rankOf[e.from] + 1) { rankOf[e.to] = rankOf[e.from] + 1; changed = true; }
+        });
+      }
+      const maxRank = Math.max(...Object.values(rankOf));
+      const ranks = [];
+      for (let r = 0; r <= maxRank; r++) ranks.push([]);
+      nodes.forEach(n => { ranks[rankOf[n.id]].push(n); });
+      const pos = {};
+      const rankWidths = ranks.map(r => r.length * NODE_W + (r.length - 1) * NODE_GAP);
+      const maxWidth = Math.max(...rankWidths, 400);
+      ranks.forEach((rankNodes, r) => {
+        const withAnchor = rankNodes.map(n => {
+          const parents = incoming[n.id].map(p => pos[p] ? pos[p].x + NODE_W / 2 : null).filter(x => x !== null);
+          const anchor = parents.length ? parents.reduce((a, b) => a + b, 0) / parents.length : null;
+          return { node: n, anchor };
+        });
+        withAnchor.sort((a, b) => {
+          if (a.anchor === null && b.anchor === null) return 0;
+          if (a.anchor === null) return 1;
+          if (b.anchor === null) return -1;
+          return a.anchor - b.anchor;
+        });
+        const totalW = withAnchor.length * NODE_W + (withAnchor.length - 1) * NODE_GAP;
+        const startX = (maxWidth - totalW) / 2 + 20;
+        withAnchor.forEach((it, i) => {
+          pos[it.node.id] = { x: startX + i * (NODE_W + NODE_GAP), y: 20 + r * (NODE_H + RANK_GAP) };
+        });
+      });
+      for (let pass = 0; pass < 3; pass++) {
+        ranks.forEach(rankNodes => {
+          const sorted = rankNodes.slice().sort((a, b) => pos[a.id].x - pos[b.id].x);
+          for (let i = 1; i < sorted.length; i++) {
+            const prev = pos[sorted[i - 1].id], cur = pos[sorted[i].id];
+            if (cur.x < prev.x + NODE_W + NODE_GAP) cur.x = prev.x + NODE_W + NODE_GAP;
+          }
+        });
+      }
+      const width = Math.max(...Object.values(pos).map(p => p.x)) + NODE_W + 20;
+      const height = Math.max(...Object.values(pos).map(p => p.y)) + NODE_H + 24;
+      const s = svgEl(width, height);
+      s.setAttribute('width', width);
+      s.setAttribute('height', height);
+      s.style.maxWidth = '100%';
+      s.style.height = 'auto';
+      const defs = el('defs');
+      const marker = el('marker', { id: 'arrow', viewBox: '0 0 10 10', refX: 9, refY: 5, markerWidth: 6, markerHeight: 6, orient: 'auto-start-reverse' });
+      marker.appendChild(el('path', { d: 'M 0 0 L 10 5 L 0 10 z', fill: '#94a3b8' }));
+      defs.appendChild(marker);
+      s.appendChild(defs);
+      edges.forEach(e => {
+        const from = pos[e.from], to = pos[e.to];
+        if (!from || !to) return;
+        const x1 = from.x + NODE_W / 2, y1 = from.y + NODE_H;
+        const x2 = to.x + NODE_W / 2, y2 = to.y;
+        const cy = (y1 + y2) / 2;
+        const d = 'M' + x1 + ',' + y1 + ' C' + x1 + ',' + cy + ' ' + x2 + ',' + cy + ' ' + x2 + ',' + y2;
+        s.appendChild(el('path', { d, fill: 'none', stroke: '#94a3b8', 'stroke-width': 1.25, 'marker-end': 'url(#arrow)' }));
+        if (e.label) {
+          const mx = (x1 + x2) / 2, my = cy;
+          const w = Math.max(e.label.length * 9 + 10, 28);
+          s.appendChild(el('rect', { x: mx - w / 2, y: my - 10, width: w, height: 18, rx: 4, fill: '#ffffff', stroke: '#e5e7eb' }));
+          const t = el('text', { x: mx, y: my + 3, 'text-anchor': 'middle', 'font-size': 11, fill: '#475569' });
+          t.textContent = e.label;
+          s.appendChild(t);
+        }
+      });
+      nodes.forEach(n => {
+        const p = pos[n.id];
+        const k = KIND_STYLE[n.kind] || KIND_STYLE.entry;
+        s.appendChild(el('rect', { x: p.x, y: p.y, width: NODE_W, height: NODE_H, rx: 10, fill: k.fill, stroke: k.stroke, 'stroke-width': n.kind === 'channel' ? 1.4 : 1 }));
+        const titleY = n.sub ? p.y + 24 : p.y + NODE_H / 2 + 4;
+        const title = el('text', { x: p.x + NODE_W / 2, y: titleY, 'text-anchor': 'middle', 'font-size': 12.5, 'font-weight': 600, fill: k.text });
+        title.textContent = n.title;
+        s.appendChild(title);
+        if (n.sub) {
+          const sub = el('text', { x: p.x + NODE_W / 2, y: p.y + 42, 'text-anchor': 'middle', 'font-size': 11, fill: k.text, opacity: 0.82 });
+          sub.textContent = n.sub;
+          s.appendChild(sub);
+        }
+      });
+      mount.innerHTML = '';
+      mount.appendChild(s);
+    }
+
+    drawBarChart(document.getElementById('chart-funnel'), {
+      categories: ['注册→激活', '激活→Aha里程碑', '单人→多人账户', '试用→付费', '年度续费率'],
+      series: [
+        { name: '当前基准（估算）',    data: [35, 40, 30, 20, 75], tone: 'neutral' },
+        { name: 'MA 自动化后（估算）', data: [47, 52, 42, 27, 84], tone: 'success' },
+      ], valueSuffix: '%', height: 260,
+    });
+    drawBarChart(document.getElementById('chart-channel'), {
+      categories: ['Email', '应用内消息', 'Web Push', 'App Push', 'SMS'],
+      series: [{ name: 'B2B SaaS 触达适配（相对值·示意）', data: [95, 88, 60, 45, 20], tone: 'info' }],
+      valueSuffix: '', height: 220,
+    });
+
+    drawJourney(document.getElementById('dag-j1'),
+      [
+        {id:'start',kind:'entry',title:'开始',sub:'事件: 注册/创建工作区'},
+        {id:'em0',kind:'channel',title:'Email',sub:'欢迎+3步快速上手'},
+        {id:'w1',kind:'wait',title:'等待事件',sub:'24h 内等待: 完成setup'},
+        {id:'ok0',kind:'exitOk',title:'结束（已激活）',sub:'完成关键激活动作'},
+        {id:'br1',kind:'branch',title:'条件分支',sub:'属性: 已完成setup步骤'},
+        {id:'ia',kind:'channel',title:'应用内消息',sub:'(未建项目) 一键创建首个项目'},
+        {id:'ib',kind:'channel',title:'应用内消息',sub:'(未连数据) 连接数据源引导'},
+        {id:'w2',kind:'wait',title:'等待事件',sub:'3天内等待: 完成setup'},
+        {id:'ok1',kind:'exitOk',title:'结束（已激活）',sub:'完成关键激活动作'},
+        {id:'em1',kind:'channel',title:'Email',sub:'同行业客户如何配置(案例)'},
+        {id:'w3',kind:'wait',title:'等待事件',sub:'7天内等待: 完成setup'},
+        {id:'ok2',kind:'exitOk',title:'结束（已激活）',sub:'完成关键激活动作'},
+        {id:'end',kind:'exitEnd',title:'结束',sub:'转低活跃培育'},
+      ],
+      [
+        {from:'start',to:'em0'},{from:'em0',to:'w1'},{from:'w1',to:'ok0',label:'已激活'},{from:'w1',to:'br1',label:'未激活'},
+        {from:'br1',to:'ia',label:'未建项目'},{from:'br1',to:'ib',label:'未连数据'},
+        {from:'ia',to:'w2'},{from:'ib',to:'w2'},{from:'w2',to:'ok1',label:'已激活'},{from:'w2',to:'em1',label:'未激活'},
+        {from:'em1',to:'w3'},{from:'w3',to:'ok2',label:'已激活'},{from:'w3',to:'end',label:'未激活'},
+      ]);
+
+    drawJourney(document.getElementById('dag-j2'),
+      [
+        {id:'start',kind:'entry',title:'开始',sub:'属性: setup完成未达Aha'},
+        {id:'ia',kind:'channel',title:'应用内消息',sub:'用例模板·一键套用'},
+        {id:'w1',kind:'wait',title:'等待事件',sub:'3天内等待: 达成里程碑'},
+        {id:'ok0',kind:'exitOk',title:'结束（已达成）',sub:'Aha 里程碑达成'},
+        {id:'em1',kind:'channel',title:'Email',sub:'3分钟视频·跑通首个流程'},
+        {id:'w2',kind:'wait',title:'等待事件',sub:'7天内等待: 达成里程碑'},
+        {id:'ok1',kind:'exitOk',title:'结束（已达成）',sub:'Aha 里程碑达成'},
+        {id:'wp1',kind:'channel',title:'Web Push',sub:'行业最佳实践+专家答疑'},
+        {id:'w3',kind:'wait',title:'等待事件',sub:'7天内等待: 达成里程碑'},
+        {id:'ok2',kind:'exitOk',title:'结束（已达成）',sub:'Aha 里程碑达成'},
+        {id:'end',kind:'exitEnd',title:'结束',sub:'标记低活跃·转CSM评估'},
+      ],
+      [
+        {from:'start',to:'ia'},{from:'ia',to:'w1'},{from:'w1',to:'ok0',label:'已达成'},{from:'w1',to:'em1',label:'未达成'},
+        {from:'em1',to:'w2'},{from:'w2',to:'ok1',label:'已达成'},{from:'w2',to:'wp1',label:'未达成'},
+        {from:'wp1',to:'w3'},{from:'w3',to:'ok2',label:'已达成'},{from:'w3',to:'end',label:'未达成'},
+      ]);
+
+    drawJourney(document.getElementById('dag-j3'),
+      [
+        {id:'start',kind:'entry',title:'开始',sub:'属性: 账户活跃成员=1'},
+        {id:'br1',kind:'branch',title:'条件分支',sub:'属性: 用户角色'},
+        {id:'ema',kind:'channel',title:'Email（管理员）',sub:'团队协作价值+一键邀请'},
+        {id:'iam',kind:'channel',title:'应用内（成员）',sub:'@同事协作·共享工作区'},
+        {id:'w1',kind:'wait',title:'等待事件',sub:'7天内等待: 新增活跃成员'},
+        {id:'ok0',kind:'exitOk',title:'结束（已扩散）',sub:'账户新增活跃成员'},
+        {id:'em1',kind:'channel',title:'Email',sub:'多人协作客户案例+模板'},
+        {id:'w2',kind:'wait',title:'等待事件',sub:'14天内等待: 新增成员'},
+        {id:'ok1',kind:'exitOk',title:'结束（已扩散）',sub:'账户新增活跃成员'},
+        {id:'end',kind:'exitEnd',title:'结束',sub:'标记单人账户·续费风险'},
+      ],
+      [
+        {from:'start',to:'br1'},{from:'br1',to:'ema',label:'管理员'},{from:'br1',to:'iam',label:'成员'},
+        {from:'ema',to:'w1'},{from:'iam',to:'w1'},
+        {from:'w1',to:'ok0',label:'已扩散'},{from:'w1',to:'em1',label:'未扩散'},
+        {from:'em1',to:'w2'},{from:'w2',to:'ok1',label:'已扩散'},{from:'w2',to:'end',label:'未扩散'},
+      ]);
+
+    drawJourney(document.getElementById('dag-j4'),
+      [
+        {id:'start',kind:'entry',title:'开始',sub:'属性: 试用到期前7天'},
+        {id:'br1',kind:'branch',title:'条件分支',sub:'属性: 账户健康度'},
+        {id:'emh',kind:'channel',title:'Email（管理员）',sub:'(高活跃) 本月节省X小时·年付方案'},
+        {id:'eml',kind:'channel',title:'Email',sub:'(低活跃) 用例教育+延长试用'},
+        {id:'w1',kind:'wait',title:'等待事件',sub:'T-3 前等待: 是否付费'},
+        {id:'ok0',kind:'exitOk',title:'结束（已付费）',sub:'完成订阅'},
+        {id:'ia1',kind:'channel',title:'应用内消息',sub:'T-3 试用剩余·套餐对比'},
+        {id:'w2',kind:'wait',title:'等待事件',sub:'T-1 前等待: 是否付费'},
+        {id:'ok1',kind:'exitOk',title:'结束（已付费）',sub:'完成订阅'},
+        {id:'br2',kind:'branch',title:'条件分支',sub:'属性: 账户价值'},
+        {id:'csm',kind:'channel',title:'Email+CSM',sub:'(高价值) 转人工1对1跟进'},
+        {id:'em2',kind:'channel',title:'Email',sub:'(长尾) 数据保留期说明'},
+        {id:'end',kind:'exitEnd',title:'结束',sub:'转流失召回'},
+      ],
+      [
+        {from:'start',to:'br1'},{from:'br1',to:'emh',label:'高活跃'},{from:'br1',to:'eml',label:'低活跃'},
+        {from:'emh',to:'w1'},{from:'eml',to:'w1'},
+        {from:'w1',to:'ok0',label:'已付费'},{from:'w1',to:'ia1',label:'未付费'},
+        {from:'ia1',to:'w2'},{from:'w2',to:'ok1',label:'已付费'},{from:'w2',to:'br2',label:'未付费'},
+        {from:'br2',to:'csm',label:'高价值'},{from:'br2',to:'em2',label:'长尾'},
+        {from:'csm',to:'end'},{from:'em2',to:'end'},
+      ]);
+
+    drawJourney(document.getElementById('dag-j5'),
+      [
+        {id:'start',kind:'entry',title:'开始',sub:'事件: 用量/席位达阈值80%'},
+        {id:'ia1',kind:'channel',title:'应用内消息',sub:'用量已达80%·查看套餐'},
+        {id:'w1',kind:'wait',title:'等待事件',sub:'3天内等待: 是否升级'},
+        {id:'ok0',kind:'exitOk',title:'结束（已升级）',sub:'完成升级/加购'},
+        {id:'br1',kind:'branch',title:'条件分支',sub:'属性: 超限类型'},
+        {id:'ems',kind:'channel',title:'Email（管理员）',sub:'(席位不足) 加购席位方案'},
+        {id:'emu',kind:'channel',title:'Email（管理员）',sub:'(用量超限) 套餐升级对比'},
+        {id:'w2',kind:'wait',title:'等待事件',sub:'7天内等待: 是否升级'},
+        {id:'ok1',kind:'exitOk',title:'结束（已升级）',sub:'完成升级/加购'},
+        {id:'ia2',kind:'channel',title:'应用内消息',sub:'已达上限·功能受限提示'},
+        {id:'end',kind:'exitEnd',title:'结束',sub:'转CSM跟进'},
+      ],
+      [
+        {from:'start',to:'ia1'},{from:'ia1',to:'w1'},{from:'w1',to:'ok0',label:'已升级'},{from:'w1',to:'br1',label:'未升级'},
+        {from:'br1',to:'ems',label:'席位不足'},{from:'br1',to:'emu',label:'用量超限'},
+        {from:'ems',to:'w2'},{from:'emu',to:'w2'},
+        {from:'w2',to:'ok1',label:'已升级'},{from:'w2',to:'ia2',label:'未升级'},{from:'ia2',to:'end'},
+      ]);
+
+    drawJourney(document.getElementById('dag-j6'),
+      [
+        {id:'start',kind:'entry',title:'开始',sub:'属性: 活跃下滑/续费前30天'},
+        {id:'br1',kind:'branch',title:'条件分支',sub:'属性: 账户价值+健康度'},
+        {id:'csm',kind:'channel',title:'Email+CSM',sub:'(高价值) 转人工·健康度复盘'},
+        {id:'em1',kind:'channel',title:'Email（管理员）',sub:'(长尾) 使用报告+功能推荐'},
+        {id:'w1',kind:'wait',title:'等待事件',sub:'14天内等待: 活跃恢复/续费'},
+        {id:'ok0',kind:'exitOk',title:'结束（已恢复）',sub:'活跃恢复或续费'},
+        {id:'ia1',kind:'channel',title:'应用内消息',sub:'新功能上线·提升团队效率'},
+        {id:'w2',kind:'wait',title:'等待事件',sub:'续费前等待: 是否续费'},
+        {id:'ok1',kind:'exitOk',title:'结束（已续费）',sub:'完成续费'},
+        {id:'em2',kind:'channel',title:'Email（管理员）',sub:'续费提醒+数据导出说明'},
+        {id:'end',kind:'exitEnd',title:'结束',sub:'标记流失·转赢回旅程'},
+      ],
+      [
+        {from:'start',to:'br1'},{from:'br1',to:'csm',label:'高价值'},{from:'br1',to:'em1',label:'长尾'},
+        {from:'csm',to:'w1'},{from:'em1',to:'w1'},
+        {from:'w1',to:'ok0',label:'已恢复'},{from:'w1',to:'ia1',label:'未恢复'},
+        {from:'ia1',to:'w2'},{from:'w2',to:'ok1',label:'已续费'},{from:'w2',to:'em2',label:'未续费'},{from:'em2',to:'end'},
+      ]);
+
+  })();
+  </script>
+</body>
+</html>
