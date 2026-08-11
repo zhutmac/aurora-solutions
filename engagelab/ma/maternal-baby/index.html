@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EngageLab MA · 母婴亲子平台增长方案</title>
+  <style>
+    :root {
+      --bg: #ffffff;
+      --bg-soft: #f7f8fa;
+      --bg-elev: #ffffff;
+      --border: #e5e7eb;
+      --border-strong: #d1d5db;
+      --text: #111827;
+      --text-2: #374151;
+      --text-3: #6b7280;
+      --text-4: #9ca3af;
+      --accent: #2563eb;
+      --accent-soft: #dbeafe;
+      --success: #16a34a;
+      --success-soft: #dcfce7;
+      --warning: #d97706;
+      --warning-soft: #fef3c7;
+      --info: #0369a1;
+      --info-soft: #e0f2fe;
+      --danger: #dc2626;
+      --danger-soft: #fee2e2;
+      --radius: 10px;
+      --radius-sm: 6px;
+      --shadow: 0 1px 2px rgba(16, 24, 40, 0.04);
+    }
+
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; background: var(--bg-soft); color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC",
+        "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", sans-serif;
+      line-height: 1.6; -webkit-font-smoothing: antialiased; font-size: 15px; }
+
+    main { max-width: 1180px; margin: 0 auto; padding: 32px 28px 80px; }
+
+    h1 { font-size: 30px; font-weight: 700; margin: 0 0 8px; letter-spacing: -0.01em; color: var(--text); }
+    h2 { font-size: 22px; font-weight: 700; margin: 0 0 12px; letter-spacing: -0.005em; color: var(--text); }
+    h3 { font-size: 17px; font-weight: 600; margin: 0 0 10px; color: var(--text); }
+    p { margin: 0 0 8px; color: var(--text-2); }
+    .muted { color: var(--text-3); }
+    .small { font-size: 13px; }
+    .bold { font-weight: 600; }
+
+    .section { background: var(--bg-elev); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 24px 26px; margin-bottom: 20px; }
+    .section-plain { padding: 6px 2px 18px; margin-bottom: 12px; }
+    .divider { height: 1px; background: var(--border); margin: 16px 0; border: none; }
+
+    .hero { background: linear-gradient(180deg, #fff 0%, #f0fdf4 100%);
+      border: 1px solid var(--border); border-radius: 14px; padding: 28px 30px;
+      margin-bottom: 24px; }
+    .hero-pills { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 14px; }
+    .hero-subtitle { color: var(--text-3); font-size: 15px; max-width: 900px; margin: 8px 0 18px; }
+
+    .pill { display: inline-flex; align-items: center; padding: 2px 10px;
+      font-size: 12px; border-radius: 999px; border: 1px solid var(--border-strong);
+      color: var(--text-2); background: #fff; font-weight: 500; }
+    .pill-accent { background: var(--accent-soft); border-color: var(--accent); color: var(--accent); }
+    .pill-info { background: var(--info-soft); border-color: var(--info); color: var(--info); }
+    .pill-success { background: var(--success-soft); border-color: var(--success); color: var(--success); }
+    .pill-warn { background: var(--warning-soft); border-color: var(--warning); color: var(--warning); }
+
+    .grid { display: grid; gap: 16px; }
+    .grid-4 { grid-template-columns: repeat(4, 1fr); }
+    .grid-3 { grid-template-columns: repeat(3, 1fr); }
+    .grid-2 { grid-template-columns: repeat(2, 1fr); }
+    .grid-5 { grid-template-columns: repeat(5, 1fr); }
+    .grid-1-2 { grid-template-columns: 1fr 2fr; }
+    .grid-2-1 { grid-template-columns: 1.4fr 1fr; }
+    .grid-12-1 { grid-template-columns: 1.2fr 1fr; }
+    .row { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+
+    .stat { padding: 14px 16px; background: var(--bg-elev); border: 1px solid var(--border);
+      border-radius: var(--radius); }
+    .stat-value { font-size: 26px; font-weight: 700; letter-spacing: -0.01em; color: var(--text);
+      line-height: 1.15; }
+    .stat-value.success { color: var(--success); }
+    .stat-value.info { color: var(--info); }
+    .stat-value.warn { color: var(--warning); }
+
+    .stat-label { font-size: 12px; color: var(--text-3); margin-top: 4px; }
+
+    .card { background: var(--bg-elev); border: 1px solid var(--border);
+      border-radius: var(--radius); overflow: hidden; }
+    .card-header { padding: 10px 16px; border-bottom: 1px solid var(--border);
+      background: #fafbfc; font-size: 13px; font-weight: 600; color: var(--text-2); }
+    .card-body { padding: 16px; }
+    .card-body.p-sm { padding: 12px; }
+    .card-body ul { margin: 0; padding-left: 18px; }
+    .card-body li { margin-bottom: 4px; font-size: 13.5px; color: var(--text-2); }
+
+    .callout { padding: 12px 14px; border-radius: var(--radius-sm);
+      border: 1px solid var(--border); border-left-width: 3px; background: var(--bg-soft); }
+    .callout-title { font-weight: 600; margin-bottom: 4px; font-size: 14px; }
+    .callout-body { font-size: 13px; color: var(--text-2); }
+    .callout-body p { font-size: 13px; color: var(--text-2); margin: 0 0 4px; }
+    .callout.info { border-left-color: var(--info); background: var(--info-soft); }
+    .callout.info .callout-title { color: var(--info); }
+    .callout.success { border-left-color: var(--success); background: var(--success-soft); }
+    .callout.success .callout-title { color: var(--success); }
+    .callout.warn { border-left-color: var(--warning); background: var(--warning-soft); }
+    .callout.warn .callout-title { color: var(--warning); }
+    .callout.neutral { border-left-color: var(--text-3); }
+
+    table { width: 100%; border-collapse: collapse; font-size: 13.5px;
+      background: var(--bg-elev); border: 1px solid var(--border); border-radius: var(--radius);
+      overflow: hidden; }
+    th, td { padding: 10px 12px; text-align: left; border-bottom: 1px solid var(--border);
+      color: var(--text-2); vertical-align: middle; }
+    th { background: #fafbfc; font-weight: 600; font-size: 12.5px; color: var(--text-3);
+      letter-spacing: 0.01em; text-transform: uppercase; }
+    tr:last-child td { border-bottom: 0; }
+    tr.tone-success td { background: rgba(22, 163, 74, 0.04); }
+    tr.tone-info td { background: rgba(3, 105, 161, 0.04); }
+
+    .signal-row { display: flex; gap: 10px; padding: 10px 0;
+      border-bottom: 1px solid var(--border); align-items: center; }
+    .signal-row:last-child { border-bottom: 0; }
+    .signal-row .left { flex: 1; min-width: 0; }
+    .signal-row .label { font-size: 13px; font-weight: 600; }
+    .signal-row .hint { font-size: 12px; color: var(--text-3); }
+    .signal-row .value { font-weight: 700; color: var(--text); font-size: 14px; white-space: nowrap; }
+
+    .chart { width: 100%; }
+    .chart svg { width: 100%; height: auto; display: block; }
+    .chart-legend { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--border); }
+    .chart-legend .leg-item { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--text-3); }
+    .chart-legend .dot { width: 10px; height: 10px; border-radius: 2px; }
+
+    .dag-wrap { overflow-x: auto; padding: 8px 2px; }
+    .dag-wrap svg { display: block; margin: 0 auto; }
+
+    .toc-bar { position: sticky; top: 0; background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(8px); border-bottom: 1px solid var(--border);
+      z-index: 10; padding: 10px 28px; margin: -32px -28px 24px;
+      font-size: 12.5px; }
+    .toc-bar .toc-inner { max-width: 1180px; margin: 0 auto; display: flex; gap: 14px;
+      align-items: center; overflow-x: auto; }
+    .toc-bar a { color: var(--text-3); text-decoration: none; white-space: nowrap; padding: 4px 2px; }
+    .toc-bar a:hover { color: var(--accent); }
+    .toc-bar .brand { font-weight: 700; color: var(--text); }
+
+    @page { size: A4; margin: 14mm; }
+    @media print {
+      body { background: #fff; }
+      main { max-width: none; padding: 0; }
+      .toc-bar { display: none; }
+      .section, .card, .hero { page-break-inside: avoid; box-shadow: none; }
+      h2 { page-break-after: avoid; }
+      .hero { break-before: avoid; }
+      .dag-wrap { overflow: visible; }
+      .dag-wrap svg { max-width: 100%; }
+    }
+
+    .spacer-sm { height: 6px; }
+    .spacer-md { height: 12px; }
+
+    .step-num { display: inline-flex; align-items: center; justify-content: center;
+      width: 22px; height: 22px; border-radius: 50%; background: var(--accent-soft);
+      color: var(--accent); font-weight: 700; font-size: 12px; margin-right: 8px; }
+
+    footer.site-footer { margin-top: 36px; padding-top: 16px; border-top: 1px solid var(--border);
+      font-size: 12px; color: var(--text-4); text-align: center; }
+  
+  .back-home {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    color: rgba(255,255,255,0.65);
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 500;
+    padding: 4px 10px 4px 6px;
+    border-radius: 6px;
+    border: 1px solid rgba(255,255,255,0.18);
+    margin-right: 16px;
+    white-space: nowrap;
+    transition: all 0.2s ease;
+    flex-shrink: 0;
+  }
+  .back-home:hover {
+    color: #fff;
+    background: rgba(255,255,255,0.12);
+    border-color: rgba(255,255,255,0.35);
+  }
+  .back-home svg {
+    width: 14px;
+    height: 14px;
+    opacity: 0.8;
+  }
+</style>
+</head>
+<body>
+  <nav class="toc-bar">
+    <div class="toc-inner">
+      <a class="back-home" href="../">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+        返回首页
+      </a>
+      <span class="brand">EngageLab MA · 母婴亲子平台方案</span>
+      <a href="#s-market">市场机会</a><a href="#s-funnel">用户漏斗</a><a href="#s-why">为什么 EngageLab</a>
+      <a href="#s-scenarios">场景总览</a><a href="#s-journey">旅程编排</a><a href="#s-channel">渠道选型</a>
+      <a href="#s-compliance">合规安全</a><a href="#s-plan">测试计划</a>
+    </div>
+  </nav>
+  <main>
+    <section class="hero">
+      <div class="hero-pills">
+        <span class="pill pill-success">母婴亲子 · 孕产 / 育儿 / 用品</span>
+        <span class="pill">东南亚 · 中东 + 欧美</span>
+        <span class="pill pill-info">月龄驱动 · 需求快速演进</span>
+      </div>
+      <h1>EngageLab MA · 母婴亲子平台增长方案</h1>
+      <p class="hero-subtitle">
+        母婴是"需求演进最快"的品类——从备孕、孕期到宝宝出生后按月龄变化，
+        <span class="bold">每个月需要的商品、内容与服务都完全不同</span>，而妈妈们对"这个阶段该做什么"的信息需求极强。
+        用户生命周期短（3-5 年）但期间价值密度极高，谁能精准跟上月龄节奏，谁就拿走全部消费。
+        本方案以 <span class="bold">孕育建档激活、孕期周报与阶段陪伴、月龄成长内容与用品推荐、疫苗与体检提醒、耗材周期复购、社区互动与沉默召回</span> 六大旅程切入，
+        统一编排 <span class="bold">App Push + Email + SMS + WhatsApp</span> 四类通道。
+      </p>
+      <div class="row">
+        <span class="pill pill-accent">极光 / App Push（阶段内容）</span>
+        <span class="pill pill-accent">Email（周报/成长档案）</span>
+        <span class="pill pill-accent">SMS（体检疫苗节点）</span>
+        <span class="pill pill-accent">WhatsApp（新兴市场妈妈群）</span>
+      </div>
+    </section>
+
+    <section id="s-market" class="section">
+      <h2>一、为什么母婴平台必须做月龄驱动运营</h2>
+      <div class="grid grid-4" style="margin-bottom:16px">
+        <div class="stat"><div class="stat-value warn">月龄即需求</div><div class="stat-label">每个月龄对应完全不同的商品与内容需求</div></div>
+        <div class="stat"><div class="stat-value info">信息饥渴</div><div class="stat-label">新手父母对阶段性育儿知识需求极强</div></div>
+        <div class="stat"><div class="stat-value">价值密度高</div><div class="stat-label">生命周期虽短，期间消费频次与金额极高</div></div>
+        <div class="stat"><div class="stat-value danger">阶段错配即流失</div><div class="stat-label">推送不匹配月龄的内容会被立即判定无用</div></div>
+      </div>
+      <p class="muted small">注：下文所有转化率、提升幅度为母婴行业估算区间，落地以实测为准。健康类内容不构成医疗建议；婴幼儿配方食品营销遵循当地相关法规。</p>
+      <hr class="divider" />
+      <div class="grid grid-2">
+        <div class="callout neutral"><div class="callout-title">痛点 1 · 不填孕育信息就无法精准运营</div><div class="callout-body"><p>没有预产期或宝宝出生日期，平台无法推算任何阶段，只能做无差别群发。</p></div></div>
+        <div class="callout info"><div class="callout-title">解法 · 孕育建档激活</div><div class="callout-body"><p>用"每周孕期变化 / 每月成长指南"作为直接价值，驱动用户填写预产期或出生日期。</p></div></div>
+        <div class="callout neutral"><div class="callout-title">痛点 2 · 阶段内容不匹配</div><div class="callout-body"><p>给 3 个月宝宝的妈妈推辅食、给孕早期推待产包，会被立即判定"这个 App 不懂我"。</p></div></div>
+        <div class="callout info"><div class="callout-title">解法 · 月龄/孕周精准内容</div><div class="callout-body"><p>按孕周与宝宝月龄自动推送对应知识、用品清单与服务，做到"正好是我现在需要的"。</p></div></div>
+        <div class="callout neutral"><div class="callout-title">痛点 3 · 疫苗体检节点错过</div><div class="callout-body"><p>宝宝疫苗与体检有明确时间表，新手父母容易记混，错过既影响健康也损失服务收入。</p></div></div>
+        <div class="callout info"><div class="callout-title">解法 · 疫苗体检周期提醒</div><div class="callout-body"><p>按出生日期自动推算免疫规划时间表，提前提醒并直连预约，接受度极高。</p></div></div>
+        <div class="callout neutral"><div class="callout-title">痛点 4 · 耗材复购与阶段过渡流失</div><div class="callout-body"><p>纸尿裤、奶粉等耗材用完不在平台复购；宝宝长大后尺码段位变化未被识别，流向竞品。</p></div></div>
+        <div class="callout info"><div class="callout-title">解法 · 耗材周期 + 阶段升级推荐</div><div class="callout-body"><p>按月龄体重推算耗材消耗与尺码段位变化，提前提醒复购并推荐正确规格。</p></div></div>
+      </div>
+    </section>
+
+    <section id="s-funnel" class="section">
+      <h2>二、用户漏斗：从建档到全阶段陪伴，每层都有增长空间</h2>
+      <p class="muted small">下图为母婴行业估算区间对比，非实测数据。</p>
+      <div class="chart" id="chart-funnel"></div>
+    </section>
+
+    <section id="s-why" class="section">
+      <h2>三、为什么选择 EngageLab MA</h2>
+      <div class="grid grid-3">
+        <div class="card"><div class="card-header">月龄自动演进</div><div class="card-body p-sm"><ul><li>按预产期/出生日期自动推算孕周与月龄</li><li>内容与商品推荐随阶段自动切换，无需人工维护</li></ul></div></div>
+        <div class="card"><div class="card-header">长周期旅程编排</div><div class="card-body p-sm"><ul><li>孕期 40 周 + 育儿 36 个月的超长周期自动运行</li><li>疫苗、体检、耗材多条周期并行且去重</li></ul></div></div>
+        <div class="card"><div class="card-header">CDP 统一身份（EUID）</div><div class="card-body p-sm"><ul><li>孕育阶段、宝宝月龄体重、消费偏好统一为属性</li><li>二胎家庭可分别建档与推送</li></ul></div></div>
+        <div class="card"><div class="card-header">内容 + 电商一体</div><div class="card-body p-sm"><ul><li>阶段知识内容自然带出对应商品推荐</li><li>内容驱动电商是母婴最高效的转化路径</li></ul></div></div>
+        <div class="card"><div class="card-header">AI 多语言文案</div><div class="card-body p-sm"><ul><li>母婴出海覆盖多语种，一套旅程适配多国</li><li>温暖陪伴型文案 AI 本地化并 A/B</li></ul></div></div>
+        <div class="card"><div class="card-header">合规 · 母婴特殊要求</div><div class="card-body p-sm"><ul><li>婴幼儿配方食品营销遵循当地法规限制</li><li>健康内容不构成医疗建议；儿童数据严格保护</li></ul></div></div>
+      </div>
+    </section>
+
+    <section id="s-scenarios" class="section">
+      <h2>四、高 ROI 运营场景总览</h2>
+      <table>
+        <thead><tr><th>#</th><th>场景</th><th>生命周期阶段</th><th>核心触发</th><th>渠道组合</th><th>预期提升（估算）</th></tr></thead>
+        <tbody>
+          <tr class="tone-info"><td>J1</td><td>孕育建档激活</td><td>激活</td><td>注册后未填孕育信息</td><td>App Push + Email</td><td>建档率 +35~55%</td></tr>
+          <tr class="tone-success"><td>J2</td><td>孕期周报与阶段陪伴</td><td>孕期留存</td><td>每孕周自动触发</td><td>App Push + Email</td><td>周活跃 +25~40%</td></tr>
+          <tr class="tone-success"><td>J3</td><td>月龄成长内容 + 用品推荐</td><td>育儿期转化</td><td>宝宝月龄变化</td><td>App Push + Email</td><td>内容带货转化 +20~35%</td></tr>
+          <tr><td>J4</td><td>疫苗 / 体检周期提醒</td><td>服务 / 信任</td><td>按出生日期推算</td><td>App Push + SMS</td><td>预约转化 +30~45%</td></tr>
+          <tr><td>J5</td><td>耗材复购 + 尺码段位升级</td><td>电商复购</td><td>消耗周期 / 体重月龄变化</td><td>App Push + Email</td><td>复购频次 +25~40%</td></tr>
+          <tr><td>J6</td><td>社区互动 + 沉默召回</td><td>留存 / 召回</td><td>社区动态 / 14 天未活跃</td><td>App Push + WhatsApp</td><td>回归率 +20~35%</td></tr>
+        </tbody>
+      </table>
+      <p class="muted small" style="margin-top:8px">提升幅度为行业公开区间估算，最终以 4 周测试实测为准。</p>
+    </section>
+
+    <section id="s-journey" class="section-plain">
+      <h2>五、核心旅程详细编排</h2>
+      <div class="section" style="margin-top:16px;">
+        <h3>旅程 1：孕育建档激活</h3>
+        <div class="grid grid-2-1"><div class="dag-wrap" id="dag-j1"></div><div>
+          <div class="callout neutral" style="margin-bottom:12px"><div class="callout-title">业务痛点</div><div class="callout-body"><p>没有预产期或出生日期，平台无法推算阶段，只能无差别群发，转化极低。</p></div></div>
+          <div class="callout info" style="margin-bottom:12px"><div class="callout-title">旅程组件配置</div><div class="callout-body">
+            <p><strong>进入条件：</strong>事件：注册成功且未填孕育信息</p>
+            <p><strong>分支：</strong>属性：用户阶段（备孕 / 孕期 / 已育）</p>
+            <p><strong>提前退出：</strong>事件：完成孕育建档</p>
+            <p><strong>价值感：</strong>"每周孕期变化 / 每月成长指南，正好是你需要的"</p>
+          </div></div>
+          <div class="callout success"><div class="callout-title">预期效益</div><div class="callout-body"><p>建档率 +35~55%（估算）；建档是母婴平台全部精准运营的前提。</p></div></div>
+        </div></div>
+      </div>
+      <div class="section">
+        <h3>旅程 2：孕期周报与阶段陪伴</h3>
+        <div class="grid grid-2-1"><div class="dag-wrap" id="dag-j2"></div><div>
+          <div class="callout neutral" style="margin-bottom:12px"><div class="callout-title">业务痛点</div><div class="callout-body"><p>孕妈对每周变化的信息需求极强，若平台不提供就转向其他 App 或社群。</p></div></div>
+          <div class="callout info" style="margin-bottom:12px"><div class="callout-title">旅程组件配置</div><div class="callout-body">
+            <p><strong>进入条件：</strong>属性：孕期用户，按孕周自动触发</p>
+            <p><strong>分支：</strong>属性：孕期阶段（早期 / 中期 / 晚期待产）</p>
+            <p><strong>内容：</strong>本周宝宝发育、妈妈注意事项、该准备的用品</p>
+            <p><strong>周期：</strong>40 周持续运行，产后自动转育儿旅程</p>
+          </div></div>
+          <div class="callout success"><div class="callout-title">预期效益</div><div class="callout-body"><p>周活跃 +25~40%（估算）；孕期周报是母婴 App 最强的留存内容。</p></div></div>
+        </div></div>
+      </div>
+      <div class="section">
+        <h3>旅程 3：月龄成长内容 + 用品推荐</h3>
+        <div class="grid grid-2-1"><div class="dag-wrap" id="dag-j3"></div><div>
+          <div class="callout neutral" style="margin-bottom:12px"><div class="callout-title">业务痛点</div><div class="callout-body"><p>推送不匹配月龄的内容会被立即判定无用；而正确的阶段推荐转化率极高。</p></div></div>
+          <div class="callout info" style="margin-bottom:12px"><div class="callout-title">旅程组件配置</div><div class="callout-body">
+            <p><strong>进入条件：</strong>属性：宝宝月龄变化（每月自动触发）</p>
+            <p><strong>分支：</strong>属性：月龄段（0-6 月 / 6-12 月辅食期 / 1-3 岁）</p>
+            <p><strong>内容：</strong>本月发育里程碑、养育要点、该阶段用品清单</p>
+            <p><strong>合规：</strong>婴幼儿配方食品相关内容遵循当地营销法规</p>
+          </div></div>
+          <div class="callout success"><div class="callout-title">预期效益</div><div class="callout-body"><p>内容带货转化 +20~35%（估算）；内容驱动电商是母婴最高效的转化路径。</p></div></div>
+        </div></div>
+      </div>
+      <div class="section">
+        <h3>旅程 4：疫苗 / 体检周期提醒</h3>
+        <div class="grid grid-2-1"><div class="dag-wrap" id="dag-j4"></div><div>
+          <div class="callout neutral" style="margin-bottom:12px"><div class="callout-title">业务痛点</div><div class="callout-body"><p>宝宝疫苗与体检时间表复杂，新手父母容易记混，错过影响健康也损失服务收入。</p></div></div>
+          <div class="callout info" style="margin-bottom:12px"><div class="callout-title">旅程组件配置</div><div class="callout-body">
+            <p><strong>进入条件：</strong>属性：按出生日期推算的疫苗或体检节点临近</p>
+            <p><strong>分支：</strong>属性：类型（免疫规划疫苗 / 自费疫苗 / 常规体检）</p>
+            <p><strong>递进：</strong>提前 7 天 → 提前 1 天 → 逾期提醒</p>
+            <p><strong>合规：</strong>依据当地免疫规划时间表，不构成医疗建议</p>
+          </div></div>
+          <div class="callout success"><div class="callout-title">预期效益</div><div class="callout-body"><p>预约转化 +30~45%（估算）；父母对宝宝健康类提醒的接受度与行动率极高。</p></div></div>
+        </div></div>
+      </div>
+      <div class="section">
+        <h3>旅程 5：耗材复购 + 尺码段位升级</h3>
+        <div class="grid grid-2-1"><div class="dag-wrap" id="dag-j5"></div><div>
+          <div class="callout neutral" style="margin-bottom:12px"><div class="callout-title">业务痛点</div><div class="callout-body"><p>纸尿裤奶粉用完不在平台复购；宝宝长大后尺码与段位变化未被识别，买错或流失。</p></div></div>
+          <div class="callout info" style="margin-bottom:12px"><div class="callout-title">旅程组件配置</div><div class="callout-body">
+            <p><strong>进入条件：</strong>属性：耗材消耗周期临近 / 月龄体重达尺码段位切换点</p>
+            <p><strong>分支：</strong>属性：品类与是否需升级规格（同规格复购 / 升尺码或段位）</p>
+            <p><strong>内容：</strong>"宝宝该换 L 码了""该转 2 段奶粉了"的贴心提示</p>
+            <p><strong>提前退出：</strong>事件：完成复购</p>
+          </div></div>
+          <div class="callout success"><div class="callout-title">预期效益</div><div class="callout-body"><p>复购频次 +25~40%（估算）；尺码段位提醒既提升转化又避免买错的差评。</p></div></div>
+        </div></div>
+      </div>
+      <div class="section">
+        <h3>旅程 6：社区互动 + 沉默召回</h3>
+        <div class="grid grid-2-1"><div class="dag-wrap" id="dag-j6"></div><div>
+          <div class="callout neutral" style="margin-bottom:12px"><div class="callout-title">业务痛点</div><div class="callout-body"><p>新手父母的问题得不到回应就转向社群；沉默用户在需求高峰期流向竞品。</p></div></div>
+          <div class="callout info" style="margin-bottom:12px"><div class="callout-title">旅程组件配置</div><div class="callout-body">
+            <p><strong>进入条件：</strong>事件：提问获得回答 / 属性：14 天未活跃</p>
+            <p><strong>分支：</strong>属性：触发类型（社区互动 / 沉默召回）</p>
+            <p><strong>召回内容：</strong>用当前月龄的关键问题作钩子（"宝宝X月了，这些要注意"）</p>
+            <p><strong>再次进入：</strong>可，间隔 15 天</p>
+          </div></div>
+          <div class="callout success"><div class="callout-title">预期效益</div><div class="callout-body"><p>回归率 +20~35%（估算）；同月龄妈妈社区是母婴平台最强的情感黏性来源。</p></div></div>
+        </div></div>
+      </div>
+    </section>
+
+    <section id="s-channel" class="section-plain">
+      <h2>六、渠道选型参考</h2>
+      <div class="section">
+        <p class="muted small">母婴平台渠道适配相对值（示意）：App Push 承载阶段内容与提醒主力，Email 承载孕期周报与成长档案（内容长、妈妈愿意细看并保存），SMS 用于疫苗体检等关键节点，WhatsApp 在新兴市场妈妈社群中价值极高。</p>
+        <div class="chart" id="chart-channel"></div>
+        <div class="grid grid-2" style="margin-top:14px">
+          <div class="callout info"><div class="callout-title">主力通道</div><div class="callout-body"><p>App Push（月龄内容、疫苗提醒、耗材复购）+ Email（孕期周报与成长档案，情感价值高）。</p></div></div>
+          <div class="callout warn"><div class="callout-title">阶段准确性是生命线</div><div class="callout-body"><p>母婴用户对内容是否匹配当前阶段极度敏感——推错一次就可能被判定"不懂我"而卸载，阶段推算必须准确。</p></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="s-compliance" class="section">
+      <h2>七、合规与安全</h2>
+      <div class="grid grid-3">
+        <div class="card"><div class="card-header">母婴特殊法规</div><div class="card-body p-sm"><ul><li>婴幼儿配方食品营销遵循当地限制（如母乳代用品守则）</li><li>健康内容不构成医疗建议，依据公开免疫规划</li><li>不夸大产品功效、不制造育儿焦虑</li></ul></div></div>
+        <div class="card"><div class="card-header">儿童数据保护</div><div class="card-body p-sm"><ul><li>宝宝出生日期、体重等信息严格脱敏</li><li>COPPA / GDPR-K：内容与营销均面向父母</li><li>GDPR/CCPA 数据删除与同意管理</li></ul></div></div>
+        <div class="card"><div class="card-header">触达护栏</div><div class="card-body p-sm"><ul><li>多周期（内容/疫苗/耗材）去重与合并</li><li>勿扰时段（避免打扰哺乳与休息）</li><li>一键退订、记录留存（如 60 天）</li></ul></div></div>
+      </div>
+    </section>
+
+    <section id="s-plan" class="section">
+      <h2>八、测试计划（4 周）</h2>
+      <table>
+        <thead><tr><th>周次</th><th>阶段</th><th>核心工作</th><th>验收指标</th></tr></thead>
+        <tbody>
+          <tr><td>第 1 周</td><td>启动 · 数据打通</td><td>确认埋点（注册、孕育建档、内容浏览、购买、预约）；孕周月龄推算规则</td><td>事件入库率 ≥95%；阶段推算准确</td></tr>
+          <tr><td>第 2 周</td><td>核心旅程上线</td><td>J1 孕育建档 + J2 孕期周报（2 条，小流量）；多周期去重配置</td><td>旅程触发成功率 ≥98%；零阶段错配</td></tr>
+          <tr><td>第 3 周</td><td>扩量 · A/B</td><td>J3 月龄内容 + J4 疫苗体检全量；内容带货 vs 纯商品推送 A/B</td><td>活跃与转化 uplift 显现</td></tr>
+          <tr><td>第 4 周</td><td>复盘 · 扩面</td><td>J5 耗材升级 + J6 社区召回上线；输出 GMV 与留存 uplift 报告</td><td>建档/活跃/转化/复购 uplift 可量化</td></tr>
+        </tbody>
+      </table>
+      <div class="callout success" style="margin-top:14px"><div class="callout-title">投入</div><div class="callout-body"><p>测试期授权费 $0，配置 2 人专属服务团队支撑埋点、阶段规则与旅程交付。</p></div></div>
+    </section>
+    <footer class="site-footer">EngageLab MA · 母婴亲子平台增长方案 — 内部方案，转化/提升数据为行业估算或公开参考，落地以实测为准。健康内容不构成医疗建议；婴幼儿配方食品营销遵循当地法规。</footer>
+  </main>
+  <script>
+  (function(){
+    // ========== Shared helpers ==========
+    const COLORS = {
+      accent: '#2563eb', info: '#0369a1', success: '#16a34a',
+      warning: '#d97706', neutral: '#94a3b8', muted: '#cbd5e1',
+      text: '#374151', textMute: '#9ca3af', grid: '#e5e7eb',
+    };
+    function svgEl(w, h) {
+      const s = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+      s.setAttribute('viewBox', '0 0 ' + w + ' ' + h);
+      s.setAttribute('width', '100%');
+      s.setAttribute('preserveAspectRatio', 'xMidYMid meet');
+      return s;
+    }
+    function el(tag, attrs) {
+      const e = document.createElementNS('http://www.w3.org/2000/svg', tag);
+      for (const k in attrs) e.setAttribute(k, attrs[k]);
+      return e;
+    }
+
+    // ========== Bar Chart ==========
+    function drawBarChart(mount, opts) {
+      const { categories, series, valueSuffix = '', height = 240 } = opts;
+      const W = 600, H = height, PAD_L = 44, PAD_R = 16, PAD_T = 12, PAD_B = 56;
+      const innerW = W - PAD_L - PAD_R, innerH = H - PAD_T - PAD_B;
+      const max = Math.max(...series.flatMap(s => s.data), 1);
+      const niceMax = Math.ceil(max / 20) * 20 || 100;
+      const groupCount = categories.length;
+      const barsPerGroup = series.length;
+      const groupW = innerW / groupCount;
+      const barW = Math.min(22, (groupW - 12) / barsPerGroup);
+      const s = svgEl(W, H);
+      for (let i = 0; i <= 4; i++) {
+        const v = (niceMax / 4) * i;
+        const y = PAD_T + innerH - (v / niceMax) * innerH;
+        s.appendChild(el('line', { x1: PAD_L, x2: W - PAD_R, y1: y, y2: y, stroke: COLORS.grid, 'stroke-width': 1 }));
+        const t = el('text', { x: PAD_L - 6, y: y + 4, 'text-anchor': 'end', 'font-size': 10, fill: COLORS.textMute });
+        t.textContent = Math.round(v) + valueSuffix;
+        s.appendChild(t);
+      }
+      categories.forEach((cat, ci) => {
+        const gx = PAD_L + groupW * ci;
+        series.forEach((se, si) => {
+          const v = se.data[ci] || 0;
+          const h = (v / niceMax) * innerH;
+          const x = gx + (groupW - barW * barsPerGroup) / 2 + si * barW;
+          const y = PAD_T + innerH - h;
+          const color = COLORS[se.tone] || COLORS.neutral;
+          s.appendChild(el('rect', { x, y, width: barW - 2, height: h, fill: color, rx: 2 }));
+          if (v > 0) {
+            const label = el('text', { x: x + (barW - 2) / 2, y: y - 2, 'text-anchor': 'middle', 'font-size': 8, fill: COLORS.text });
+            label.textContent = v + valueSuffix;
+            s.appendChild(label);
+          }
+        });
+        const t = el('text', { x: gx + groupW / 2, y: H - PAD_B + 14, 'text-anchor': 'middle', 'font-size': 10, fill: COLORS.text });
+        t.textContent = cat;
+        s.appendChild(t);
+      });
+      // Legend
+      let legX = PAD_L;
+      series.forEach((se) => {
+        const color = COLORS[se.tone] || COLORS.accent;
+        s.appendChild(el('rect', { x: legX, y: H - 18, width: 10, height: 10, rx: 2, fill: color }));
+        const t = el('text', { x: legX + 14, y: H - 10, 'font-size': 10, fill: COLORS.text });
+        t.textContent = se.name;
+        s.appendChild(t);
+        legX += 14 + (se.name.length * 7) + 16;
+      });
+      mount.innerHTML = '';
+      mount.appendChild(s);
+    }
+
+    // ========== Journey DAG renderer (same as fintech/security solution) ==========
+    const KIND_STYLE = {
+      entry:    { fill: '#f1f5f9', stroke: '#94a3b8', text: '#111827' },
+      wait:     { fill: '#fafafa', stroke: '#d1d5db', text: '#6b7280' },
+      branch:   { fill: '#f9fafb', stroke: '#475569', text: '#111827' },
+      channel:  { fill: '#dbeafe', stroke: '#2563eb', text: '#1e3a8a' },
+      sendtime: { fill: '#fef3c7', stroke: '#d97706', text: '#92400e' },
+      exitOk:   { fill: '#dcfce7', stroke: '#16a34a', text: '#14532d' },
+      exitEnd:  { fill: '#f3f4f6', stroke: '#9ca3af', text: '#4b5563' },
+    };
+
+    function drawJourney(mount, nodes, edges) {
+      const NODE_W = 176, NODE_H = 62, RANK_GAP = 42, NODE_GAP = 22;
+      const rankOf = {}, incoming = {};
+      nodes.forEach(n => { rankOf[n.id] = 0; incoming[n.id] = []; });
+      edges.forEach(e => { incoming[e.to].push(e.from); });
+      let changed = true;
+      while (changed) {
+        changed = false;
+        edges.forEach(e => {
+          if (rankOf[e.to] < rankOf[e.from] + 1) { rankOf[e.to] = rankOf[e.from] + 1; changed = true; }
+        });
+      }
+      const maxRank = Math.max(...Object.values(rankOf));
+      const ranks = [];
+      for (let r = 0; r <= maxRank; r++) ranks.push([]);
+      nodes.forEach(n => { ranks[rankOf[n.id]].push(n); });
+      const pos = {};
+      const rankWidths = ranks.map(r => r.length * NODE_W + (r.length - 1) * NODE_GAP);
+      const maxWidth = Math.max(...rankWidths, 400);
+      ranks.forEach((rankNodes, r) => {
+        const withAnchor = rankNodes.map(n => {
+          const parents = incoming[n.id].map(p => pos[p] ? pos[p].x + NODE_W / 2 : null).filter(x => x !== null);
+          const anchor = parents.length ? parents.reduce((a, b) => a + b, 0) / parents.length : null;
+          return { node: n, anchor };
+        });
+        withAnchor.sort((a, b) => {
+          if (a.anchor === null && b.anchor === null) return 0;
+          if (a.anchor === null) return 1;
+          if (b.anchor === null) return -1;
+          return a.anchor - b.anchor;
+        });
+        const totalW = withAnchor.length * NODE_W + (withAnchor.length - 1) * NODE_GAP;
+        const startX = (maxWidth - totalW) / 2 + 20;
+        withAnchor.forEach((it, i) => {
+          pos[it.node.id] = { x: startX + i * (NODE_W + NODE_GAP), y: 20 + r * (NODE_H + RANK_GAP) };
+        });
+      });
+      for (let pass = 0; pass < 3; pass++) {
+        ranks.forEach(rankNodes => {
+          const sorted = rankNodes.slice().sort((a, b) => pos[a.id].x - pos[b.id].x);
+          for (let i = 1; i < sorted.length; i++) {
+            const prev = pos[sorted[i - 1].id], cur = pos[sorted[i].id];
+            if (cur.x < prev.x + NODE_W + NODE_GAP) cur.x = prev.x + NODE_W + NODE_GAP;
+          }
+        });
+      }
+      const width = Math.max(...Object.values(pos).map(p => p.x)) + NODE_W + 20;
+      const height = Math.max(...Object.values(pos).map(p => p.y)) + NODE_H + 24;
+      const s = svgEl(width, height);
+      s.setAttribute('width', width);
+      s.setAttribute('height', height);
+      s.style.maxWidth = '100%';
+      s.style.height = 'auto';
+      const defs = el('defs');
+      const marker = el('marker', { id: 'arrow', viewBox: '0 0 10 10', refX: 9, refY: 5, markerWidth: 6, markerHeight: 6, orient: 'auto-start-reverse' });
+      marker.appendChild(el('path', { d: 'M 0 0 L 10 5 L 0 10 z', fill: '#94a3b8' }));
+      defs.appendChild(marker);
+      s.appendChild(defs);
+      edges.forEach(e => {
+        const from = pos[e.from], to = pos[e.to];
+        if (!from || !to) return;
+        const x1 = from.x + NODE_W / 2, y1 = from.y + NODE_H;
+        const x2 = to.x + NODE_W / 2, y2 = to.y;
+        const cy = (y1 + y2) / 2;
+        const d = 'M' + x1 + ',' + y1 + ' C' + x1 + ',' + cy + ' ' + x2 + ',' + cy + ' ' + x2 + ',' + y2;
+        s.appendChild(el('path', { d, fill: 'none', stroke: '#94a3b8', 'stroke-width': 1.25, 'marker-end': 'url(#arrow)' }));
+        if (e.label) {
+          const mx = (x1 + x2) / 2, my = cy;
+          const w = Math.max(e.label.length * 9 + 10, 28);
+          s.appendChild(el('rect', { x: mx - w / 2, y: my - 10, width: w, height: 18, rx: 4, fill: '#ffffff', stroke: '#e5e7eb' }));
+          const t = el('text', { x: mx, y: my + 3, 'text-anchor': 'middle', 'font-size': 11, fill: '#475569' });
+          t.textContent = e.label;
+          s.appendChild(t);
+        }
+      });
+      nodes.forEach(n => {
+        const p = pos[n.id];
+        const k = KIND_STYLE[n.kind] || KIND_STYLE.entry;
+        s.appendChild(el('rect', { x: p.x, y: p.y, width: NODE_W, height: NODE_H, rx: 10, fill: k.fill, stroke: k.stroke, 'stroke-width': n.kind === 'channel' ? 1.4 : 1 }));
+        const titleY = n.sub ? p.y + 24 : p.y + NODE_H / 2 + 4;
+        const title = el('text', { x: p.x + NODE_W / 2, y: titleY, 'text-anchor': 'middle', 'font-size': 12.5, 'font-weight': 600, fill: k.text });
+        title.textContent = n.title;
+        s.appendChild(title);
+        if (n.sub) {
+          const sub = el('text', { x: p.x + NODE_W / 2, y: p.y + 42, 'text-anchor': 'middle', 'font-size': 11, fill: k.text, opacity: 0.82 });
+          sub.textContent = n.sub;
+          s.appendChild(sub);
+        }
+      });
+      mount.innerHTML = '';
+      mount.appendChild(s);
+    }
+
+    drawBarChart(document.getElementById('chart-funnel'), {
+      categories: ['注册→孕育建档', '建档→周活跃', '内容→商品转化', '疫苗体检预约', '耗材复购率'],
+      series: [
+        { name: '当前基准（估算）',    data: [40, 35, 15, 40, 30], tone: 'neutral' },
+        { name: 'MA 自动化后（估算）', data: [58, 48, 20, 56, 42], tone: 'success' },
+      ], valueSuffix: '%', height: 260,
+    });
+    drawBarChart(document.getElementById('chart-channel'), {
+      categories: ['App Push', 'Email', 'SMS', 'WhatsApp', 'Web Push'],
+      series: [{ name: '母婴平台触达适配（相对值·示意）', data: [92, 84, 70, 66, 35], tone: 'info' }],
+      valueSuffix: '', height: 220,
+    });
+
+    drawJourney(document.getElementById('dag-j1'),
+      [
+        {id:'start',kind:'entry',title:'开始',sub:'事件: 注册·未填孕育信息'},
+        {id:'w1',kind:'wait',title:'等待事件',sub:'2h 内等待: 完成建档'},
+        {id:'ok0',kind:'exitOk',title:'结束（已建档）',sub:'完成孕育建档'},
+        {id:'br1',kind:'branch',title:'条件分支',sub:'属性: 用户阶段'},
+        {id:'pa',kind:'channel',title:'App Push',sub:'(孕期) 填预产期看每周变化'},
+        {id:'pb',kind:'channel',title:'App Push',sub:'(已育) 填出生日看月龄指南'},
+        {id:'pc',kind:'channel',title:'App Push',sub:'(备孕) 备孕知识与工具'},
+        {id:'w2',kind:'wait',title:'等待事件',sub:'24h 内等待: 完成建档'},
+        {id:'ok1',kind:'exitOk',title:'结束（已建档）',sub:'完成孕育建档'},
+        {id:'em1',kind:'channel',title:'Email',sub:'阶段指南样张+建档入口'},
+        {id:'w3',kind:'wait',title:'等待事件',sub:'3天内等待: 完成建档'},
+        {id:'ok2',kind:'exitOk',title:'结束（已建档）',sub:'完成孕育建档'},
+        {id:'end',kind:'exitEnd',title:'结束',sub:'转通用内容培育'},
+      ],
+      [
+        {from:'start',to:'w1'},{from:'w1',to:'ok0',label:'已建档'},{from:'w1',to:'br1',label:'未建档'},
+        {from:'br1',to:'pa',label:'孕期'},{from:'br1',to:'pb',label:'已育'},{from:'br1',to:'pc',label:'备孕'},
+        {from:'pa',to:'w2'},{from:'pb',to:'w2'},{from:'pc',to:'w2'},
+        {from:'w2',to:'ok1',label:'已建档'},{from:'w2',to:'em1',label:'未建档'},
+        {from:'em1',to:'w3'},{from:'w3',to:'ok2',label:'已建档'},{from:'w3',to:'end',label:'未建档'},
+      ]);
+
+    drawJourney(document.getElementById('dag-j2'),
+      [
+        {id:'start',kind:'entry',title:'开始',sub:'属性: 孕期用户·每孕周'},
+        {id:'st1',kind:'sendtime',title:'可发送时间',sub:'每天 9:00-21:00 终端时区'},
+        {id:'br1',kind:'branch',title:'条件分支',sub:'属性: 孕期阶段'},
+        {id:'pa',kind:'channel',title:'App Push',sub:'(早期) 本周发育+营养要点'},
+        {id:'pb',kind:'channel',title:'App Push',sub:'(中期) 产检提醒+胎教建议'},
+        {id:'pc',kind:'channel',title:'App Push',sub:'(晚期) 待产包清单+分娩准备'},
+        {id:'em1',kind:'channel',title:'Email',sub:'本周孕期周报（完整版）'},
+        {id:'w1',kind:'wait',title:'等待事件',sub:'本周内等待: 是否阅读'},
+        {id:'ok',kind:'exitOk',title:'结束（已阅读）',sub:'本周陪伴完成'},
+        {id:'end',kind:'exitEnd',title:'结束',sub:'下周继续·产后转育儿旅程'},
+      ],
+      [
+        {from:'start',to:'st1'},{from:'st1',to:'br1'},
+        {from:'br1',to:'pa',label:'孕早期'},{from:'br1',to:'pb',label:'孕中期'},{from:'br1',to:'pc',label:'孕晚期'},
+        {from:'pa',to:'em1'},{from:'pb',to:'em1'},{from:'pc',to:'em1'},
+        {from:'em1',to:'w1'},{from:'w1',to:'ok',label:'已阅读'},{from:'w1',to:'end',label:'未阅读'},
+      ]);
+
+    drawJourney(document.getElementById('dag-j3'),
+      [
+        {id:'start',kind:'entry',title:'开始',sub:'属性: 宝宝月龄变化'},
+        {id:'br1',kind:'branch',title:'条件分支',sub:'属性: 月龄段'},
+        {id:'pa',kind:'channel',title:'App Push',sub:'(0-6月) 本月发育+哺乳护理'},
+        {id:'pb',kind:'channel',title:'App Push',sub:'(6-12月) 辅食添加指南+器具'},
+        {id:'pc',kind:'channel',title:'App Push',sub:'(1-3岁) 早教启蒙+玩具推荐'},
+        {id:'w1',kind:'wait',title:'等待事件',sub:'7天内等待: 浏览/购买'},
+        {id:'ok0',kind:'exitOk',title:'结束（已转化）',sub:'内容阅读或购买'},
+        {id:'em1',kind:'channel',title:'Email',sub:'本月成长档案+用品清单'},
+        {id:'w2',kind:'wait',title:'等待事件',sub:'7天内等待: 浏览/购买'},
+        {id:'ok1',kind:'exitOk',title:'结束（已转化）',sub:'内容阅读或购买'},
+        {id:'end',kind:'exitEnd',title:'结束',sub:'下月龄再触发'},
+      ],
+      [
+        {from:'start',to:'br1'},{from:'br1',to:'pa',label:'0-6月'},{from:'br1',to:'pb',label:'6-12月'},{from:'br1',to:'pc',label:'1-3岁'},
+        {from:'pa',to:'w1'},{from:'pb',to:'w1'},{from:'pc',to:'w1'},
+        {from:'w1',to:'ok0',label:'已转化'},{from:'w1',to:'em1',label:'未转化'},
+        {from:'em1',to:'w2'},{from:'w2',to:'ok1',label:'已转化'},{from:'w2',to:'end',label:'未转化'},
+      ]);
+
+    drawJourney(document.getElementById('dag-j4'),
+      [
+        {id:'start',kind:'entry',title:'开始',sub:'属性: 疫苗/体检节点临近'},
+        {id:'st1',kind:'sendtime',title:'可发送时间',sub:'每天 9:00-21:00 终端时区'},
+        {id:'br1',kind:'branch',title:'条件分支',sub:'属性: 类型'},
+        {id:'pv',kind:'channel',title:'App Push',sub:'(免疫规划) 该接种XX疫苗了'},
+        {id:'pf',kind:'channel',title:'App Push',sub:'(自费疫苗) 可选疫苗说明'},
+        {id:'pc',kind:'channel',title:'App Push',sub:'(体检) 本月龄体检项目'},
+        {id:'w1',kind:'wait',title:'等待事件',sub:'5天内等待: 预约/完成'},
+        {id:'ok0',kind:'exitOk',title:'结束（已完成）',sub:'完成预约或接种'},
+        {id:'sms1',kind:'channel',title:'SMS',sub:'接种时间临近·勿错过'},
+        {id:'w2',kind:'wait',title:'等待事件',sub:'5天内等待: 预约/完成'},
+        {id:'ok1',kind:'exitOk',title:'结束（已完成）',sub:'完成预约或接种'},
+        {id:'end',kind:'exitEnd',title:'结束',sub:'下节点再提醒'},
+      ],
+      [
+        {from:'start',to:'st1'},{from:'st1',to:'br1'},
+        {from:'br1',to:'pv',label:'免疫规划'},{from:'br1',to:'pf',label:'自费疫苗'},{from:'br1',to:'pc',label:'体检'},
+        {from:'pv',to:'w1'},{from:'pf',to:'w1'},{from:'pc',to:'w1'},
+        {from:'w1',to:'ok0',label:'已完成'},{from:'w1',to:'sms1',label:'未完成'},
+        {from:'sms1',to:'w2'},{from:'w2',to:'ok1',label:'已完成'},{from:'w2',to:'end',label:'未完成'},
+      ]);
+
+    drawJourney(document.getElementById('dag-j5'),
+      [
+        {id:'start',kind:'entry',title:'开始',sub:'属性:耗材周期/尺码段位变化'},
+        {id:'br1',kind:'branch',title:'条件分支',sub:'属性: 是否需升级规格'},
+        {id:'pu',kind:'channel',title:'App Push',sub:'(需升级) 宝宝该换L码/2段了'},
+        {id:'pr',kind:'channel',title:'App Push',sub:'(同规格) 纸尿裤/奶粉该补货了'},
+        {id:'w1',kind:'wait',title:'等待事件',sub:'5天内等待: 是否复购'},
+        {id:'ok0',kind:'exitOk',title:'结束（已复购）',sub:'完成购买'},
+        {id:'em1',kind:'channel',title:'Email',sub:'囤货优惠+同月龄妈妈都在买'},
+        {id:'w2',kind:'wait',title:'等待事件',sub:'5天内等待: 是否复购'},
+        {id:'ok1',kind:'exitOk',title:'结束（已复购）',sub:'完成购买'},
+        {id:'p2',kind:'channel',title:'App Push',sub:'订阅送货·再不下单可能断货'},
+        {id:'end',kind:'exitEnd',title:'结束',sub:'下周期再提醒'},
+      ],
+      [
+        {from:'start',to:'br1'},{from:'br1',to:'pu',label:'需升级'},{from:'br1',to:'pr',label:'同规格'},
+        {from:'pu',to:'w1'},{from:'pr',to:'w1'},
+        {from:'w1',to:'ok0',label:'已复购'},{from:'w1',to:'em1',label:'未复购'},
+        {from:'em1',to:'w2'},{from:'w2',to:'ok1',label:'已复购'},{from:'w2',to:'p2',label:'未复购'},{from:'p2',to:'end'},
+      ]);
+
+    drawJourney(document.getElementById('dag-j6'),
+      [
+        {id:'start',kind:'entry',title:'开始',sub:'事件:社区互动/14天未活跃'},
+        {id:'br1',kind:'branch',title:'条件分支',sub:'属性: 触发类型'},
+        {id:'pi',kind:'channel',title:'App Push',sub:'(社区) 你的提问有N个新回答'},
+        {id:'ps',kind:'channel',title:'App Push',sub:'(沉默) 宝宝X月了·这些要注意'},
+        {id:'w1',kind:'wait',title:'等待事件',sub:'3天内等待: 是否回访'},
+        {id:'w2',kind:'wait',title:'等待事件',sub:'7天内等待: 是否回访'},
+        {id:'ok',kind:'exitOk',title:'结束（已回访）',sub:'恢复活跃'},
+        {id:'p2',kind:'channel',title:'App Push',sub:'同月龄妈妈热议话题'},
+        {id:'wa1',kind:'channel',title:'WhatsApp',sub:'妈妈社群+专属优惠'},
+        {id:'w3',kind:'wait',title:'等待事件',sub:'7天内等待: 是否回访'},
+        {id:'ok2',kind:'exitOk',title:'结束（已回访）',sub:'恢复活跃'},
+        {id:'end',kind:'exitEnd',title:'结束',sub:'标记深度沉默·降频'},
+      ],
+      [
+        {from:'start',to:'br1'},{from:'br1',to:'pi',label:'社区互动'},{from:'br1',to:'ps',label:'沉默召回'},
+        {from:'pi',to:'w1'},{from:'ps',to:'w2'},
+        {from:'w1',to:'ok',label:'已回访'},{from:'w2',to:'ok',label:'已回访'},
+        {from:'w1',to:'p2',label:'未回访'},{from:'w2',to:'wa1',label:'未回访'},
+        {from:'p2',to:'w3'},{from:'wa1',to:'w3'},
+        {from:'w3',to:'ok2',label:'已回访'},{from:'w3',to:'end',label:'未回访'},
+      ]);
+
+  })();
+  </script>
+</body>
+</html>

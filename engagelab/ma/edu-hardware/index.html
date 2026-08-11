@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EngageLab MA · 教育硬件（学习机 / 词典笔）增长方案</title>
+  <style>
+    :root {
+      --bg: #ffffff;
+      --bg-soft: #f7f8fa;
+      --bg-elev: #ffffff;
+      --border: #e5e7eb;
+      --border-strong: #d1d5db;
+      --text: #111827;
+      --text-2: #374151;
+      --text-3: #6b7280;
+      --text-4: #9ca3af;
+      --accent: #2563eb;
+      --accent-soft: #dbeafe;
+      --success: #16a34a;
+      --success-soft: #dcfce7;
+      --warning: #d97706;
+      --warning-soft: #fef3c7;
+      --info: #0369a1;
+      --info-soft: #e0f2fe;
+      --danger: #dc2626;
+      --danger-soft: #fee2e2;
+      --radius: 10px;
+      --radius-sm: 6px;
+      --shadow: 0 1px 2px rgba(16, 24, 40, 0.04);
+    }
+
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; background: var(--bg-soft); color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC",
+        "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", sans-serif;
+      line-height: 1.6; -webkit-font-smoothing: antialiased; font-size: 15px; }
+
+    main { max-width: 1180px; margin: 0 auto; padding: 32px 28px 80px; }
+
+    h1 { font-size: 30px; font-weight: 700; margin: 0 0 8px; letter-spacing: -0.01em; color: var(--text); }
+    h2 { font-size: 22px; font-weight: 700; margin: 0 0 12px; letter-spacing: -0.005em; color: var(--text); }
+    h3 { font-size: 17px; font-weight: 600; margin: 0 0 10px; color: var(--text); }
+    p { margin: 0 0 8px; color: var(--text-2); }
+    .muted { color: var(--text-3); }
+    .small { font-size: 13px; }
+    .bold { font-weight: 600; }
+
+    .section { background: var(--bg-elev); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 24px 26px; margin-bottom: 20px; }
+    .section-plain { padding: 6px 2px 18px; margin-bottom: 12px; }
+    .divider { height: 1px; background: var(--border); margin: 16px 0; border: none; }
+
+    .hero { background: linear-gradient(180deg, #fff 0%, #f0fdf4 100%);
+      border: 1px solid var(--border); border-radius: 14px; padding: 28px 30px;
+      margin-bottom: 24px; }
+    .hero-pills { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 14px; }
+    .hero-subtitle { color: var(--text-3); font-size: 15px; max-width: 900px; margin: 8px 0 18px; }
+
+    .pill { display: inline-flex; align-items: center; padding: 2px 10px;
+      font-size: 12px; border-radius: 999px; border: 1px solid var(--border-strong);
+      color: var(--text-2); background: #fff; font-weight: 500; }
+    .pill-accent { background: var(--accent-soft); border-color: var(--accent); color: var(--accent); }
+    .pill-info { background: var(--info-soft); border-color: var(--info); color: var(--info); }
+    .pill-success { background: var(--success-soft); border-color: var(--success); color: var(--success); }
+    .pill-warn { background: var(--warning-soft); border-color: var(--warning); color: var(--warning); }
+
+    .grid { display: grid; gap: 16px; }
+    .grid-4 { grid-template-columns: repeat(4, 1fr); }
+    .grid-3 { grid-template-columns: repeat(3, 1fr); }
+    .grid-2 { grid-template-columns: repeat(2, 1fr); }
+    .grid-5 { grid-template-columns: repeat(5, 1fr); }
+    .grid-1-2 { grid-template-columns: 1fr 2fr; }
+    .grid-2-1 { grid-template-columns: 1.4fr 1fr; }
+    .grid-12-1 { grid-template-columns: 1.2fr 1fr; }
+    .row { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+
+    .stat { padding: 14px 16px; background: var(--bg-elev); border: 1px solid var(--border);
+      border-radius: var(--radius); }
+    .stat-value { font-size: 26px; font-weight: 700; letter-spacing: -0.01em; color: var(--text);
+      line-height: 1.15; }
+    .stat-value.success { color: var(--success); }
+    .stat-value.info { color: var(--info); }
+    .stat-value.warn { color: var(--warning); }
+
+    .stat-label { font-size: 12px; color: var(--text-3); margin-top: 4px; }
+
+    .card { background: var(--bg-elev); border: 1px solid var(--border);
+      border-radius: var(--radius); overflow: hidden; }
+    .card-header { padding: 10px 16px; border-bottom: 1px solid var(--border);
+      background: #fafbfc; font-size: 13px; font-weight: 600; color: var(--text-2); }
+    .card-body { padding: 16px; }
+    .card-body.p-sm { padding: 12px; }
+    .card-body ul { margin: 0; padding-left: 18px; }
+    .card-body li { margin-bottom: 4px; font-size: 13.5px; color: var(--text-2); }
+
+    .callout { padding: 12px 14px; border-radius: var(--radius-sm);
+      border: 1px solid var(--border); border-left-width: 3px; background: var(--bg-soft); }
+    .callout-title { font-weight: 600; margin-bottom: 4px; font-size: 14px; }
+    .callout-body { font-size: 13px; color: var(--text-2); }
+    .callout-body p { font-size: 13px; color: var(--text-2); margin: 0 0 4px; }
+    .callout.info { border-left-color: var(--info); background: var(--info-soft); }
+    .callout.info .callout-title { color: var(--info); }
+    .callout.success { border-left-color: var(--success); background: var(--success-soft); }
+    .callout.success .callout-title { color: var(--success); }
+    .callout.warn { border-left-color: var(--warning); background: var(--warning-soft); }
+    .callout.warn .callout-title { color: var(--warning); }
+    .callout.neutral { border-left-color: var(--text-3); }
+
+    table { width: 100%; border-collapse: collapse; font-size: 13.5px;
+      background: var(--bg-elev); border: 1px solid var(--border); border-radius: var(--radius);
+      overflow: hidden; }
+    th, td { padding: 10px 12px; text-align: left; border-bottom: 1px solid var(--border);
+      color: var(--text-2); vertical-align: middle; }
+    th { background: #fafbfc; font-weight: 600; font-size: 12.5px; color: var(--text-3);
+      letter-spacing: 0.01em; text-transform: uppercase; }
+    tr:last-child td { border-bottom: 0; }
+    tr.tone-success td { background: rgba(22, 163, 74, 0.04); }
+    tr.tone-info td { background: rgba(3, 105, 161, 0.04); }
+
+    .signal-row { display: flex; gap: 10px; padding: 10px 0;
+      border-bottom: 1px solid var(--border); align-items: center; }
+    .signal-row:last-child { border-bottom: 0; }
+    .signal-row .left { flex: 1; min-width: 0; }
+    .signal-row .label { font-size: 13px; font-weight: 600; }
+    .signal-row .hint { font-size: 12px; color: var(--text-3); }
+    .signal-row .value { font-weight: 700; color: var(--text); font-size: 14px; white-space: nowrap; }
+
+    .chart { width: 100%; }
+    .chart svg { width: 100%; height: auto; display: block; }
+    .chart-legend { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--border); }
+    .chart-legend .leg-item { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--text-3); }
+    .chart-legend .dot { width: 10px; height: 10px; border-radius: 2px; }
+
+    .dag-wrap { overflow-x: auto; padding: 8px 2px; }
+    .dag-wrap svg { display: block; margin: 0 auto; }
+
+    .toc-bar { position: sticky; top: 0; background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(8px); border-bottom: 1px solid var(--border);
+      z-index: 10; padding: 10px 28px; margin: -32px -28px 24px;
+      font-size: 12.5px; }
+    .toc-bar .toc-inner { max-width: 1180px; margin: 0 auto; display: flex; gap: 14px;
+      align-items: center; overflow-x: auto; }
+    .toc-bar a { color: var(--text-3); text-decoration: none; white-space: nowrap; padding: 4px 2px; }
+    .toc-bar a:hover { color: var(--accent); }
+    .toc-bar .brand { font-weight: 700; color: var(--text); }
+
+    @page { size: A4; margin: 14mm; }
+    @media print {
+      body { background: #fff; }
+      main { max-width: none; padding: 0; }
+      .toc-bar { display: none; }
+      .section, .card, .hero { page-break-inside: avoid; box-shadow: none; }
+      h2 { page-break-after: avoid; }
+      .hero { break-before: avoid; }
+      .dag-wrap { overflow: visible; }
+      .dag-wrap svg { max-width: 100%; }
+    }
+
+    .spacer-sm { height: 6px; }
+    .spacer-md { height: 12px; }
+
+    .step-num { display: inline-flex; align-items: center; justify-content: center;
+      width: 22px; height: 22px; border-radius: 50%; background: var(--accent-soft);
+      color: var(--accent); font-weight: 700; font-size: 12px; margin-right: 8px; }
+
+    footer.site-footer { margin-top: 36px; padding-top: 16px; border-top: 1px solid var(--border);
+      font-size: 12px; color: var(--text-4); text-align: center; }
+  
+  .back-home {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    color: rgba(255,255,255,0.65);
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 500;
+    padding: 4px 10px 4px 6px;
+    border-radius: 6px;
+    border: 1px solid rgba(255,255,255,0.18);
+    margin-right: 16px;
+    white-space: nowrap;
+    transition: all 0.2s ease;
+    flex-shrink: 0;
+  }
+  .back-home:hover {
+    color: #fff;
+    background: rgba(255,255,255,0.12);
+    border-color: rgba(255,255,255,0.35);
+  }
+  .back-home svg {
+    width: 14px;
+    height: 14px;
+    opacity: 0.8;
+  }
+</style>
+</head>
+<body>
+  <nav class="toc-bar">
+    <div class="toc-inner">
+      <a class="back-home" href="../">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+        返回首页
+      </a>
+      <span class="brand">EngageLab MA · 教育硬件增长方案</span>
+      <a href="#s-market">市场机会</a><a href="#s-funnel">用户漏斗</a><a href="#s-why">为什么 EngageLab</a>
+      <a href="#s-scenarios">场景总览</a><a href="#s-journey">旅程编排</a><a href="#s-channel">渠道选型</a>
+      <a href="#s-compliance">合规安全</a><a href="#s-plan">测试计划</a>
+    </div>
+  </nav>
+  <main>
+    <section class="hero">
+      <div class="hero-pills">
+        <span class="pill pill-success">教育硬件 · 学习机 / 词典笔 / 平板</span>
+        <span class="pill">全球 · 东南亚 + 欧美</span>
+        <span class="pill pill-info">家长决策 · 孩子使用</span>
+      </div>
+      <h1>EngageLab MA · 教育硬件（学习机 / 词典笔）增长方案</h1>
+      <p class="hero-subtitle">
+        教育硬件最特殊的地方是<span class="bold">决策者与使用者分离</span>——家长掏钱、孩子使用，
+        两者关心的完全不同：家长看学习效果与性价比，孩子看有不有趣。
+        硬件卖出后的课程内容订阅才是长期利润，而设备闲置是续订流失的最强前兆。
+        本方案以 <span class="bold">设备激活与家长建档、孩子学习习惯养成、课程内容试用转订阅、学习报告与家长感知、续订与设备闲置挽回、多孩家庭与升级</span> 六大旅程切入，
+        统一编排 <span class="bold">App Push + Email + SMS + WhatsApp</span> 四类通道（家长端为主）。
+      </p>
+      <div class="row">
+        <span class="pill pill-accent">极光 / App Push（家长端）</span>
+        <span class="pill pill-accent">Email（学习报告）</span>
+        <span class="pill pill-accent">SMS（续订关键节点）</span>
+        <span class="pill pill-accent">WhatsApp（新兴市场家长群）</span>
+      </div>
+    </section>
+
+    <section id="s-market" class="section">
+      <h2>一、为什么教育硬件必须做家长端持续运营</h2>
+      <div class="grid grid-4" style="margin-bottom:16px">
+        <div class="stat"><div class="stat-value warn">决策使用分离</div><div class="stat-label">家长付费、孩子使用，触达对象必须是家长</div></div>
+        <div class="stat"><div class="stat-value info">内容才是利润</div><div class="stat-label">硬件毛利薄，课程内容订阅是长期收入</div></div>
+        <div class="stat"><div class="stat-value">效果需可见</div><div class="stat-label">家长看不到学习效果就不会续订</div></div>
+        <div class="stat"><div class="stat-value danger">设备闲置</div><div class="stat-label">设备吃灰是续订流失的最强前兆</div></div>
+      </div>
+      <p class="muted small">注：下文所有转化率、提升幅度为教育硬件行业估算区间，落地以实测为准。涉及未成年人使用，遵循 COPPA / GDPR-K 等未成年保护要求。</p>
+      <hr class="divider" />
+      <div class="grid grid-2">
+        <div class="callout neutral"><div class="callout-title">痛点 1 · 买了不激活、家长未建联</div><div class="callout-body"><p>设备买回家没绑定家长账号，平台既触达不到决策者，也无法推送学习数据。</p></div></div>
+        <div class="callout info"><div class="callout-title">解法 · 设备激活 + 家长建档</div><div class="callout-body"><p>引导绑定家长账号与孩子年级信息，用"实时查看学习报告"作为家长的直接价值。</p></div></div>
+        <div class="callout neutral"><div class="callout-title">痛点 2 · 孩子用两天就丢一边</div><div class="callout-body"><p>没有学习习惯与激励机制，设备很快闲置，家长自然认为不值得续订内容。</p></div></div>
+        <div class="callout info"><div class="callout-title">解法 · 学习习惯养成旅程</div><div class="callout-body"><p>向家长推送学习任务提醒与孩子成就，用"打卡连续天数、闯关进度"驱动持续使用。</p></div></div>
+        <div class="callout neutral"><div class="callout-title">痛点 3 · 内容试用不转订阅</div><div class="callout-body"><p>随机附赠的课程试用期结束，家长感受不到效果差异，直接放弃续费。</p></div></div>
+        <div class="callout info"><div class="callout-title">解法 · 试用转订阅（效果背书）</div><div class="callout-body"><p>用"本月学习 X 小时、掌握 Y 个单词、正确率提升 Z%"的学习数据说服家长，而非单纯打折。</p></div></div>
+        <div class="callout neutral"><div class="callout-title">痛点 4 · 设备闲置与续订流失</div><div class="callout-body"><p>设备长期不开机是续订流失的最强前兆，但没有预警与干预机制。</p></div></div>
+        <div class="callout info"><div class="callout-title">解法 · 闲置预警 + 续订前置</div><div class="callout-body"><p>设备闲置即触发家长关怀与内容推荐；续订前展示学期学习成果，把续订变默认选项。</p></div></div>
+      </div>
+    </section>
+
+    <section id="s-funnel" class="section">
+      <h2>二、用户漏斗：从激活到内容续订，每层都有增长空间</h2>
+      <p class="muted small">下图为教育硬件行业估算区间对比，非实测数据。</p>
+      <div class="chart" id="chart-funnel"></div>
+    </section>
+
+    <section id="s-why" class="section">
+      <h2>三、为什么选择 EngageLab MA</h2>
+      <div class="grid grid-3">
+        <div class="card"><div class="card-header">家长 / 孩子双身份</div><div class="card-body p-sm"><ul><li>触达对象始终是家长（决策者），内容围绕孩子</li><li>一位家长多个孩子可分别建档与推送</li></ul></div></div>
+        <div class="card"><div class="card-header">设备事件驱动</div><div class="card-body p-sm"><ul><li>激活、学习时长、闲置天数秒级触发旅程</li><li>设备状态是最准确的续订流失预警信号</li></ul></div></div>
+        <div class="card"><div class="card-header">学习数据个性化</div><div class="card-body p-sm"><ul><li>学习时长、掌握词汇、正确率作为文案变量</li><li>效果数据背书比促销更能驱动家长续订</li></ul></div></div>
+        <div class="card"><div class="card-header">CDP 统一身份（EUID）</div><div class="card-body p-sm"><ul><li>设备、家长账号、孩子档案、订阅状态统一为属性</li><li>支撑按孩子年级与学习深度的精准运营</li></ul></div></div>
+        <div class="card"><div class="card-header">AI 多语言文案</div><div class="card-body p-sm"><ul><li>教育硬件出海覆盖多语种，一套旅程适配多国</li><li>家长沟通话术 AI 本地化并 A/B</li></ul></div></div>
+        <div class="card"><div class="card-header">合规 · 未成年保护</div><div class="card-body p-sm"><ul><li>COPPA / GDPR-K：付费类触达仅面向家长</li><li>孩子学习数据严格脱敏与授权管理</li></ul></div></div>
+      </div>
+    </section>
+
+    <section id="s-scenarios" class="section">
+      <h2>四、高 ROI 运营场景总览</h2>
+      <table>
+        <thead><tr><th>#</th><th>场景</th><th>对象端</th><th>核心触发</th><th>渠道组合</th><th>预期提升（估算）</th></tr></thead>
+        <tbody>
+          <tr class="tone-info"><td>J1</td><td>设备激活 + 家长建档</td><td>家长</td><td>设备开机未绑定</td><td>App Push + SMS</td><td>激活绑定 +25~40%</td></tr>
+          <tr class="tone-success"><td>J2</td><td>孩子学习习惯养成</td><td>家长</td><td>当日未学习</td><td>App Push（智能时机）</td><td>周使用频次 +20~35%</td></tr>
+          <tr class="tone-success"><td>J3</td><td>课程内容试用转订阅</td><td>家长</td><td>试用 T-3 / T-1</td><td>App Push + Email + SMS</td><td>转订阅 +25~40%</td></tr>
+          <tr><td>J4</td><td>学习报告与家长感知</td><td>家长</td><td>每周 / 每月固定</td><td>Email + App Push</td><td>续订意愿显著提升</td></tr>
+          <tr><td>J5</td><td>设备闲置预警 + 续订前置</td><td>家长</td><td>闲置 &gt;7 天 / 到期前 30 天</td><td>App Push + Email + SMS</td><td>续订率 +15~25%</td></tr>
+          <tr><td>J6</td><td>多孩家庭 + 年级升级运营</td><td>家长</td><td>新增孩子 / 年级变化</td><td>App Push + Email + WhatsApp</td><td>件均与复购 +15~25%</td></tr>
+        </tbody>
+      </table>
+      <p class="muted small" style="margin-top:8px">提升幅度为行业公开区间估算，最终以 4 周测试实测为准。</p>
+    </section>
+
+    <section id="s-journey" class="section-plain">
+      <h2>五、核心旅程详细编排</h2>
+      <div class="section" style="margin-top:16px;">
+        <h3>旅程 1：设备激活 + 家长建档</h3>
+        <div class="grid grid-2-1"><div class="dag-wrap" id="dag-j1"></div><div>
+          <div class="callout neutral" style="margin-bottom:12px"><div class="callout-title">业务痛点</div><div class="callout-body"><p>设备买回家没绑定家长账号，平台触达不到决策者，后续一切运营无从谈起。</p></div></div>
+          <div class="callout info" style="margin-bottom:12px"><div class="callout-title">旅程组件配置</div><div class="callout-body">
+            <p><strong>进入条件：</strong>事件：设备首次开机未绑定家长账号</p>
+            <p><strong>提前退出：</strong>事件：完成家长绑定与孩子建档</p>
+            <p><strong>价值感：</strong>"绑定后可随时查看孩子学习报告"（家长最关心的）</p>
+            <p><strong>渠道：</strong>购机预留手机号可用 SMS 触达（尚无 App 时）</p>
+          </div></div>
+          <div class="callout success"><div class="callout-title">预期效益</div><div class="callout-body"><p>激活绑定 +25~40%（估算）；家长建联是教育硬件全部后续运营的前提。</p></div></div>
+        </div></div>
+      </div>
+      <div class="section">
+        <h3>旅程 2：孩子学习习惯养成</h3>
+        <div class="grid grid-2-1"><div class="dag-wrap" id="dag-j2"></div><div>
+          <div class="callout neutral" style="margin-bottom:12px"><div class="callout-title">业务痛点</div><div class="callout-body"><p>没有习惯与激励，设备很快闲置，家长自然认为内容不值得续订。</p></div></div>
+          <div class="callout info" style="margin-bottom:12px"><div class="callout-title">旅程组件配置</div><div class="callout-body">
+            <p><strong>进入条件：</strong>属性：当日尚未使用设备学习</p>
+            <p><strong>分支：</strong>属性：连续打卡天数（有连续保护 / 无连续常规提醒）</p>
+            <p><strong>智能时机：</strong>按孩子历史学习时段推送给家长</p>
+            <p><strong>合规：</strong>触达对象为家长，不直接向未成年人推送</p>
+          </div></div>
+          <div class="callout success"><div class="callout-title">预期效益</div><div class="callout-body"><p>周使用频次 +20~35%（估算）；使用频次直接决定家长的续订意愿。</p></div></div>
+        </div></div>
+      </div>
+      <div class="section">
+        <h3>旅程 3：课程内容试用转订阅</h3>
+        <div class="grid grid-2-1"><div class="dag-wrap" id="dag-j3"></div><div>
+          <div class="callout neutral" style="margin-bottom:12px"><div class="callout-title">业务痛点</div><div class="callout-body"><p>试用期结束家长感受不到效果差异，直接放弃续费，内容订阅收入无法转化。</p></div></div>
+          <div class="callout info" style="margin-bottom:12px"><div class="callout-title">旅程组件配置</div><div class="callout-body">
+            <p><strong>进入条件：</strong>属性：内容试用到期前 3 天</p>
+            <p><strong>分支：</strong>属性：试用期使用深度（高频用效果数据 / 低频先激活使用）</p>
+            <p><strong>内容：</strong>"本月学习 X 小时、掌握 Y 词、正确率 +Z%"</p>
+            <p><strong>提前退出：</strong>事件：完成订阅</p>
+          </div></div>
+          <div class="callout success"><div class="callout-title">预期效益</div><div class="callout-body"><p>转订阅 +25~40%（估算）；学习效果数据是说服家长最有力的证据。</p></div></div>
+        </div></div>
+      </div>
+      <div class="section">
+        <h3>旅程 4：学习报告与家长感知</h3>
+        <div class="grid grid-2-1"><div class="dag-wrap" id="dag-j4"></div><div>
+          <div class="callout neutral" style="margin-bottom:12px"><div class="callout-title">业务痛点</div><div class="callout-body"><p>家长看不到孩子的学习进展，硬件与内容的价值感持续衰减。</p></div></div>
+          <div class="callout info" style="margin-bottom:12px"><div class="callout-title">旅程组件配置</div><div class="callout-body">
+            <p><strong>进入条件：</strong>属性：每周 / 每月固定周期</p>
+            <p><strong>分支：</strong>属性：学习活跃度（活跃报喜与进阶推荐 / 低活跃给改进建议）</p>
+            <p><strong>内容：</strong>学习时长、知识点掌握、薄弱环节与建议</p>
+            <p><strong>渠道：</strong>Email 承载完整报告，Push 做摘要提醒</p>
+          </div></div>
+          <div class="callout success"><div class="callout-title">预期效益</div><div class="callout-body"><p>续订意愿显著提升；周期性报告是维持家长价值感最有效的手段。</p></div></div>
+        </div></div>
+      </div>
+      <div class="section">
+        <h3>旅程 5：设备闲置预警 + 续订前置</h3>
+        <div class="grid grid-2-1"><div class="dag-wrap" id="dag-j5"></div><div>
+          <div class="callout neutral" style="margin-bottom:12px"><div class="callout-title">业务痛点</div><div class="callout-body"><p>设备长期不开机是续订流失最强前兆，但没有预警与干预机制。</p></div></div>
+          <div class="callout info" style="margin-bottom:12px"><div class="callout-title">旅程组件配置</div><div class="callout-body">
+            <p><strong>进入条件：</strong>属性：设备闲置 &gt;7 天 / 内容订阅到期前 30 天</p>
+            <p><strong>分支：</strong>属性：触发类型与闲置深度（7-14 / 15-30 / ≥30 天）</p>
+            <p><strong>内容：</strong>闲置推新课程与孩子兴趣内容；续订展示学期成果</p>
+            <p><strong>提前退出：</strong>事件：恢复使用 / 完成续订</p>
+          </div></div>
+          <div class="callout success"><div class="callout-title">预期效益</div><div class="callout-body"><p>续订率 +15~25%（估算）；闲置预警把"到期才发现流失"提前到可干预阶段。</p></div></div>
+        </div></div>
+      </div>
+      <div class="section">
+        <h3>旅程 6：多孩家庭 + 年级升级运营</h3>
+        <div class="grid grid-2-1"><div class="dag-wrap" id="dag-j6"></div><div>
+          <div class="callout neutral" style="margin-bottom:12px"><div class="callout-title">业务痛点</div><div class="callout-body"><p>多孩家庭只买了一台设备；孩子升年级后内容不匹配，价值感下降。</p></div></div>
+          <div class="callout info" style="margin-bottom:12px"><div class="callout-title">旅程组件配置</div><div class="callout-body">
+            <p><strong>进入条件：</strong>属性：多孩家庭 / 孩子年级变化（新学期）</p>
+            <p><strong>分支：</strong>属性：触发类型（多孩推第二台或家庭套餐 / 升级推对应年级内容包）</p>
+            <p><strong>时机：</strong>新学期开学前是教育硬件的天然转化高峰</p>
+            <p><strong>提前退出：</strong>事件：完成购买 / 内容升级</p>
+          </div></div>
+          <div class="callout success"><div class="callout-title">预期效益</div><div class="callout-body"><p>件均与复购 +15~25%（估算）；开学季 + 年级升级是最自然的销售时点。</p></div></div>
+        </div></div>
+      </div>
+    </section>
+
+    <section id="s-channel" class="section-plain">
+      <h2>六、渠道选型参考</h2>
+      <div class="section">
+        <p class="muted small">教育硬件渠道适配相对值（示意）：App Push 是家长端主力（学习提醒与报告摘要），Email 承载完整学习报告与账单，SMS 用于激活与续订关键节点（购机时已留手机号），WhatsApp 在新兴市场家长沟通中价值高。</p>
+        <div class="chart" id="chart-channel"></div>
+        <div class="grid grid-2" style="margin-top:14px">
+          <div class="callout info"><div class="callout-title">主力通道</div><div class="callout-body"><p>App Push（家长端学习提醒与成就通知）+ Email（周／月学习报告，内容长且家长愿意细看）。</p></div></div>
+          <div class="callout warn"><div class="callout-title">触达对象始终是家长</div><div class="callout-body"><p>所有付费与营销类触达仅面向家长账号，不直接推送给未成年使用者——这是合规红线也是转化逻辑。</p></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="s-compliance" class="section">
+      <h2>七、合规与安全</h2>
+      <div class="grid grid-3">
+        <div class="card"><div class="card-header">未成年人保护</div><div class="card-body p-sm"><ul><li>COPPA / GDPR-K：付费与营销类触达仅面向家长</li><li>孩子学习数据严格脱敏，需家长授权</li><li>不向未成年使用者直接推送商业内容</li></ul></div></div>
+        <div class="card"><div class="card-header">数据法规</div><div class="card-body p-sm"><ul><li>GDPR / CCPA：数据删除 / 导出 / 同意管理</li><li>学习行为数据最小化采集与使用</li><li>已通过 GDPR、SOC 2 认证</li></ul></div></div>
+        <div class="card"><div class="card-header">触达护栏</div><div class="card-body p-sm"><ul><li>学习提醒频控（每日 ≤2 条）、勿扰时段</li><li>订阅与账单类通知独立于营销退订</li><li>记录留存（如 60 天）、审计可追溯</li></ul></div></div>
+      </div>
+    </section>
+
+    <section id="s-plan" class="section">
+      <h2>八、测试计划（4 周）</h2>
+      <table>
+        <thead><tr><th>周次</th><th>阶段</th><th>核心工作</th><th>验收指标</th></tr></thead>
+        <tbody>
+          <tr><td>第 1 周</td><td>启动 · 数据打通</td><td>确认埋点（激活绑定、学习时长、闲置、试用与订阅状态、孩子年级）；家长账号映射</td><td>事件入库率 ≥95%</td></tr>
+          <tr><td>第 2 周</td><td>核心旅程上线</td><td>J1 激活建档 + J3 试用转订阅（2 条，小流量）；家长端定向配置</td><td>旅程触发成功率 ≥98%；零未成年误投</td></tr>
+          <tr><td>第 3 周</td><td>扩量 · A/B</td><td>J2 习惯养成 + J4 学习报告全量；效果数据 vs 促销话术 A/B</td><td>使用频次与转订阅 uplift 显现</td></tr>
+          <tr><td>第 4 周</td><td>复盘 · 扩面</td><td>J5 闲置续订 + J6 多孩升级上线；输出内容订阅 uplift 报告</td><td>激活/使用/转订阅/续订 uplift 可量化</td></tr>
+        </tbody>
+      </table>
+      <div class="callout success" style="margin-top:14px"><div class="callout-title">投入</div><div class="callout-body"><p>测试期授权费 $0，配置 2 人专属服务团队支撑埋点、旅程与多语言文案交付。</p></div></div>
+    </section>
+    <footer class="site-footer">EngageLab MA · 教育硬件（学习机 / 词典笔）增长方案 — 内部方案，转化/提升数据为行业估算或公开参考，落地以实测为准。涉及未成年人使用，遵循 COPPA / GDPR-K 等保护要求。</footer>
+  </main>
+  <script>
+  (function(){
+    // ========== Shared helpers ==========
+    const COLORS = {
+      accent: '#2563eb', info: '#0369a1', success: '#16a34a',
+      warning: '#d97706', neutral: '#94a3b8', muted: '#cbd5e1',
+      text: '#374151', textMute: '#9ca3af', grid: '#e5e7eb',
+    };
+    function svgEl(w, h) {
+      const s = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+      s.setAttribute('viewBox', '0 0 ' + w + ' ' + h);
+      s.setAttribute('width', '100%');
+      s.setAttribute('preserveAspectRatio', 'xMidYMid meet');
+      return s;
+    }
+    function el(tag, attrs) {
+      const e = document.createElementNS('http://www.w3.org/2000/svg', tag);
+      for (const k in attrs) e.setAttribute(k, attrs[k]);
+      return e;
+    }
+
+    // ========== Bar Chart ==========
+    function drawBarChart(mount, opts) {
+      const { categories, series, valueSuffix = '', height = 240 } = opts;
+      const W = 600, H = height, PAD_L = 44, PAD_R = 16, PAD_T = 12, PAD_B = 56;
+      const innerW = W - PAD_L - PAD_R, innerH = H - PAD_T - PAD_B;
+      const max = Math.max(...series.flatMap(s => s.data), 1);
+      const niceMax = Math.ceil(max / 20) * 20 || 100;
+      const groupCount = categories.length;
+      const barsPerGroup = series.length;
+      const groupW = innerW / groupCount;
+      const barW = Math.min(22, (groupW - 12) / barsPerGroup);
+      const s = svgEl(W, H);
+      for (let i = 0; i <= 4; i++) {
+        const v = (niceMax / 4) * i;
+        const y = PAD_T + innerH - (v / niceMax) * innerH;
+        s.appendChild(el('line', { x1: PAD_L, x2: W - PAD_R, y1: y, y2: y, stroke: COLORS.grid, 'stroke-width': 1 }));
+        const t = el('text', { x: PAD_L - 6, y: y + 4, 'text-anchor': 'end', 'font-size': 10, fill: COLORS.textMute });
+        t.textContent = Math.round(v) + valueSuffix;
+        s.appendChild(t);
+      }
+      categories.forEach((cat, ci) => {
+        const gx = PAD_L + groupW * ci;
+        series.forEach((se, si) => {
+          const v = se.data[ci] || 0;
+          const h = (v / niceMax) * innerH;
+          const x = gx + (groupW - barW * barsPerGroup) / 2 + si * barW;
+          const y = PAD_T + innerH - h;
+          const color = COLORS[se.tone] || COLORS.neutral;
+          s.appendChild(el('rect', { x, y, width: barW - 2, height: h, fill: color, rx: 2 }));
+          if (v > 0) {
+            const label = el('text', { x: x + (barW - 2) / 2, y: y - 2, 'text-anchor': 'middle', 'font-size': 8, fill: COLORS.text });
+            label.textContent = v + valueSuffix;
+            s.appendChild(label);
+          }
+        });
+        const t = el('text', { x: gx + groupW / 2, y: H - PAD_B + 14, 'text-anchor': 'middle', 'font-size': 10, fill: COLORS.text });
+        t.textContent = cat;
+        s.appendChild(t);
+      });
+      // Legend
+      let legX = PAD_L;
+      series.forEach((se) => {
+        const color = COLORS[se.tone] || COLORS.accent;
+        s.appendChild(el('rect', { x: legX, y: H - 18, width: 10, height: 10, rx: 2, fill: color }));
+        const t = el('text', { x: legX + 14, y: H - 10, 'font-size': 10, fill: COLORS.text });
+        t.textContent = se.name;
+        s.appendChild(t);
+        legX += 14 + (se.name.length * 7) + 16;
+      });
+      mount.innerHTML = '';
+      mount.appendChild(s);
+    }
+
+    // ========== Journey DAG renderer (same as fintech/security solution) ==========
+    const KIND_STYLE = {
+      entry:    { fill: '#f1f5f9', stroke: '#94a3b8', text: '#111827' },
+      wait:     { fill: '#fafafa', stroke: '#d1d5db', text: '#6b7280' },
+      branch:   { fill: '#f9fafb', stroke: '#475569', text: '#111827' },
+      channel:  { fill: '#dbeafe', stroke: '#2563eb', text: '#1e3a8a' },
+      sendtime: { fill: '#fef3c7', stroke: '#d97706', text: '#92400e' },
+      exitOk:   { fill: '#dcfce7', stroke: '#16a34a', text: '#14532d' },
+      exitEnd:  { fill: '#f3f4f6', stroke: '#9ca3af', text: '#4b5563' },
+    };
+
+    function drawJourney(mount, nodes, edges) {
+      const NODE_W = 176, NODE_H = 62, RANK_GAP = 42, NODE_GAP = 22;
+      const rankOf = {}, incoming = {};
+      nodes.forEach(n => { rankOf[n.id] = 0; incoming[n.id] = []; });
+      edges.forEach(e => { incoming[e.to].push(e.from); });
+      let changed = true;
+      while (changed) {
+        changed = false;
+        edges.forEach(e => {
+          if (rankOf[e.to] < rankOf[e.from] + 1) { rankOf[e.to] = rankOf[e.from] + 1; changed = true; }
+        });
+      }
+      const maxRank = Math.max(...Object.values(rankOf));
+      const ranks = [];
+      for (let r = 0; r <= maxRank; r++) ranks.push([]);
+      nodes.forEach(n => { ranks[rankOf[n.id]].push(n); });
+      const pos = {};
+      const rankWidths = ranks.map(r => r.length * NODE_W + (r.length - 1) * NODE_GAP);
+      const maxWidth = Math.max(...rankWidths, 400);
+      ranks.forEach((rankNodes, r) => {
+        const withAnchor = rankNodes.map(n => {
+          const parents = incoming[n.id].map(p => pos[p] ? pos[p].x + NODE_W / 2 : null).filter(x => x !== null);
+          const anchor = parents.length ? parents.reduce((a, b) => a + b, 0) / parents.length : null;
+          return { node: n, anchor };
+        });
+        withAnchor.sort((a, b) => {
+          if (a.anchor === null && b.anchor === null) return 0;
+          if (a.anchor === null) return 1;
+          if (b.anchor === null) return -1;
+          return a.anchor - b.anchor;
+        });
+        const totalW = withAnchor.length * NODE_W + (withAnchor.length - 1) * NODE_GAP;
+        const startX = (maxWidth - totalW) / 2 + 20;
+        withAnchor.forEach((it, i) => {
+          pos[it.node.id] = { x: startX + i * (NODE_W + NODE_GAP), y: 20 + r * (NODE_H + RANK_GAP) };
+        });
+      });
+      for (let pass = 0; pass < 3; pass++) {
+        ranks.forEach(rankNodes => {
+          const sorted = rankNodes.slice().sort((a, b) => pos[a.id].x - pos[b.id].x);
+          for (let i = 1; i < sorted.length; i++) {
+            const prev = pos[sorted[i - 1].id], cur = pos[sorted[i].id];
+            if (cur.x < prev.x + NODE_W + NODE_GAP) cur.x = prev.x + NODE_W + NODE_GAP;
+          }
+        });
+      }
+      const width = Math.max(...Object.values(pos).map(p => p.x)) + NODE_W + 20;
+      const height = Math.max(...Object.values(pos).map(p => p.y)) + NODE_H + 24;
+      const s = svgEl(width, height);
+      s.setAttribute('width', width);
+      s.setAttribute('height', height);
+      s.style.maxWidth = '100%';
+      s.style.height = 'auto';
+      const defs = el('defs');
+      const marker = el('marker', { id: 'arrow', viewBox: '0 0 10 10', refX: 9, refY: 5, markerWidth: 6, markerHeight: 6, orient: 'auto-start-reverse' });
+      marker.appendChild(el('path', { d: 'M 0 0 L 10 5 L 0 10 z', fill: '#94a3b8' }));
+      defs.appendChild(marker);
+      s.appendChild(defs);
+      edges.forEach(e => {
+        const from = pos[e.from], to = pos[e.to];
+        if (!from || !to) return;
+        const x1 = from.x + NODE_W / 2, y1 = from.y + NODE_H;
+        const x2 = to.x + NODE_W / 2, y2 = to.y;
+        const cy = (y1 + y2) / 2;
+        const d = 'M' + x1 + ',' + y1 + ' C' + x1 + ',' + cy + ' ' + x2 + ',' + cy + ' ' + x2 + ',' + y2;
+        s.appendChild(el('path', { d, fill: 'none', stroke: '#94a3b8', 'stroke-width': 1.25, 'marker-end': 'url(#arrow)' }));
+        if (e.label) {
+          const mx = (x1 + x2) / 2, my = cy;
+          const w = Math.max(e.label.length * 9 + 10, 28);
+          s.appendChild(el('rect', { x: mx - w / 2, y: my - 10, width: w, height: 18, rx: 4, fill: '#ffffff', stroke: '#e5e7eb' }));
+          const t = el('text', { x: mx, y: my + 3, 'text-anchor': 'middle', 'font-size': 11, fill: '#475569' });
+          t.textContent = e.label;
+          s.appendChild(t);
+        }
+      });
+      nodes.forEach(n => {
+        const p = pos[n.id];
+        const k = KIND_STYLE[n.kind] || KIND_STYLE.entry;
+        s.appendChild(el('rect', { x: p.x, y: p.y, width: NODE_W, height: NODE_H, rx: 10, fill: k.fill, stroke: k.stroke, 'stroke-width': n.kind === 'channel' ? 1.4 : 1 }));
+        const titleY = n.sub ? p.y + 24 : p.y + NODE_H / 2 + 4;
+        const title = el('text', { x: p.x + NODE_W / 2, y: titleY, 'text-anchor': 'middle', 'font-size': 12.5, 'font-weight': 600, fill: k.text });
+        title.textContent = n.title;
+        s.appendChild(title);
+        if (n.sub) {
+          const sub = el('text', { x: p.x + NODE_W / 2, y: p.y + 42, 'text-anchor': 'middle', 'font-size': 11, fill: k.text, opacity: 0.82 });
+          sub.textContent = n.sub;
+          s.appendChild(sub);
+        }
+      });
+      mount.innerHTML = '';
+      mount.appendChild(s);
+    }
+
+    drawBarChart(document.getElementById('chart-funnel'), {
+      categories: ['开机→家长绑定', '绑定→周频使用', '试用→内容订阅', '内容续订率', '闲置召回率'],
+      series: [
+        { name: '当前基准（估算）',    data: [55, 35, 25, 45, 12], tone: 'neutral' },
+        { name: 'MA 自动化后（估算）', data: [72, 47, 34, 56, 28], tone: 'success' },
+      ], valueSuffix: '%', height: 260,
+    });
+    drawBarChart(document.getElementById('chart-channel'), {
+      categories: ['App Push(家长)', 'Email', 'SMS', 'WhatsApp', 'Web Push'],
+      series: [{ name: '教育硬件触达适配（相对值·示意）', data: [90, 85, 70, 58, 32], tone: 'info' }],
+      valueSuffix: '', height: 220,
+    });
+
+    drawJourney(document.getElementById('dag-j1'),
+      [
+        {id:'start',kind:'entry',title:'开始',sub:'事件: 设备开机未绑定'},
+        {id:'w1',kind:'wait',title:'等待事件',sub:'24h 内等待: 家长绑定'},
+        {id:'ok0',kind:'exitOk',title:'结束（已绑定）',sub:'完成家长建档'},
+        {id:'sms1',kind:'channel',title:'SMS',sub:'绑定家长端·查看学习报告'},
+        {id:'w2',kind:'wait',title:'等待事件',sub:'48h 内等待: 家长绑定'},
+        {id:'ok1',kind:'exitOk',title:'结束（已绑定）',sub:'完成家长建档'},
+        {id:'st1',kind:'sendtime',title:'可发送时间',sub:'每天 9:00-21:00 终端时区'},
+        {id:'p1',kind:'channel',title:'App Push',sub:'补充孩子年级·内容更匹配'},
+        {id:'w3',kind:'wait',title:'等待事件',sub:'7天内等待: 完成建档'},
+        {id:'ok2',kind:'exitOk',title:'结束（已绑定）',sub:'完成家长建档'},
+        {id:'end',kind:'exitEnd',title:'结束',sub:'转长期培育'},
+      ],
+      [
+        {from:'start',to:'w1'},{from:'w1',to:'ok0',label:'已绑定'},{from:'w1',to:'sms1',label:'未绑定'},
+        {from:'sms1',to:'w2'},{from:'w2',to:'ok1',label:'已绑定'},{from:'w2',to:'st1',label:'未绑定'},
+        {from:'st1',to:'p1'},{from:'p1',to:'w3'},{from:'w3',to:'ok2',label:'已建档'},{from:'w3',to:'end',label:'未建档'},
+      ]);
+
+    drawJourney(document.getElementById('dag-j2'),
+      [
+        {id:'start',kind:'entry',title:'开始',sub:'属性: 当日未学习'},
+        {id:'st1',kind:'sendtime',title:'可发送时间',sub:'按孩子学习时段 终端时区'},
+        {id:'br1',kind:'branch',title:'条件分支',sub:'属性: 连续打卡天数'},
+        {id:'pc',kind:'channel',title:'App Push（家长）',sub:'(有连续) 孩子{n}天连续将中断'},
+        {id:'pn',kind:'channel',title:'App Push（家长）',sub:'(无连续) 今日任务仅需15分钟'},
+        {id:'w1',kind:'wait',title:'等待事件',sub:'当日内等待: 是否学习'},
+        {id:'ok',kind:'exitOk',title:'结束（已学习）',sub:'完成当日学习'},
+        {id:'p2',kind:'channel',title:'App Push（家长）',sub:'孩子今日尚未学习'},
+        {id:'w2',kind:'wait',title:'等待事件',sub:'当日内等待: 是否学习'},
+        {id:'ok2',kind:'exitOk',title:'结束（已学习）',sub:'完成当日学习'},
+        {id:'end',kind:'exitEnd',title:'结束',sub:'转闲置预警旅程'},
+      ],
+      [
+        {from:'start',to:'st1'},{from:'st1',to:'br1'},
+        {from:'br1',to:'pc',label:'有连续'},{from:'br1',to:'pn',label:'无连续'},
+        {from:'pc',to:'w1'},{from:'pn',to:'w1'},
+        {from:'w1',to:'ok',label:'已学习'},{from:'w1',to:'p2',label:'未学习'},
+        {from:'p2',to:'w2'},{from:'w2',to:'ok2',label:'已学习'},{from:'w2',to:'end',label:'未学习'},
+      ]);
+
+    drawJourney(document.getElementById('dag-j3'),
+      [
+        {id:'start',kind:'entry',title:'开始',sub:'属性: 内容试用到期前3天'},
+        {id:'br1',kind:'branch',title:'条件分支',sub:'属性: 试用期使用深度'},
+        {id:'ph',kind:'channel',title:'App Push（家长）',sub:'(高频) 已学X小时·正确率+Z%'},
+        {id:'pl',kind:'channel',title:'App Push（家长）',sub:'(低频) 再学1课解锁能力测评'},
+        {id:'w1',kind:'wait',title:'等待事件',sub:'T-1 前等待: 是否订阅'},
+        {id:'ok0',kind:'exitOk',title:'结束（已订阅）',sub:'完成内容订阅'},
+        {id:'em1',kind:'channel',title:'Email',sub:'T-1 试用期学习报告+订阅权益'},
+        {id:'w2',kind:'wait',title:'等待事件',sub:'到期前等待: 是否订阅'},
+        {id:'ok1',kind:'exitOk',title:'结束（已订阅）',sub:'完成内容订阅'},
+        {id:'sms1',kind:'channel',title:'SMS',sub:'课程明日到期·学习记录保留'},
+        {id:'w3',kind:'wait',title:'等待事件',sub:'7天内等待: 是否订阅'},
+        {id:'ok2',kind:'exitOk',title:'结束（已订阅）',sub:'完成内容订阅'},
+        {id:'end',kind:'exitEnd',title:'结束',sub:'转闲置召回旅程'},
+      ],
+      [
+        {from:'start',to:'br1'},{from:'br1',to:'ph',label:'高频'},{from:'br1',to:'pl',label:'低频'},
+        {from:'ph',to:'w1'},{from:'pl',to:'w1'},
+        {from:'w1',to:'ok0',label:'已订阅'},{from:'w1',to:'em1',label:'未订阅'},
+        {from:'em1',to:'w2'},{from:'w2',to:'ok1',label:'已订阅'},{from:'w2',to:'sms1',label:'未订阅'},
+        {from:'sms1',to:'w3'},{from:'w3',to:'ok2',label:'已订阅'},{from:'w3',to:'end',label:'未订阅'},
+      ]);
+
+    drawJourney(document.getElementById('dag-j4'),
+      [
+        {id:'start',kind:'entry',title:'开始',sub:'属性: 每周/每月报告周期'},
+        {id:'st1',kind:'sendtime',title:'可发送时间',sub:'周末上午 终端时区'},
+        {id:'br1',kind:'branch',title:'条件分支',sub:'属性: 学习活跃度'},
+        {id:'ea',kind:'channel',title:'Email（家长）',sub:'(活跃) 本周成果+进阶课推荐'},
+        {id:'eb',kind:'channel',title:'Email（家长）',sub:'(低活跃) 学习建议+薄弱环节'},
+        {id:'p1',kind:'channel',title:'App Push（家长）',sub:'学习报告已生成·查看详情'},
+        {id:'w1',kind:'wait',title:'等待事件',sub:'3天内等待: 是否查看'},
+        {id:'ok',kind:'exitOk',title:'结束（已查看）',sub:'家长查看报告'},
+        {id:'end',kind:'exitEnd',title:'结束',sub:'下周期再推送'},
+      ],
+      [
+        {from:'start',to:'st1'},{from:'st1',to:'br1'},
+        {from:'br1',to:'ea',label:'活跃'},{from:'br1',to:'eb',label:'低活跃'},
+        {from:'ea',to:'p1'},{from:'eb',to:'p1'},{from:'p1',to:'w1'},
+        {from:'w1',to:'ok',label:'已查看'},{from:'w1',to:'end',label:'未查看'},
+      ]);
+
+    drawJourney(document.getElementById('dag-j5'),
+      [
+        {id:'start',kind:'entry',title:'开始',sub:'属性:闲置>7天/到期前30天'},
+        {id:'br1',kind:'branch',title:'条件分支',sub:'属性: 触发类型'},
+        {id:'pi',kind:'channel',title:'App Push（家长）',sub:'(闲置) 新课上线·孩子可能喜欢'},
+        {id:'pr',kind:'channel',title:'App Push（家长）',sub:'(续订前) 本学期学习成果回顾'},
+        {id:'w1',kind:'wait',title:'等待事件',sub:'7天内等待: 使用/续订'},
+        {id:'ok0',kind:'exitOk',title:'结束（已转化）',sub:'恢复使用或续订'},
+        {id:'em1',kind:'channel',title:'Email（家长）',sub:'学期报告+续订优惠'},
+        {id:'w2',kind:'wait',title:'等待事件',sub:'14天内等待: 使用/续订'},
+        {id:'ok1',kind:'exitOk',title:'结束（已转化）',sub:'恢复使用或续订'},
+        {id:'sms1',kind:'channel',title:'SMS',sub:'内容服务即将到期'},
+        {id:'end',kind:'exitEnd',title:'结束',sub:'标记流失·转赢回'},
+      ],
+      [
+        {from:'start',to:'br1'},{from:'br1',to:'pi',label:'设备闲置'},{from:'br1',to:'pr',label:'续订前'},
+        {from:'pi',to:'w1'},{from:'pr',to:'w1'},
+        {from:'w1',to:'ok0',label:'已转化'},{from:'w1',to:'em1',label:'未转化'},
+        {from:'em1',to:'w2'},{from:'w2',to:'ok1',label:'已转化'},{from:'w2',to:'sms1',label:'未转化'},{from:'sms1',to:'end'},
+      ]);
+
+    drawJourney(document.getElementById('dag-j6'),
+      [
+        {id:'start',kind:'entry',title:'开始',sub:'属性: 多孩家庭/年级变化'},
+        {id:'st1',kind:'sendtime',title:'可发送时间',sub:'开学季 终端时区'},
+        {id:'br1',kind:'branch',title:'条件分支',sub:'属性: 触发类型'},
+        {id:'pm',kind:'channel',title:'App Push（家长）',sub:'(多孩) 家庭套餐·第二台优惠'},
+        {id:'pg',kind:'channel',title:'App Push（家长）',sub:'(升年级) 新学期内容包已上线'},
+        {id:'w1',kind:'wait',title:'等待事件',sub:'7天内等待: 购买/升级'},
+        {id:'ok0',kind:'exitOk',title:'结束（已转化）',sub:'完成购买或升级'},
+        {id:'em1',kind:'channel',title:'Email（家长）',sub:'开学季方案+同龄家长选择'},
+        {id:'w2',kind:'wait',title:'等待事件',sub:'14天内等待: 购买/升级'},
+        {id:'ok1',kind:'exitOk',title:'结束（已转化）',sub:'完成购买或升级'},
+        {id:'wa1',kind:'channel',title:'WhatsApp',sub:'家长顾问1对1咨询'},
+        {id:'end',kind:'exitEnd',title:'结束',sub:'下学期再评估'},
+      ],
+      [
+        {from:'start',to:'st1'},{from:'st1',to:'br1'},
+        {from:'br1',to:'pm',label:'多孩家庭'},{from:'br1',to:'pg',label:'升年级'},
+        {from:'pm',to:'w1'},{from:'pg',to:'w1'},
+        {from:'w1',to:'ok0',label:'已转化'},{from:'w1',to:'em1',label:'未转化'},
+        {from:'em1',to:'w2'},{from:'w2',to:'ok1',label:'已转化'},{from:'w2',to:'wa1',label:'未转化'},{from:'wa1',to:'end'},
+      ]);
+
+  })();
+  </script>
+</body>
+</html>
