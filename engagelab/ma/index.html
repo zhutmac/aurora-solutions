@@ -3,63 +3,119 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EngageLab · 营销自动化 MA · 客户方案</title>
+    <title>EngageLab · 营销自动化 MA · 方案库</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
             background: linear-gradient(135deg, #0f0c29 0%, #1a1a4e 50%, #24243e 100%);
+            background-attachment: fixed;
             min-height: 100vh;
-            display: flex; align-items: center; justify-content: center;
-            padding: 48px 20px;
+            padding: 40px 20px 80px;
+            color: #fff;
         }
-        .container { max-width: 820px; width: 100%; }
+        .container { max-width: 1120px; margin: 0 auto; }
+
         .back {
             display: inline-flex; align-items: center; gap: 6px;
             color: rgba(255,255,255,0.55); text-decoration: none; font-size: 13px;
             border: 1px solid rgba(255,255,255,0.15); border-radius: 8px; padding: 6px 12px;
-            margin-bottom: 28px; transition: all 0.2s ease;
+            margin-bottom: 24px; transition: all 0.2s ease;
         }
         .back:hover { color: #fff; background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.3); }
         .back svg { width: 14px; height: 14px; }
 
-        .header { margin-bottom: 32px; }
+        .header { margin-bottom: 28px; }
         .header .crumb { font-size: 13px; color: rgba(255,255,255,0.4); margin-bottom: 8px; }
-        .header h1 { font-size: 30px; font-weight: 700; color: #fff; margin-bottom: 10px; }
-        .header p { font-size: 15px; color: rgba(255,255,255,0.6); max-width: 640px; line-height: 1.6; }
+        .header h1 { font-size: 30px; font-weight: 700; margin-bottom: 10px; }
+        .header p { font-size: 15px; color: rgba(255,255,255,0.6); max-width: 720px; line-height: 1.6; }
+        .header .count { color: rgba(255,255,255,0.85); font-weight: 600; }
 
-        .solutions { display: flex; flex-direction: column; gap: 18px; }
+        /* ---- 工具栏：搜索 + 筛选 ---- */
+        .toolbar {
+            position: sticky; top: 0; z-index: 20;
+            background: rgba(15,12,41,0.82); backdrop-filter: blur(12px);
+            border: 1px solid rgba(255,255,255,0.1); border-radius: 14px;
+            padding: 14px 16px; margin-bottom: 28px;
+        }
+        .search-wrap { position: relative; margin-bottom: 12px; }
+        .search-wrap svg {
+            position: absolute; left: 12px; top: 50%; transform: translateY(-50%);
+            width: 16px; height: 16px; color: rgba(255,255,255,0.35);
+        }
+        #search {
+            width: 100%; padding: 10px 12px 10px 36px;
+            background: rgba(255,255,255,0.06); color: #fff;
+            border: 1px solid rgba(255,255,255,0.12); border-radius: 10px;
+            font-size: 14px; font-family: inherit; outline: none; transition: all 0.2s ease;
+        }
+        #search::placeholder { color: rgba(255,255,255,0.35); }
+        #search:focus { border-color: rgba(255,255,255,0.35); background: rgba(255,255,255,0.1); }
+
+        .filters { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+        .filters .label { font-size: 12px; color: rgba(255,255,255,0.4); margin-right: 2px; }
+        .chip {
+            font-size: 12.5px; color: rgba(255,255,255,0.7);
+            background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12);
+            border-radius: 999px; padding: 5px 13px; cursor: pointer;
+            transition: all 0.2s ease; user-select: none; font-family: inherit;
+        }
+        .chip:hover { background: rgba(255,255,255,0.13); color: #fff; }
+        .chip.active { background: rgba(255,255,255,0.92); color: #1a1a4e; border-color: transparent; font-weight: 600; }
+
+        /* ---- 分组 ---- */
+        .group { margin-bottom: 34px; }
+        .group.hidden { display: none; }
+        .group-title {
+            display: flex; align-items: center; gap: 12px;
+            font-size: 14px; font-weight: 600; letter-spacing: 0.02em;
+            color: rgba(255,255,255,0.75); margin-bottom: 14px; padding-left: 2px;
+        }
+        .group-title::after { content: ""; flex: 1; height: 1px; background: rgba(255,255,255,0.1); }
+        .group-title .n {
+            font-size: 11px; font-weight: 600; color: rgba(255,255,255,0.5);
+            background: rgba(255,255,255,0.08); border-radius: 999px; padding: 2px 9px;
+        }
+
+        .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
         .card {
-            display: flex; align-items: center; gap: 24px;
+            display: flex; align-items: flex-start; gap: 14px;
             background: rgba(255,255,255,0.06); backdrop-filter: blur(12px);
-            border: 1px solid rgba(255,255,255,0.1); border-radius: 16px;
-            padding: 26px 30px; text-decoration: none; transition: all 0.3s ease;
+            border: 1px solid rgba(255,255,255,0.1); border-radius: 14px;
+            padding: 18px 20px; text-decoration: none; transition: all 0.25s ease;
         }
         .card:hover {
             background: rgba(255,255,255,0.12); border-color: rgba(255,255,255,0.25);
-            transform: translateY(-2px); box-shadow: 0 12px 40px rgba(0,0,0,0.3);
+            transform: translateY(-2px); box-shadow: 0 10px 30px rgba(0,0,0,0.3);
         }
+        .card.hidden { display: none; }
         .card-icon {
-            font-size: 38px; flex-shrink: 0; width: 62px; height: 62px;
+            font-size: 26px; flex-shrink: 0; width: 46px; height: 46px;
             display: flex; align-items: center; justify-content: center;
-            background: rgba(255,255,255,0.08); border-radius: 14px;
+            background: rgba(255,255,255,0.08); border-radius: 12px;
         }
-        .card-content h2 { font-size: 20px; font-weight: 600; color: #fff; margin-bottom: 6px; }
-        .card-content p { font-size: 14px; color: rgba(255,255,255,0.5); line-height: 1.5; }
-        .card-meta { margin-left: auto; display: flex; align-items: center; gap: 14px; flex-shrink: 0; }
-        .badge {
-            font-size: 12px; color: rgba(255,255,255,0.55);
-            border: 1px solid rgba(255,255,255,0.15); border-radius: 999px; padding: 3px 10px;
+        .card-body { flex: 1; min-width: 0; }
+        .card-body h2 { font-size: 16px; font-weight: 600; color: #fff; margin-bottom: 5px; line-height: 1.35; }
+        .card-body p { font-size: 13px; color: rgba(255,255,255,0.5); line-height: 1.55; margin-bottom: 8px; }
+        .card-tags { display: flex; gap: 6px; flex-wrap: wrap; }
+        .tag {
+            font-size: 11px; color: rgba(255,255,255,0.5);
+            border: 1px solid rgba(255,255,255,0.14); border-radius: 999px; padding: 2px 8px;
         }
-        .card-arrow { font-size: 20px; color: rgba(255,255,255,0.3); transition: all 0.3s ease; }
-        .card:hover .card-arrow { color: rgba(255,255,255,0.7); transform: translateX(4px); }
+        .tag.hot { color: #b8e6c4; border-color: rgba(184,230,196,0.35); background: rgba(184,230,196,0.08); }
 
-        @media (max-width: 600px) {
-            .card { padding: 20px; gap: 16px; }
-            .card-icon { width: 48px; height: 48px; font-size: 28px; }
-            .card-content h2 { font-size: 17px; }
+        .empty {
+            display: none; text-align: center; padding: 60px 20px;
+            color: rgba(255,255,255,0.4); font-size: 14px;
+        }
+        .empty.show { display: block; }
+
+        .footer { text-align: center; margin-top: 44px; font-size: 12px; color: rgba(255,255,255,0.3); }
+
+        @media (max-width: 820px) {
+            .grid { grid-template-columns: 1fr; }
             .header h1 { font-size: 24px; }
-            .card-meta .badge { display: none; }
+            .card { padding: 16px; }
         }
     </style>
 </head>
@@ -69,288 +125,222 @@
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
             返回产品首页
         </a>
+
         <div class="header">
             <div class="crumb">EngageLab（出海） · 营销自动化 MA</div>
-            <h1>营销自动化 MA · 客户方案</h1>
-            <p>基于 EngageLab MA 的行业/客户增长方案，全渠道用户旅程编排，覆盖全生命周期运营。点击客户查看对应方案。</p>
+            <h1>营销自动化 MA · 方案库</h1>
+            <p>共 <span class="count" id="total">0</span> 份方案，覆盖 C 端 / B 端 / 双边平台等业务形态。每份方案含痛点分析、用户漏斗、六大核心旅程编排（可视化 DAG）、渠道选型、合规要点与 4 周落地计划。</p>
         </div>
 
-        <div class="solutions">
-            <a class="card" href="./miniwo/">
-                <div class="card-icon">🌌</div>
-                <div class="card-content">
-                    <h2>拽米科技 · Miniwo（AI 剧场）</h2>
-                    <p>多人剧情 × 社交 × 创作互动内容平台，北美增长方案：OTP 一键认证 / Aha 催化 / 分享裂变 / 订阅转化六大旅程</p>
-                </div>
-                <div class="card-meta">
-                    <span class="badge">北美 · Waitlist</span>
-                    <span class="card-arrow">→</span>
-                </div>
-            </a>
-            <a class="card" href="./lami-mahjong/">
-                <div class="card-icon">🀄</div>
-                <div class="card-content">
-                    <h2>Lami Mahjong（棋牌平台）</h2>
-                    <p>东南亚 social casino 棋牌平台增长方案：首充黄金期 / 金币耗尽挽回 / 沉睡召回 / 赛事段位 / 公会社交六大旅程</p>
-                </div>
-                <div class="card-meta">
-                    <span class="badge">东南亚 · 马来西亚</span>
-                    <span class="card-arrow">→</span>
-                </div>
-            </a>
-            <a class="card" href="./web3/">
-                <div class="card-icon">🪙</div>
-                <div class="card-content">
-                    <h2>Web3 行业方案（交易 · 钱包 · GameFi）</h2>
-                    <p>全球·新兴市场 Web3 增长方案：开户 KYC / 首入金首交易 / 行情驱动唤醒 / 沉睡召回 / 安全信任 / 邀请裂变空投六大旅程</p>
-                </div>
-                <div class="card-meta">
-                    <span class="badge">行业方案 · 全球</span>
-                    <span class="card-arrow">→</span>
-                </div>
-            </a>
-            <a class="card" href="./cross-border-ecommerce/">
-                <div class="card-icon">🛒</div>
-                <div class="card-content">
-                    <h2>跨境电商行业方案（DTC · 独立站 + App）</h2>
-                    <p>全球·欧美为主 跨境电商增长方案：新客首购 / 弃购挽回 / 浏览召回 / 售后复购 / 沉睡唤醒 / 大促会员六大旅程</p>
-                </div>
-                <div class="card-meta">
-                    <span class="badge">行业方案 · 全球</span>
-                    <span class="card-arrow">→</span>
-                </div>
-            </a>
-            <a class="card" href="./online-education/">
-                <div class="card-icon">📚</div>
-                <div class="card-content">
-                    <h2>在线教育 / 语言学习出海</h2>
-                    <p>学习生命周期运营：首课激活 / Streak 守护 / 试用转订阅 / 断更召回 / 续订升级 / 结课裂变六大旅程</p>
-                </div>
-                <div class="card-meta">
-                    <span class="badge">行业方案 · 全球</span>
-                    <span class="card-arrow">→</span>
-                </div>
-            </a>
-            <a class="card" href="./social-dating/">
-                <div class="card-icon">💬</div>
-                <div class="card-content">
-                    <h2>社交 / 婚恋交友 App 出海</h2>
-                    <p>关系链自动化运营：资料完善 / 匹配破冰 / 对话挽回 / Likes 唤醒 / 会员订阅 / 沉默召回六大旅程</p>
-                </div>
-                <div class="card-meta">
-                    <span class="badge">行业方案 · 全球</span>
-                    <span class="card-arrow">→</span>
-                </div>
-            </a>
-            <a class="card" href="./consumer-finance/">
-                <div class="card-icon">💳</div>
-                <div class="card-content">
-                    <h2>海外消费金融（借贷 / BNPL）</h2>
-                    <p>贷前贷后自动化：KYC 挽回 / 首借黄金期 / 还款提醒 / 逾期分级 / 复借召回 / 额度提升六大旅程</p>
-                </div>
-                <div class="card-meta">
-                    <span class="badge">行业方案 · 新兴市场</span>
-                    <span class="card-arrow">→</span>
-                </div>
-            </a>
-            <a class="card" href="./short-drama/">
-                <div class="card-icon">🎬</div>
-                <div class="card-content">
-                    <h2>短剧 / 流媒体出海</h2>
-                    <p>追剧生命周期运营：首集完播 / 免费耗尽首充 / 弃剧挽回 / 剧币补充 / 会员续订 / 沉睡召回六大旅程</p>
-                </div>
-                <div class="card-meta">
-                    <span class="badge">行业方案 · 全球</span>
-                    <span class="card-arrow">→</span>
-                </div>
-            </a>
-            <a class="card" href="./travel-ota/">
-                <div class="card-icon">✈️</div>
-                <div class="card-content">
-                    <h2>旅游出行 / OTA 预订</h2>
-                    <p>全行程自动化：搜索召回 / 预订放弃挽回 / 行前提醒 / 行中增购 / 行后复购 / 淡季唤醒六大旅程</p>
-                </div>
-                <div class="card-meta">
-                    <span class="badge">行业方案 · 全球</span>
-                    <span class="card-arrow">→</span>
-                </div>
-            </a>
-            <a class="card" href="./b2b-saas/">
-                <div class="card-icon">🧩</div>
-                <div class="card-content">
-                    <h2>B2B SaaS（PLG 产品驱动增长）</h2>
-                    <p>账户级运营：Onboarding 激活 / Aha 里程碑 / 团队扩散 / 试用转付费 / 席位扩张 / 健康度预警六大旅程</p>
-                </div>
-                <div class="card-meta">
-                    <span class="badge">行业方案 · B 端</span>
-                    <span class="card-arrow">→</span>
-                </div>
-            </a>
-            <a class="card" href="./food-delivery/">
-                <div class="card-icon">🛵</div>
-                <div class="card-content">
-                    <h2>生鲜外卖 / 本地生活出海</h2>
-                    <p>时段化高频运营：首单转化 / 饭点唤醒 / 弃单挽回 / 履约安抚 / 7日复购 / 会员召回六大旅程</p>
-                </div>
-                <div class="card-meta">
-                    <span class="badge">行业方案 · 新兴市场</span>
-                    <span class="card-arrow">→</span>
-                </div>
-            </a>
-            <a class="card" href="./health-fitness/">
-                <div class="card-icon">💪</div>
-                <div class="card-content">
-                    <h2>健康健身 App 订阅</h2>
-                    <p>运动习惯养成：首练激活 / 训练连续性守护 / 试用转订阅 / 断练召回 / 续费升级 / 目标与季节性唤醒</p>
-                </div>
-                <div class="card-meta"><span class="badge">行业方案 · 全球</span><span class="card-arrow">→</span></div>
-            </a>
-            <a class="card" href="./iot-subscription/">
-                <div class="card-icon">📡</div>
-                <div class="card-content">
-                    <h2>智能硬件 IoT 云订阅</h2>
-                    <p>硬件转订阅：绑定激活 / 试用转付费 / 续费提醒 / 支付失败 Dunning / 过期召回 / 设备告警与增购</p>
-                </div>
-                <div class="card-meta"><span class="badge">行业方案 · 全球</span><span class="card-arrow">→</span></div>
-            </a>
-            <a class="card" href="./recruitment/">
-                <div class="card-icon">💼</div>
-                <div class="card-content">
-                    <h2>招聘求职平台（双边市场）</h2>
-                    <p>双边匹配效率：建档激活 / 职位推荐 / 投递反馈闭环 / 面试提醒 / HR 端简历处理 / 双端召回</p>
-                </div>
-                <div class="card-meta"><span class="badge">行业方案 · 双边</span><span class="card-arrow">→</span></div>
-            </a>
-            <a class="card" href="./c2c-marketplace/">
-                <div class="card-icon">🔄</div>
-                <div class="card-content">
-                    <h2>二手交易 C2C 平台</h2>
-                    <p>双边循环：卖家首发 / 咨询回复提醒 / 滞销降价引导 / 议价促成 / 履约评价 / 双角色循环召回</p>
-                </div>
-                <div class="card-meta"><span class="badge">行业方案 · 双边</span><span class="card-arrow">→</span></div>
-            </a>
-            <a class="card" href="./ride-hailing/">
-                <div class="card-icon">🚕</div>
-                <div class="card-content">
-                    <h2>网约车 / 出行平台（双边）</h2>
-                    <p>运力供需平衡：乘客首单 / 通勤唤醒 / 行程安全触达 / 司机运力调度 / 司机激励留存 / 双端召回</p>
-                </div>
-                <div class="card-meta"><span class="badge">行业方案 · 新兴市场</span><span class="card-arrow">→</span></div>
-            </a>
-            <a class="card" href="./music-podcast/">
-                <div class="card-icon">🎧</div>
-                <div class="card-content">
-                    <h2>音乐 / 播客订阅出海</h2>
-                    <p>收听习惯与资产：首听歌单沉淀 / 场景化唤醒 / 痛点时刻订阅 / 内容更新 / 续费家庭升级 / 沉默召回</p>
-                </div>
-                <div class="card-meta"><span class="badge">行业方案 · 全球</span><span class="card-arrow">→</span></div>
-            </a>
-            <a class="card" href="./telehealth/">
-                <div class="card-icon">🩺</div>
-                <div class="card-content">
-                    <h2>在线医疗问诊平台</h2>
-                    <p>就医闭环自动化：建档激活 / 问诊防爽约 / 取药用药提醒 / 复诊随访 / 慢病周期管理 / 医生端效率</p>
-                </div>
-                <div class="card-meta"><span class="badge">行业方案 · 强合规</span><span class="card-arrow">→</span></div>
-            </a>
-            <a class="card" href="./insurtech/">
-                <div class="card-icon">🛡️</div>
-                <div class="card-content">
-                    <h2>保险科技（InsurTech）</h2>
-                    <p>信任与续保循环：报价跟进 / 保单激活 / 续保前置提醒 / 理赔全流程陪伴 / 保障缺口交叉销售 / 断保召回</p>
-                </div>
-                <div class="card-meta"><span class="badge">行业方案 · 强合规</span><span class="card-arrow">→</span></div>
-            </a>
-            <a class="card" href="./remittance/">
-                <div class="card-icon">💸</div>
-                <div class="card-content">
-                    <h2>跨境支付 / 汇款平台</h2>
-                    <p>周期习惯绑定：KYC 催办 / 首汇转化 / 汇率提醒择时 / 周期复汇唤醒 / 到账通知 / 召回与推荐裂变</p>
-                </div>
-                <div class="card-meta"><span class="badge">行业方案 · 新兴市场</span><span class="card-arrow">→</span></div>
-            </a>
-            <a class="card" href="./real-estate/">
-                <div class="card-icon">🏠</div>
-                <div class="card-content">
-                    <h2>房产租售平台（双边）</h2>
-                    <p>长周期陪伴：需求建档 / 新房源与降价匹配 / 看房履约 / 经纪人线索催办 / 成交转介绍 / 房东侧运营</p>
-                </div>
-                <div class="card-meta"><span class="badge">行业方案 · 双边</span><span class="card-arrow">→</span></div>
-            </a>
-            <a class="card" href="./pet-services/">
-                <div class="card-icon">🐾</div>
-                <div class="card-content">
-                    <h2>宠物服务平台</h2>
-                    <p>周期化运营：宠物建档 / 疫苗驱虫提醒 / 洗护履约 / 口粮智能补货 / 就医随访 / 会员与年龄阶段运营</p>
-                </div>
-                <div class="card-meta"><span class="badge">行业方案 · 全球</span><span class="card-arrow">→</span></div>
-            </a>
-            <a class="card" href="./aigc-tools/">
-                <div class="card-icon">✨</div>
-                <div class="card-content">
-                    <h2>AIGC 工具订阅</h2>
-                    <p>额度与创作运营：首次生成 Aha / 创作习惯养成 / 额度耗尽转化 / 作品分享裂变 / 续费升级 / 新模型唤醒</p>
-                </div>
-                <div class="card-meta"><span class="badge">行业方案 · 全球</span><span class="card-arrow">→</span></div>
-            </a>
-            <a class="card" href="./edu-hardware/">
-                <div class="card-icon">📖</div>
-                <div class="card-content">
-                    <h2>教育硬件（学习机 / 词典笔）</h2>
-                    <p>家长决策孩子使用：设备激活建档 / 学习习惯养成 / 内容试用转订阅 / 学习报告 / 闲置预警续订 / 多孩升级</p>
-                </div>
-                <div class="card-meta"><span class="badge">行业方案 · 未成年保护</span><span class="card-arrow">→</span></div>
-            </a>
-            <a class="card" href="./auto-aftermarket/">
-                <div class="card-icon">🔧</div>
-                <div class="card-content">
-                    <h2>汽车后市场（保养 / 维修）</h2>
-                    <p>车辆档案驱动：建档激活 / 保养周期提醒 / 施工进度透明 / 年检保险 / 易损件预测 / 会员与召回</p>
-                </div>
-                <div class="card-meta"><span class="badge">行业方案 · 强周期</span><span class="card-arrow">→</span></div>
-            </a>
-            <a class="card" href="./maternal-baby/">
-                <div class="card-icon">🍼</div>
-                <div class="card-content">
-                    <h2>母婴亲子平台</h2>
-                    <p>月龄驱动演进：孕育建档 / 孕期周报 / 月龄内容带货 / 疫苗体检提醒 / 耗材与尺码升级 / 社区召回</p>
-                </div>
-                <div class="card-meta"><span class="badge">行业方案 · 阶段演进</span><span class="card-arrow">→</span></div>
-            </a>
-            <a class="card" href="./subscription-box/">
-                <div class="card-icon">💄</div>
-                <div class="card-content">
-                    <h2>美妆个护订阅盒（Subscription Box）</h2>
-                    <p>月度周期运营：首盒偏好建档 / 选品窗口提醒 / 扣款发货开箱 / 退订转跳过 / 试用转正装 / 暂停召回</p>
-                </div>
-                <div class="card-meta"><span class="badge">行业方案 · 订阅制</span><span class="card-arrow">→</span></div>
-            </a>
-            <a class="card" href="./gym-chain/">
-                <div class="card-icon">🏋️</div>
-                <div class="card-content">
-                    <h2>健身房 / 线下门店连锁</h2>
-                    <p>到店频次决定续费：首次到店 / 频次习惯养成 / 私教体验转化 / 团课到课 / 续费前置 / 沉睡预警</p>
-                </div>
-                <div class="card-meta"><span class="badge">行业方案 · 线下门店</span><span class="card-arrow">→</span></div>
-            </a>
-            <a class="card" href="./corporate-travel/">
-                <div class="card-icon">🧳</div>
-                <div class="card-content">
-                    <h2>企业差旅管理（TMC）</h2>
-                    <p>B2B2E 三方协同：员工激活 / 预订引导合规 / 行程异常处理 / 报销闭环 / 企业报告 / 账户预警续约</p>
-                </div>
-                <div class="card-meta"><span class="badge">行业方案 · B 端</span><span class="card-arrow">→</span></div>
-            </a>
-            <a class="card" href="./cross-border-logistics/">
-                <div class="card-icon">📦</div>
-                <div class="card-content">
-                    <h2>跨境物流 / 货代</h2>
-                    <p>确定性与主动告知：询价跟进 / 首单履约 / 运单全程透明 / 异常清关处理 / 旺季锁舱 / 货量预警</p>
-                </div>
-                <div class="card-meta"><span class="badge">行业方案 · B 端</span><span class="card-arrow">→</span></div>
-            </a>
-            <!-- 以后新增 MA 客户方案在这里加卡片，并在同目录建 <客户名>/index.html -->
+        <div class="toolbar">
+            <div class="search-wrap">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                <input type="text" id="search" placeholder="搜索行业、客户或场景关键词，如「订阅」「双边」「弃单」…" autocomplete="off">
+            </div>
+            <div class="filters" id="filters">
+                <span class="label">筛选</span>
+            </div>
         </div>
+
+        <div id="groups"></div>
+        <div class="empty" id="empty">没有匹配的方案，换个关键词试试</div>
+
+        <div class="footer">内部方案库 · 数据为估算或公开参考，落地以实测为准</div>
     </div>
+
+<script>
+/* ===========================================================
+   方案数据 —— 新增方案只需在此数组加一条，并在同目录建 <名称>/index.html
+   字段：g 分组 | icon 图标 | name 标题 | desc 简介 | href 链接 | tags 筛选标签
+   =========================================================== */
+const GROUPS = [
+  '客户定制方案',
+  '电商 · 零售 · 消费品',
+  '内容 · 社交 · 娱乐',
+  '金融 · 支付 · 保险',
+  '教育 · 硬件订阅',
+  '健康 · 生活服务',
+  '出行 · 物流 · 房产',
+  'B 端 · 企业服务',
+];
+
+const SOLUTIONS = [
+  // ---- 客户定制方案 ----
+  { g:'客户定制方案', icon:'🌌', name:'拽米科技 · Miniwo（AI 剧场）', href:'./miniwo/',
+    desc:'多人剧情 × 社交 × 创作互动内容平台，北美增长方案：OTP 一键认证 / Aha 催化 / 分享裂变 / 订阅转化',
+    tags:['客户方案','C 端','内容社交','订阅制'] },
+  { g:'客户定制方案', icon:'🀄', name:'Lami Mahjong（棋牌平台）', href:'./lami-mahjong/',
+    desc:'东南亚 social casino 棋牌平台：首充黄金期 / 金币耗尽挽回 / 赛事段位 / 公会社交六大旅程',
+    tags:['客户方案','C 端','游戏','新兴市场'] },
+
+  // ---- 电商 · 零售 · 消费品 ----
+  { g:'电商 · 零售 · 消费品', icon:'🛒', name:'跨境电商（DTC · 独立站 + App）', href:'./cross-border-ecommerce/',
+    desc:'新客首购 / 弃购挽回 / 浏览召回 / 售后复购 / 沉睡唤醒 / 大促会员，Web Push 覆盖未登录访客',
+    tags:['C 端','电商'] },
+  { g:'电商 · 零售 · 消费品', icon:'🔄', name:'二手交易 C2C 平台', href:'./c2c-marketplace/',
+    desc:'双角色循环：卖家首发 / 咨询回复提醒 / 滞销降价引导 / 议价促成 / 履约评价 / 角色循环召回',
+    tags:['C 端','双边平台','电商'] },
+  { g:'电商 · 零售 · 消费品', icon:'💄', name:'美妆个护订阅盒（Subscription Box）', href:'./subscription-box/',
+    desc:'月度周期：首盒偏好建档 / 选品窗口提醒 / 扣款发货开箱 / 退订转跳过 / 试用转正装 / 暂停召回',
+    tags:['C 端','订阅制','电商'] },
+  { g:'电商 · 零售 · 消费品', icon:'🍼', name:'母婴亲子平台', href:'./maternal-baby/',
+    desc:'月龄驱动演进：孕育建档 / 孕期周报 / 月龄内容带货 / 疫苗体检 / 耗材尺码升级 / 社区召回',
+    tags:['C 端','强周期','电商','强合规'] },
+
+  // ---- 内容 · 社交 · 娱乐 ----
+  { g:'内容 · 社交 · 娱乐', icon:'🎬', name:'短剧 / 流媒体出海', href:'./short-drama/',
+    desc:'追剧生命周期：首集完播 / 免费耗尽首充 / 弃剧挽回 / 剧币补充 / 会员续订 / 沉睡召回',
+    tags:['C 端','内容社交','订阅制'] },
+  { g:'内容 · 社交 · 娱乐', icon:'🎧', name:'音乐 / 播客订阅出海', href:'./music-podcast/',
+    desc:'收听习惯与资产：歌单沉淀 / 场景化唤醒 / 痛点时刻订阅 / 内容更新 / 家庭升级 / 沉默召回',
+    tags:['C 端','内容社交','订阅制'] },
+  { g:'内容 · 社交 · 娱乐', icon:'💬', name:'社交 / 婚恋交友 App', href:'./social-dating/',
+    desc:'关系链自动化：资料完善 / 匹配破冰 / 对话挽回 / Likes 唤醒 / 会员订阅 / 沉默召回',
+    tags:['C 端','内容社交','订阅制'] },
+  { g:'内容 · 社交 · 娱乐', icon:'✨', name:'AIGC 工具订阅', href:'./aigc-tools/',
+    desc:'额度与创作：首次生成 Aha / 习惯养成 / 额度耗尽阶梯转化 / 作品分享裂变 / 续费 / 新模型唤醒',
+    tags:['C 端','订阅制','工具'] },
+
+  // ---- 金融 · 支付 · 保险 ----
+  { g:'金融 · 支付 · 保险', icon:'🪙', name:'Web3（交易 · 钱包 · GameFi）', href:'./web3/',
+    desc:'开户 KYC / 首入金首交易 / 行情驱动唤醒 / 沉睡召回 / 安全信任 / 邀请裂变空投',
+    tags:['C 端','金融','强合规'] },
+  { g:'金融 · 支付 · 保险', icon:'💳', name:'海外消费金融（借贷 / BNPL）', href:'./consumer-finance/',
+    desc:'贷前贷后自动化：KYC 挽回 / 首借黄金期 / 还款提醒 / 逾期分级 / 复借召回 / 额度提升',
+    tags:['C 端','金融','强合规','新兴市场'] },
+  { g:'金融 · 支付 · 保险', icon:'🛡️', name:'保险科技（InsurTech）', href:'./insurtech/',
+    desc:'信任与续保：报价跟进 / 保单激活 / 续保前置 / 理赔陪伴 / 缺口交叉销售 / 断保召回',
+    tags:['C 端','金融','强合规'] },
+  { g:'金融 · 支付 · 保险', icon:'💸', name:'跨境支付 / 汇款平台', href:'./remittance/',
+    desc:'周期习惯绑定：KYC 催办 / 首汇转化 / 汇率择时 / 周期复汇 / 到账通知 / 推荐裂变',
+    tags:['C 端','金融','强合规','强周期','新兴市场'] },
+
+  // ---- 教育 · 硬件订阅 ----
+  { g:'教育 · 硬件订阅', icon:'📚', name:'在线教育 / 语言学习出海', href:'./online-education/',
+    desc:'学习生命周期：首课激活 / Streak 守护 / 试用转订阅 / 断更召回 / 续订升级 / 结课裂变',
+    tags:['C 端','教育','订阅制'] },
+  { g:'教育 · 硬件订阅', icon:'📖', name:'教育硬件（学习机 / 词典笔）', href:'./edu-hardware/',
+    desc:'家长决策孩子使用：设备激活建档 / 学习习惯 / 内容试用转订阅 / 学习报告 / 闲置预警 / 多孩升级',
+    tags:['C 端','教育','订阅制','强合规'] },
+  { g:'教育 · 硬件订阅', icon:'📡', name:'智能硬件 IoT 云订阅', href:'./iot-subscription/',
+    desc:'硬件转订阅：绑定激活 / 试用转付费 / 续费提醒 / 支付失败 Dunning / 过期召回 / 设备告警',
+    tags:['C 端','订阅制','硬件'] },
+
+  // ---- 健康 · 生活服务 ----
+  { g:'健康 · 生活服务', icon:'🩺', name:'在线医疗问诊平台', href:'./telehealth/',
+    desc:'就医闭环：建档激活 / 问诊防爽约 / 取药用药 / 复诊随访 / 慢病周期管理 / 医生端效率',
+    tags:['C 端','健康','强合规','双边平台'] },
+  { g:'健康 · 生活服务', icon:'💪', name:'健康健身 App 订阅', href:'./health-fitness/',
+    desc:'运动习惯养成：首练激活 / 训练连续性 / 试用转订阅 / 断练召回 / 续费升级 / 目标季节唤醒',
+    tags:['C 端','健康','订阅制'] },
+  { g:'健康 · 生活服务', icon:'🏋️', name:'健身房 / 线下门店连锁', href:'./gym-chain/',
+    desc:'到店频次决定续费：首次到店 / 频次习惯 / 私教体验转化 / 团课到课 / 续费前置 / 沉睡预警',
+    tags:['C 端','健康','线下门店'] },
+  { g:'健康 · 生活服务', icon:'🐾', name:'宠物服务平台', href:'./pet-services/',
+    desc:'周期化运营：宠物建档 / 疫苗驱虫提醒 / 洗护履约 / 口粮补货 / 就医随访 / 年龄阶段运营',
+    tags:['C 端','强周期','线下门店'] },
+  { g:'健康 · 生活服务', icon:'🛵', name:'生鲜外卖 / 本地生活出海', href:'./food-delivery/',
+    desc:'时段化高频：首单转化 / 饭点唤醒 / 分钟级弃单挽回 / 履约安抚 / 7 日复购 / 会员召回',
+    tags:['C 端','高频','新兴市场'] },
+
+  // ---- 出行 · 物流 · 房产 ----
+  { g:'出行 · 物流 · 房产', icon:'✈️', name:'旅游出行 / OTA 预订', href:'./travel-ota/',
+    desc:'全行程自动化：搜索召回 / 预订放弃挽回 / 行前提醒 / 行中增购 / 行后复购 / 淡季唤醒',
+    tags:['C 端','出行'] },
+  { g:'出行 · 物流 · 房产', icon:'🚕', name:'网约车 / 出行平台（双边）', href:'./ride-hailing/',
+    desc:'运力供需平衡：乘客首单 / 通勤唤醒 / 行程安全 / 司机运力调度 / 司机激励 / 双端召回',
+    tags:['C 端','双边平台','出行','新兴市场'] },
+  { g:'出行 · 物流 · 房产', icon:'🔧', name:'汽车后市场（保养 / 维修）', href:'./auto-aftermarket/',
+    desc:'车辆档案驱动：建档激活 / 保养周期 / 施工透明 / 年检保险 / 易损件预测 / 会员召回',
+    tags:['C 端','强周期','线下门店','出行'] },
+  { g:'出行 · 物流 · 房产', icon:'🏠', name:'房产租售平台（双边）', href:'./real-estate/',
+    desc:'长周期陪伴：需求建档 / 房源与降价匹配 / 看房履约 / 经纪人催办 / 转介绍 / 房东侧运营',
+    tags:['C 端','双边平台'] },
+
+  // ---- B 端 · 企业服务 ----
+  { g:'B 端 · 企业服务', icon:'🧩', name:'B2B SaaS（PLG 产品驱动增长）', href:'./b2b-saas/',
+    desc:'账户级运营：Onboarding 激活 / Aha 里程碑 / 团队扩散 / 试用转付费 / 席位扩张 / 健康度预警',
+    tags:['B 端','SaaS','订阅制'] },
+  { g:'B 端 · 企业服务', icon:'🧳', name:'企业差旅管理（TMC）', href:'./corporate-travel/',
+    desc:'B2B2E 三方协同：员工激活 / 预订引导合规 / 行程异常 / 报销闭环 / 企业报告 / 账户预警',
+    tags:['B 端','SaaS','出行'] },
+  { g:'B 端 · 企业服务', icon:'📦', name:'跨境物流 / 货代', href:'./cross-border-logistics/',
+    desc:'确定性与主动告知：询价跟进 / 首单履约 / 运单透明 / 异常清关 / 旺季锁舱 / 货量预警',
+    tags:['B 端','物流'] },
+  { g:'B 端 · 企业服务', icon:'💼', name:'招聘求职平台（双边市场）', href:'./recruitment/',
+    desc:'双边匹配效率：建档激活 / 职位推荐 / 投递反馈闭环 / 面试提醒 / HR 端处理 / 双端召回',
+    tags:['B 端','双边平台','强合规'] },
+];
+
+/* 筛选标签（顺序即展示顺序） */
+const FILTERS = ['全部','客户方案','C 端','B 端','双边平台','订阅制','强合规','强周期','新兴市场'];
+
+/* ---------------- 渲染 ---------------- */
+const groupsEl = document.getElementById('groups');
+const filtersEl = document.getElementById('filters');
+const searchEl = document.getElementById('search');
+const emptyEl = document.getElementById('empty');
+document.getElementById('total').textContent = SOLUTIONS.length;
+
+// 高亮标签：这些标签在卡片上用强调色
+const HOT_TAGS = new Set(['客户方案','双边平台','强合规']);
+
+GROUPS.forEach(g => {
+    const items = SOLUTIONS.filter(s => s.g === g);
+    if (!items.length) return;
+    const sec = document.createElement('section');
+    sec.className = 'group';
+    sec.dataset.group = g;
+    sec.innerHTML = `<div class="group-title">${g}<span class="n">${items.length}</span></div>
+        <div class="grid">${items.map(s => `
+        <a class="card" href="${s.href}" data-tags="${s.tags.join('|')}" data-text="${(s.name + ' ' + s.desc + ' ' + s.tags.join(' ')).toLowerCase()}">
+            <div class="card-icon">${s.icon}</div>
+            <div class="card-body">
+                <h2>${s.name}</h2>
+                <p>${s.desc}</p>
+                <div class="card-tags">${s.tags.map(t => `<span class="tag${HOT_TAGS.has(t) ? ' hot' : ''}">${t}</span>`).join('')}</div>
+            </div>
+        </a>`).join('')}</div>`;
+    groupsEl.appendChild(sec);
+});
+
+FILTERS.forEach((f, i) => {
+    const b = document.createElement('button');
+    b.className = 'chip' + (i === 0 ? ' active' : '');
+    b.textContent = f;
+    b.dataset.filter = f;
+    filtersEl.appendChild(b);
+});
+
+let activeFilter = '全部';
+
+function apply() {
+    const q = searchEl.value.trim().toLowerCase();
+    let shown = 0;
+    document.querySelectorAll('.group').forEach(sec => {
+        let visibleInGroup = 0;
+        sec.querySelectorAll('.card').forEach(card => {
+            const tagOk = activeFilter === '全部' || card.dataset.tags.split('|').includes(activeFilter);
+            const textOk = !q || card.dataset.text.includes(q);
+            const ok = tagOk && textOk;
+            card.classList.toggle('hidden', !ok);
+            if (ok) { visibleInGroup++; shown++; }
+        });
+        sec.classList.toggle('hidden', visibleInGroup === 0);
+        const n = sec.querySelector('.n');
+        if (n) n.textContent = visibleInGroup;
+    });
+    emptyEl.classList.toggle('show', shown === 0);
+}
+
+filtersEl.addEventListener('click', e => {
+    const b = e.target.closest('.chip');
+    if (!b) return;
+    activeFilter = b.dataset.filter;
+    filtersEl.querySelectorAll('.chip').forEach(c => c.classList.toggle('active', c === b));
+    apply();
+});
+searchEl.addEventListener('input', apply);
+</script>
 </body>
 </html>
