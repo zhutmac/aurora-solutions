@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EngageLab MA · AIGC 工具订阅增长方案</title>
+  <style>
+    :root {
+      --bg: #ffffff;
+      --bg-soft: #f7f8fa;
+      --bg-elev: #ffffff;
+      --border: #e5e7eb;
+      --border-strong: #d1d5db;
+      --text: #111827;
+      --text-2: #374151;
+      --text-3: #6b7280;
+      --text-4: #9ca3af;
+      --accent: #2563eb;
+      --accent-soft: #dbeafe;
+      --success: #16a34a;
+      --success-soft: #dcfce7;
+      --warning: #d97706;
+      --warning-soft: #fef3c7;
+      --info: #0369a1;
+      --info-soft: #e0f2fe;
+      --danger: #dc2626;
+      --danger-soft: #fee2e2;
+      --radius: 10px;
+      --radius-sm: 6px;
+      --shadow: 0 1px 2px rgba(16, 24, 40, 0.04);
+    }
+
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; background: var(--bg-soft); color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC",
+        "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", sans-serif;
+      line-height: 1.6; -webkit-font-smoothing: antialiased; font-size: 15px; }
+
+    main { max-width: 1180px; margin: 0 auto; padding: 32px 28px 80px; }
+
+    h1 { font-size: 30px; font-weight: 700; margin: 0 0 8px; letter-spacing: -0.01em; color: var(--text); }
+    h2 { font-size: 22px; font-weight: 700; margin: 0 0 12px; letter-spacing: -0.005em; color: var(--text); }
+    h3 { font-size: 17px; font-weight: 600; margin: 0 0 10px; color: var(--text); }
+    p { margin: 0 0 8px; color: var(--text-2); }
+    .muted { color: var(--text-3); }
+    .small { font-size: 13px; }
+    .bold { font-weight: 600; }
+
+    .section { background: var(--bg-elev); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 24px 26px; margin-bottom: 20px; }
+    .section-plain { padding: 6px 2px 18px; margin-bottom: 12px; }
+    .divider { height: 1px; background: var(--border); margin: 16px 0; border: none; }
+
+    .hero { background: linear-gradient(180deg, #fff 0%, #f0fdf4 100%);
+      border: 1px solid var(--border); border-radius: 14px; padding: 28px 30px;
+      margin-bottom: 24px; }
+    .hero-pills { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 14px; }
+    .hero-subtitle { color: var(--text-3); font-size: 15px; max-width: 900px; margin: 8px 0 18px; }
+
+    .pill { display: inline-flex; align-items: center; padding: 2px 10px;
+      font-size: 12px; border-radius: 999px; border: 1px solid var(--border-strong);
+      color: var(--text-2); background: #fff; font-weight: 500; }
+    .pill-accent { background: var(--accent-soft); border-color: var(--accent); color: var(--accent); }
+    .pill-info { background: var(--info-soft); border-color: var(--info); color: var(--info); }
+    .pill-success { background: var(--success-soft); border-color: var(--success); color: var(--success); }
+    .pill-warn { background: var(--warning-soft); border-color: var(--warning); color: var(--warning); }
+
+    .grid { display: grid; gap: 16px; }
+    .grid-4 { grid-template-columns: repeat(4, 1fr); }
+    .grid-3 { grid-template-columns: repeat(3, 1fr); }
+    .grid-2 { grid-template-columns: repeat(2, 1fr); }
+    .grid-5 { grid-template-columns: repeat(5, 1fr); }
+    .grid-1-2 { grid-template-columns: 1fr 2fr; }
+    .grid-2-1 { grid-template-columns: 1.4fr 1fr; }
+    .grid-12-1 { grid-template-columns: 1.2fr 1fr; }
+    .row { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+
+    .stat { padding: 14px 16px; background: var(--bg-elev); border: 1px solid var(--border);
+      border-radius: var(--radius); }
+    .stat-value { font-size: 26px; font-weight: 700; letter-spacing: -0.01em; color: var(--text);
+      line-height: 1.15; }
+    .stat-value.success { color: var(--success); }
+    .stat-value.info { color: var(--info); }
+    .stat-value.warn { color: var(--warning); }
+
+    .stat-label { font-size: 12px; color: var(--text-3); margin-top: 4px; }
+
+    .card { background: var(--bg-elev); border: 1px solid var(--border);
+      border-radius: var(--radius); overflow: hidden; }
+    .card-header { padding: 10px 16px; border-bottom: 1px solid var(--border);
+      background: #fafbfc; font-size: 13px; font-weight: 600; color: var(--text-2); }
+    .card-body { padding: 16px; }
+    .card-body.p-sm { padding: 12px; }
+    .card-body ul { margin: 0; padding-left: 18px; }
+    .card-body li { margin-bottom: 4px; font-size: 13.5px; color: var(--text-2); }
+
+    .callout { padding: 12px 14px; border-radius: var(--radius-sm);
+      border: 1px solid var(--border); border-left-width: 3px; background: var(--bg-soft); }
+    .callout-title { font-weight: 600; margin-bottom: 4px; font-size: 14px; }
+    .callout-body { font-size: 13px; color: var(--text-2); }
+    .callout-body p { font-size: 13px; color: var(--text-2); margin: 0 0 4px; }
+    .callout.info { border-left-color: var(--info); background: var(--info-soft); }
+    .callout.info .callout-title { color: var(--info); }
+    .callout.success { border-left-color: var(--success); background: var(--success-soft); }
+    .callout.success .callout-title { color: var(--success); }
+    .callout.warn { border-left-color: var(--warning); background: var(--warning-soft); }
+    .callout.warn .callout-title { color: var(--warning); }
+    .callout.neutral { border-left-color: var(--text-3); }
+
+    table { width: 100%; border-collapse: collapse; font-size: 13.5px;
+      background: var(--bg-elev); border: 1px solid var(--border); border-radius: var(--radius);
+      overflow: hidden; }
+    th, td { padding: 10px 12px; text-align: left; border-bottom: 1px solid var(--border);
+      color: var(--text-2); vertical-align: middle; }
+    th { background: #fafbfc; font-weight: 600; font-size: 12.5px; color: var(--text-3);
+      letter-spacing: 0.01em; text-transform: uppercase; }
+    tr:last-child td { border-bottom: 0; }
+    tr.tone-success td { background: rgba(22, 163, 74, 0.04); }
+    tr.tone-info td { background: rgba(3, 105, 161, 0.04); }
+
+    .signal-row { display: flex; gap: 10px; padding: 10px 0;
+      border-bottom: 1px solid var(--border); align-items: center; }
+    .signal-row:last-child { border-bottom: 0; }
+    .signal-row .left { flex: 1; min-width: 0; }
+    .signal-row .label { font-size: 13px; font-weight: 600; }
+    .signal-row .hint { font-size: 12px; color: var(--text-3); }
+    .signal-row .value { font-weight: 700; color: var(--text); font-size: 14px; white-space: nowrap; }
+
+    .chart { width: 100%; }
+    .chart svg { width: 100%; height: auto; display: block; }
+    .chart-legend { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--border); }
+    .chart-legend .leg-item { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--text-3); }
+    .chart-legend .dot { width: 10px; height: 10px; border-radius: 2px; }
+
+    .dag-wrap { overflow-x: auto; padding: 8px 2px; }
+    .dag-wrap svg { display: block; margin: 0 auto; }
+
+    .toc-bar { position: sticky; top: 0; background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(8px); border-bottom: 1px solid var(--border);
+      z-index: 10; padding: 10px 28px; margin: -32px -28px 24px;
+      font-size: 12.5px; }
+    .toc-bar .toc-inner { max-width: 1180px; margin: 0 auto; display: flex; gap: 14px;
+      align-items: center; overflow-x: auto; }
+    .toc-bar a { color: var(--text-3); text-decoration: none; white-space: nowrap; padding: 4px 2px; }
+    .toc-bar a:hover { color: var(--accent); }
+    .toc-bar .brand { font-weight: 700; color: var(--text); }
+
+    @page { size: A4; margin: 14mm; }
+    @media print {
+      body { background: #fff; }
+      main { max-width: none; padding: 0; }
+      .toc-bar { display: none; }
+      .section, .card, .hero { page-break-inside: avoid; box-shadow: none; }
+      h2 { page-break-after: avoid; }
+      .hero { break-before: avoid; }
+      .dag-wrap { overflow: visible; }
+      .dag-wrap svg { max-width: 100%; }
+    }
+
+    .spacer-sm { height: 6px; }
+    .spacer-md { height: 12px; }
+
+    .step-num { display: inline-flex; align-items: center; justify-content: center;
+      width: 22px; height: 22px; border-radius: 50%; background: var(--accent-soft);
+      color: var(--accent); font-weight: 700; font-size: 12px; margin-right: 8px; }
+
+    footer.site-footer { margin-top: 36px; padding-top: 16px; border-top: 1px solid var(--border);
+      font-size: 12px; color: var(--text-4); text-align: center; }
+  
+  .back-home {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    color: rgba(255,255,255,0.65);
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 500;
+    padding: 4px 10px 4px 6px;
+    border-radius: 6px;
+    border: 1px solid rgba(255,255,255,0.18);
+    margin-right: 16px;
+    white-space: nowrap;
+    transition: all 0.2s ease;
+    flex-shrink: 0;
+  }
+  .back-home:hover {
+    color: #fff;
+    background: rgba(255,255,255,0.12);
+    border-color: rgba(255,255,255,0.35);
+  }
+  .back-home svg {
+    width: 14px;
+    height: 14px;
+    opacity: 0.8;
+  }
+</style>
+</head>
+<body>
+  <nav class="toc-bar">
+    <div class="toc-inner">
+      <a class="back-home" href="../">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+        返回首页
+      </a>
+      <span class="brand">EngageLab MA · AIGC 工具订阅方案</span>
+      <a href="#s-market">市场机会</a><a href="#s-funnel">用户漏斗</a><a href="#s-why">为什么 EngageLab</a>
+      <a href="#s-scenarios">场景总览</a><a href="#s-journey">旅程编排</a><a href="#s-channel">渠道选型</a>
+      <a href="#s-compliance">合规安全</a><a href="#s-plan">测试计划</a>
+    </div>
+  </nav>
+  <main>
+    <section class="hero">
+      <div class="hero-pills">
+        <span class="pill pill-success">AIGC 工具 · 生成式 AI · 创作平台</span>
+        <span class="pill">全球 · 欧美为主</span>
+        <span class="pill pill-info">额度制 + 订阅制</span>
+      </div>
+      <h1>EngageLab MA · AIGC 工具订阅增长方案</h1>
+      <p class="hero-subtitle">
+        AIGC 产品的增长本质是"从尝鲜到依赖的转化"——注册后不生成第一个作品就流失、
+        免费额度用完不订阅、订阅后不常用就退订。<span class="bold">额度是天然的付费触发器，作品是天然的留存资产</span>。
+        本方案以 <span class="bold">首次生成 Aha、创作习惯养成、额度耗尽订阅转化、作品分享裂变、订阅续费与升级、新模型功能唤醒</span> 六大旅程切入，
+        统一编排 <span class="bold">应用内 + Email + App Push + Web Push</span> 四类通道。
+      </p>
+      <div class="row">
+        <span class="pill pill-accent">应用内消息（转化主力）</span>
+        <span class="pill pill-accent">Email（Web 端主力）</span>
+        <span class="pill pill-accent">App Push（移动端）</span>
+        <span class="pill pill-accent">Web Push（网页端）</span>
+      </div>
+    </section>
+
+    <section id="s-market" class="section">
+      <h2>一、为什么 AIGC 工具必须做额度与创作运营</h2>
+      <div class="grid grid-4" style="margin-bottom:16px">
+        <div class="stat"><div class="stat-value warn">尝鲜即走</div><div class="stat-label">大量用户生成一两次后就再不回来</div></div>
+        <div class="stat"><div class="stat-value info">额度即触发器</div><div class="stat-label">额度耗尽是最强、最明确的付费意愿瞬间</div></div>
+        <div class="stat"><div class="stat-value">作品是资产</div><div class="stat-label">作品库沉淀越多，迁移成本越高</div></div>
+        <div class="stat"><div class="stat-value danger">退订率高</div><div class="stat-label">工具类订阅不常用即退订，需持续激活</div></div>
+      </div>
+      <p class="muted small">注：下文所有转化率、提升幅度为 AIGC / SaaS 工具行业估算区间，落地以实测为准。</p>
+      <hr class="divider" />
+      <div class="grid grid-2">
+        <div class="callout neutral"><div class="callout-title">痛点 1 · 注册后不生成第一个作品</div><div class="callout-body"><p>用户被好奇心吸引注册，却因"不知道怎么写提示词"而放弃，Aha 时刻从未发生。</p></div></div>
+        <div class="callout info"><div class="callout-title">解法 · 首次生成 Aha 旅程</div><div class="callout-body"><p>提供一键模板与示例提示词，把"从零开始写"变成"点一下就出效果"，降低启动门槛。</p></div></div>
+        <div class="callout neutral"><div class="callout-title">痛点 2 · 尝鲜后不形成创作习惯</div><div class="callout-body"><p>生成一两次觉得新奇就走，没有把工具嵌入日常工作流，留存极差。</p></div></div>
+        <div class="callout info"><div class="callout-title">解法 · 创作习惯养成旅程</div><div class="callout-body"><p>按用户创作方向推送场景化用例与新玩法，把"玩具"变成"日常生产力工具"。</p></div></div>
+        <div class="callout neutral"><div class="callout-title">痛点 3 · 额度耗尽的转化窗口被浪费</div><div class="callout-body"><p>免费额度用完是付费意愿最强的瞬间，若只给一个冷冰冰的"额度不足"，转化极低。</p></div></div>
+        <div class="callout info"><div class="callout-title">解法 · 额度耗尽分层转化</div><div class="callout-body"><p>按创作深度分层：重度用户直推订阅，轻度用户先给小额加油包或任务领额度，阶梯转化。</p></div></div>
+        <div class="callout neutral"><div class="callout-title">痛点 4 · 订阅后不用即退订</div><div class="callout-body"><p>工具类订阅"买了不用"就会在下个周期退订；新模型上线也无人知晓。</p></div></div>
+        <div class="callout info"><div class="callout-title">解法 · 用量健康度 + 新功能唤醒</div><div class="callout-body"><p>订阅后用量下滑即预警并推用例；新模型/新功能上线按创作方向定向推送，重新激活。</p></div></div>
+      </div>
+    </section>
+
+    <section id="s-funnel" class="section">
+      <h2>二、用户漏斗：从首次生成到长期订阅，每层都有增长空间</h2>
+      <p class="muted small">下图为 AIGC 工具行业估算区间对比，非实测数据。</p>
+      <div class="chart" id="chart-funnel"></div>
+    </section>
+
+    <section id="s-why" class="section">
+      <h2>三、为什么选择 EngageLab MA</h2>
+      <div class="grid grid-3">
+        <div class="card"><div class="card-header">额度事件实时触发</div><div class="card-body p-sm"><ul><li>额度剩余、耗尽、生成完成秒级触发旅程</li><li>抓住付费意愿最强的瞬间，响应 &lt;200ms</li></ul></div></div>
+        <div class="card"><div class="card-header">应用内 · 转化路径最短</div><div class="card-body p-sm"><ul><li>额度耗尽在产品内即时引导，无需跳转</li><li>不打断创作流，转化率显著高于外部通道</li></ul></div></div>
+        <div class="card"><div class="card-header">CDP 统一身份（EUID）</div><div class="card-body p-sm"><ul><li>生成次数、创作方向、额度余量、订阅状态统一为属性</li><li>支撑按创作深度与方向的精准分层</li></ul></div></div>
+        <div class="card"><div class="card-header">Web + App 双端打通</div><div class="card-body p-sm"><ul><li>AIGC 工具多为 Web 优先，Web Push + Email 覆盖</li><li>有移动端则 App Push 补充，触点不断裂</li></ul></div></div>
+        <div class="card"><div class="card-header">AI 多语言文案</div><div class="card-body p-sm"><ul><li>AI 工具天然全球化，一套旅程覆盖多语种</li><li>用例与提示词模板 AI 批量本地化</li></ul></div></div>
+        <div class="card"><div class="card-header">合规 · AIGC 内容安全</div><div class="card-body p-sm"><ul><li>触达仅展示已通过审核的作品与模板</li><li>版权与内容安全系统对接，GDPR/CCPA 合规</li></ul></div></div>
+      </div>
+    </section>
+
+    <section id="s-scenarios" class="section">
+      <h2>四、高 ROI 运营场景总览</h2>
+      <table>
+        <thead><tr><th>#</th><th>场景</th><th>生命周期阶段</th><th>核心触发</th><th>渠道组合</th><th>预期提升（估算）</th></tr></thead>
+        <tbody>
+          <tr class="tone-info"><td>J1</td><td>首次生成 Aha 激活</td><td>激活</td><td>注册后未生成</td><td>应用内 + Email</td><td>首次生成 +25~40%</td></tr>
+          <tr class="tone-success"><td>J2</td><td>创作习惯养成（场景化用例）</td><td>留存</td><td>生成过但未形成频次</td><td>Email + Web Push + App Push</td><td>周活跃 +15~30%</td></tr>
+          <tr class="tone-success"><td>J3</td><td>额度耗尽 → 订阅转化</td><td>付费转化</td><td>额度即将/已耗尽</td><td>应用内 + Email</td><td>订阅转化 +5~15%</td></tr>
+          <tr><td>J4</td><td>作品分享裂变</td><td>UGC / 增长</td><td>生成满意作品</td><td>应用内 + Email</td><td>分享率 +20~35%</td></tr>
+          <tr><td>J5</td><td>订阅续费 + 套餐升级</td><td>续费 / ARPU</td><td>到期前 / 用量触顶</td><td>Email + 应用内 + Web Push</td><td>续费率 +10~20%</td></tr>
+          <tr><td>J6</td><td>新模型功能唤醒 + 沉默召回</td><td>召回 / 激活</td><td>新功能上线 / 14 天未用</td><td>Email + Web Push + App Push</td><td>回归率 +20~40%</td></tr>
+        </tbody>
+      </table>
+      <p class="muted small" style="margin-top:8px">提升幅度为行业公开区间估算，最终以 4 周测试实测为准。</p>
+    </section>
+
+    <section id="s-journey" class="section-plain">
+      <h2>五、核心旅程详细编排</h2>
+      <div class="section" style="margin-top:16px;">
+        <h3>旅程 1：首次生成 Aha 激活</h3>
+        <div class="grid grid-2-1"><div class="dag-wrap" id="dag-j1"></div><div>
+          <div class="callout neutral" style="margin-bottom:12px"><div class="callout-title">业务痛点</div><div class="callout-body"><p>用户因"不知道怎么写提示词"而放弃，Aha 时刻从未发生，获客成本白费。</p></div></div>
+          <div class="callout info" style="margin-bottom:12px"><div class="callout-title">旅程组件配置</div><div class="callout-body">
+            <p><strong>进入条件：</strong>事件：注册成功且未完成首次生成</p>
+            <p><strong>提前退出：</strong>事件：完成首次生成</p>
+            <p><strong>内容：</strong>一键模板与示例提示词（点一下就出效果）</p>
+            <p><strong>机制：</strong>先观察 1h，未生成才触达</p>
+          </div></div>
+          <div class="callout success"><div class="callout-title">预期效益</div><div class="callout-body"><p>首次生成 +25~40%（估算）；模板化启动是 AIGC 产品降低门槛的关键。</p></div></div>
+        </div></div>
+      </div>
+      <div class="section">
+        <h3>旅程 2：创作习惯养成（场景化用例）</h3>
+        <div class="grid grid-2-1"><div class="dag-wrap" id="dag-j2"></div><div>
+          <div class="callout neutral" style="margin-bottom:12px"><div class="callout-title">业务痛点</div><div class="callout-body"><p>生成一两次觉得新奇就走，工具没被嵌入日常工作流，留存极差。</p></div></div>
+          <div class="callout info" style="margin-bottom:12px"><div class="callout-title">旅程组件配置</div><div class="callout-body">
+            <p><strong>进入条件：</strong>属性：已生成但周频次未达标</p>
+            <p><strong>分支：</strong>属性：创作方向（图像 / 文案 / 视频 / 代码等）</p>
+            <p><strong>内容：</strong>该方向的场景化用例、高赞提示词、进阶技巧</p>
+            <p><strong>频控：</strong>每周 ≤2 封，避免打扰工作场景</p>
+          </div></div>
+          <div class="callout success"><div class="callout-title">预期效益</div><div class="callout-body"><p>周活跃 +15~30%（估算）；把"玩具"变"生产力工具"是留存的核心。</p></div></div>
+        </div></div>
+      </div>
+      <div class="section">
+        <h3>旅程 3：额度耗尽 → 订阅转化</h3>
+        <div class="grid grid-2-1"><div class="dag-wrap" id="dag-j3"></div><div>
+          <div class="callout neutral" style="margin-bottom:12px"><div class="callout-title">业务痛点</div><div class="callout-body"><p>额度用完是付费意愿最强的瞬间，只给"额度不足"提示则转化极低。</p></div></div>
+          <div class="callout info" style="margin-bottom:12px"><div class="callout-title">旅程组件配置</div><div class="callout-body">
+            <p><strong>进入条件：</strong>事件：额度剩余 ≤20% / 额度归零</p>
+            <p><strong>分支：</strong>属性：创作深度（重度直推订阅 / 轻度推加油包或任务领额度）</p>
+            <p><strong>提前退出：</strong>事件：完成订阅 / 购买加油包</p>
+            <p><strong>机制：</strong>应用内即时优先，Email 后续补触达</p>
+          </div></div>
+          <div class="callout success"><div class="callout-title">预期效益</div><div class="callout-body"><p>订阅转化 +5~15%（估算）；阶梯式（任务→加油包→订阅）比直接推订阅转化更高。</p></div></div>
+        </div></div>
+      </div>
+      <div class="section">
+        <h3>旅程 4：作品分享裂变</h3>
+        <div class="grid grid-2-1"><div class="dag-wrap" id="dag-j4"></div><div>
+          <div class="callout neutral" style="margin-bottom:12px"><div class="callout-title">业务痛点</div><div class="callout-body"><p>用户生成了满意作品却不分享，AIGC 天然的社交传播力被浪费。</p></div></div>
+          <div class="callout info" style="margin-bottom:12px"><div class="callout-title">旅程组件配置</div><div class="callout-body">
+            <p><strong>进入条件：</strong>事件：生成后有下载/收藏等满意信号</p>
+            <p><strong>提前退出：</strong>事件：完成分享</p>
+            <p><strong>激励：</strong>分享得额度、好友注册双方得额度</p>
+            <p><strong>合规：</strong>仅可分享已通过内容审核的作品</p>
+          </div></div>
+          <div class="callout success"><div class="callout-title">预期效益</div><div class="callout-body"><p>分享率 +20~35%（估算）；作品分享是 AIGC 产品成本最低的获客来源。</p></div></div>
+        </div></div>
+      </div>
+      <div class="section">
+        <h3>旅程 5：订阅续费 + 套餐升级</h3>
+        <div class="grid grid-2-1"><div class="dag-wrap" id="dag-j5"></div><div>
+          <div class="callout neutral" style="margin-bottom:12px"><div class="callout-title">业务痛点</div><div class="callout-body"><p>工具类订阅"买了不用"就退订；用量触顶的用户未被引导升级更高套餐。</p></div></div>
+          <div class="callout info" style="margin-bottom:12px"><div class="callout-title">旅程组件配置</div><div class="callout-body">
+            <p><strong>进入条件：</strong>属性：订阅到期前 7 天 / 用量达套餐上限 80%</p>
+            <p><strong>分支：</strong>属性：用量健康度（高用量推升级 / 低用量先激活再续费）</p>
+            <p><strong>内容：</strong>本期创作统计（生成 X 次、节省 Y 小时）作为续费说服力</p>
+            <p><strong>提前退出：</strong>事件：完成续费 / 升级</p>
+          </div></div>
+          <div class="callout success"><div class="callout-title">预期效益</div><div class="callout-body"><p>续费率 +10~20%（估算）；对低用量用户先做激活再谈续费，避免无效促销。</p></div></div>
+        </div></div>
+      </div>
+      <div class="section">
+        <h3>旅程 6：新模型功能唤醒 + 沉默召回</h3>
+        <div class="grid grid-2-1"><div class="dag-wrap" id="dag-j6"></div><div>
+          <div class="callout neutral" style="margin-bottom:12px"><div class="callout-title">业务痛点</div><div class="callout-body"><p>AIGC 迭代极快，新模型上线用户不知道；沉默用户被竞品新功能吸引流失。</p></div></div>
+          <div class="callout info" style="margin-bottom:12px"><div class="callout-title">旅程组件配置</div><div class="callout-body">
+            <p><strong>进入条件：</strong>事件：新模型/功能上线 / 属性：14 天未使用</p>
+            <p><strong>分支：</strong>属性：触发类型与用户创作方向（定向推相关新功能）</p>
+            <p><strong>内容：</strong>新模型效果对比 + 赠送体验额度</p>
+            <p><strong>提前退出：</strong>事件：使用新功能 / 恢复创作</p>
+          </div></div>
+          <div class="callout success"><div class="callout-title">预期效益</div><div class="callout-body"><p>回归率 +20~40%（估算）；"新模型 + 赠送额度"是 AIGC 最有效的召回组合。</p></div></div>
+        </div></div>
+      </div>
+    </section>
+
+    <section id="s-channel" class="section-plain">
+      <h2>六、渠道选型参考</h2>
+      <div class="section">
+        <p class="muted small">AIGC 工具渠道适配相对值（示意）：应用内消息是订阅转化主力（额度耗尽瞬间路径最短），Email 是 Web 优先产品的核心通道，Web Push 覆盖网页端用户，App Push 用于有移动端的产品；SMS 在此品类几乎不用。</p>
+        <div class="chart" id="chart-channel"></div>
+        <div class="grid grid-2" style="margin-top:14px">
+          <div class="callout info"><div class="callout-title">主力通道</div><div class="callout-body"><p>应用内消息（额度耗尽即时转化）+ Email（Web 优先产品的教程、周报、账单与续费主通道）。</p></div></div>
+          <div class="callout neutral"><div class="callout-title">Web 优先的特殊性</div><div class="callout-body"><p>多数 AIGC 工具以 Web 为主阵地，Email + Web Push 的组合比移动 App Push 更关键，与消费类 App 完全不同。</p></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="s-compliance" class="section">
+      <h2>七、合规与安全</h2>
+      <div class="grid grid-3">
+        <div class="card"><div class="card-header">AIGC 内容安全</div><div class="card-body p-sm"><ul><li>触达仅展示已通过审核的作品与模板</li><li>与内容安全系统对接，过滤违规生成内容</li><li>AI 生成内容标识符合当地要求</li></ul></div></div>
+        <div class="card"><div class="card-header">版权与数据</div><div class="card-body p-sm"><ul><li>用户作品版权归属明确，分享需用户授权</li><li>创作内容不用于未经同意的训练或展示</li><li>GDPR/CCPA 数据删除与导出</li></ul></div></div>
+        <div class="card"><div class="card-header">触达护栏</div><div class="card-body p-sm"><ul><li>营销类每周频控（工作场景更敏感）</li><li>额度与账单类通知独立于营销退订</li><li>记录留存（如 60 天）、审计可追溯</li></ul></div></div>
+      </div>
+    </section>
+
+    <section id="s-plan" class="section">
+      <h2>八、测试计划（4 周）</h2>
+      <table>
+        <thead><tr><th>周次</th><th>阶段</th><th>核心工作</th><th>验收指标</th></tr></thead>
+        <tbody>
+          <tr><td>第 1 周</td><td>启动 · 数据打通</td><td>确认埋点（注册、生成、下载收藏、额度余量、分享、订阅状态、创作方向标签）</td><td>事件入库率 ≥95%</td></tr>
+          <tr><td>第 2 周</td><td>核心旅程上线</td><td>J1 首次生成 + J3 额度耗尽转化（2 条，小流量）；应用内组件接入</td><td>旅程触发成功率 ≥98%</td></tr>
+          <tr><td>第 3 周</td><td>扩量 · A/B</td><td>J2 习惯养成 + J4 分享裂变全量；阶梯转化 vs 直推订阅 A/B</td><td>订阅转化 uplift 显现；样本量 ≥1 万</td></tr>
+          <tr><td>第 4 周</td><td>复盘 · 扩面</td><td>J5 续费升级 + J6 新模型唤醒上线；输出订阅收入 uplift 报告</td><td>生成率/活跃/订阅/续费 uplift 可量化</td></tr>
+        </tbody>
+      </table>
+      <div class="callout success" style="margin-top:14px"><div class="callout-title">投入</div><div class="callout-body"><p>测试期授权费 $0，配置 2 人专属服务团队支撑埋点、旅程与多语言文案交付。</p></div></div>
+    </section>
+    <footer class="site-footer">EngageLab MA · AIGC 工具订阅增长方案 — 内部方案，转化/提升数据为行业估算或公开参考，落地以实测为准。</footer>
+  </main>
+  <script>
+  (function(){
+    // ========== Shared helpers ==========
+    const COLORS = {
+      accent: '#2563eb', info: '#0369a1', success: '#16a34a',
+      warning: '#d97706', neutral: '#94a3b8', muted: '#cbd5e1',
+      text: '#374151', textMute: '#9ca3af', grid: '#e5e7eb',
+    };
+    function svgEl(w, h) {
+      const s = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+      s.setAttribute('viewBox', '0 0 ' + w + ' ' + h);
+      s.setAttribute('width', '100%');
+      s.setAttribute('preserveAspectRatio', 'xMidYMid meet');
+      return s;
+    }
+    function el(tag, attrs) {
+      const e = document.createElementNS('http://www.w3.org/2000/svg', tag);
+      for (const k in attrs) e.setAttribute(k, attrs[k]);
+      return e;
+    }
+
+    // ========== Bar Chart ==========
+    function drawBarChart(mount, opts) {
+      const { categories, series, valueSuffix = '', height = 240 } = opts;
+      const W = 600, H = height, PAD_L = 44, PAD_R = 16, PAD_T = 12, PAD_B = 56;
+      const innerW = W - PAD_L - PAD_R, innerH = H - PAD_T - PAD_B;
+      const max = Math.max(...series.flatMap(s => s.data), 1);
+      const niceMax = Math.ceil(max / 20) * 20 || 100;
+      const groupCount = categories.length;
+      const barsPerGroup = series.length;
+      const groupW = innerW / groupCount;
+      const barW = Math.min(22, (groupW - 12) / barsPerGroup);
+      const s = svgEl(W, H);
+      for (let i = 0; i <= 4; i++) {
+        const v = (niceMax / 4) * i;
+        const y = PAD_T + innerH - (v / niceMax) * innerH;
+        s.appendChild(el('line', { x1: PAD_L, x2: W - PAD_R, y1: y, y2: y, stroke: COLORS.grid, 'stroke-width': 1 }));
+        const t = el('text', { x: PAD_L - 6, y: y + 4, 'text-anchor': 'end', 'font-size': 10, fill: COLORS.textMute });
+        t.textContent = Math.round(v) + valueSuffix;
+        s.appendChild(t);
+      }
+      categories.forEach((cat, ci) => {
+        const gx = PAD_L + groupW * ci;
+        series.forEach((se, si) => {
+          const v = se.data[ci] || 0;
+          const h = (v / niceMax) * innerH;
+          const x = gx + (groupW - barW * barsPerGroup) / 2 + si * barW;
+          const y = PAD_T + innerH - h;
+          const color = COLORS[se.tone] || COLORS.neutral;
+          s.appendChild(el('rect', { x, y, width: barW - 2, height: h, fill: color, rx: 2 }));
+          if (v > 0) {
+            const label = el('text', { x: x + (barW - 2) / 2, y: y - 2, 'text-anchor': 'middle', 'font-size': 8, fill: COLORS.text });
+            label.textContent = v + valueSuffix;
+            s.appendChild(label);
+          }
+        });
+        const t = el('text', { x: gx + groupW / 2, y: H - PAD_B + 14, 'text-anchor': 'middle', 'font-size': 10, fill: COLORS.text });
+        t.textContent = cat;
+        s.appendChild(t);
+      });
+      // Legend
+      let legX = PAD_L;
+      series.forEach((se) => {
+        const color = COLORS[se.tone] || COLORS.accent;
+        s.appendChild(el('rect', { x: legX, y: H - 18, width: 10, height: 10, rx: 2, fill: color }));
+        const t = el('text', { x: legX + 14, y: H - 10, 'font-size': 10, fill: COLORS.text });
+        t.textContent = se.name;
+        s.appendChild(t);
+        legX += 14 + (se.name.length * 7) + 16;
+      });
+      mount.innerHTML = '';
+      mount.appendChild(s);
+    }
+
+    // ========== Journey DAG renderer (same as fintech/security solution) ==========
+    const KIND_STYLE = {
+      entry:    { fill: '#f1f5f9', stroke: '#94a3b8', text: '#111827' },
+      wait:     { fill: '#fafafa', stroke: '#d1d5db', text: '#6b7280' },
+      branch:   { fill: '#f9fafb', stroke: '#475569', text: '#111827' },
+      channel:  { fill: '#dbeafe', stroke: '#2563eb', text: '#1e3a8a' },
+      sendtime: { fill: '#fef3c7', stroke: '#d97706', text: '#92400e' },
+      exitOk:   { fill: '#dcfce7', stroke: '#16a34a', text: '#14532d' },
+      exitEnd:  { fill: '#f3f4f6', stroke: '#9ca3af', text: '#4b5563' },
+    };
+
+    function drawJourney(mount, nodes, edges) {
+      const NODE_W = 176, NODE_H = 62, RANK_GAP = 42, NODE_GAP = 22;
+      const rankOf = {}, incoming = {};
+      nodes.forEach(n => { rankOf[n.id] = 0; incoming[n.id] = []; });
+      edges.forEach(e => { incoming[e.to].push(e.from); });
+      let changed = true;
+      while (changed) {
+        changed = false;
+        edges.forEach(e => {
+          if (rankOf[e.to] < rankOf[e.from] + 1) { rankOf[e.to] = rankOf[e.from] + 1; changed = true; }
+        });
+      }
+      const maxRank = Math.max(...Object.values(rankOf));
+      const ranks = [];
+      for (let r = 0; r <= maxRank; r++) ranks.push([]);
+      nodes.forEach(n => { ranks[rankOf[n.id]].push(n); });
+      const pos = {};
+      const rankWidths = ranks.map(r => r.length * NODE_W + (r.length - 1) * NODE_GAP);
+      const maxWidth = Math.max(...rankWidths, 400);
+      ranks.forEach((rankNodes, r) => {
+        const withAnchor = rankNodes.map(n => {
+          const parents = incoming[n.id].map(p => pos[p] ? pos[p].x + NODE_W / 2 : null).filter(x => x !== null);
+          const anchor = parents.length ? parents.reduce((a, b) => a + b, 0) / parents.length : null;
+          return { node: n, anchor };
+        });
+        withAnchor.sort((a, b) => {
+          if (a.anchor === null && b.anchor === null) return 0;
+          if (a.anchor === null) return 1;
+          if (b.anchor === null) return -1;
+          return a.anchor - b.anchor;
+        });
+        const totalW = withAnchor.length * NODE_W + (withAnchor.length - 1) * NODE_GAP;
+        const startX = (maxWidth - totalW) / 2 + 20;
+        withAnchor.forEach((it, i) => {
+          pos[it.node.id] = { x: startX + i * (NODE_W + NODE_GAP), y: 20 + r * (NODE_H + RANK_GAP) };
+        });
+      });
+      for (let pass = 0; pass < 3; pass++) {
+        ranks.forEach(rankNodes => {
+          const sorted = rankNodes.slice().sort((a, b) => pos[a.id].x - pos[b.id].x);
+          for (let i = 1; i < sorted.length; i++) {
+            const prev = pos[sorted[i - 1].id], cur = pos[sorted[i].id];
+            if (cur.x < prev.x + NODE_W + NODE_GAP) cur.x = prev.x + NODE_W + NODE_GAP;
+          }
+        });
+      }
+      const width = Math.max(...Object.values(pos).map(p => p.x)) + NODE_W + 20;
+      const height = Math.max(...Object.values(pos).map(p => p.y)) + NODE_H + 24;
+      const s = svgEl(width, height);
+      s.setAttribute('width', width);
+      s.setAttribute('height', height);
+      s.style.maxWidth = '100%';
+      s.style.height = 'auto';
+      const defs = el('defs');
+      const marker = el('marker', { id: 'arrow', viewBox: '0 0 10 10', refX: 9, refY: 5, markerWidth: 6, markerHeight: 6, orient: 'auto-start-reverse' });
+      marker.appendChild(el('path', { d: 'M 0 0 L 10 5 L 0 10 z', fill: '#94a3b8' }));
+      defs.appendChild(marker);
+      s.appendChild(defs);
+      edges.forEach(e => {
+        const from = pos[e.from], to = pos[e.to];
+        if (!from || !to) return;
+        const x1 = from.x + NODE_W / 2, y1 = from.y + NODE_H;
+        const x2 = to.x + NODE_W / 2, y2 = to.y;
+        const cy = (y1 + y2) / 2;
+        const d = 'M' + x1 + ',' + y1 + ' C' + x1 + ',' + cy + ' ' + x2 + ',' + cy + ' ' + x2 + ',' + y2;
+        s.appendChild(el('path', { d, fill: 'none', stroke: '#94a3b8', 'stroke-width': 1.25, 'marker-end': 'url(#arrow)' }));
+        if (e.label) {
+          const mx = (x1 + x2) / 2, my = cy;
+          const w = Math.max(e.label.length * 9 + 10, 28);
+          s.appendChild(el('rect', { x: mx - w / 2, y: my - 10, width: w, height: 18, rx: 4, fill: '#ffffff', stroke: '#e5e7eb' }));
+          const t = el('text', { x: mx, y: my + 3, 'text-anchor': 'middle', 'font-size': 11, fill: '#475569' });
+          t.textContent = e.label;
+          s.appendChild(t);
+        }
+      });
+      nodes.forEach(n => {
+        const p = pos[n.id];
+        const k = KIND_STYLE[n.kind] || KIND_STYLE.entry;
+        s.appendChild(el('rect', { x: p.x, y: p.y, width: NODE_W, height: NODE_H, rx: 10, fill: k.fill, stroke: k.stroke, 'stroke-width': n.kind === 'channel' ? 1.4 : 1 }));
+        const titleY = n.sub ? p.y + 24 : p.y + NODE_H / 2 + 4;
+        const title = el('text', { x: p.x + NODE_W / 2, y: titleY, 'text-anchor': 'middle', 'font-size': 12.5, 'font-weight': 600, fill: k.text });
+        title.textContent = n.title;
+        s.appendChild(title);
+        if (n.sub) {
+          const sub = el('text', { x: p.x + NODE_W / 2, y: p.y + 42, 'text-anchor': 'middle', 'font-size': 11, fill: k.text, opacity: 0.82 });
+          sub.textContent = n.sub;
+          s.appendChild(sub);
+        }
+      });
+      mount.innerHTML = '';
+      mount.appendChild(s);
+    }
+
+    drawBarChart(document.getElementById('chart-funnel'), {
+      categories: ['注册→首次生成', '生成→周频创作', '额度耗尽→订阅', '作品分享率', '订阅续费率'],
+      series: [
+        { name: '当前基准（估算）',    data: [55, 25, 8, 20, 65], tone: 'neutral' },
+        { name: 'MA 自动化后（估算）', data: [72, 34, 15, 28, 76], tone: 'success' },
+      ], valueSuffix: '%', height: 260,
+    });
+    drawBarChart(document.getElementById('chart-channel'), {
+      categories: ['应用内消息', 'Email', 'Web Push', 'App Push', 'SMS'],
+      series: [{ name: 'AIGC 工具触达适配（相对值·示意）', data: [92, 90, 70, 55, 15], tone: 'info' }],
+      valueSuffix: '', height: 220,
+    });
+
+    drawJourney(document.getElementById('dag-j1'),
+      [
+        {id:'start',kind:'entry',title:'开始',sub:'事件: 注册·未完成首次生成'},
+        {id:'w1',kind:'wait',title:'等待事件',sub:'1h 内等待: 完成生成'},
+        {id:'ok0',kind:'exitOk',title:'结束（已生成）',sub:'完成首次生成'},
+        {id:'ia',kind:'channel',title:'应用内消息',sub:'一键模板·点一下就出效果'},
+        {id:'w2',kind:'wait',title:'等待事件',sub:'24h 内等待: 完成生成'},
+        {id:'ok1',kind:'exitOk',title:'结束（已生成）',sub:'完成首次生成'},
+        {id:'em1',kind:'channel',title:'Email',sub:'热门提示词+作品案例'},
+        {id:'w3',kind:'wait',title:'等待事件',sub:'3天内等待: 完成生成'},
+        {id:'ok2',kind:'exitOk',title:'结束（已生成）',sub:'完成首次生成'},
+        {id:'wp1',kind:'channel',title:'Web Push',sub:'赠送额度·体验新模型'},
+        {id:'end',kind:'exitEnd',title:'结束',sub:'转沉默召回旅程'},
+      ],
+      [
+        {from:'start',to:'w1'},{from:'w1',to:'ok0',label:'已生成'},{from:'w1',to:'ia',label:'未生成'},
+        {from:'ia',to:'w2'},{from:'w2',to:'ok1',label:'已生成'},{from:'w2',to:'em1',label:'未生成'},
+        {from:'em1',to:'w3'},{from:'w3',to:'ok2',label:'已生成'},{from:'w3',to:'wp1',label:'未生成'},{from:'wp1',to:'end'},
+      ]);
+
+    drawJourney(document.getElementById('dag-j2'),
+      [
+        {id:'start',kind:'entry',title:'开始',sub:'属性: 已生成·频次未达标'},
+        {id:'br1',kind:'branch',title:'条件分支',sub:'属性: 创作方向'},
+        {id:'ea',kind:'channel',title:'Email',sub:'(图像) 商用级出图技巧'},
+        {id:'eb',kind:'channel',title:'Email',sub:'(文案) 高转化文案用例'},
+        {id:'ec',kind:'channel',title:'Email',sub:'(视频/代码) 进阶工作流'},
+        {id:'w1',kind:'wait',title:'等待事件',sub:'7天内等待: 是否创作'},
+        {id:'ok0',kind:'exitOk',title:'结束（已活跃）',sub:'恢复创作频次'},
+        {id:'wp1',kind:'channel',title:'Web Push',sub:'本周高赞提示词合集'},
+        {id:'w2',kind:'wait',title:'等待事件',sub:'7天内等待: 是否创作'},
+        {id:'ok1',kind:'exitOk',title:'结束（已活跃）',sub:'恢复创作频次'},
+        {id:'end',kind:'exitEnd',title:'结束',sub:'转沉默召回旅程'},
+      ],
+      [
+        {from:'start',to:'br1'},{from:'br1',to:'ea',label:'图像'},{from:'br1',to:'eb',label:'文案'},{from:'br1',to:'ec',label:'视频/代码'},
+        {from:'ea',to:'w1'},{from:'eb',to:'w1'},{from:'ec',to:'w1'},
+        {from:'w1',to:'ok0',label:'已创作'},{from:'w1',to:'wp1',label:'未创作'},
+        {from:'wp1',to:'w2'},{from:'w2',to:'ok1',label:'已创作'},{from:'w2',to:'end',label:'未创作'},
+      ]);
+
+    drawJourney(document.getElementById('dag-j3'),
+      [
+        {id:'start',kind:'entry',title:'开始',sub:'事件: 额度剩余≤20%'},
+        {id:'ia0',kind:'channel',title:'应用内消息',sub:'额度剩余提醒·避免中断'},
+        {id:'w1',kind:'wait',title:'等待事件',sub:'等待: 额度是否归零'},
+        {id:'br1',kind:'branch',title:'条件分支',sub:'属性: 创作深度'},
+        {id:'ih',kind:'channel',title:'应用内消息',sub:'(重度) 订阅无限生成·首月优惠'},
+        {id:'il',kind:'channel',title:'应用内消息',sub:'(轻度) 做任务领额度/小额加油包'},
+        {id:'w2',kind:'wait',title:'等待事件',sub:'24h 内等待: 订阅/购买'},
+        {id:'ok0',kind:'exitOk',title:'结束（已付费）',sub:'订阅或购买加油包'},
+        {id:'em1',kind:'channel',title:'Email',sub:'套餐对比+限时优惠'},
+        {id:'w3',kind:'wait',title:'等待事件',sub:'3天内等待: 订阅/购买'},
+        {id:'ok1',kind:'exitOk',title:'结束（已付费）',sub:'订阅或购买加油包'},
+        {id:'end',kind:'exitEnd',title:'结束',sub:'标记价格敏感·等额度重置'},
+      ],
+      [
+        {from:'start',to:'ia0'},{from:'ia0',to:'w1'},{from:'w1',to:'br1'},
+        {from:'br1',to:'ih',label:'重度'},{from:'br1',to:'il',label:'轻度'},
+        {from:'ih',to:'w2'},{from:'il',to:'w2'},
+        {from:'w2',to:'ok0',label:'已付费'},{from:'w2',to:'em1',label:'未付费'},
+        {from:'em1',to:'w3'},{from:'w3',to:'ok1',label:'已付费'},{from:'w3',to:'end',label:'未付费'},
+      ]);
+
+    drawJourney(document.getElementById('dag-j4'),
+      [
+        {id:'start',kind:'entry',title:'开始',sub:'事件: 下载/收藏作品'},
+        {id:'ia1',kind:'channel',title:'应用内消息',sub:'分享作品得额度奖励'},
+        {id:'w1',kind:'wait',title:'等待事件',sub:'2h 内等待: 是否分享'},
+        {id:'ok0',kind:'exitOk',title:'结束（已分享）',sub:'完成分享'},
+        {id:'em1',kind:'channel',title:'Email',sub:'你的作品+一键分享卡片'},
+        {id:'w2',kind:'wait',title:'等待事件',sub:'3天内等待: 是否分享'},
+        {id:'ok1',kind:'exitOk',title:'结束（已分享）',sub:'完成分享'},
+        {id:'wp1',kind:'channel',title:'Web Push',sub:'邀请好友双方各得额度'},
+        {id:'end',kind:'exitEnd',title:'结束',sub:'归档'},
+      ],
+      [
+        {from:'start',to:'ia1'},{from:'ia1',to:'w1'},
+        {from:'w1',to:'ok0',label:'已分享'},{from:'w1',to:'em1',label:'未分享'},
+        {from:'em1',to:'w2'},{from:'w2',to:'ok1',label:'已分享'},{from:'w2',to:'wp1',label:'未分享'},{from:'wp1',to:'end'},
+      ]);
+
+    drawJourney(document.getElementById('dag-j5'),
+      [
+        {id:'start',kind:'entry',title:'开始',sub:'属性: 到期前7天/用量达80%'},
+        {id:'br1',kind:'branch',title:'条件分支',sub:'属性: 用量健康度'},
+        {id:'eh',kind:'channel',title:'Email',sub:'(高用量) 升级更高套餐更划算'},
+        {id:'el',kind:'channel',title:'Email',sub:'(低用量) 这些用例你还没试过'},
+        {id:'w1',kind:'wait',title:'等待事件',sub:'4天内等待: 续费/升级'},
+        {id:'ok0',kind:'exitOk',title:'结束（已转化）',sub:'续费或升级'},
+        {id:'ia1',kind:'channel',title:'应用内消息',sub:'本期创作统计+续费入口'},
+        {id:'w2',kind:'wait',title:'等待事件',sub:'T-1 前等待: 续费/升级'},
+        {id:'ok1',kind:'exitOk',title:'结束（已转化）',sub:'续费或升级'},
+        {id:'wp1',kind:'channel',title:'Web Push',sub:'订阅明日到期·作品仍保留'},
+        {id:'end',kind:'exitEnd',title:'结束',sub:'转沉默召回旅程'},
+      ],
+      [
+        {from:'start',to:'br1'},{from:'br1',to:'eh',label:'高用量'},{from:'br1',to:'el',label:'低用量'},
+        {from:'eh',to:'w1'},{from:'el',to:'w1'},
+        {from:'w1',to:'ok0',label:'已转化'},{from:'w1',to:'ia1',label:'未转化'},
+        {from:'ia1',to:'w2'},{from:'w2',to:'ok1',label:'已转化'},{from:'w2',to:'wp1',label:'未转化'},{from:'wp1',to:'end'},
+      ]);
+
+    drawJourney(document.getElementById('dag-j6'),
+      [
+        {id:'start',kind:'entry',title:'开始',sub:'事件:新功能上线/14天未用'},
+        {id:'br1',kind:'branch',title:'条件分支',sub:'属性: 触发类型+创作方向'},
+        {id:'en',kind:'channel',title:'Email',sub:'(新功能) 新模型效果对比+体验额度'},
+        {id:'es',kind:'channel',title:'Email',sub:'(沉默) 你的作品库+赠送额度'},
+        {id:'w1',kind:'wait',title:'等待事件',sub:'5天内等待: 是否使用'},
+        {id:'w2',kind:'wait',title:'等待事件',sub:'5天内等待: 是否回归'},
+        {id:'ok',kind:'exitOk',title:'结束（已激活）',sub:'使用新功能或恢复创作'},
+        {id:'wp1',kind:'channel',title:'Web Push',sub:'限时体验额度即将过期'},
+        {id:'p1',kind:'channel',title:'App Push',sub:'新玩法·一键体验'},
+        {id:'w3',kind:'wait',title:'等待事件',sub:'7天内等待: 是否使用'},
+        {id:'ok2',kind:'exitOk',title:'结束（已激活）',sub:'使用新功能或恢复创作'},
+        {id:'end',kind:'exitEnd',title:'结束',sub:'标记深度流失·降频'},
+      ],
+      [
+        {from:'start',to:'br1'},{from:'br1',to:'en',label:'新功能'},{from:'br1',to:'es',label:'沉默召回'},
+        {from:'en',to:'w1'},{from:'es',to:'w2'},
+        {from:'w1',to:'ok',label:'已使用'},{from:'w2',to:'ok',label:'已回归'},
+        {from:'w1',to:'wp1',label:'未使用'},{from:'w2',to:'p1',label:'未回归'},
+        {from:'wp1',to:'w3'},{from:'p1',to:'w3'},
+        {from:'w3',to:'ok2',label:'已激活'},{from:'w3',to:'end',label:'未激活'},
+      ]);
+
+  })();
+  </script>
+</body>
+</html>

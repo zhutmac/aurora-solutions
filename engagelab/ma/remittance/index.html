@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EngageLab MA · 跨境支付 / 汇款平台增长方案</title>
+  <style>
+    :root {
+      --bg: #ffffff;
+      --bg-soft: #f7f8fa;
+      --bg-elev: #ffffff;
+      --border: #e5e7eb;
+      --border-strong: #d1d5db;
+      --text: #111827;
+      --text-2: #374151;
+      --text-3: #6b7280;
+      --text-4: #9ca3af;
+      --accent: #2563eb;
+      --accent-soft: #dbeafe;
+      --success: #16a34a;
+      --success-soft: #dcfce7;
+      --warning: #d97706;
+      --warning-soft: #fef3c7;
+      --info: #0369a1;
+      --info-soft: #e0f2fe;
+      --danger: #dc2626;
+      --danger-soft: #fee2e2;
+      --radius: 10px;
+      --radius-sm: 6px;
+      --shadow: 0 1px 2px rgba(16, 24, 40, 0.04);
+    }
+
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; background: var(--bg-soft); color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC",
+        "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", sans-serif;
+      line-height: 1.6; -webkit-font-smoothing: antialiased; font-size: 15px; }
+
+    main { max-width: 1180px; margin: 0 auto; padding: 32px 28px 80px; }
+
+    h1 { font-size: 30px; font-weight: 700; margin: 0 0 8px; letter-spacing: -0.01em; color: var(--text); }
+    h2 { font-size: 22px; font-weight: 700; margin: 0 0 12px; letter-spacing: -0.005em; color: var(--text); }
+    h3 { font-size: 17px; font-weight: 600; margin: 0 0 10px; color: var(--text); }
+    p { margin: 0 0 8px; color: var(--text-2); }
+    .muted { color: var(--text-3); }
+    .small { font-size: 13px; }
+    .bold { font-weight: 600; }
+
+    .section { background: var(--bg-elev); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 24px 26px; margin-bottom: 20px; }
+    .section-plain { padding: 6px 2px 18px; margin-bottom: 12px; }
+    .divider { height: 1px; background: var(--border); margin: 16px 0; border: none; }
+
+    .hero { background: linear-gradient(180deg, #fff 0%, #f0fdf4 100%);
+      border: 1px solid var(--border); border-radius: 14px; padding: 28px 30px;
+      margin-bottom: 24px; }
+    .hero-pills { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 14px; }
+    .hero-subtitle { color: var(--text-3); font-size: 15px; max-width: 900px; margin: 8px 0 18px; }
+
+    .pill { display: inline-flex; align-items: center; padding: 2px 10px;
+      font-size: 12px; border-radius: 999px; border: 1px solid var(--border-strong);
+      color: var(--text-2); background: #fff; font-weight: 500; }
+    .pill-accent { background: var(--accent-soft); border-color: var(--accent); color: var(--accent); }
+    .pill-info { background: var(--info-soft); border-color: var(--info); color: var(--info); }
+    .pill-success { background: var(--success-soft); border-color: var(--success); color: var(--success); }
+    .pill-warn { background: var(--warning-soft); border-color: var(--warning); color: var(--warning); }
+
+    .grid { display: grid; gap: 16px; }
+    .grid-4 { grid-template-columns: repeat(4, 1fr); }
+    .grid-3 { grid-template-columns: repeat(3, 1fr); }
+    .grid-2 { grid-template-columns: repeat(2, 1fr); }
+    .grid-5 { grid-template-columns: repeat(5, 1fr); }
+    .grid-1-2 { grid-template-columns: 1fr 2fr; }
+    .grid-2-1 { grid-template-columns: 1.4fr 1fr; }
+    .grid-12-1 { grid-template-columns: 1.2fr 1fr; }
+    .row { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+
+    .stat { padding: 14px 16px; background: var(--bg-elev); border: 1px solid var(--border);
+      border-radius: var(--radius); }
+    .stat-value { font-size: 26px; font-weight: 700; letter-spacing: -0.01em; color: var(--text);
+      line-height: 1.15; }
+    .stat-value.success { color: var(--success); }
+    .stat-value.info { color: var(--info); }
+    .stat-value.warn { color: var(--warning); }
+
+    .stat-label { font-size: 12px; color: var(--text-3); margin-top: 4px; }
+
+    .card { background: var(--bg-elev); border: 1px solid var(--border);
+      border-radius: var(--radius); overflow: hidden; }
+    .card-header { padding: 10px 16px; border-bottom: 1px solid var(--border);
+      background: #fafbfc; font-size: 13px; font-weight: 600; color: var(--text-2); }
+    .card-body { padding: 16px; }
+    .card-body.p-sm { padding: 12px; }
+    .card-body ul { margin: 0; padding-left: 18px; }
+    .card-body li { margin-bottom: 4px; font-size: 13.5px; color: var(--text-2); }
+
+    .callout { padding: 12px 14px; border-radius: var(--radius-sm);
+      border: 1px solid var(--border); border-left-width: 3px; background: var(--bg-soft); }
+    .callout-title { font-weight: 600; margin-bottom: 4px; font-size: 14px; }
+    .callout-body { font-size: 13px; color: var(--text-2); }
+    .callout-body p { font-size: 13px; color: var(--text-2); margin: 0 0 4px; }
+    .callout.info { border-left-color: var(--info); background: var(--info-soft); }
+    .callout.info .callout-title { color: var(--info); }
+    .callout.success { border-left-color: var(--success); background: var(--success-soft); }
+    .callout.success .callout-title { color: var(--success); }
+    .callout.warn { border-left-color: var(--warning); background: var(--warning-soft); }
+    .callout.warn .callout-title { color: var(--warning); }
+    .callout.neutral { border-left-color: var(--text-3); }
+
+    table { width: 100%; border-collapse: collapse; font-size: 13.5px;
+      background: var(--bg-elev); border: 1px solid var(--border); border-radius: var(--radius);
+      overflow: hidden; }
+    th, td { padding: 10px 12px; text-align: left; border-bottom: 1px solid var(--border);
+      color: var(--text-2); vertical-align: middle; }
+    th { background: #fafbfc; font-weight: 600; font-size: 12.5px; color: var(--text-3);
+      letter-spacing: 0.01em; text-transform: uppercase; }
+    tr:last-child td { border-bottom: 0; }
+    tr.tone-success td { background: rgba(22, 163, 74, 0.04); }
+    tr.tone-info td { background: rgba(3, 105, 161, 0.04); }
+
+    .signal-row { display: flex; gap: 10px; padding: 10px 0;
+      border-bottom: 1px solid var(--border); align-items: center; }
+    .signal-row:last-child { border-bottom: 0; }
+    .signal-row .left { flex: 1; min-width: 0; }
+    .signal-row .label { font-size: 13px; font-weight: 600; }
+    .signal-row .hint { font-size: 12px; color: var(--text-3); }
+    .signal-row .value { font-weight: 700; color: var(--text); font-size: 14px; white-space: nowrap; }
+
+    .chart { width: 100%; }
+    .chart svg { width: 100%; height: auto; display: block; }
+    .chart-legend { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--border); }
+    .chart-legend .leg-item { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--text-3); }
+    .chart-legend .dot { width: 10px; height: 10px; border-radius: 2px; }
+
+    .dag-wrap { overflow-x: auto; padding: 8px 2px; }
+    .dag-wrap svg { display: block; margin: 0 auto; }
+
+    .toc-bar { position: sticky; top: 0; background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(8px); border-bottom: 1px solid var(--border);
+      z-index: 10; padding: 10px 28px; margin: -32px -28px 24px;
+      font-size: 12.5px; }
+    .toc-bar .toc-inner { max-width: 1180px; margin: 0 auto; display: flex; gap: 14px;
+      align-items: center; overflow-x: auto; }
+    .toc-bar a { color: var(--text-3); text-decoration: none; white-space: nowrap; padding: 4px 2px; }
+    .toc-bar a:hover { color: var(--accent); }
+    .toc-bar .brand { font-weight: 700; color: var(--text); }
+
+    @page { size: A4; margin: 14mm; }
+    @media print {
+      body { background: #fff; }
+      main { max-width: none; padding: 0; }
+      .toc-bar { display: none; }
+      .section, .card, .hero { page-break-inside: avoid; box-shadow: none; }
+      h2 { page-break-after: avoid; }
+      .hero { break-before: avoid; }
+      .dag-wrap { overflow: visible; }
+      .dag-wrap svg { max-width: 100%; }
+    }
+
+    .spacer-sm { height: 6px; }
+    .spacer-md { height: 12px; }
+
+    .step-num { display: inline-flex; align-items: center; justify-content: center;
+      width: 22px; height: 22px; border-radius: 50%; background: var(--accent-soft);
+      color: var(--accent); font-weight: 700; font-size: 12px; margin-right: 8px; }
+
+    footer.site-footer { margin-top: 36px; padding-top: 16px; border-top: 1px solid var(--border);
+      font-size: 12px; color: var(--text-4); text-align: center; }
+  
+  .back-home {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    color: rgba(255,255,255,0.65);
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 500;
+    padding: 4px 10px 4px 6px;
+    border-radius: 6px;
+    border: 1px solid rgba(255,255,255,0.18);
+    margin-right: 16px;
+    white-space: nowrap;
+    transition: all 0.2s ease;
+    flex-shrink: 0;
+  }
+  .back-home:hover {
+    color: #fff;
+    background: rgba(255,255,255,0.12);
+    border-color: rgba(255,255,255,0.35);
+  }
+  .back-home svg {
+    width: 14px;
+    height: 14px;
+    opacity: 0.8;
+  }
+</style>
+</head>
+<body>
+  <nav class="toc-bar">
+    <div class="toc-inner">
+      <a class="back-home" href="../">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+        返回首页
+      </a>
+      <span class="brand">EngageLab MA · 跨境支付 / 汇款方案</span>
+      <a href="#s-market">市场机会</a><a href="#s-funnel">用户漏斗</a><a href="#s-why">为什么 EngageLab</a>
+      <a href="#s-scenarios">场景总览</a><a href="#s-journey">旅程编排</a><a href="#s-channel">渠道选型</a>
+      <a href="#s-compliance">合规安全</a><a href="#s-plan">测试计划</a>
+    </div>
+  </nav>
+  <main>
+    <section class="hero">
+      <div class="hero-pills">
+        <span class="pill pill-success">跨境支付 · 汇款 · 侨汇</span>
+        <span class="pill">东南亚 · 南亚 · 中东 · 拉美</span>
+        <span class="pill pill-warn">强合规 KYC/AML</span>
+      </div>
+      <h1>EngageLab MA · 跨境支付 / 汇款平台增长方案</h1>
+      <p class="hero-subtitle">
+        汇款业务的增长本质是"周期性习惯的绑定"——务工人群按发薪周期规律汇款，
+        谁能在<span class="bold">对的时点、用对的汇率</span>触达，谁就拿走这一笔。KYC 断点与首汇门槛则是前置阻碍。
+        本方案以 <span class="bold">KYC 完成催办、首次汇款转化、汇率提醒与择时、汇款周期复汇唤醒、汇款进度与到账通知、沉默召回与推荐裂变</span> 六大旅程切入，
+        统一编排 <span class="bold">App Push + SMS + WhatsApp + Email</span> 四类通道。
+      </p>
+      <div class="row">
+        <span class="pill pill-accent">极光 / App Push</span>
+        <span class="pill pill-accent">SMS（到账/安全必达）</span>
+        <span class="pill pill-accent">WhatsApp（新兴市场主力）</span>
+        <span class="pill pill-accent">Email（回单/凭证）</span>
+      </div>
+    </section>
+
+    <section id="s-market" class="section">
+      <h2>一、为什么汇款平台必须做周期化自动运营</h2>
+      <div class="grid grid-4" style="margin-bottom:16px">
+        <div class="stat"><div class="stat-value warn">KYC 断点</div><div class="stat-label">身份认证是最大漏损，直接决定可交易人群</div></div>
+        <div class="stat"><div class="stat-value info">周期性强</div><div class="stat-label">务工人群按发薪周期规律汇款，可预测</div></div>
+        <div class="stat"><div class="stat-value">汇率敏感</div><div class="stat-label">汇率波动直接影响择时与平台选择</div></div>
+        <div class="stat"><div class="stat-value danger">首汇门槛</div><div class="stat-label">首次汇款涉及信任建立，转化难度最高</div></div>
+      </div>
+      <p class="muted small">注：下文所有转化率、提升幅度为跨境汇款行业估算区间，落地以实测为准。本方案面向持牌合规支付机构，触达遵循 KYC/AML 与当地支付监管要求。</p>
+      <hr class="divider" />
+      <div class="grid grid-2">
+        <div class="callout neutral"><div class="callout-title">痛点 1 · KYC 完成率低</div><div class="callout-body"><p>注册后卡在身份认证与资料上传，无法交易，获客成本直接损失。</p></div></div>
+        <div class="callout info"><div class="callout-title">解法 · KYC 分环节催办</div><div class="callout-body"><p>按中断环节精准引导（证件上传 / 活体 / 地址证明），并说明认证后可享的额度与费率。</p></div></div>
+        <div class="callout neutral"><div class="callout-title">痛点 2 · 首次汇款不敢用</div><div class="callout-body"><p>跨境汇款涉及资金安全信任，新用户往往犹豫，首汇转化是最难的一关。</p></div></div>
+        <div class="callout info"><div class="callout-title">解法 · 首汇转化旅程</div><div class="callout-body"><p>用"首笔免手续费 + 到账时效承诺 + 牌照与安全背书"降低信任门槛，分层递进跟进。</p></div></div>
+        <div class="callout neutral"><div class="callout-title">痛点 3 · 汇率波动错过时点</div><div class="callout-body"><p>用户等好汇率却错过窗口，或不知汇率已变优，转而使用竞品或线下渠道。</p></div></div>
+        <div class="callout info"><div class="callout-title">解法 · 汇率提醒与择时</div><div class="callout-body"><p>用户可订阅目标汇率，达标即时提醒；结合发薪周期在最佳时点推送，抢占决策时刻。</p></div></div>
+        <div class="callout neutral"><div class="callout-title">痛点 4 · 复汇周期未被绑定</div><div class="callout-body"><p>汇款高度规律（月度/双周），但缺乏周期性唤醒，用户容易被竞品的一次促销带走。</p></div></div>
+        <div class="callout info"><div class="callout-title">解法 · 周期复汇唤醒 + 收款人快捷</div><div class="callout-body"><p>按个人汇款周期提前唤醒，"再次汇给 XX（已保存收款人）"一键复汇，把习惯锁定在平台。</p></div></div>
+      </div>
+    </section>
+
+    <section id="s-funnel" class="section">
+      <h2>二、用户漏斗：从 KYC 到复汇，每层都有增长空间</h2>
+      <p class="muted small">下图为跨境汇款行业估算区间对比，非实测数据。</p>
+      <div class="chart" id="chart-funnel"></div>
+    </section>
+
+    <section id="s-why" class="section">
+      <h2>三、为什么选择 EngageLab MA</h2>
+      <div class="grid grid-3">
+        <div class="card"><div class="card-header">周期性旅程编排</div><div class="card-body p-sm"><ul><li>按个人汇款周期（月度/双周）自动循环唤醒</li><li>结合发薪日与节庆（开斋节、春节）时点运营</li></ul></div></div>
+        <div class="card"><div class="card-header">实时汇率事件触发</div><div class="card-body p-sm"><ul><li>汇率达标秒级触发提醒，抓住决策窗口</li><li>响应 &lt;200ms，时效性直接决定转化</li></ul></div></div>
+        <div class="card"><div class="card-header">WhatsApp · 新兴市场主力</div><div class="card-body p-sm"><ul><li>东南亚/南亚/中东务工人群渗透极高</li><li>成本远低于短信，适合高频汇率与营销触达</li></ul></div></div>
+        <div class="card"><div class="card-header">OTP · 交易安全</div><div class="card-body p-sm"><ul><li>注册验证、大额汇款二次确认、异常登录</li><li>多通道 OTP 自动兜底，保障资金安全</li></ul></div></div>
+        <div class="card"><div class="card-header">CDP 统一身份（EUID）</div><div class="card-body p-sm"><ul><li>KYC 状态、汇款周期、收款人列表、目标汇率统一为属性</li><li>支撑周期预测与个性化择时推送</li></ul></div></div>
+        <div class="card"><div class="card-header">合规 · 支付监管</div><div class="card-body p-sm"><ul><li>KYC/AML 流程触达，反洗钱与制裁名单要求</li><li>手机号哈希、PII 脱敏、审计留痕可导出</li></ul></div></div>
+      </div>
+    </section>
+
+    <section id="s-scenarios" class="section">
+      <h2>四、高 ROI 运营场景总览</h2>
+      <table>
+        <thead><tr><th>#</th><th>场景</th><th>生命周期阶段</th><th>核心触发</th><th>渠道组合</th><th>预期提升（估算）</th></tr></thead>
+        <tbody>
+          <tr class="tone-info"><td>J1</td><td>KYC 完成催办</td><td>激活</td><td>注册后 KYC 未完成</td><td>App Push → WhatsApp → SMS</td><td>KYC 完成 +10~20%</td></tr>
+          <tr class="tone-success"><td>J2</td><td>首次汇款转化</td><td>首次交易</td><td>KYC 通过未汇款</td><td>App Push + WhatsApp + Email</td><td>首汇转化 +15~30%</td></tr>
+          <tr><td>J3</td><td>汇率提醒与择时</td><td>转化 / 复汇</td><td>汇率达用户目标值</td><td>App Push + WhatsApp</td><td>汇率触发汇款 +20~35%</td></tr>
+          <tr class="tone-success"><td>J4</td><td>汇款周期复汇唤醒</td><td>复购 / 习惯</td><td>个人汇款周期临近</td><td>App Push + WhatsApp</td><td>复汇率 +20~40%</td></tr>
+          <tr><td>J5</td><td>汇款进度与到账通知</td><td>服务 / 信任</td><td>汇款各状态节点</td><td>App Push + SMS</td><td>咨询量下降、信任提升</td></tr>
+          <tr><td>J6</td><td>沉默召回 + 推荐裂变</td><td>召回 / 增长</td><td>60 天未汇款 / 成功汇款后</td><td>App Push + WhatsApp + SMS</td><td>召回与推荐 +20~35%</td></tr>
+        </tbody>
+      </table>
+      <p class="muted small" style="margin-top:8px">提升幅度为行业公开区间估算，最终以 4 周测试实测为准。</p>
+    </section>
+
+    <section id="s-journey" class="section-plain">
+      <h2>五、核心旅程详细编排</h2>
+      <div class="section" style="margin-top:16px;">
+        <h3>旅程 1：KYC 完成催办</h3>
+        <div class="grid grid-2-1"><div class="dag-wrap" id="dag-j1"></div><div>
+          <div class="callout neutral" style="margin-bottom:12px"><div class="callout-title">业务痛点</div><div class="callout-body"><p>注册后卡在身份认证，无法交易，获客成本直接损失。</p></div></div>
+          <div class="callout info" style="margin-bottom:12px"><div class="callout-title">旅程组件配置</div><div class="callout-body">
+            <p><strong>进入条件：</strong>事件：注册成功且 KYC 未完成</p>
+            <p><strong>分支：</strong>属性：中断环节（证件上传 / 活体 / 地址证明）</p>
+            <p><strong>提前退出：</strong>事件：KYC 通过</p>
+            <p><strong>渠道递进：</strong>App Push → WhatsApp → SMS（成本由低到高）</p>
+          </div></div>
+          <div class="callout success"><div class="callout-title">预期效益</div><div class="callout-body"><p>KYC 完成 +10~20%（估算）；说明"认证后可享额度与优惠费率"比单纯催办有效。</p></div></div>
+        </div></div>
+      </div>
+      <div class="section">
+        <h3>旅程 2：首次汇款转化</h3>
+        <div class="grid grid-2-1"><div class="dag-wrap" id="dag-j2"></div><div>
+          <div class="callout neutral" style="margin-bottom:12px"><div class="callout-title">业务痛点</div><div class="callout-body"><p>跨境汇款涉及资金安全信任，新用户犹豫，首汇是最难的一关。</p></div></div>
+          <div class="callout info" style="margin-bottom:12px"><div class="callout-title">旅程组件配置</div><div class="callout-body">
+            <p><strong>进入条件：</strong>事件：KYC 通过且无汇款记录</p>
+            <p><strong>提前退出：</strong>事件：完成首笔汇款</p>
+            <p><strong>内容：</strong>首笔免手续费 + 到账时效承诺 + 牌照与安全背书</p>
+            <p><strong>分支：</strong>属性：是否已添加收款人（已添加直接催汇 / 未添加先引导添加）</p>
+          </div></div>
+          <div class="callout success"><div class="callout-title">预期效益</div><div class="callout-body"><p>首汇转化 +15~30%（估算）；信任背书 + 首笔免费是降低门槛的最有效组合。</p></div></div>
+        </div></div>
+      </div>
+      <div class="section">
+        <h3>旅程 3：汇率提醒与择时</h3>
+        <div class="grid grid-2-1"><div class="dag-wrap" id="dag-j3"></div><div>
+          <div class="callout neutral" style="margin-bottom:12px"><div class="callout-title">业务痛点</div><div class="callout-body"><p>用户等好汇率却错过窗口，或不知汇率已变优，转而使用竞品或线下渠道。</p></div></div>
+          <div class="callout info" style="margin-bottom:12px"><div class="callout-title">旅程组件配置</div><div class="callout-body">
+            <p><strong>进入条件：</strong>事件：汇率达到用户订阅的目标值</p>
+            <p><strong>时效：</strong>即时下发（汇率窗口短，不加时段限制）</p>
+            <p><strong>提前退出：</strong>事件：完成汇款</p>
+            <p><strong>合规：</strong>如实展示汇率与费用，不做汇率走势预测或投资建议</p>
+          </div></div>
+          <div class="callout success"><div class="callout-title">预期效益</div><div class="callout-body"><p>汇率触发汇款 +20~35%（估算）；汇率提醒是汇款行业转化率最高的触发类型之一。</p></div></div>
+        </div></div>
+      </div>
+      <div class="section">
+        <h3>旅程 4：汇款周期复汇唤醒</h3>
+        <div class="grid grid-2-1"><div class="dag-wrap" id="dag-j4"></div><div>
+          <div class="callout neutral" style="margin-bottom:12px"><div class="callout-title">业务痛点</div><div class="callout-body"><p>汇款高度规律但缺乏周期性唤醒，用户容易被竞品的一次促销带走。</p></div></div>
+          <div class="callout info" style="margin-bottom:12px"><div class="callout-title">旅程组件配置</div><div class="callout-body">
+            <p><strong>进入条件：</strong>属性：个人汇款周期临近（基于历史频率预测）</p>
+            <p><strong>分支：</strong>属性：周期类型（月度 / 双周 / 节庆前）</p>
+            <p><strong>内容：</strong>"再次汇给 XX（已保存收款人）"一键复汇 + 当前汇率</p>
+            <p><strong>再次进入：</strong>按周期持续循环运行</p>
+          </div></div>
+          <div class="callout success"><div class="callout-title">预期效益</div><div class="callout-body"><p>复汇率 +20~40%（估算）；一键复汇把汇款习惯牢牢锁定在平台。</p></div></div>
+        </div></div>
+      </div>
+      <div class="section">
+        <h3>旅程 5：汇款进度与到账通知</h3>
+        <div class="grid grid-2-1"><div class="dag-wrap" id="dag-j5"></div><div>
+          <div class="callout neutral" style="margin-bottom:12px"><div class="callout-title">业务痛点</div><div class="callout-body"><p>汇款过程不透明引发焦虑与大量客服咨询；到账不确认则信任无法建立。</p></div></div>
+          <div class="callout info" style="margin-bottom:12px"><div class="callout-title">旅程组件配置</div><div class="callout-body">
+            <p><strong>进入条件：</strong>事件：发起汇款</p>
+            <p><strong>时间轴：</strong>受理 → 处理中 → 已汇出 → 收款人已到账 → 电子回单</p>
+            <p><strong>分类：</strong>交易类通知，不受营销退订与频控限制</p>
+            <p><strong>兜底：</strong>到账与异常必须 SMS 兜底，确保 100% 触达</p>
+          </div></div>
+          <div class="callout success"><div class="callout-title">预期效益</div><div class="callout-body"><p>咨询量下降、信任提升；进度透明是汇款平台建立口碑的基础。</p></div></div>
+        </div></div>
+      </div>
+      <div class="section">
+        <h3>旅程 6：沉默召回 + 推荐裂变</h3>
+        <div class="grid grid-2-1"><div class="dag-wrap" id="dag-j6"></div><div>
+          <div class="callout neutral" style="margin-bottom:12px"><div class="callout-title">业务痛点</div><div class="callout-body"><p>用户被竞品带走后长期沉默；同乡/同事推荐是汇款行业最有效的获客来源却未系统化。</p></div></div>
+          <div class="callout info" style="margin-bottom:12px"><div class="callout-title">旅程组件配置</div><div class="callout-body">
+            <p><strong>进入条件：</strong>属性：60 天未汇款 / 事件：成功汇款后</p>
+            <p><strong>分支：</strong>属性：触发类型（沉默召回 / 成功汇款后推荐）</p>
+            <p><strong>提前退出：</strong>事件：完成汇款 / 好友完成首汇</p>
+            <p><strong>内容：</strong>召回用优惠费率；推荐用双方奖励（同乡社群传播力强）</p>
+          </div></div>
+          <div class="callout success"><div class="callout-title">预期效益</div><div class="callout-body"><p>召回与推荐 +20~35%（估算）；务工社群的口碑推荐获客成本远低于买量。</p></div></div>
+        </div></div>
+      </div>
+    </section>
+
+    <section id="s-channel" class="section-plain">
+      <h2>六、新兴市场渠道选型参考</h2>
+      <div class="section">
+        <p class="muted small">跨境汇款渠道适配相对值（示意）：WhatsApp 在东南亚/南亚/中东务工人群中渗透极高且成本低，是汇率与营销触达主力；SMS 是到账与安全通知的必达兜底；App Push 承载日常与周期唤醒；Email 承载回单与凭证。</p>
+        <div class="chart" id="chart-channel"></div>
+        <div class="grid grid-2" style="margin-top:14px">
+          <div class="callout info"><div class="callout-title">主力通道</div><div class="callout-body"><p>WhatsApp（务工人群渗透极高、成本低，适合汇率与周期唤醒）+ App Push（实时触发）+ SMS（到账必达）。</p></div></div>
+          <div class="callout warn"><div class="callout-title">资金类通知必达</div><div class="callout-body"><p>到账、异常、退款等资金类通知必须多通道确保 100% 送达，并留存可审计记录——这是信任与监管的双重要求。</p></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="s-compliance" class="section">
+      <h2>七、合规与安全（支付强化）</h2>
+      <div class="grid grid-3">
+        <div class="card"><div class="card-header">支付与反洗钱监管</div><div class="card-body p-sm"><ul><li>KYC / AML 流程触达，符合各地支付牌照要求</li><li>制裁名单与可疑交易场景不做营销触达</li><li>不做汇率预测或投资建议</li></ul></div></div>
+        <div class="card"><div class="card-header">资金与账户安全</div><div class="card-body p-sm"><ul><li>OTP 二次确认、异常登录与大额汇款提醒</li><li>防钓鱼：触达链接仅指向官方已验证域名</li><li>手机号哈希、PII 脱敏、全链路加密</li></ul></div></div>
+        <div class="card"><div class="card-header">触达与留痕</div><div class="card-body p-sm"><ul><li>交易类通知独立于营销退订，确保必达</li><li>营销类频控与勿扰时段（跨时区注意）</li><li>发送记录留存可导出，满足监管审计</li></ul></div></div>
+      </div>
+    </section>
+
+    <section id="s-plan" class="section">
+      <h2>八、测试计划（4 周）</h2>
+      <table>
+        <thead><tr><th>周次</th><th>阶段</th><th>核心工作</th><th>验收指标</th></tr></thead>
+        <tbody>
+          <tr><td>第 1 周</td><td>启动 · 数据打通</td><td>确认埋点（注册、KYC 各环节、收款人、汇款各状态、汇率订阅）；合规审核</td><td>事件入库率 ≥95%</td></tr>
+          <tr><td>第 2 周</td><td>核心旅程上线</td><td>J1 KYC 催办 + J5 汇款进度通知（2 条，小流量）；交易类分类配置</td><td>旅程触发成功率 ≥98%；资金类 100% 送达</td></tr>
+          <tr><td>第 3 周</td><td>扩量 · A/B</td><td>J2 首汇转化 + J3 汇率提醒 + J4 周期唤醒全量；WhatsApp 成本对比</td><td>首汇/复汇 uplift 显现；样本量 ≥1 万</td></tr>
+          <tr><td>第 4 周</td><td>复盘 · 扩面</td><td>J6 召回与推荐裂变上线；输出交易额 uplift 与成本节约报告</td><td>KYC/首汇/复汇/推荐 uplift 可量化</td></tr>
+        </tbody>
+      </table>
+      <div class="callout success" style="margin-top:14px"><div class="callout-title">投入</div><div class="callout-body"><p>测试期授权费 $0，配置 2 人专属服务团队支撑埋点、旅程与合规话术交付。</p></div></div>
+    </section>
+    <footer class="site-footer">EngageLab MA · 跨境支付 / 汇款平台增长方案 — 内部方案，转化/提升数据为行业估算或公开参考，落地以实测为准。面向持牌合规支付机构，触达遵循 KYC/AML 与当地支付监管要求。</footer>
+  </main>
+  <script>
+  (function(){
+    // ========== Shared helpers ==========
+    const COLORS = {
+      accent: '#2563eb', info: '#0369a1', success: '#16a34a',
+      warning: '#d97706', neutral: '#94a3b8', muted: '#cbd5e1',
+      text: '#374151', textMute: '#9ca3af', grid: '#e5e7eb',
+    };
+    function svgEl(w, h) {
+      const s = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+      s.setAttribute('viewBox', '0 0 ' + w + ' ' + h);
+      s.setAttribute('width', '100%');
+      s.setAttribute('preserveAspectRatio', 'xMidYMid meet');
+      return s;
+    }
+    function el(tag, attrs) {
+      const e = document.createElementNS('http://www.w3.org/2000/svg', tag);
+      for (const k in attrs) e.setAttribute(k, attrs[k]);
+      return e;
+    }
+
+    // ========== Bar Chart ==========
+    function drawBarChart(mount, opts) {
+      const { categories, series, valueSuffix = '', height = 240 } = opts;
+      const W = 600, H = height, PAD_L = 44, PAD_R = 16, PAD_T = 12, PAD_B = 56;
+      const innerW = W - PAD_L - PAD_R, innerH = H - PAD_T - PAD_B;
+      const max = Math.max(...series.flatMap(s => s.data), 1);
+      const niceMax = Math.ceil(max / 20) * 20 || 100;
+      const groupCount = categories.length;
+      const barsPerGroup = series.length;
+      const groupW = innerW / groupCount;
+      const barW = Math.min(22, (groupW - 12) / barsPerGroup);
+      const s = svgEl(W, H);
+      for (let i = 0; i <= 4; i++) {
+        const v = (niceMax / 4) * i;
+        const y = PAD_T + innerH - (v / niceMax) * innerH;
+        s.appendChild(el('line', { x1: PAD_L, x2: W - PAD_R, y1: y, y2: y, stroke: COLORS.grid, 'stroke-width': 1 }));
+        const t = el('text', { x: PAD_L - 6, y: y + 4, 'text-anchor': 'end', 'font-size': 10, fill: COLORS.textMute });
+        t.textContent = Math.round(v) + valueSuffix;
+        s.appendChild(t);
+      }
+      categories.forEach((cat, ci) => {
+        const gx = PAD_L + groupW * ci;
+        series.forEach((se, si) => {
+          const v = se.data[ci] || 0;
+          const h = (v / niceMax) * innerH;
+          const x = gx + (groupW - barW * barsPerGroup) / 2 + si * barW;
+          const y = PAD_T + innerH - h;
+          const color = COLORS[se.tone] || COLORS.neutral;
+          s.appendChild(el('rect', { x, y, width: barW - 2, height: h, fill: color, rx: 2 }));
+          if (v > 0) {
+            const label = el('text', { x: x + (barW - 2) / 2, y: y - 2, 'text-anchor': 'middle', 'font-size': 8, fill: COLORS.text });
+            label.textContent = v + valueSuffix;
+            s.appendChild(label);
+          }
+        });
+        const t = el('text', { x: gx + groupW / 2, y: H - PAD_B + 14, 'text-anchor': 'middle', 'font-size': 10, fill: COLORS.text });
+        t.textContent = cat;
+        s.appendChild(t);
+      });
+      // Legend
+      let legX = PAD_L;
+      series.forEach((se) => {
+        const color = COLORS[se.tone] || COLORS.accent;
+        s.appendChild(el('rect', { x: legX, y: H - 18, width: 10, height: 10, rx: 2, fill: color }));
+        const t = el('text', { x: legX + 14, y: H - 10, 'font-size': 10, fill: COLORS.text });
+        t.textContent = se.name;
+        s.appendChild(t);
+        legX += 14 + (se.name.length * 7) + 16;
+      });
+      mount.innerHTML = '';
+      mount.appendChild(s);
+    }
+
+    // ========== Journey DAG renderer (same as fintech/security solution) ==========
+    const KIND_STYLE = {
+      entry:    { fill: '#f1f5f9', stroke: '#94a3b8', text: '#111827' },
+      wait:     { fill: '#fafafa', stroke: '#d1d5db', text: '#6b7280' },
+      branch:   { fill: '#f9fafb', stroke: '#475569', text: '#111827' },
+      channel:  { fill: '#dbeafe', stroke: '#2563eb', text: '#1e3a8a' },
+      sendtime: { fill: '#fef3c7', stroke: '#d97706', text: '#92400e' },
+      exitOk:   { fill: '#dcfce7', stroke: '#16a34a', text: '#14532d' },
+      exitEnd:  { fill: '#f3f4f6', stroke: '#9ca3af', text: '#4b5563' },
+    };
+
+    function drawJourney(mount, nodes, edges) {
+      const NODE_W = 176, NODE_H = 62, RANK_GAP = 42, NODE_GAP = 22;
+      const rankOf = {}, incoming = {};
+      nodes.forEach(n => { rankOf[n.id] = 0; incoming[n.id] = []; });
+      edges.forEach(e => { incoming[e.to].push(e.from); });
+      let changed = true;
+      while (changed) {
+        changed = false;
+        edges.forEach(e => {
+          if (rankOf[e.to] < rankOf[e.from] + 1) { rankOf[e.to] = rankOf[e.from] + 1; changed = true; }
+        });
+      }
+      const maxRank = Math.max(...Object.values(rankOf));
+      const ranks = [];
+      for (let r = 0; r <= maxRank; r++) ranks.push([]);
+      nodes.forEach(n => { ranks[rankOf[n.id]].push(n); });
+      const pos = {};
+      const rankWidths = ranks.map(r => r.length * NODE_W + (r.length - 1) * NODE_GAP);
+      const maxWidth = Math.max(...rankWidths, 400);
+      ranks.forEach((rankNodes, r) => {
+        const withAnchor = rankNodes.map(n => {
+          const parents = incoming[n.id].map(p => pos[p] ? pos[p].x + NODE_W / 2 : null).filter(x => x !== null);
+          const anchor = parents.length ? parents.reduce((a, b) => a + b, 0) / parents.length : null;
+          return { node: n, anchor };
+        });
+        withAnchor.sort((a, b) => {
+          if (a.anchor === null && b.anchor === null) return 0;
+          if (a.anchor === null) return 1;
+          if (b.anchor === null) return -1;
+          return a.anchor - b.anchor;
+        });
+        const totalW = withAnchor.length * NODE_W + (withAnchor.length - 1) * NODE_GAP;
+        const startX = (maxWidth - totalW) / 2 + 20;
+        withAnchor.forEach((it, i) => {
+          pos[it.node.id] = { x: startX + i * (NODE_W + NODE_GAP), y: 20 + r * (NODE_H + RANK_GAP) };
+        });
+      });
+      for (let pass = 0; pass < 3; pass++) {
+        ranks.forEach(rankNodes => {
+          const sorted = rankNodes.slice().sort((a, b) => pos[a.id].x - pos[b.id].x);
+          for (let i = 1; i < sorted.length; i++) {
+            const prev = pos[sorted[i - 1].id], cur = pos[sorted[i].id];
+            if (cur.x < prev.x + NODE_W + NODE_GAP) cur.x = prev.x + NODE_W + NODE_GAP;
+          }
+        });
+      }
+      const width = Math.max(...Object.values(pos).map(p => p.x)) + NODE_W + 20;
+      const height = Math.max(...Object.values(pos).map(p => p.y)) + NODE_H + 24;
+      const s = svgEl(width, height);
+      s.setAttribute('width', width);
+      s.setAttribute('height', height);
+      s.style.maxWidth = '100%';
+      s.style.height = 'auto';
+      const defs = el('defs');
+      const marker = el('marker', { id: 'arrow', viewBox: '0 0 10 10', refX: 9, refY: 5, markerWidth: 6, markerHeight: 6, orient: 'auto-start-reverse' });
+      marker.appendChild(el('path', { d: 'M 0 0 L 10 5 L 0 10 z', fill: '#94a3b8' }));
+      defs.appendChild(marker);
+      s.appendChild(defs);
+      edges.forEach(e => {
+        const from = pos[e.from], to = pos[e.to];
+        if (!from || !to) return;
+        const x1 = from.x + NODE_W / 2, y1 = from.y + NODE_H;
+        const x2 = to.x + NODE_W / 2, y2 = to.y;
+        const cy = (y1 + y2) / 2;
+        const d = 'M' + x1 + ',' + y1 + ' C' + x1 + ',' + cy + ' ' + x2 + ',' + cy + ' ' + x2 + ',' + y2;
+        s.appendChild(el('path', { d, fill: 'none', stroke: '#94a3b8', 'stroke-width': 1.25, 'marker-end': 'url(#arrow)' }));
+        if (e.label) {
+          const mx = (x1 + x2) / 2, my = cy;
+          const w = Math.max(e.label.length * 9 + 10, 28);
+          s.appendChild(el('rect', { x: mx - w / 2, y: my - 10, width: w, height: 18, rx: 4, fill: '#ffffff', stroke: '#e5e7eb' }));
+          const t = el('text', { x: mx, y: my + 3, 'text-anchor': 'middle', 'font-size': 11, fill: '#475569' });
+          t.textContent = e.label;
+          s.appendChild(t);
+        }
+      });
+      nodes.forEach(n => {
+        const p = pos[n.id];
+        const k = KIND_STYLE[n.kind] || KIND_STYLE.entry;
+        s.appendChild(el('rect', { x: p.x, y: p.y, width: NODE_W, height: NODE_H, rx: 10, fill: k.fill, stroke: k.stroke, 'stroke-width': n.kind === 'channel' ? 1.4 : 1 }));
+        const titleY = n.sub ? p.y + 24 : p.y + NODE_H / 2 + 4;
+        const title = el('text', { x: p.x + NODE_W / 2, y: titleY, 'text-anchor': 'middle', 'font-size': 12.5, 'font-weight': 600, fill: k.text });
+        title.textContent = n.title;
+        s.appendChild(title);
+        if (n.sub) {
+          const sub = el('text', { x: p.x + NODE_W / 2, y: p.y + 42, 'text-anchor': 'middle', 'font-size': 11, fill: k.text, opacity: 0.82 });
+          sub.textContent = n.sub;
+          s.appendChild(sub);
+        }
+      });
+      mount.innerHTML = '';
+      mount.appendChild(s);
+    }
+
+    drawBarChart(document.getElementById('chart-funnel'), {
+      categories: ['注册→KYC完成', 'KYC→首次汇款', '首汇→复汇率', '汇率提醒转化', '沉默召回率'],
+      series: [
+        { name: '当前基准（估算）',    data: [45, 35, 40, 15, 10], tone: 'neutral' },
+        { name: 'MA 自动化后（估算）', data: [55, 46, 56, 24, 26], tone: 'success' },
+      ], valueSuffix: '%', height: 260,
+    });
+    drawBarChart(document.getElementById('chart-channel'), {
+      categories: ['WhatsApp', 'App Push', 'SMS', 'Email', 'Voice OTP'],
+      series: [{ name: '跨境汇款触达适配（相对值·示意）', data: [94, 82, 88, 50, 42], tone: 'info' }],
+      valueSuffix: '', height: 220,
+    });
+
+    drawJourney(document.getElementById('dag-j1'),
+      [
+        {id:'start',kind:'entry',title:'开始',sub:'事件: 注册·KYC未完成'},
+        {id:'w1',kind:'wait',title:'等待事件',sub:'2h 内等待: KYC 完成'},
+        {id:'ok0',kind:'exitOk',title:'结束（已完成）',sub:'KYC 通过'},
+        {id:'br1',kind:'branch',title:'条件分支',sub:'属性: KYC 中断环节'},
+        {id:'pa',kind:'channel',title:'App Push',sub:'(未传证件) 2分钟完成认证'},
+        {id:'pb',kind:'channel',title:'App Push',sub:'(未活体) 刷脸10秒即可'},
+        {id:'pc',kind:'channel',title:'App Push',sub:'(缺地址证明) 上传即可提额'},
+        {id:'w2',kind:'wait',title:'等待事件',sub:'24h 内等待: KYC 完成'},
+        {id:'ok1',kind:'exitOk',title:'结束（已完成）',sub:'KYC 通过'},
+        {id:'st1',kind:'sendtime',title:'可发送时间',sub:'每天 9:00-21:00 终端时区'},
+        {id:'wa1',kind:'channel',title:'WhatsApp',sub:'客服协助完成认证'},
+        {id:'w3',kind:'wait',title:'等待事件',sub:'48h 内等待: KYC 完成'},
+        {id:'ok2',kind:'exitOk',title:'结束（已完成）',sub:'KYC 通过'},
+        {id:'sms1',kind:'channel',title:'SMS',sub:'认证入口+首汇免手续费'},
+        {id:'end',kind:'exitEnd',title:'结束',sub:'转长期培育'},
+      ],
+      [
+        {from:'start',to:'w1'},{from:'w1',to:'ok0',label:'已完成'},{from:'w1',to:'br1',label:'未完成'},
+        {from:'br1',to:'pa',label:'未传证件'},{from:'br1',to:'pb',label:'未活体'},{from:'br1',to:'pc',label:'缺地址证明'},
+        {from:'pa',to:'w2'},{from:'pb',to:'w2'},{from:'pc',to:'w2'},
+        {from:'w2',to:'ok1',label:'已完成'},{from:'w2',to:'st1',label:'未完成'},
+        {from:'st1',to:'wa1'},{from:'wa1',to:'w3'},{from:'w3',to:'ok2',label:'已完成'},{from:'w3',to:'sms1',label:'未完成'},
+        {from:'sms1',to:'end'},
+      ]);
+
+    drawJourney(document.getElementById('dag-j2'),
+      [
+        {id:'start',kind:'entry',title:'开始',sub:'事件: KYC通过·无汇款'},
+        {id:'br1',kind:'branch',title:'条件分支',sub:'属性: 是否已添加收款人'},
+        {id:'pa',kind:'channel',title:'App Push',sub:'(已添加) 首笔免手续费·立即汇'},
+        {id:'pb',kind:'channel',title:'App Push',sub:'(未添加) 添加收款人仅需1分钟'},
+        {id:'w1',kind:'wait',title:'等待事件',sub:'24h 内等待: 完成首汇'},
+        {id:'ok0',kind:'exitOk',title:'结束（已首汇）',sub:'完成首笔汇款'},
+        {id:'st1',kind:'sendtime',title:'可发送时间',sub:'每天 9:00-21:00 终端时区'},
+        {id:'wa1',kind:'channel',title:'WhatsApp',sub:'到账时效承诺+牌照背书'},
+        {id:'w2',kind:'wait',title:'等待事件',sub:'3天内等待: 完成首汇'},
+        {id:'ok1',kind:'exitOk',title:'结束（已首汇）',sub:'完成首笔汇款'},
+        {id:'em1',kind:'channel',title:'Email',sub:'费率对比+安全保障说明'},
+        {id:'w3',kind:'wait',title:'等待事件',sub:'7天内等待: 完成首汇'},
+        {id:'ok2',kind:'exitOk',title:'结束（已首汇）',sub:'完成首笔汇款'},
+        {id:'end',kind:'exitEnd',title:'结束',sub:'转汇率提醒旅程'},
+      ],
+      [
+        {from:'start',to:'br1'},{from:'br1',to:'pa',label:'已添加'},{from:'br1',to:'pb',label:'未添加'},
+        {from:'pa',to:'w1'},{from:'pb',to:'w1'},
+        {from:'w1',to:'ok0',label:'已首汇'},{from:'w1',to:'st1',label:'未首汇'},
+        {from:'st1',to:'wa1'},{from:'wa1',to:'w2'},{from:'w2',to:'ok1',label:'已首汇'},{from:'w2',to:'em1',label:'未首汇'},
+        {from:'em1',to:'w3'},{from:'w3',to:'ok2',label:'已首汇'},{from:'w3',to:'end',label:'未首汇'},
+      ]);
+
+    drawJourney(document.getElementById('dag-j3'),
+      [
+        {id:'start',kind:'entry',title:'开始',sub:'事件: 汇率达目标值'},
+        {id:'p1',kind:'channel',title:'App Push',sub:'汇率已达你的目标·即时汇'},
+        {id:'w1',kind:'wait',title:'等待事件',sub:'2h 内等待: 是否汇款'},
+        {id:'ok0',kind:'exitOk',title:'结束（已汇款）',sub:'完成汇款'},
+        {id:'wa1',kind:'channel',title:'WhatsApp',sub:'当前汇率与到手金额试算'},
+        {id:'w2',kind:'wait',title:'等待事件',sub:'12h 内等待: 是否汇款'},
+        {id:'ok1',kind:'exitOk',title:'结束（已汇款）',sub:'完成汇款'},
+        {id:'p2',kind:'channel',title:'App Push',sub:'优惠汇率窗口即将结束'},
+        {id:'w3',kind:'wait',title:'等待事件',sub:'12h 内等待: 是否汇款'},
+        {id:'ok2',kind:'exitOk',title:'结束（已汇款）',sub:'完成汇款'},
+        {id:'end',kind:'exitEnd',title:'结束',sub:'继续监控汇率'},
+      ],
+      [
+        {from:'start',to:'p1'},{from:'p1',to:'w1'},
+        {from:'w1',to:'ok0',label:'已汇款'},{from:'w1',to:'wa1',label:'未汇款'},
+        {from:'wa1',to:'w2'},{from:'w2',to:'ok1',label:'已汇款'},{from:'w2',to:'p2',label:'未汇款'},
+        {from:'p2',to:'w3'},{from:'w3',to:'ok2',label:'已汇款'},{from:'w3',to:'end',label:'未汇款'},
+      ]);
+
+    drawJourney(document.getElementById('dag-j4'),
+      [
+        {id:'start',kind:'entry',title:'开始',sub:'属性: 汇款周期临近'},
+        {id:'st1',kind:'sendtime',title:'可发送时间',sub:'按发薪日时段 终端时区'},
+        {id:'br1',kind:'branch',title:'条件分支',sub:'属性: 周期类型'},
+        {id:'pm',kind:'channel',title:'App Push',sub:'(月度) 再次汇给{收款人}·一键'},
+        {id:'pb',kind:'channel',title:'App Push',sub:'(双周) 本期汇款·当前汇率优'},
+        {id:'pf',kind:'channel',title:'App Push',sub:'(节庆前) 节日汇款早鸟费率'},
+        {id:'w1',kind:'wait',title:'等待事件',sub:'3天内等待: 是否汇款'},
+        {id:'ok0',kind:'exitOk',title:'结束（已复汇）',sub:'完成汇款'},
+        {id:'wa1',kind:'channel',title:'WhatsApp',sub:'专属费率+一键复汇链接'},
+        {id:'w2',kind:'wait',title:'等待事件',sub:'4天内等待: 是否汇款'},
+        {id:'ok1',kind:'exitOk',title:'结束（已复汇）',sub:'完成汇款'},
+        {id:'end',kind:'exitEnd',title:'结束',sub:'转沉默召回旅程'},
+      ],
+      [
+        {from:'start',to:'st1'},{from:'st1',to:'br1'},
+        {from:'br1',to:'pm',label:'月度'},{from:'br1',to:'pb',label:'双周'},{from:'br1',to:'pf',label:'节庆前'},
+        {from:'pm',to:'w1'},{from:'pb',to:'w1'},{from:'pf',to:'w1'},
+        {from:'w1',to:'ok0',label:'已汇款'},{from:'w1',to:'wa1',label:'未汇款'},
+        {from:'wa1',to:'w2'},{from:'w2',to:'ok1',label:'已汇款'},{from:'w2',to:'end',label:'未汇款'},
+      ]);
+
+    drawJourney(document.getElementById('dag-j5'),
+      [
+        {id:'start',kind:'entry',title:'开始',sub:'事件: 发起汇款'},
+        {id:'p0',kind:'channel',title:'App Push',sub:'汇款已受理·订单号与预计到账'},
+        {id:'w1',kind:'wait',title:'等待',sub:'等待至处理中'},
+        {id:'p1',kind:'channel',title:'App Push',sub:'处理中·已汇出'},
+        {id:'w2',kind:'wait',title:'等待事件',sub:'等待: 是否到账'},
+        {id:'p2',kind:'channel',title:'App Push+SMS',sub:'收款人已到账'},
+        {id:'em1',kind:'channel',title:'Email',sub:'电子回单与凭证'},
+        {id:'ok',kind:'exitOk',title:'结束（已到账）',sub:'汇款完成'},
+        {id:'pe',kind:'channel',title:'App Push+SMS',sub:'汇款异常·处理进度与客服'},
+        {id:'w3',kind:'wait',title:'等待事件',sub:'等待: 异常是否解决'},
+        {id:'end',kind:'exitEnd',title:'结束',sub:'转人工客服处理'},
+      ],
+      [
+        {from:'start',to:'p0'},{from:'p0',to:'w1'},{from:'w1',to:'p1'},{from:'p1',to:'w2'},
+        {from:'w2',to:'p2',label:'已到账'},{from:'w2',to:'pe',label:'异常'},
+        {from:'p2',to:'em1'},{from:'em1',to:'ok'},
+        {from:'pe',to:'w3'},{from:'w3',to:'ok',label:'已解决'},{from:'w3',to:'end',label:'未解决'},
+      ]);
+
+    drawJourney(document.getElementById('dag-j6'),
+      [
+        {id:'start',kind:'entry',title:'开始',sub:'属性:60天未汇/汇款成功后'},
+        {id:'br1',kind:'branch',title:'条件分支',sub:'属性: 触发类型'},
+        {id:'pr',kind:'channel',title:'App Push',sub:'(汇款后) 推荐好友双方各得奖励'},
+        {id:'ps',kind:'channel',title:'App Push',sub:'(沉默) 老客专属优惠费率'},
+        {id:'w1',kind:'wait',title:'等待事件',sub:'7天内等待: 推荐/汇款'},
+        {id:'w2',kind:'wait',title:'等待事件',sub:'7天内等待: 是否汇款'},
+        {id:'ok',kind:'exitOk',title:'结束（已转化）',sub:'汇款或成功推荐'},
+        {id:'wa1',kind:'channel',title:'WhatsApp',sub:'专属链接·分享给同乡'},
+        {id:'sms1',kind:'channel',title:'SMS',sub:'限时零手续费回归'},
+        {id:'w3',kind:'wait',title:'等待事件',sub:'14天内等待: 是否转化'},
+        {id:'ok2',kind:'exitOk',title:'结束（已转化）',sub:'汇款或成功推荐'},
+        {id:'end',kind:'exitEnd',title:'结束',sub:'标记深度流失·降频'},
+      ],
+      [
+        {from:'start',to:'br1'},{from:'br1',to:'pr',label:'汇款后推荐'},{from:'br1',to:'ps',label:'沉默召回'},
+        {from:'pr',to:'w1'},{from:'ps',to:'w2'},
+        {from:'w1',to:'ok',label:'已转化'},{from:'w2',to:'ok',label:'已转化'},
+        {from:'w1',to:'wa1',label:'未转化'},{from:'w2',to:'sms1',label:'未转化'},
+        {from:'wa1',to:'w3'},{from:'sms1',to:'w3'},
+        {from:'w3',to:'ok2',label:'已转化'},{from:'w3',to:'end',label:'未转化'},
+      ]);
+
+  })();
+  </script>
+</body>
+</html>

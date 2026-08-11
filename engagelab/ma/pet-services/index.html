@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EngageLab MA · 宠物服务平台增长方案</title>
+  <style>
+    :root {
+      --bg: #ffffff;
+      --bg-soft: #f7f8fa;
+      --bg-elev: #ffffff;
+      --border: #e5e7eb;
+      --border-strong: #d1d5db;
+      --text: #111827;
+      --text-2: #374151;
+      --text-3: #6b7280;
+      --text-4: #9ca3af;
+      --accent: #2563eb;
+      --accent-soft: #dbeafe;
+      --success: #16a34a;
+      --success-soft: #dcfce7;
+      --warning: #d97706;
+      --warning-soft: #fef3c7;
+      --info: #0369a1;
+      --info-soft: #e0f2fe;
+      --danger: #dc2626;
+      --danger-soft: #fee2e2;
+      --radius: 10px;
+      --radius-sm: 6px;
+      --shadow: 0 1px 2px rgba(16, 24, 40, 0.04);
+    }
+
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; background: var(--bg-soft); color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC",
+        "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", sans-serif;
+      line-height: 1.6; -webkit-font-smoothing: antialiased; font-size: 15px; }
+
+    main { max-width: 1180px; margin: 0 auto; padding: 32px 28px 80px; }
+
+    h1 { font-size: 30px; font-weight: 700; margin: 0 0 8px; letter-spacing: -0.01em; color: var(--text); }
+    h2 { font-size: 22px; font-weight: 700; margin: 0 0 12px; letter-spacing: -0.005em; color: var(--text); }
+    h3 { font-size: 17px; font-weight: 600; margin: 0 0 10px; color: var(--text); }
+    p { margin: 0 0 8px; color: var(--text-2); }
+    .muted { color: var(--text-3); }
+    .small { font-size: 13px; }
+    .bold { font-weight: 600; }
+
+    .section { background: var(--bg-elev); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 24px 26px; margin-bottom: 20px; }
+    .section-plain { padding: 6px 2px 18px; margin-bottom: 12px; }
+    .divider { height: 1px; background: var(--border); margin: 16px 0; border: none; }
+
+    .hero { background: linear-gradient(180deg, #fff 0%, #f0fdf4 100%);
+      border: 1px solid var(--border); border-radius: 14px; padding: 28px 30px;
+      margin-bottom: 24px; }
+    .hero-pills { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 14px; }
+    .hero-subtitle { color: var(--text-3); font-size: 15px; max-width: 900px; margin: 8px 0 18px; }
+
+    .pill { display: inline-flex; align-items: center; padding: 2px 10px;
+      font-size: 12px; border-radius: 999px; border: 1px solid var(--border-strong);
+      color: var(--text-2); background: #fff; font-weight: 500; }
+    .pill-accent { background: var(--accent-soft); border-color: var(--accent); color: var(--accent); }
+    .pill-info { background: var(--info-soft); border-color: var(--info); color: var(--info); }
+    .pill-success { background: var(--success-soft); border-color: var(--success); color: var(--success); }
+    .pill-warn { background: var(--warning-soft); border-color: var(--warning); color: var(--warning); }
+
+    .grid { display: grid; gap: 16px; }
+    .grid-4 { grid-template-columns: repeat(4, 1fr); }
+    .grid-3 { grid-template-columns: repeat(3, 1fr); }
+    .grid-2 { grid-template-columns: repeat(2, 1fr); }
+    .grid-5 { grid-template-columns: repeat(5, 1fr); }
+    .grid-1-2 { grid-template-columns: 1fr 2fr; }
+    .grid-2-1 { grid-template-columns: 1.4fr 1fr; }
+    .grid-12-1 { grid-template-columns: 1.2fr 1fr; }
+    .row { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+
+    .stat { padding: 14px 16px; background: var(--bg-elev); border: 1px solid var(--border);
+      border-radius: var(--radius); }
+    .stat-value { font-size: 26px; font-weight: 700; letter-spacing: -0.01em; color: var(--text);
+      line-height: 1.15; }
+    .stat-value.success { color: var(--success); }
+    .stat-value.info { color: var(--info); }
+    .stat-value.warn { color: var(--warning); }
+
+    .stat-label { font-size: 12px; color: var(--text-3); margin-top: 4px; }
+
+    .card { background: var(--bg-elev); border: 1px solid var(--border);
+      border-radius: var(--radius); overflow: hidden; }
+    .card-header { padding: 10px 16px; border-bottom: 1px solid var(--border);
+      background: #fafbfc; font-size: 13px; font-weight: 600; color: var(--text-2); }
+    .card-body { padding: 16px; }
+    .card-body.p-sm { padding: 12px; }
+    .card-body ul { margin: 0; padding-left: 18px; }
+    .card-body li { margin-bottom: 4px; font-size: 13.5px; color: var(--text-2); }
+
+    .callout { padding: 12px 14px; border-radius: var(--radius-sm);
+      border: 1px solid var(--border); border-left-width: 3px; background: var(--bg-soft); }
+    .callout-title { font-weight: 600; margin-bottom: 4px; font-size: 14px; }
+    .callout-body { font-size: 13px; color: var(--text-2); }
+    .callout-body p { font-size: 13px; color: var(--text-2); margin: 0 0 4px; }
+    .callout.info { border-left-color: var(--info); background: var(--info-soft); }
+    .callout.info .callout-title { color: var(--info); }
+    .callout.success { border-left-color: var(--success); background: var(--success-soft); }
+    .callout.success .callout-title { color: var(--success); }
+    .callout.warn { border-left-color: var(--warning); background: var(--warning-soft); }
+    .callout.warn .callout-title { color: var(--warning); }
+    .callout.neutral { border-left-color: var(--text-3); }
+
+    table { width: 100%; border-collapse: collapse; font-size: 13.5px;
+      background: var(--bg-elev); border: 1px solid var(--border); border-radius: var(--radius);
+      overflow: hidden; }
+    th, td { padding: 10px 12px; text-align: left; border-bottom: 1px solid var(--border);
+      color: var(--text-2); vertical-align: middle; }
+    th { background: #fafbfc; font-weight: 600; font-size: 12.5px; color: var(--text-3);
+      letter-spacing: 0.01em; text-transform: uppercase; }
+    tr:last-child td { border-bottom: 0; }
+    tr.tone-success td { background: rgba(22, 163, 74, 0.04); }
+    tr.tone-info td { background: rgba(3, 105, 161, 0.04); }
+
+    .signal-row { display: flex; gap: 10px; padding: 10px 0;
+      border-bottom: 1px solid var(--border); align-items: center; }
+    .signal-row:last-child { border-bottom: 0; }
+    .signal-row .left { flex: 1; min-width: 0; }
+    .signal-row .label { font-size: 13px; font-weight: 600; }
+    .signal-row .hint { font-size: 12px; color: var(--text-3); }
+    .signal-row .value { font-weight: 700; color: var(--text); font-size: 14px; white-space: nowrap; }
+
+    .chart { width: 100%; }
+    .chart svg { width: 100%; height: auto; display: block; }
+    .chart-legend { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--border); }
+    .chart-legend .leg-item { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--text-3); }
+    .chart-legend .dot { width: 10px; height: 10px; border-radius: 2px; }
+
+    .dag-wrap { overflow-x: auto; padding: 8px 2px; }
+    .dag-wrap svg { display: block; margin: 0 auto; }
+
+    .toc-bar { position: sticky; top: 0; background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(8px); border-bottom: 1px solid var(--border);
+      z-index: 10; padding: 10px 28px; margin: -32px -28px 24px;
+      font-size: 12.5px; }
+    .toc-bar .toc-inner { max-width: 1180px; margin: 0 auto; display: flex; gap: 14px;
+      align-items: center; overflow-x: auto; }
+    .toc-bar a { color: var(--text-3); text-decoration: none; white-space: nowrap; padding: 4px 2px; }
+    .toc-bar a:hover { color: var(--accent); }
+    .toc-bar .brand { font-weight: 700; color: var(--text); }
+
+    @page { size: A4; margin: 14mm; }
+    @media print {
+      body { background: #fff; }
+      main { max-width: none; padding: 0; }
+      .toc-bar { display: none; }
+      .section, .card, .hero { page-break-inside: avoid; box-shadow: none; }
+      h2 { page-break-after: avoid; }
+      .hero { break-before: avoid; }
+      .dag-wrap { overflow: visible; }
+      .dag-wrap svg { max-width: 100%; }
+    }
+
+    .spacer-sm { height: 6px; }
+    .spacer-md { height: 12px; }
+
+    .step-num { display: inline-flex; align-items: center; justify-content: center;
+      width: 22px; height: 22px; border-radius: 50%; background: var(--accent-soft);
+      color: var(--accent); font-weight: 700; font-size: 12px; margin-right: 8px; }
+
+    footer.site-footer { margin-top: 36px; padding-top: 16px; border-top: 1px solid var(--border);
+      font-size: 12px; color: var(--text-4); text-align: center; }
+  
+  .back-home {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    color: rgba(255,255,255,0.65);
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 500;
+    padding: 4px 10px 4px 6px;
+    border-radius: 6px;
+    border: 1px solid rgba(255,255,255,0.18);
+    margin-right: 16px;
+    white-space: nowrap;
+    transition: all 0.2s ease;
+    flex-shrink: 0;
+  }
+  .back-home:hover {
+    color: #fff;
+    background: rgba(255,255,255,0.12);
+    border-color: rgba(255,255,255,0.35);
+  }
+  .back-home svg {
+    width: 14px;
+    height: 14px;
+    opacity: 0.8;
+  }
+</style>
+</head>
+<body>
+  <nav class="toc-bar">
+    <div class="toc-inner">
+      <a class="back-home" href="../">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+        返回首页
+      </a>
+      <span class="brand">EngageLab MA · 宠物服务平台方案</span>
+      <a href="#s-market">市场机会</a><a href="#s-funnel">用户漏斗</a><a href="#s-why">为什么 EngageLab</a>
+      <a href="#s-scenarios">场景总览</a><a href="#s-journey">旅程编排</a><a href="#s-channel">渠道选型</a>
+      <a href="#s-compliance">合规安全</a><a href="#s-plan">测试计划</a>
+    </div>
+  </nav>
+  <main>
+    <section class="hero">
+      <div class="hero-pills">
+        <span class="pill pill-success">宠物服务 · 医疗 / 洗护 / 用品</span>
+        <span class="pill">全球 · 欧美 + 东南亚</span>
+        <span class="pill pill-info">强周期性 · 高情感黏性</span>
+      </div>
+      <h1>EngageLab MA · 宠物服务平台增长方案</h1>
+      <p class="hero-subtitle">
+        宠物是"强周期 + 高情感"的品类——疫苗、驱虫、洗护、口粮都有明确的周期节律，
+        而宠物档案（品种、年龄、体重）一旦建立，几乎所有服务都能被精准预测与提醒。
+        本方案以 <span class="bold">宠物建档激活、疫苗驱虫周期提醒、洗护预约与履约、口粮耗材复购、就医与健康随访、会员订阅与沉默召回</span> 六大旅程切入，
+        统一编排 <span class="bold">App Push（主力）+ SMS + Email + WhatsApp</span> 四类通道。
+      </p>
+      <div class="row">
+        <span class="pill pill-accent">极光 / App Push（周期提醒）</span>
+        <span class="pill pill-accent">SMS（预约与就医节点）</span>
+        <span class="pill pill-accent">Email（健康档案/账单）</span>
+        <span class="pill pill-accent">WhatsApp（门店沟通）</span>
+      </div>
+    </section>
+
+    <section id="s-market" class="section">
+      <h2>一、为什么宠物平台必须做周期化自动运营</h2>
+      <div class="grid grid-4" style="margin-bottom:16px">
+        <div class="stat"><div class="stat-value warn">档案是钥匙</div><div class="stat-label">没有宠物档案就无法预测任何服务周期</div></div>
+        <div class="stat"><div class="stat-value info">强周期性</div><div class="stat-label">疫苗/驱虫/洗护/口粮都有明确周期节律</div></div>
+        <div class="stat"><div class="stat-value">高情感黏性</div><div class="stat-label">宠物主对"为它好"的提醒接受度极高</div></div>
+        <div class="stat"><div class="stat-value success">全生命周期</div><div class="stat-label">幼年到老年，需求随年龄自然演进</div></div>
+      </div>
+      <p class="muted small">注：下文所有转化率、提升幅度为宠物行业估算区间，落地以实测为准。健康类提醒不构成兽医诊疗建议。</p>
+      <hr class="divider" />
+      <div class="grid grid-2">
+        <div class="callout neutral"><div class="callout-title">痛点 1 · 用户不建宠物档案</div><div class="callout-body"><p>没有宠物品种、年龄、体重等档案，平台就无法预测疫苗、驱虫、口粮任何周期，运营完全失去抓手。</p></div></div>
+        <div class="callout info"><div class="callout-title">解法 · 宠物建档激活旅程</div><div class="callout-body"><p>用"建档后自动提醒疫苗驱虫时间、领取新宠礼包"驱动建档，把档案变成运营的基础设施。</p></div></div>
+        <div class="callout neutral"><div class="callout-title">痛点 2 · 疫苗驱虫周期错过</div><div class="callout-body"><p>宠物主容易忘记疫苗与驱虫时间，既影响宠物健康，平台也损失掉最确定的服务收入。</p></div></div>
+        <div class="callout info"><div class="callout-title">解法 · 周期性健康提醒</div><div class="callout-body"><p>按品种与年龄自动推算疫苗、驱虫周期，提前提醒并直连预约，是转化最确定的旅程。</p></div></div>
+        <div class="callout neutral"><div class="callout-title">痛点 3 · 洗护爽约与复购断层</div><div class="callout-body"><p>预约洗护不到店浪费门店资源；口粮猫砂等耗材用完不复购，直接流向电商平台。</p></div></div>
+        <div class="callout info"><div class="callout-title">解法 · 履约提醒 + 耗材补货</div><div class="callout-body"><p>洗护多段提醒降低爽约；按宠物体重与规格推算口粮消耗周期，提前推补货。</p></div></div>
+        <div class="callout neutral"><div class="callout-title">痛点 4 · 就医后无随访、老龄需求未覆盖</div><div class="callout-body"><p>看病后不复诊、不服药，健康结果差；宠物进入老年期后的体检与专用食品需求未被识别。</p></div></div>
+        <div class="callout info"><div class="callout-title">解法 · 就医随访 + 年龄阶段运营</div><div class="callout-body"><p>就医后随访用药与复诊；按宠物年龄自动切换幼年/成年/老年阶段的服务与商品推荐。</p></div></div>
+      </div>
+    </section>
+
+    <section id="s-funnel" class="section">
+      <h2>二、用户漏斗：从建档到全周期服务，每层都有增长空间</h2>
+      <p class="muted small">下图为宠物行业估算区间对比，非实测数据。</p>
+      <div class="chart" id="chart-funnel"></div>
+    </section>
+
+    <section id="s-why" class="section">
+      <h2>三、为什么选择 EngageLab MA</h2>
+      <div class="grid grid-3">
+        <div class="card"><div class="card-header">周期性旅程编排</div><div class="card-body p-sm"><ul><li>疫苗、驱虫、洗护、口粮各有周期，自动循环运行</li><li>按宠物品种、年龄、体重自动推算周期</li></ul></div></div>
+        <div class="card"><div class="card-header">宠物档案驱动</div><div class="card-body p-sm"><ul><li>宠物属性（品种/年龄/体重/绝育状态）作为分群维度</li><li>一位主人多只宠物可分别建档与触达</li></ul></div></div>
+        <div class="card"><div class="card-header">CDP 统一身份（EUID）</div><div class="card-body p-sm"><ul><li>宠物档案、服务记录、消费记录统一为属性</li><li>支撑跨服务（医疗+洗护+商城）的组合运营</li></ul></div></div>
+        <div class="card"><div class="card-header">线上线下协同</div><div class="card-body p-sm"><ul><li>门店预约、到店履约与线上商城统一编排</li><li>WhatsApp 承接门店与宠物主的直接沟通</li></ul></div></div>
+        <div class="card"><div class="card-header">AI 多语言文案</div><div class="card-body p-sm"><ul><li>宠物出海覆盖多语种市场，一套旅程适配多国</li><li>情感化文案（以宠物口吻）AI 生成并 A/B</li></ul></div></div>
+        <div class="card"><div class="card-header">合规 · 宠物医疗边界</div><div class="card-body p-sm"><ul><li>健康提醒不构成兽医诊疗建议</li><li>用药提醒仅做周期提示，不做用药指导</li></ul></div></div>
+      </div>
+    </section>
+
+    <section id="s-scenarios" class="section">
+      <h2>四、高 ROI 运营场景总览</h2>
+      <table>
+        <thead><tr><th>#</th><th>场景</th><th>生命周期阶段</th><th>核心触发</th><th>渠道组合</th><th>预期提升（估算）</th></tr></thead>
+        <tbody>
+          <tr class="tone-info"><td>J1</td><td>宠物建档激活</td><td>激活</td><td>注册后未建档</td><td>App Push + Email</td><td>建档率 +30~50%</td></tr>
+          <tr class="tone-success"><td>J2</td><td>疫苗 / 驱虫周期提醒</td><td>服务复购</td><td>按档案推算周期临近</td><td>App Push + SMS</td><td>服务转化 +30~50%</td></tr>
+          <tr><td>J3</td><td>洗护预约与履约提醒</td><td>服务履约</td><td>预约成功 / 到店前</td><td>App Push + SMS</td><td>到店率 +20~35%</td></tr>
+          <tr class="tone-success"><td>J4</td><td>口粮 / 耗材智能补货</td><td>商城复购</td><td>按消耗周期推算</td><td>App Push + Email</td><td>复购频次 +25~45%</td></tr>
+          <tr><td>J5</td><td>就医随访 + 健康管理</td><td>医疗闭环</td><td>就诊后 / 用药周期</td><td>App Push + SMS + Email</td><td>复诊率 +20~35%</td></tr>
+          <tr><td>J6</td><td>会员订阅 + 年龄阶段运营</td><td>LTV / 召回</td><td>高频用户 / 年龄阶段变化</td><td>App Push + Email + WhatsApp</td><td>会员转化与召回 +20~35%</td></tr>
+        </tbody>
+      </table>
+      <p class="muted small" style="margin-top:8px">提升幅度为行业公开区间估算，最终以 4 周测试实测为准。</p>
+    </section>
+
+    <section id="s-journey" class="section-plain">
+      <h2>五、核心旅程详细编排</h2>
+      <div class="section" style="margin-top:16px;">
+        <h3>旅程 1：宠物建档激活</h3>
+        <div class="grid grid-2-1"><div class="dag-wrap" id="dag-j1"></div><div>
+          <div class="callout neutral" style="margin-bottom:12px"><div class="callout-title">业务痛点</div><div class="callout-body"><p>没有宠物档案就无法预测任何服务周期，整个自动化运营失去基础。</p></div></div>
+          <div class="callout info" style="margin-bottom:12px"><div class="callout-title">旅程组件配置</div><div class="callout-body">
+            <p><strong>进入条件：</strong>事件：注册成功且未建宠物档案</p>
+            <p><strong>提前退出：</strong>事件：完成宠物建档</p>
+            <p><strong>价值感：</strong>"建档后自动提醒疫苗驱虫时间 + 新宠礼包"</p>
+            <p><strong>分支：</strong>属性：是否已填品种（补全年龄体重以精准推算周期）</p>
+          </div></div>
+          <div class="callout success"><div class="callout-title">预期效益</div><div class="callout-body"><p>建档率 +30~50%（估算）；档案是宠物行业所有自动化运营的基础设施。</p></div></div>
+        </div></div>
+      </div>
+      <div class="section">
+        <h3>旅程 2：疫苗 / 驱虫周期提醒</h3>
+        <div class="grid grid-2-1"><div class="dag-wrap" id="dag-j2"></div><div>
+          <div class="callout neutral" style="margin-bottom:12px"><div class="callout-title">业务痛点</div><div class="callout-body"><p>宠物主容易忘记疫苗与驱虫时间，既影响宠物健康，平台也损失确定性收入。</p></div></div>
+          <div class="callout info" style="margin-bottom:12px"><div class="callout-title">旅程组件配置</div><div class="callout-body">
+            <p><strong>进入条件：</strong>属性：按品种年龄推算的疫苗/驱虫周期临近</p>
+            <p><strong>分支：</strong>属性：服务类型（疫苗 / 体内驱虫 / 体外驱虫）</p>
+            <p><strong>递进：</strong>提前 7 天 → 提前 1 天 → 逾期提醒</p>
+            <p><strong>提前退出：</strong>事件：完成预约或到店服务</p>
+          </div></div>
+          <div class="callout success"><div class="callout-title">预期效益</div><div class="callout-body"><p>服务转化 +30~50%（估算）；这是宠物行业转化最确定、ROI 最高的旅程。</p></div></div>
+        </div></div>
+      </div>
+      <div class="section">
+        <h3>旅程 3：洗护预约与履约提醒</h3>
+        <div class="grid grid-2-1"><div class="dag-wrap" id="dag-j3"></div><div>
+          <div class="callout neutral" style="margin-bottom:12px"><div class="callout-title">业务痛点</div><div class="callout-body"><p>预约洗护不到店浪费门店资源与档期，门店满意度与平台履约口碑双受损。</p></div></div>
+          <div class="callout info" style="margin-bottom:12px"><div class="callout-title">旅程组件配置</div><div class="callout-body">
+            <p><strong>进入条件：</strong>事件：洗护预约成功 / 属性：上次洗护距今超周期</p>
+            <p><strong>时间轴：</strong>预约确认 → T-24h → T-2h（含门店地址）→ 服务后评价</p>
+            <p><strong>分类：</strong>预约类为服务通知，不受营销退订限制</p>
+            <p><strong>周期唤醒：</strong>按毛发类型推算的洗护周期主动提醒</p>
+          </div></div>
+          <div class="callout success"><div class="callout-title">预期效益</div><div class="callout-body"><p>到店率 +20~35%（估算）；周期性洗护是稳定的高频服务收入来源。</p></div></div>
+        </div></div>
+      </div>
+      <div class="section">
+        <h3>旅程 4：口粮 / 耗材智能补货</h3>
+        <div class="grid grid-2-1"><div class="dag-wrap" id="dag-j4"></div><div>
+          <div class="callout neutral" style="margin-bottom:12px"><div class="callout-title">业务痛点</div><div class="callout-body"><p>口粮、猫砂等耗材用完不在平台复购，直接流向综合电商，商城价值无法沉淀。</p></div></div>
+          <div class="callout info" style="margin-bottom:12px"><div class="callout-title">旅程组件配置</div><div class="callout-body">
+            <p><strong>进入条件：</strong>属性：按宠物体重与购买规格推算的消耗周期临近</p>
+            <p><strong>分支：</strong>属性：品类（主粮 / 猫砂 / 零食保健）</p>
+            <p><strong>提前量：</strong>预计用完前 5-7 天提醒，留出配送时间</p>
+            <p><strong>提前退出：</strong>事件：完成复购</p>
+          </div></div>
+          <div class="callout success"><div class="callout-title">预期效益</div><div class="callout-body"><p>复购频次 +25~45%（估算）；按实际消耗推算比统一促销精准得多。</p></div></div>
+        </div></div>
+      </div>
+      <div class="section">
+        <h3>旅程 5：就医随访 + 健康管理</h3>
+        <div class="grid grid-2-1"><div class="dag-wrap" id="dag-j5"></div><div>
+          <div class="callout neutral" style="margin-bottom:12px"><div class="callout-title">业务痛点</div><div class="callout-body"><p>看病后不按时喂药、不复诊，治疗效果差，宠物主对平台医疗服务信任受损。</p></div></div>
+          <div class="callout info" style="margin-bottom:12px"><div class="callout-title">旅程组件配置</div><div class="callout-body">
+            <p><strong>进入条件：</strong>事件：完成就诊</p>
+            <p><strong>阶段：</strong>用药周期提醒 → 恢复情况随访 → 复诊提醒</p>
+            <p><strong>合规：</strong>仅做周期提示与就诊引导，不构成兽医诊疗建议</p>
+            <p><strong>提前退出：</strong>事件：完成复诊 / 疗程结束</p>
+          </div></div>
+          <div class="callout success"><div class="callout-title">预期效益</div><div class="callout-body"><p>复诊率 +20~35%（估算）；医疗闭环是宠物平台最高客单的服务线。</p></div></div>
+        </div></div>
+      </div>
+      <div class="section">
+        <h3>旅程 6：会员订阅 + 年龄阶段运营</h3>
+        <div class="grid grid-2-1"><div class="dag-wrap" id="dag-j6"></div><div>
+          <div class="callout neutral" style="margin-bottom:12px"><div class="callout-title">业务痛点</div><div class="callout-body"><p>高频用户未转会员则 LTV 受限；宠物进入老年期后的体检与专用食品需求未被识别。</p></div></div>
+          <div class="callout info" style="margin-bottom:12px"><div class="callout-title">旅程组件配置</div><div class="callout-body">
+            <p><strong>进入条件：</strong>属性：高频消费用户 / 宠物年龄阶段变化 / 长期未活跃</p>
+            <p><strong>分支：</strong>属性：触发类型（会员转化 / 年龄阶段推荐 / 沉默召回）</p>
+            <p><strong>年龄运营：</strong>幼年疫苗与训练 → 成年绝育与保健 → 老年体检与处方粮</p>
+            <p><strong>提前退出：</strong>事件：开通会员 / 完成消费</p>
+          </div></div>
+          <div class="callout success"><div class="callout-title">预期效益</div><div class="callout-body"><p>会员转化与召回 +20~35%（估算）；按宠物年龄自然演进的推荐接受度极高。</p></div></div>
+        </div></div>
+      </div>
+    </section>
+
+    <section id="s-channel" class="section-plain">
+      <h2>六、渠道选型参考</h2>
+      <div class="section">
+        <p class="muted small">宠物服务渠道适配相对值（示意）：App Push 是周期提醒的绝对主力（成本近零、时效可控），SMS 用于预约与就医关键节点，Email 承载健康档案与账单，WhatsApp 在门店与宠物主沟通中价值高。</p>
+        <div class="chart" id="chart-channel"></div>
+        <div class="grid grid-2" style="margin-top:14px">
+          <div class="callout info"><div class="callout-title">主力通道</div><div class="callout-body"><p>App Push（疫苗驱虫、洗护、补货等全部周期提醒，宠物主对这类提醒接受度极高）。</p></div></div>
+          <div class="callout neutral"><div class="callout-title">情感化文案</div><div class="callout-body"><p>宠物品类适合用宠物口吻的情感化文案（"该给我打疫苗啦"），打开率显著高于功能性表述。</p></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="s-compliance" class="section">
+      <h2>七、合规与安全</h2>
+      <div class="grid grid-3">
+        <div class="card"><div class="card-header">宠物医疗边界</div><div class="card-body p-sm"><ul><li>健康提醒不构成兽医诊疗建议</li><li>用药提醒仅做周期提示，不做剂量与用药指导</li><li>遵循当地宠物医疗与药品监管要求</li></ul></div></div>
+        <div class="card"><div class="card-header">数据法规</div><div class="card-body p-sm"><ul><li>GDPR / CCPA：数据删除 / 导出 / 同意管理</li><li>PII 脱敏、RBAC 权限、全链路 TLS</li><li>已通过 GDPR、SOC 2 认证</li></ul></div></div>
+        <div class="card"><div class="card-header">触达护栏</div><div class="card-body p-sm"><ul><li>周期提醒频控与去重，避免多宠物用户被重复打扰</li><li>服务预约类通知独立于营销退订</li><li>勿扰时段、记录留存（如 60 天）</li></ul></div></div>
+      </div>
+    </section>
+
+    <section id="s-plan" class="section">
+      <h2>八、测试计划（4 周）</h2>
+      <table>
+        <thead><tr><th>周次</th><th>阶段</th><th>核心工作</th><th>验收指标</th></tr></thead>
+        <tbody>
+          <tr><td>第 1 周</td><td>启动 · 数据打通</td><td>确认埋点（注册、建档、疫苗驱虫记录、预约、购买、就诊）；周期推算规则</td><td>事件入库率 ≥95%；周期推算准确</td></tr>
+          <tr><td>第 2 周</td><td>核心旅程上线</td><td>J1 建档激活 + J2 疫苗驱虫提醒（2 条，小流量）；情感化文案配置</td><td>旅程触发成功率 ≥98%</td></tr>
+          <tr><td>第 3 周</td><td>扩量 · A/B</td><td>J3 洗护履约 + J4 耗材补货全量；情感化 vs 功能性文案 A/B</td><td>服务转化与复购 uplift 显现</td></tr>
+          <tr><td>第 4 周</td><td>复盘 · 扩面</td><td>J5 就医随访 + J6 会员与年龄运营上线；输出 uplift 报告</td><td>建档/服务转化/复购/复诊 uplift 可量化</td></tr>
+        </tbody>
+      </table>
+      <div class="callout success" style="margin-top:14px"><div class="callout-title">投入</div><div class="callout-body"><p>测试期授权费 $0，配置 2 人专属服务团队支撑埋点、周期规则与旅程交付。</p></div></div>
+    </section>
+    <footer class="site-footer">EngageLab MA · 宠物服务平台增长方案 — 内部方案，转化/提升数据为行业估算或公开参考，落地以实测为准。健康类提醒不构成兽医诊疗建议。</footer>
+  </main>
+  <script>
+  (function(){
+    // ========== Shared helpers ==========
+    const COLORS = {
+      accent: '#2563eb', info: '#0369a1', success: '#16a34a',
+      warning: '#d97706', neutral: '#94a3b8', muted: '#cbd5e1',
+      text: '#374151', textMute: '#9ca3af', grid: '#e5e7eb',
+    };
+    function svgEl(w, h) {
+      const s = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+      s.setAttribute('viewBox', '0 0 ' + w + ' ' + h);
+      s.setAttribute('width', '100%');
+      s.setAttribute('preserveAspectRatio', 'xMidYMid meet');
+      return s;
+    }
+    function el(tag, attrs) {
+      const e = document.createElementNS('http://www.w3.org/2000/svg', tag);
+      for (const k in attrs) e.setAttribute(k, attrs[k]);
+      return e;
+    }
+
+    // ========== Bar Chart ==========
+    function drawBarChart(mount, opts) {
+      const { categories, series, valueSuffix = '', height = 240 } = opts;
+      const W = 600, H = height, PAD_L = 44, PAD_R = 16, PAD_T = 12, PAD_B = 56;
+      const innerW = W - PAD_L - PAD_R, innerH = H - PAD_T - PAD_B;
+      const max = Math.max(...series.flatMap(s => s.data), 1);
+      const niceMax = Math.ceil(max / 20) * 20 || 100;
+      const groupCount = categories.length;
+      const barsPerGroup = series.length;
+      const groupW = innerW / groupCount;
+      const barW = Math.min(22, (groupW - 12) / barsPerGroup);
+      const s = svgEl(W, H);
+      for (let i = 0; i <= 4; i++) {
+        const v = (niceMax / 4) * i;
+        const y = PAD_T + innerH - (v / niceMax) * innerH;
+        s.appendChild(el('line', { x1: PAD_L, x2: W - PAD_R, y1: y, y2: y, stroke: COLORS.grid, 'stroke-width': 1 }));
+        const t = el('text', { x: PAD_L - 6, y: y + 4, 'text-anchor': 'end', 'font-size': 10, fill: COLORS.textMute });
+        t.textContent = Math.round(v) + valueSuffix;
+        s.appendChild(t);
+      }
+      categories.forEach((cat, ci) => {
+        const gx = PAD_L + groupW * ci;
+        series.forEach((se, si) => {
+          const v = se.data[ci] || 0;
+          const h = (v / niceMax) * innerH;
+          const x = gx + (groupW - barW * barsPerGroup) / 2 + si * barW;
+          const y = PAD_T + innerH - h;
+          const color = COLORS[se.tone] || COLORS.neutral;
+          s.appendChild(el('rect', { x, y, width: barW - 2, height: h, fill: color, rx: 2 }));
+          if (v > 0) {
+            const label = el('text', { x: x + (barW - 2) / 2, y: y - 2, 'text-anchor': 'middle', 'font-size': 8, fill: COLORS.text });
+            label.textContent = v + valueSuffix;
+            s.appendChild(label);
+          }
+        });
+        const t = el('text', { x: gx + groupW / 2, y: H - PAD_B + 14, 'text-anchor': 'middle', 'font-size': 10, fill: COLORS.text });
+        t.textContent = cat;
+        s.appendChild(t);
+      });
+      // Legend
+      let legX = PAD_L;
+      series.forEach((se) => {
+        const color = COLORS[se.tone] || COLORS.accent;
+        s.appendChild(el('rect', { x: legX, y: H - 18, width: 10, height: 10, rx: 2, fill: color }));
+        const t = el('text', { x: legX + 14, y: H - 10, 'font-size': 10, fill: COLORS.text });
+        t.textContent = se.name;
+        s.appendChild(t);
+        legX += 14 + (se.name.length * 7) + 16;
+      });
+      mount.innerHTML = '';
+      mount.appendChild(s);
+    }
+
+    // ========== Journey DAG renderer (same as fintech/security solution) ==========
+    const KIND_STYLE = {
+      entry:    { fill: '#f1f5f9', stroke: '#94a3b8', text: '#111827' },
+      wait:     { fill: '#fafafa', stroke: '#d1d5db', text: '#6b7280' },
+      branch:   { fill: '#f9fafb', stroke: '#475569', text: '#111827' },
+      channel:  { fill: '#dbeafe', stroke: '#2563eb', text: '#1e3a8a' },
+      sendtime: { fill: '#fef3c7', stroke: '#d97706', text: '#92400e' },
+      exitOk:   { fill: '#dcfce7', stroke: '#16a34a', text: '#14532d' },
+      exitEnd:  { fill: '#f3f4f6', stroke: '#9ca3af', text: '#4b5563' },
+    };
+
+    function drawJourney(mount, nodes, edges) {
+      const NODE_W = 176, NODE_H = 62, RANK_GAP = 42, NODE_GAP = 22;
+      const rankOf = {}, incoming = {};
+      nodes.forEach(n => { rankOf[n.id] = 0; incoming[n.id] = []; });
+      edges.forEach(e => { incoming[e.to].push(e.from); });
+      let changed = true;
+      while (changed) {
+        changed = false;
+        edges.forEach(e => {
+          if (rankOf[e.to] < rankOf[e.from] + 1) { rankOf[e.to] = rankOf[e.from] + 1; changed = true; }
+        });
+      }
+      const maxRank = Math.max(...Object.values(rankOf));
+      const ranks = [];
+      for (let r = 0; r <= maxRank; r++) ranks.push([]);
+      nodes.forEach(n => { ranks[rankOf[n.id]].push(n); });
+      const pos = {};
+      const rankWidths = ranks.map(r => r.length * NODE_W + (r.length - 1) * NODE_GAP);
+      const maxWidth = Math.max(...rankWidths, 400);
+      ranks.forEach((rankNodes, r) => {
+        const withAnchor = rankNodes.map(n => {
+          const parents = incoming[n.id].map(p => pos[p] ? pos[p].x + NODE_W / 2 : null).filter(x => x !== null);
+          const anchor = parents.length ? parents.reduce((a, b) => a + b, 0) / parents.length : null;
+          return { node: n, anchor };
+        });
+        withAnchor.sort((a, b) => {
+          if (a.anchor === null && b.anchor === null) return 0;
+          if (a.anchor === null) return 1;
+          if (b.anchor === null) return -1;
+          return a.anchor - b.anchor;
+        });
+        const totalW = withAnchor.length * NODE_W + (withAnchor.length - 1) * NODE_GAP;
+        const startX = (maxWidth - totalW) / 2 + 20;
+        withAnchor.forEach((it, i) => {
+          pos[it.node.id] = { x: startX + i * (NODE_W + NODE_GAP), y: 20 + r * (NODE_H + RANK_GAP) };
+        });
+      });
+      for (let pass = 0; pass < 3; pass++) {
+        ranks.forEach(rankNodes => {
+          const sorted = rankNodes.slice().sort((a, b) => pos[a.id].x - pos[b.id].x);
+          for (let i = 1; i < sorted.length; i++) {
+            const prev = pos[sorted[i - 1].id], cur = pos[sorted[i].id];
+            if (cur.x < prev.x + NODE_W + NODE_GAP) cur.x = prev.x + NODE_W + NODE_GAP;
+          }
+        });
+      }
+      const width = Math.max(...Object.values(pos).map(p => p.x)) + NODE_W + 20;
+      const height = Math.max(...Object.values(pos).map(p => p.y)) + NODE_H + 24;
+      const s = svgEl(width, height);
+      s.setAttribute('width', width);
+      s.setAttribute('height', height);
+      s.style.maxWidth = '100%';
+      s.style.height = 'auto';
+      const defs = el('defs');
+      const marker = el('marker', { id: 'arrow', viewBox: '0 0 10 10', refX: 9, refY: 5, markerWidth: 6, markerHeight: 6, orient: 'auto-start-reverse' });
+      marker.appendChild(el('path', { d: 'M 0 0 L 10 5 L 0 10 z', fill: '#94a3b8' }));
+      defs.appendChild(marker);
+      s.appendChild(defs);
+      edges.forEach(e => {
+        const from = pos[e.from], to = pos[e.to];
+        if (!from || !to) return;
+        const x1 = from.x + NODE_W / 2, y1 = from.y + NODE_H;
+        const x2 = to.x + NODE_W / 2, y2 = to.y;
+        const cy = (y1 + y2) / 2;
+        const d = 'M' + x1 + ',' + y1 + ' C' + x1 + ',' + cy + ' ' + x2 + ',' + cy + ' ' + x2 + ',' + y2;
+        s.appendChild(el('path', { d, fill: 'none', stroke: '#94a3b8', 'stroke-width': 1.25, 'marker-end': 'url(#arrow)' }));
+        if (e.label) {
+          const mx = (x1 + x2) / 2, my = cy;
+          const w = Math.max(e.label.length * 9 + 10, 28);
+          s.appendChild(el('rect', { x: mx - w / 2, y: my - 10, width: w, height: 18, rx: 4, fill: '#ffffff', stroke: '#e5e7eb' }));
+          const t = el('text', { x: mx, y: my + 3, 'text-anchor': 'middle', 'font-size': 11, fill: '#475569' });
+          t.textContent = e.label;
+          s.appendChild(t);
+        }
+      });
+      nodes.forEach(n => {
+        const p = pos[n.id];
+        const k = KIND_STYLE[n.kind] || KIND_STYLE.entry;
+        s.appendChild(el('rect', { x: p.x, y: p.y, width: NODE_W, height: NODE_H, rx: 10, fill: k.fill, stroke: k.stroke, 'stroke-width': n.kind === 'channel' ? 1.4 : 1 }));
+        const titleY = n.sub ? p.y + 24 : p.y + NODE_H / 2 + 4;
+        const title = el('text', { x: p.x + NODE_W / 2, y: titleY, 'text-anchor': 'middle', 'font-size': 12.5, 'font-weight': 600, fill: k.text });
+        title.textContent = n.title;
+        s.appendChild(title);
+        if (n.sub) {
+          const sub = el('text', { x: p.x + NODE_W / 2, y: p.y + 42, 'text-anchor': 'middle', 'font-size': 11, fill: k.text, opacity: 0.82 });
+          sub.textContent = n.sub;
+          s.appendChild(sub);
+        }
+      });
+      mount.innerHTML = '';
+      mount.appendChild(s);
+    }
+
+    drawBarChart(document.getElementById('chart-funnel'), {
+      categories: ['注册→宠物建档', '建档→首次服务', '疫苗驱虫转化', '耗材复购率', '就诊→复诊率'],
+      series: [
+        { name: '当前基准（估算）',    data: [35, 40, 35, 25, 30], tone: 'neutral' },
+        { name: 'MA 自动化后（估算）', data: [50, 55, 52, 38, 42], tone: 'success' },
+      ], valueSuffix: '%', height: 260,
+    });
+    drawBarChart(document.getElementById('chart-channel'), {
+      categories: ['App Push', 'SMS', 'Email', 'WhatsApp', 'Web Push'],
+      series: [{ name: '宠物服务触达适配（相对值·示意）', data: [94, 72, 65, 60, 35], tone: 'info' }],
+      valueSuffix: '', height: 220,
+    });
+
+    drawJourney(document.getElementById('dag-j1'),
+      [
+        {id:'start',kind:'entry',title:'开始',sub:'事件: 注册·未建宠物档案'},
+        {id:'w1',kind:'wait',title:'等待事件',sub:'2h 内等待: 完成建档'},
+        {id:'ok0',kind:'exitOk',title:'结束（已建档）',sub:'完成宠物建档'},
+        {id:'p1',kind:'channel',title:'App Push',sub:'建档领新宠礼包·自动提醒疫苗'},
+        {id:'w2',kind:'wait',title:'等待事件',sub:'24h 内等待: 完成建档'},
+        {id:'ok1',kind:'exitOk',title:'结束（已建档）',sub:'完成宠物建档'},
+        {id:'br1',kind:'branch',title:'条件分支',sub:'属性: 是否已填品种'},
+        {id:'pa',kind:'channel',title:'App Push',sub:'(已填品种) 补年龄体重更精准'},
+        {id:'em1',kind:'channel',title:'Email',sub:'(未填) 宠物健康周期手册'},
+        {id:'w3',kind:'wait',title:'等待事件',sub:'3天内等待: 完成建档'},
+        {id:'ok2',kind:'exitOk',title:'结束（已建档）',sub:'完成宠物建档'},
+        {id:'end',kind:'exitEnd',title:'结束',sub:'转长期培育'},
+      ],
+      [
+        {from:'start',to:'w1'},{from:'w1',to:'ok0',label:'已建档'},{from:'w1',to:'p1',label:'未建档'},
+        {from:'p1',to:'w2'},{from:'w2',to:'ok1',label:'已建档'},{from:'w2',to:'br1',label:'未建档'},
+        {from:'br1',to:'pa',label:'已填品种'},{from:'br1',to:'em1',label:'未填'},
+        {from:'pa',to:'w3'},{from:'em1',to:'w3'},
+        {from:'w3',to:'ok2',label:'已建档'},{from:'w3',to:'end',label:'未建档'},
+      ]);
+
+    drawJourney(document.getElementById('dag-j2'),
+      [
+        {id:'start',kind:'entry',title:'开始',sub:'属性: 疫苗/驱虫周期临近'},
+        {id:'st1',kind:'sendtime',title:'可发送时间',sub:'每天 9:00-21:00 终端时区'},
+        {id:'br1',kind:'branch',title:'条件分支',sub:'属性: 服务类型'},
+        {id:'pv',kind:'channel',title:'App Push',sub:'(疫苗) 该打疫苗啦·一键预约'},
+        {id:'pi',kind:'channel',title:'App Push',sub:'(体内驱虫) 驱虫周期已到'},
+        {id:'pe',kind:'channel',title:'App Push',sub:'(体外驱虫) 换季驱虫提醒'},
+        {id:'w1',kind:'wait',title:'等待事件',sub:'3天内等待: 预约/到店'},
+        {id:'ok0',kind:'exitOk',title:'结束（已服务）',sub:'完成预约或服务'},
+        {id:'p2',kind:'channel',title:'App Push',sub:'明日为最佳接种时间'},
+        {id:'w2',kind:'wait',title:'等待事件',sub:'4天内等待: 预约/到店'},
+        {id:'ok1',kind:'exitOk',title:'结束（已服务）',sub:'完成预约或服务'},
+        {id:'sms1',kind:'channel',title:'SMS',sub:'已逾期·尽快补种保障健康'},
+        {id:'end',kind:'exitEnd',title:'结束',sub:'下周期再提醒'},
+      ],
+      [
+        {from:'start',to:'st1'},{from:'st1',to:'br1'},
+        {from:'br1',to:'pv',label:'疫苗'},{from:'br1',to:'pi',label:'体内驱虫'},{from:'br1',to:'pe',label:'体外驱虫'},
+        {from:'pv',to:'w1'},{from:'pi',to:'w1'},{from:'pe',to:'w1'},
+        {from:'w1',to:'ok0',label:'已服务'},{from:'w1',to:'p2',label:'未服务'},
+        {from:'p2',to:'w2'},{from:'w2',to:'ok1',label:'已服务'},{from:'w2',to:'sms1',label:'未服务'},{from:'sms1',to:'end'},
+      ]);
+
+    drawJourney(document.getElementById('dag-j3'),
+      [
+        {id:'start',kind:'entry',title:'开始',sub:'事件:预约成功/洗护周期到'},
+        {id:'br1',kind:'branch',title:'条件分支',sub:'属性: 是否已预约'},
+        {id:'pw',kind:'channel',title:'App Push',sub:'(未预约) 该洗澡啦·门店档期'},
+        {id:'p0',kind:'channel',title:'App Push',sub:'(已预约) 预约确认·时间地点'},
+        {id:'w0',kind:'wait',title:'等待事件',sub:'3天内等待: 是否预约'},
+        {id:'w1',kind:'wait',title:'等待',sub:'等待至到店前 24h'},
+        {id:'p1',kind:'channel',title:'App Push',sub:'T-24h 明日洗护提醒'},
+        {id:'w2',kind:'wait',title:'等待',sub:'等待至到店前 2h'},
+        {id:'p2',kind:'channel',title:'App Push+SMS',sub:'T-2h 门店地址与注意事项'},
+        {id:'w3',kind:'wait',title:'等待事件',sub:'当日等待: 是否到店'},
+        {id:'ok',kind:'exitOk',title:'结束（已到店）',sub:'完成洗护+评价'},
+        {id:'end',kind:'exitEnd',title:'结束',sub:'爽约·引导改约'},
+      ],
+      [
+        {from:'start',to:'br1'},{from:'br1',to:'pw',label:'未预约'},{from:'br1',to:'p0',label:'已预约'},
+        {from:'pw',to:'w0'},{from:'w0',to:'p0',label:'已预约'},{from:'w0',to:'end',label:'未预约'},
+        {from:'p0',to:'w1'},{from:'w1',to:'p1'},{from:'p1',to:'w2'},{from:'w2',to:'p2'},
+        {from:'p2',to:'w3'},{from:'w3',to:'ok',label:'已到店'},{from:'w3',to:'end',label:'未到店'},
+      ]);
+
+    drawJourney(document.getElementById('dag-j4'),
+      [
+        {id:'start',kind:'entry',title:'开始',sub:'属性: 耗材消耗周期临近'},
+        {id:'br1',kind:'branch',title:'条件分支',sub:'属性: 品类'},
+        {id:'pm',kind:'channel',title:'App Push',sub:'(主粮) 口粮快见底了·一键复购'},
+        {id:'pl',kind:'channel',title:'App Push',sub:'(猫砂) 猫砂该补货了'},
+        {id:'ps',kind:'channel',title:'App Push',sub:'(零食保健) 补充装优惠'},
+        {id:'w1',kind:'wait',title:'等待事件',sub:'3天内等待: 是否复购'},
+        {id:'ok0',kind:'exitOk',title:'结束（已复购）',sub:'完成购买'},
+        {id:'p2',kind:'channel',title:'App Push',sub:'订阅送货省心又省钱'},
+        {id:'w2',kind:'wait',title:'等待事件',sub:'4天内等待: 是否复购'},
+        {id:'ok1',kind:'exitOk',title:'结束（已复购）',sub:'完成购买'},
+        {id:'em1',kind:'channel',title:'Email',sub:'同款优惠+同类推荐'},
+        {id:'end',kind:'exitEnd',title:'结束',sub:'下周期再提醒'},
+      ],
+      [
+        {from:'start',to:'br1'},{from:'br1',to:'pm',label:'主粮'},{from:'br1',to:'pl',label:'猫砂'},{from:'br1',to:'ps',label:'零食保健'},
+        {from:'pm',to:'w1'},{from:'pl',to:'w1'},{from:'ps',to:'w1'},
+        {from:'w1',to:'ok0',label:'已复购'},{from:'w1',to:'p2',label:'未复购'},
+        {from:'p2',to:'w2'},{from:'w2',to:'ok1',label:'已复购'},{from:'w2',to:'em1',label:'未复购'},{from:'em1',to:'end'},
+      ]);
+
+    drawJourney(document.getElementById('dag-j5'),
+      [
+        {id:'start',kind:'entry',title:'开始',sub:'事件: 完成就诊'},
+        {id:'p1',kind:'channel',title:'App Push',sub:'用药提醒（按疗程周期）'},
+        {id:'w1',kind:'wait',title:'等待',sub:'等待至疗程中段'},
+        {id:'p2',kind:'channel',title:'App Push',sub:'恢复情况如何·1分钟反馈'},
+        {id:'w2',kind:'wait',title:'等待事件',sub:'3天内等待: 是否反馈'},
+        {id:'br1',kind:'branch',title:'条件分支',sub:'属性: 恢复情况'},
+        {id:'pg',kind:'channel',title:'App Push',sub:'(良好) 疗程结束提醒+保健建议'},
+        {id:'pb',kind:'channel',title:'App Push+SMS',sub:'(不佳) 建议尽快复诊'},
+        {id:'w3',kind:'wait',title:'等待事件',sub:'7天内等待: 是否复诊'},
+        {id:'ok',kind:'exitOk',title:'结束（已复诊）',sub:'完成复诊'},
+        {id:'em1',kind:'channel',title:'Email',sub:'宠物健康档案更新'},
+        {id:'end',kind:'exitEnd',title:'结束',sub:'转健康管理旅程'},
+      ],
+      [
+        {from:'start',to:'p1'},{from:'p1',to:'w1'},{from:'w1',to:'p2'},{from:'p2',to:'w2'},{from:'w2',to:'br1'},
+        {from:'br1',to:'pg',label:'恢复良好'},{from:'br1',to:'pb',label:'恢复不佳'},
+        {from:'pg',to:'w3'},{from:'pb',to:'w3'},
+        {from:'w3',to:'ok',label:'已复诊'},{from:'w3',to:'em1',label:'未复诊'},{from:'em1',to:'end'},
+      ]);
+
+    drawJourney(document.getElementById('dag-j6'),
+      [
+        {id:'start',kind:'entry',title:'开始',sub:'属性:高频/年龄变化/未活跃'},
+        {id:'br1',kind:'branch',title:'条件分支',sub:'属性: 触发类型'},
+        {id:'pm',kind:'channel',title:'App Push',sub:'(高频) 会员卡·洗护年省X'},
+        {id:'pa',kind:'channel',title:'App Push',sub:'(年龄变化) 进入新阶段·营养建议'},
+        {id:'ps',kind:'channel',title:'App Push',sub:'(沉默) 好久不见·回归礼包'},
+        {id:'w1',kind:'wait',title:'等待事件',sub:'7天内等待: 开卡/消费'},
+        {id:'w2',kind:'wait',title:'等待事件',sub:'7天内等待: 是否消费'},
+        {id:'w3',kind:'wait',title:'等待事件',sub:'7天内等待: 是否回归'},
+        {id:'ok',kind:'exitOk',title:'结束（已转化）',sub:'开卡或消费'},
+        {id:'em1',kind:'channel',title:'Email',sub:'专属方案+门店优惠'},
+        {id:'wa1',kind:'channel',title:'WhatsApp',sub:'门店1对1咨询与预约'},
+        {id:'w4',kind:'wait',title:'等待事件',sub:'14天内等待: 是否转化'},
+        {id:'ok2',kind:'exitOk',title:'结束（已转化）',sub:'开卡或消费'},
+        {id:'end',kind:'exitEnd',title:'结束',sub:'标记深度沉默·降频'},
+      ],
+      [
+        {from:'start',to:'br1'},{from:'br1',to:'pm',label:'高频'},{from:'br1',to:'pa',label:'年龄变化'},{from:'br1',to:'ps',label:'沉默'},
+        {from:'pm',to:'w1'},{from:'pa',to:'w2'},{from:'ps',to:'w3'},
+        {from:'w1',to:'ok',label:'已转化'},{from:'w2',to:'ok',label:'已转化'},{from:'w3',to:'ok',label:'已回归'},
+        {from:'w1',to:'em1',label:'未转化'},{from:'w2',to:'em1',label:'未转化'},{from:'w3',to:'wa1',label:'未回归'},
+        {from:'em1',to:'w4'},{from:'wa1',to:'w4'},
+        {from:'w4',to:'ok2',label:'已转化'},{from:'w4',to:'end',label:'未转化'},
+      ]);
+
+  })();
+  </script>
+</body>
+</html>

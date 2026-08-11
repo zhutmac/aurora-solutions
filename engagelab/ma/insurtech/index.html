@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EngageLab MA · 保险科技（InsurTech）增长方案</title>
+  <style>
+    :root {
+      --bg: #ffffff;
+      --bg-soft: #f7f8fa;
+      --bg-elev: #ffffff;
+      --border: #e5e7eb;
+      --border-strong: #d1d5db;
+      --text: #111827;
+      --text-2: #374151;
+      --text-3: #6b7280;
+      --text-4: #9ca3af;
+      --accent: #2563eb;
+      --accent-soft: #dbeafe;
+      --success: #16a34a;
+      --success-soft: #dcfce7;
+      --warning: #d97706;
+      --warning-soft: #fef3c7;
+      --info: #0369a1;
+      --info-soft: #e0f2fe;
+      --danger: #dc2626;
+      --danger-soft: #fee2e2;
+      --radius: 10px;
+      --radius-sm: 6px;
+      --shadow: 0 1px 2px rgba(16, 24, 40, 0.04);
+    }
+
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; background: var(--bg-soft); color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC",
+        "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", sans-serif;
+      line-height: 1.6; -webkit-font-smoothing: antialiased; font-size: 15px; }
+
+    main { max-width: 1180px; margin: 0 auto; padding: 32px 28px 80px; }
+
+    h1 { font-size: 30px; font-weight: 700; margin: 0 0 8px; letter-spacing: -0.01em; color: var(--text); }
+    h2 { font-size: 22px; font-weight: 700; margin: 0 0 12px; letter-spacing: -0.005em; color: var(--text); }
+    h3 { font-size: 17px; font-weight: 600; margin: 0 0 10px; color: var(--text); }
+    p { margin: 0 0 8px; color: var(--text-2); }
+    .muted { color: var(--text-3); }
+    .small { font-size: 13px; }
+    .bold { font-weight: 600; }
+
+    .section { background: var(--bg-elev); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 24px 26px; margin-bottom: 20px; }
+    .section-plain { padding: 6px 2px 18px; margin-bottom: 12px; }
+    .divider { height: 1px; background: var(--border); margin: 16px 0; border: none; }
+
+    .hero { background: linear-gradient(180deg, #fff 0%, #f0fdf4 100%);
+      border: 1px solid var(--border); border-radius: 14px; padding: 28px 30px;
+      margin-bottom: 24px; }
+    .hero-pills { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 14px; }
+    .hero-subtitle { color: var(--text-3); font-size: 15px; max-width: 900px; margin: 8px 0 18px; }
+
+    .pill { display: inline-flex; align-items: center; padding: 2px 10px;
+      font-size: 12px; border-radius: 999px; border: 1px solid var(--border-strong);
+      color: var(--text-2); background: #fff; font-weight: 500; }
+    .pill-accent { background: var(--accent-soft); border-color: var(--accent); color: var(--accent); }
+    .pill-info { background: var(--info-soft); border-color: var(--info); color: var(--info); }
+    .pill-success { background: var(--success-soft); border-color: var(--success); color: var(--success); }
+    .pill-warn { background: var(--warning-soft); border-color: var(--warning); color: var(--warning); }
+
+    .grid { display: grid; gap: 16px; }
+    .grid-4 { grid-template-columns: repeat(4, 1fr); }
+    .grid-3 { grid-template-columns: repeat(3, 1fr); }
+    .grid-2 { grid-template-columns: repeat(2, 1fr); }
+    .grid-5 { grid-template-columns: repeat(5, 1fr); }
+    .grid-1-2 { grid-template-columns: 1fr 2fr; }
+    .grid-2-1 { grid-template-columns: 1.4fr 1fr; }
+    .grid-12-1 { grid-template-columns: 1.2fr 1fr; }
+    .row { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+
+    .stat { padding: 14px 16px; background: var(--bg-elev); border: 1px solid var(--border);
+      border-radius: var(--radius); }
+    .stat-value { font-size: 26px; font-weight: 700; letter-spacing: -0.01em; color: var(--text);
+      line-height: 1.15; }
+    .stat-value.success { color: var(--success); }
+    .stat-value.info { color: var(--info); }
+    .stat-value.warn { color: var(--warning); }
+
+    .stat-label { font-size: 12px; color: var(--text-3); margin-top: 4px; }
+
+    .card { background: var(--bg-elev); border: 1px solid var(--border);
+      border-radius: var(--radius); overflow: hidden; }
+    .card-header { padding: 10px 16px; border-bottom: 1px solid var(--border);
+      background: #fafbfc; font-size: 13px; font-weight: 600; color: var(--text-2); }
+    .card-body { padding: 16px; }
+    .card-body.p-sm { padding: 12px; }
+    .card-body ul { margin: 0; padding-left: 18px; }
+    .card-body li { margin-bottom: 4px; font-size: 13.5px; color: var(--text-2); }
+
+    .callout { padding: 12px 14px; border-radius: var(--radius-sm);
+      border: 1px solid var(--border); border-left-width: 3px; background: var(--bg-soft); }
+    .callout-title { font-weight: 600; margin-bottom: 4px; font-size: 14px; }
+    .callout-body { font-size: 13px; color: var(--text-2); }
+    .callout-body p { font-size: 13px; color: var(--text-2); margin: 0 0 4px; }
+    .callout.info { border-left-color: var(--info); background: var(--info-soft); }
+    .callout.info .callout-title { color: var(--info); }
+    .callout.success { border-left-color: var(--success); background: var(--success-soft); }
+    .callout.success .callout-title { color: var(--success); }
+    .callout.warn { border-left-color: var(--warning); background: var(--warning-soft); }
+    .callout.warn .callout-title { color: var(--warning); }
+    .callout.neutral { border-left-color: var(--text-3); }
+
+    table { width: 100%; border-collapse: collapse; font-size: 13.5px;
+      background: var(--bg-elev); border: 1px solid var(--border); border-radius: var(--radius);
+      overflow: hidden; }
+    th, td { padding: 10px 12px; text-align: left; border-bottom: 1px solid var(--border);
+      color: var(--text-2); vertical-align: middle; }
+    th { background: #fafbfc; font-weight: 600; font-size: 12.5px; color: var(--text-3);
+      letter-spacing: 0.01em; text-transform: uppercase; }
+    tr:last-child td { border-bottom: 0; }
+    tr.tone-success td { background: rgba(22, 163, 74, 0.04); }
+    tr.tone-info td { background: rgba(3, 105, 161, 0.04); }
+
+    .signal-row { display: flex; gap: 10px; padding: 10px 0;
+      border-bottom: 1px solid var(--border); align-items: center; }
+    .signal-row:last-child { border-bottom: 0; }
+    .signal-row .left { flex: 1; min-width: 0; }
+    .signal-row .label { font-size: 13px; font-weight: 600; }
+    .signal-row .hint { font-size: 12px; color: var(--text-3); }
+    .signal-row .value { font-weight: 700; color: var(--text); font-size: 14px; white-space: nowrap; }
+
+    .chart { width: 100%; }
+    .chart svg { width: 100%; height: auto; display: block; }
+    .chart-legend { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--border); }
+    .chart-legend .leg-item { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--text-3); }
+    .chart-legend .dot { width: 10px; height: 10px; border-radius: 2px; }
+
+    .dag-wrap { overflow-x: auto; padding: 8px 2px; }
+    .dag-wrap svg { display: block; margin: 0 auto; }
+
+    .toc-bar { position: sticky; top: 0; background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(8px); border-bottom: 1px solid var(--border);
+      z-index: 10; padding: 10px 28px; margin: -32px -28px 24px;
+      font-size: 12.5px; }
+    .toc-bar .toc-inner { max-width: 1180px; margin: 0 auto; display: flex; gap: 14px;
+      align-items: center; overflow-x: auto; }
+    .toc-bar a { color: var(--text-3); text-decoration: none; white-space: nowrap; padding: 4px 2px; }
+    .toc-bar a:hover { color: var(--accent); }
+    .toc-bar .brand { font-weight: 700; color: var(--text); }
+
+    @page { size: A4; margin: 14mm; }
+    @media print {
+      body { background: #fff; }
+      main { max-width: none; padding: 0; }
+      .toc-bar { display: none; }
+      .section, .card, .hero { page-break-inside: avoid; box-shadow: none; }
+      h2 { page-break-after: avoid; }
+      .hero { break-before: avoid; }
+      .dag-wrap { overflow: visible; }
+      .dag-wrap svg { max-width: 100%; }
+    }
+
+    .spacer-sm { height: 6px; }
+    .spacer-md { height: 12px; }
+
+    .step-num { display: inline-flex; align-items: center; justify-content: center;
+      width: 22px; height: 22px; border-radius: 50%; background: var(--accent-soft);
+      color: var(--accent); font-weight: 700; font-size: 12px; margin-right: 8px; }
+
+    footer.site-footer { margin-top: 36px; padding-top: 16px; border-top: 1px solid var(--border);
+      font-size: 12px; color: var(--text-4); text-align: center; }
+  
+  .back-home {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    color: rgba(255,255,255,0.65);
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 500;
+    padding: 4px 10px 4px 6px;
+    border-radius: 6px;
+    border: 1px solid rgba(255,255,255,0.18);
+    margin-right: 16px;
+    white-space: nowrap;
+    transition: all 0.2s ease;
+    flex-shrink: 0;
+  }
+  .back-home:hover {
+    color: #fff;
+    background: rgba(255,255,255,0.12);
+    border-color: rgba(255,255,255,0.35);
+  }
+  .back-home svg {
+    width: 14px;
+    height: 14px;
+    opacity: 0.8;
+  }
+</style>
+</head>
+<body>
+  <nav class="toc-bar">
+    <div class="toc-inner">
+      <a class="back-home" href="../">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+        返回首页
+      </a>
+      <span class="brand">EngageLab MA · 保险科技增长方案</span>
+      <a href="#s-market">市场机会</a><a href="#s-funnel">用户漏斗</a><a href="#s-why">为什么 EngageLab</a>
+      <a href="#s-scenarios">场景总览</a><a href="#s-journey">旅程编排</a><a href="#s-channel">渠道选型</a>
+      <a href="#s-compliance">合规安全</a><a href="#s-plan">测试计划</a>
+    </div>
+  </nav>
+  <main>
+    <section class="hero">
+      <div class="hero-pills">
+        <span class="pill pill-success">保险科技 · 车险 / 健康险 / 意外险</span>
+        <span class="pill">东南亚 · 拉美 + 欧美</span>
+        <span class="pill pill-warn">强合规 · 长决策</span>
+      </div>
+      <h1>EngageLab MA · 保险科技（InsurTech）增长方案</h1>
+      <p class="hero-subtitle">
+        保险的增长本质是"信任建立与续保循环"——报价后长决策不成交、投保后到期不续保、
+        理赔体验差直接摧毁口碑。<span class="bold">续保率是保险业务的生命线，而理赔体验决定续保</span>。
+        本方案以 <span class="bold">报价转化跟进、投保履约与保单激活、续保前置提醒、理赔全流程陪伴、保障缺口交叉销售、沉默客户唤醒</span> 六大旅程切入，
+        统一编排 <span class="bold">App Push + Email + SMS + WhatsApp</span> 四类通道。
+      </p>
+      <div class="row">
+        <span class="pill pill-accent">极光 / App Push</span>
+        <span class="pill pill-accent">Email（保单/条款凭证）</span>
+        <span class="pill pill-accent">SMS（续保/理赔关键节点）</span>
+        <span class="pill pill-accent">WhatsApp（新兴市场顾问）</span>
+      </div>
+    </section>
+
+    <section id="s-market" class="section">
+      <h2>一、为什么保险平台必须做信任与续保自动化</h2>
+      <div class="grid grid-4" style="margin-bottom:16px">
+        <div class="stat"><div class="stat-value warn">长决策期</div><div class="stat-label">报价到成交常跨越数天至数周，需持续跟进</div></div>
+        <div class="stat"><div class="stat-value info">续保是命脉</div><div class="stat-label">续保率直接决定保险业务的长期盈利能力</div></div>
+        <div class="stat"><div class="stat-value">理赔即口碑</div><div class="stat-label">理赔体验是续保与口碑传播的决定因素</div></div>
+        <div class="stat"><div class="stat-value danger">强监管</div><div class="stat-label">保险销售话术受严格监管，不得误导</div></div>
+      </div>
+      <p class="muted small">注：下文所有转化率、提升幅度为保险行业估算区间，落地以实测为准。本方案面向持牌合规保险机构，所有触达遵循当地保险销售监管，不含误导性表述。</p>
+      <hr class="divider" />
+      <div class="grid grid-2">
+        <div class="callout neutral"><div class="callout-title">痛点 1 · 报价后长期不成交</div><div class="callout-body"><p>用户查了报价就走去比价，决策周期长，没有持续跟进就流向竞品或干脆不买。</p></div></div>
+        <div class="callout info"><div class="callout-title">解法 · 报价转化跟进旅程</div><div class="callout-body"><p>用"报价有效期""保障缺口测算""同类人群投保案例"分阶段跟进，把长决策期填满。</p></div></div>
+        <div class="callout neutral"><div class="callout-title">痛点 2 · 投保后保单沉睡</div><div class="callout-body"><p>买了保险不知道保什么、不会用，出险时才发现不匹配，续保意愿自然低。</p></div></div>
+        <div class="callout info"><div class="callout-title">解法 · 保单激活与权益教育</div><div class="callout-body"><p>投保后引导查看保单、了解保障范围与增值服务（体检、道路救援），提升感知价值。</p></div></div>
+        <div class="callout neutral"><div class="callout-title">痛点 3 · 续保静默流失</div><div class="callout-body"><p>保单到期无提醒即断保，车险等强需求品类会直接流向竞品，客户获取成本白费。</p></div></div>
+        <div class="callout info"><div class="callout-title">解法 · 续保多段前置提醒</div><div class="callout-body"><p>到期前 30/15/7/1 天递进提醒，展示上年理赔与无赔款优惠，把续保做成默认选项。</p></div></div>
+        <div class="callout neutral"><div class="callout-title">痛点 4 · 理赔体验差、缺口未覆盖</div><div class="callout-body"><p>理赔进度不透明引发焦虑与投诉；家庭保障缺口（如有车无健康险）未被识别与推荐。</p></div></div>
+        <div class="callout info"><div class="callout-title">解法 · 理赔陪伴 + 缺口交叉销售</div><div class="callout-body"><p>理赔全流程进度透明化；基于已有保单识别保障缺口，做合规的组合推荐。</p></div></div>
+      </div>
+    </section>
+
+    <section id="s-funnel" class="section">
+      <h2>二、用户漏斗：从报价到续保，每层都有增长空间</h2>
+      <p class="muted small">下图为保险行业估算区间对比，非实测数据。</p>
+      <div class="chart" id="chart-funnel"></div>
+    </section>
+
+    <section id="s-why" class="section">
+      <h2>三、为什么选择 EngageLab MA</h2>
+      <div class="grid grid-3">
+        <div class="card"><div class="card-header">长周期旅程编排</div><div class="card-body p-sm"><ul><li>以保单到期日为锚点的多段"等待至"节点</li><li>年度续保周期可自动长期运行</li></ul></div></div>
+        <div class="card"><div class="card-header">强时效 + 多通道兜底</div><div class="card-body p-sm"><ul><li>续保与理赔关键节点 Push 失败降级 SMS</li><li>确保法定告知与重要通知 100% 送达</li></ul></div></div>
+        <div class="card"><div class="card-header">CDP 统一身份（EUID）</div><div class="card-body p-sm"><ul><li>保单类型、到期日、理赔记录、家庭成员统一为属性</li><li>支撑保障缺口识别与组合推荐</li></ul></div></div>
+        <div class="card"><div class="card-header">与代理人/顾问协同</div><div class="card-body p-sm"><ul><li>自动化承接长尾客户，高价值转人工顾问</li><li>WhatsApp 承接新兴市场顾问沟通</li></ul></div></div>
+        <div class="card"><div class="card-header">AI 多语言文案</div><div class="card-body p-sm"><ul><li>跨国保险覆盖多语种，一套旅程适配多市场</li><li>文案经合规审核后由 AI 本地化</li></ul></div></div>
+        <div class="card"><div class="card-header">合规 · 保险销售监管</div><div class="card-body p-sm"><ul><li>销售话术不含收益承诺与误导性表述</li><li>投保人信息严格脱敏，符合当地保险数据规范</li></ul></div></div>
+      </div>
+    </section>
+
+    <section id="s-scenarios" class="section">
+      <h2>四、高 ROI 运营场景总览</h2>
+      <table>
+        <thead><tr><th>#</th><th>场景</th><th>生命周期阶段</th><th>核心触发</th><th>渠道组合</th><th>预期提升（估算）</th></tr></thead>
+        <tbody>
+          <tr class="tone-info"><td>J1</td><td>报价转化跟进</td><td>转化</td><td>获取报价未投保</td><td>App Push + Email + WhatsApp</td><td>报价→投保 +15~30%</td></tr>
+          <tr><td>J2</td><td>投保后保单激活与权益教育</td><td>激活 / 感知价值</td><td>投保成功</td><td>App Push + Email</td><td>权益使用率 +25~40%</td></tr>
+          <tr class="tone-success"><td>J3</td><td>续保多段前置提醒</td><td>续保</td><td>保单到期前 30 天</td><td>App Push + SMS + Email</td><td>续保率 +10~20%</td></tr>
+          <tr class="tone-success"><td>J4</td><td>理赔全流程陪伴</td><td>服务 / 口碑</td><td>提交理赔申请</td><td>App Push + SMS + Email</td><td>理赔满意度提升、投诉下降</td></tr>
+          <tr><td>J5</td><td>保障缺口交叉销售</td><td>增购 / LTV</td><td>已有保单 + 缺口识别</td><td>App Push + Email</td><td>件均保费 +10~20%</td></tr>
+          <tr><td>J6</td><td>沉默客户唤醒</td><td>召回</td><td>断保 / 长期未活跃</td><td>App Push → Email → WhatsApp/SMS</td><td>回归投保 +15~30%</td></tr>
+        </tbody>
+      </table>
+      <p class="muted small" style="margin-top:8px">提升幅度为行业公开区间估算，最终以 4 周测试实测为准。</p>
+    </section>
+
+    <section id="s-journey" class="section-plain">
+      <h2>五、核心旅程详细编排</h2>
+      <div class="section" style="margin-top:16px;">
+        <h3>旅程 1：报价转化跟进</h3>
+        <div class="grid grid-2-1"><div class="dag-wrap" id="dag-j1"></div><div>
+          <div class="callout neutral" style="margin-bottom:12px"><div class="callout-title">业务痛点</div><div class="callout-body"><p>用户查了报价就走去比价，长决策期无跟进就流向竞品。</p></div></div>
+          <div class="callout info" style="margin-bottom:12px"><div class="callout-title">旅程组件配置</div><div class="callout-body">
+            <p><strong>进入条件：</strong>事件：获取报价未投保</p>
+            <p><strong>提前退出：</strong>事件：完成投保</p>
+            <p><strong>分支：</strong>属性：保费金额（高保费转人工顾问 / 常规走自动化）</p>
+            <p><strong>内容：</strong>报价有效期、保障对比、同类人群投保案例（不含收益承诺）</p>
+          </div></div>
+          <div class="callout success"><div class="callout-title">预期效益</div><div class="callout-body"><p>报价→投保 +15~30%（估算）；高保费客户转人工顾问的 ROI 极高。</p></div></div>
+        </div></div>
+      </div>
+      <div class="section">
+        <h3>旅程 2：投保后保单激活与权益教育</h3>
+        <div class="grid grid-2-1"><div class="dag-wrap" id="dag-j2"></div><div>
+          <div class="callout neutral" style="margin-bottom:12px"><div class="callout-title">业务痛点</div><div class="callout-body"><p>买了保险不知道保什么、不会用增值服务，感知价值低导致续保意愿差。</p></div></div>
+          <div class="callout info" style="margin-bottom:12px"><div class="callout-title">旅程组件配置</div><div class="callout-body">
+            <p><strong>进入条件：</strong>事件：投保成功</p>
+            <p><strong>阶段：</strong>保单凭证 → 保障范围解读 → 增值服务引导（体检/道路救援）</p>
+            <p><strong>提前退出：</strong>事件：使用增值服务</p>
+            <p><strong>合规：</strong>如实说明保障与免责，不夸大保障范围</p>
+          </div></div>
+          <div class="callout success"><div class="callout-title">预期效益</div><div class="callout-body"><p>权益使用率 +25~40%（估算）；用过增值服务的客户续保率显著更高。</p></div></div>
+        </div></div>
+      </div>
+      <div class="section">
+        <h3>旅程 3：续保多段前置提醒</h3>
+        <div class="grid grid-2-1"><div class="dag-wrap" id="dag-j3"></div><div>
+          <div class="callout neutral" style="margin-bottom:12px"><div class="callout-title">业务痛点</div><div class="callout-body"><p>保单到期无提醒即断保，车险等强需求品类直接流向竞品。</p></div></div>
+          <div class="callout info" style="margin-bottom:12px"><div class="callout-title">旅程组件配置</div><div class="callout-body">
+            <p><strong>进入条件：</strong>属性：保单到期前 30 天</p>
+            <p><strong>递进：</strong>T-30 续保权益 → T-15 无赔款优惠 → T-7 到期提醒 → T-1 SMS 兜底</p>
+            <p><strong>分支：</strong>属性：上年是否理赔（未理赔强调优惠 / 已理赔强调保障价值）</p>
+            <p><strong>提前退出：</strong>事件：完成续保</p>
+          </div></div>
+          <div class="callout success"><div class="callout-title">预期效益</div><div class="callout-body"><p>续保率 +10~20%（估算）；续保率是保险业务最重要的长期指标。</p></div></div>
+        </div></div>
+      </div>
+      <div class="section">
+        <h3>旅程 4：理赔全流程陪伴</h3>
+        <div class="grid grid-2-1"><div class="dag-wrap" id="dag-j4"></div><div>
+          <div class="callout neutral" style="margin-bottom:12px"><div class="callout-title">业务痛点</div><div class="callout-body"><p>理赔进度不透明引发焦虑与投诉，而理赔体验直接决定续保与口碑。</p></div></div>
+          <div class="callout info" style="margin-bottom:12px"><div class="callout-title">旅程组件配置</div><div class="callout-body">
+            <p><strong>进入条件：</strong>事件：提交理赔申请</p>
+            <p><strong>时间轴：</strong>受理确认 → 材料补充提醒 → 审核进度 → 赔付到账 → 满意度回访</p>
+            <p><strong>分类：</strong>服务类通知，不受营销退订与频控限制</p>
+            <p><strong>兜底：</strong>材料补充与赔付到账用 SMS 确保触达</p>
+          </div></div>
+          <div class="callout success"><div class="callout-title">预期效益</div><div class="callout-body"><p>理赔满意度提升、投诉下降；进度透明化是最低成本的口碑投资。</p></div></div>
+        </div></div>
+      </div>
+      <div class="section">
+        <h3>旅程 5：保障缺口交叉销售</h3>
+        <div class="grid grid-2-1"><div class="dag-wrap" id="dag-j5"></div><div>
+          <div class="callout neutral" style="margin-bottom:12px"><div class="callout-title">业务痛点</div><div class="callout-body"><p>客户只买了单一险种，家庭保障缺口未被识别，件均保费与 LTV 受限。</p></div></div>
+          <div class="callout info" style="margin-bottom:12px"><div class="callout-title">旅程组件配置</div><div class="callout-body">
+            <p><strong>进入条件：</strong>属性：已有保单且存在保障缺口</p>
+            <p><strong>分支：</strong>属性：缺口类型（有车险无健康险 / 有个人无家庭 / 无意外险）</p>
+            <p><strong>时机：</strong>避开刚投保期，在保单稳定期或家庭事件节点推荐</p>
+            <p><strong>合规：</strong>基于保障需求做客观说明，不做恐吓式营销</p>
+          </div></div>
+          <div class="callout success"><div class="callout-title">预期效益</div><div class="callout-body"><p>件均保费 +10~20%（估算）；多险种客户的续保率与忠诚度显著更高。</p></div></div>
+        </div></div>
+      </div>
+      <div class="section">
+        <h3>旅程 6：沉默客户唤醒</h3>
+        <div class="grid grid-2-1"><div class="dag-wrap" id="dag-j6"></div><div>
+          <div class="callout neutral" style="margin-bottom:12px"><div class="callout-title">业务痛点</div><div class="callout-body"><p>断保客户与长期不活跃客户是最有价值的召回对象，但常被完全放弃。</p></div></div>
+          <div class="callout info" style="margin-bottom:12px"><div class="callout-title">旅程组件配置</div><div class="callout-body">
+            <p><strong>进入条件：</strong>属性：已断保 / 长期未活跃</p>
+            <p><strong>分支：</strong>属性：断保时长与历史价值（近期断保挽回 / 长期沉默做需求唤醒）</p>
+            <p><strong>提前退出：</strong>事件：重新投保 / 获取报价</p>
+            <p><strong>再次进入：</strong>可，间隔 60 天（保险为低频，避免过度打扰）</p>
+          </div></div>
+          <div class="callout success"><div class="callout-title">预期效益</div><div class="callout-body"><p>回归投保 +15~30%（估算）；老客户的信任基础使召回成本远低于新客获取。</p></div></div>
+        </div></div>
+      </div>
+    </section>
+
+    <section id="s-channel" class="section-plain">
+      <h2>六、渠道选型参考</h2>
+      <div class="section">
+        <p class="muted small">保险行业渠道适配相对值（示意）：Email 承载保单、条款与理赔凭证（法律属性不可替代），SMS 用于续保与理赔关键节点（触达率最高），App Push 承载日常服务与营销，WhatsApp 在新兴市场承接顾问式沟通。</p>
+        <div class="chart" id="chart-channel"></div>
+        <div class="grid grid-2" style="margin-top:14px">
+          <div class="callout info"><div class="callout-title">主力通道</div><div class="callout-body"><p>Email（保单凭证、条款、理赔文书，具法律与存证属性）+ SMS（续保到期、理赔到账等必达节点）。</p></div></div>
+          <div class="callout warn"><div class="callout-title">法定告知必达</div><div class="callout-body"><p>续保到期、条款变更等法定告知类通知必须多通道确保送达，并留存可审计的发送记录。</p></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="s-compliance" class="section">
+      <h2>七、合规与安全（保险强化）</h2>
+      <div class="grid grid-3">
+        <div class="card"><div class="card-header">保险销售监管</div><div class="card-body p-sm"><ul><li>话术不含收益承诺、不夸大保障、不误导</li><li>如实披露免责条款与等待期</li><li>遵循当地保险销售与广告监管要求</li></ul></div></div>
+        <div class="card"><div class="card-header">数据与隐私</div><div class="card-body p-sm"><ul><li>投保人与被保险人信息严格脱敏</li><li>健康告知等敏感信息不出现在触达文案</li><li>GDPR/CCPA 及当地保险数据规范</li></ul></div></div>
+        <div class="card"><div class="card-header">触达与留痕</div><div class="card-body p-sm"><ul><li>法定告知类通知独立于营销退订，确保送达</li><li>营销类频控与勿扰时段</li><li>发送记录留存可导出，满足监管审计</li></ul></div></div>
+      </div>
+    </section>
+
+    <section id="s-plan" class="section">
+      <h2>八、测试计划（4 周）</h2>
+      <table>
+        <thead><tr><th>周次</th><th>阶段</th><th>核心工作</th><th>验收指标</th></tr></thead>
+        <tbody>
+          <tr><td>第 1 周</td><td>启动 · 数据打通</td><td>确认埋点（报价、投保、保单到期、理赔节点、险种组合）；合规话术审核</td><td>事件入库率 ≥95%；话术合规通过</td></tr>
+          <tr><td>第 2 周</td><td>核心旅程上线</td><td>J3 续保提醒 + J1 报价跟进（2 条，小流量）；法定告知分类配置</td><td>旅程触发成功率 ≥98%；告知类 100% 送达</td></tr>
+          <tr><td>第 3 周</td><td>扩量 · A/B</td><td>J2 保单激活 + J4 理赔陪伴全量；续保话术 A/B</td><td>续保率 uplift 显现；投诉率不上升</td></tr>
+          <tr><td>第 4 周</td><td>复盘 · 扩面</td><td>J5 缺口交叉销售 + J6 沉默唤醒上线；输出保费 uplift 报告</td><td>报价转化/续保/件均保费 uplift 可量化</td></tr>
+        </tbody>
+      </table>
+      <div class="callout success" style="margin-top:14px"><div class="callout-title">投入</div><div class="callout-body"><p>测试期授权费 $0，配置 2 人专属服务团队支撑埋点、旅程与合规话术交付。</p></div></div>
+    </section>
+    <footer class="site-footer">EngageLab MA · 保险科技（InsurTech）增长方案 — 内部方案，转化/提升数据为行业估算或公开参考，落地以实测为准。面向持牌合规保险机构，触达遵循当地保险销售监管，不含收益承诺与误导性表述。</footer>
+  </main>
+  <script>
+  (function(){
+    // ========== Shared helpers ==========
+    const COLORS = {
+      accent: '#2563eb', info: '#0369a1', success: '#16a34a',
+      warning: '#d97706', neutral: '#94a3b8', muted: '#cbd5e1',
+      text: '#374151', textMute: '#9ca3af', grid: '#e5e7eb',
+    };
+    function svgEl(w, h) {
+      const s = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+      s.setAttribute('viewBox', '0 0 ' + w + ' ' + h);
+      s.setAttribute('width', '100%');
+      s.setAttribute('preserveAspectRatio', 'xMidYMid meet');
+      return s;
+    }
+    function el(tag, attrs) {
+      const e = document.createElementNS('http://www.w3.org/2000/svg', tag);
+      for (const k in attrs) e.setAttribute(k, attrs[k]);
+      return e;
+    }
+
+    // ========== Bar Chart ==========
+    function drawBarChart(mount, opts) {
+      const { categories, series, valueSuffix = '', height = 240 } = opts;
+      const W = 600, H = height, PAD_L = 44, PAD_R = 16, PAD_T = 12, PAD_B = 56;
+      const innerW = W - PAD_L - PAD_R, innerH = H - PAD_T - PAD_B;
+      const max = Math.max(...series.flatMap(s => s.data), 1);
+      const niceMax = Math.ceil(max / 20) * 20 || 100;
+      const groupCount = categories.length;
+      const barsPerGroup = series.length;
+      const groupW = innerW / groupCount;
+      const barW = Math.min(22, (groupW - 12) / barsPerGroup);
+      const s = svgEl(W, H);
+      for (let i = 0; i <= 4; i++) {
+        const v = (niceMax / 4) * i;
+        const y = PAD_T + innerH - (v / niceMax) * innerH;
+        s.appendChild(el('line', { x1: PAD_L, x2: W - PAD_R, y1: y, y2: y, stroke: COLORS.grid, 'stroke-width': 1 }));
+        const t = el('text', { x: PAD_L - 6, y: y + 4, 'text-anchor': 'end', 'font-size': 10, fill: COLORS.textMute });
+        t.textContent = Math.round(v) + valueSuffix;
+        s.appendChild(t);
+      }
+      categories.forEach((cat, ci) => {
+        const gx = PAD_L + groupW * ci;
+        series.forEach((se, si) => {
+          const v = se.data[ci] || 0;
+          const h = (v / niceMax) * innerH;
+          const x = gx + (groupW - barW * barsPerGroup) / 2 + si * barW;
+          const y = PAD_T + innerH - h;
+          const color = COLORS[se.tone] || COLORS.neutral;
+          s.appendChild(el('rect', { x, y, width: barW - 2, height: h, fill: color, rx: 2 }));
+          if (v > 0) {
+            const label = el('text', { x: x + (barW - 2) / 2, y: y - 2, 'text-anchor': 'middle', 'font-size': 8, fill: COLORS.text });
+            label.textContent = v + valueSuffix;
+            s.appendChild(label);
+          }
+        });
+        const t = el('text', { x: gx + groupW / 2, y: H - PAD_B + 14, 'text-anchor': 'middle', 'font-size': 10, fill: COLORS.text });
+        t.textContent = cat;
+        s.appendChild(t);
+      });
+      // Legend
+      let legX = PAD_L;
+      series.forEach((se) => {
+        const color = COLORS[se.tone] || COLORS.accent;
+        s.appendChild(el('rect', { x: legX, y: H - 18, width: 10, height: 10, rx: 2, fill: color }));
+        const t = el('text', { x: legX + 14, y: H - 10, 'font-size': 10, fill: COLORS.text });
+        t.textContent = se.name;
+        s.appendChild(t);
+        legX += 14 + (se.name.length * 7) + 16;
+      });
+      mount.innerHTML = '';
+      mount.appendChild(s);
+    }
+
+    // ========== Journey DAG renderer (same as fintech/security solution) ==========
+    const KIND_STYLE = {
+      entry:    { fill: '#f1f5f9', stroke: '#94a3b8', text: '#111827' },
+      wait:     { fill: '#fafafa', stroke: '#d1d5db', text: '#6b7280' },
+      branch:   { fill: '#f9fafb', stroke: '#475569', text: '#111827' },
+      channel:  { fill: '#dbeafe', stroke: '#2563eb', text: '#1e3a8a' },
+      sendtime: { fill: '#fef3c7', stroke: '#d97706', text: '#92400e' },
+      exitOk:   { fill: '#dcfce7', stroke: '#16a34a', text: '#14532d' },
+      exitEnd:  { fill: '#f3f4f6', stroke: '#9ca3af', text: '#4b5563' },
+    };
+
+    function drawJourney(mount, nodes, edges) {
+      const NODE_W = 176, NODE_H = 62, RANK_GAP = 42, NODE_GAP = 22;
+      const rankOf = {}, incoming = {};
+      nodes.forEach(n => { rankOf[n.id] = 0; incoming[n.id] = []; });
+      edges.forEach(e => { incoming[e.to].push(e.from); });
+      let changed = true;
+      while (changed) {
+        changed = false;
+        edges.forEach(e => {
+          if (rankOf[e.to] < rankOf[e.from] + 1) { rankOf[e.to] = rankOf[e.from] + 1; changed = true; }
+        });
+      }
+      const maxRank = Math.max(...Object.values(rankOf));
+      const ranks = [];
+      for (let r = 0; r <= maxRank; r++) ranks.push([]);
+      nodes.forEach(n => { ranks[rankOf[n.id]].push(n); });
+      const pos = {};
+      const rankWidths = ranks.map(r => r.length * NODE_W + (r.length - 1) * NODE_GAP);
+      const maxWidth = Math.max(...rankWidths, 400);
+      ranks.forEach((rankNodes, r) => {
+        const withAnchor = rankNodes.map(n => {
+          const parents = incoming[n.id].map(p => pos[p] ? pos[p].x + NODE_W / 2 : null).filter(x => x !== null);
+          const anchor = parents.length ? parents.reduce((a, b) => a + b, 0) / parents.length : null;
+          return { node: n, anchor };
+        });
+        withAnchor.sort((a, b) => {
+          if (a.anchor === null && b.anchor === null) return 0;
+          if (a.anchor === null) return 1;
+          if (b.anchor === null) return -1;
+          return a.anchor - b.anchor;
+        });
+        const totalW = withAnchor.length * NODE_W + (withAnchor.length - 1) * NODE_GAP;
+        const startX = (maxWidth - totalW) / 2 + 20;
+        withAnchor.forEach((it, i) => {
+          pos[it.node.id] = { x: startX + i * (NODE_W + NODE_GAP), y: 20 + r * (NODE_H + RANK_GAP) };
+        });
+      });
+      for (let pass = 0; pass < 3; pass++) {
+        ranks.forEach(rankNodes => {
+          const sorted = rankNodes.slice().sort((a, b) => pos[a.id].x - pos[b.id].x);
+          for (let i = 1; i < sorted.length; i++) {
+            const prev = pos[sorted[i - 1].id], cur = pos[sorted[i].id];
+            if (cur.x < prev.x + NODE_W + NODE_GAP) cur.x = prev.x + NODE_W + NODE_GAP;
+          }
+        });
+      }
+      const width = Math.max(...Object.values(pos).map(p => p.x)) + NODE_W + 20;
+      const height = Math.max(...Object.values(pos).map(p => p.y)) + NODE_H + 24;
+      const s = svgEl(width, height);
+      s.setAttribute('width', width);
+      s.setAttribute('height', height);
+      s.style.maxWidth = '100%';
+      s.style.height = 'auto';
+      const defs = el('defs');
+      const marker = el('marker', { id: 'arrow', viewBox: '0 0 10 10', refX: 9, refY: 5, markerWidth: 6, markerHeight: 6, orient: 'auto-start-reverse' });
+      marker.appendChild(el('path', { d: 'M 0 0 L 10 5 L 0 10 z', fill: '#94a3b8' }));
+      defs.appendChild(marker);
+      s.appendChild(defs);
+      edges.forEach(e => {
+        const from = pos[e.from], to = pos[e.to];
+        if (!from || !to) return;
+        const x1 = from.x + NODE_W / 2, y1 = from.y + NODE_H;
+        const x2 = to.x + NODE_W / 2, y2 = to.y;
+        const cy = (y1 + y2) / 2;
+        const d = 'M' + x1 + ',' + y1 + ' C' + x1 + ',' + cy + ' ' + x2 + ',' + cy + ' ' + x2 + ',' + y2;
+        s.appendChild(el('path', { d, fill: 'none', stroke: '#94a3b8', 'stroke-width': 1.25, 'marker-end': 'url(#arrow)' }));
+        if (e.label) {
+          const mx = (x1 + x2) / 2, my = cy;
+          const w = Math.max(e.label.length * 9 + 10, 28);
+          s.appendChild(el('rect', { x: mx - w / 2, y: my - 10, width: w, height: 18, rx: 4, fill: '#ffffff', stroke: '#e5e7eb' }));
+          const t = el('text', { x: mx, y: my + 3, 'text-anchor': 'middle', 'font-size': 11, fill: '#475569' });
+          t.textContent = e.label;
+          s.appendChild(t);
+        }
+      });
+      nodes.forEach(n => {
+        const p = pos[n.id];
+        const k = KIND_STYLE[n.kind] || KIND_STYLE.entry;
+        s.appendChild(el('rect', { x: p.x, y: p.y, width: NODE_W, height: NODE_H, rx: 10, fill: k.fill, stroke: k.stroke, 'stroke-width': n.kind === 'channel' ? 1.4 : 1 }));
+        const titleY = n.sub ? p.y + 24 : p.y + NODE_H / 2 + 4;
+        const title = el('text', { x: p.x + NODE_W / 2, y: titleY, 'text-anchor': 'middle', 'font-size': 12.5, 'font-weight': 600, fill: k.text });
+        title.textContent = n.title;
+        s.appendChild(title);
+        if (n.sub) {
+          const sub = el('text', { x: p.x + NODE_W / 2, y: p.y + 42, 'text-anchor': 'middle', 'font-size': 11, fill: k.text, opacity: 0.82 });
+          sub.textContent = n.sub;
+          s.appendChild(sub);
+        }
+      });
+      mount.innerHTML = '';
+      mount.appendChild(s);
+    }
+
+    drawBarChart(document.getElementById('chart-funnel'), {
+      categories: ['报价→投保', '投保→权益使用', '保单续保率', '理赔满意度', '多险种持有率'],
+      series: [
+        { name: '当前基准（估算）',    data: [20, 30, 60, 70, 25], tone: 'neutral' },
+        { name: 'MA 自动化后（估算）', data: [26, 42, 70, 82, 33], tone: 'success' },
+      ], valueSuffix: '%', height: 260,
+    });
+    drawBarChart(document.getElementById('chart-channel'), {
+      categories: ['Email', 'SMS', 'App Push', 'WhatsApp', 'Web Push'],
+      series: [{ name: '保险行业触达适配（相对值·示意）', data: [92, 88, 78, 65, 35], tone: 'info' }],
+      valueSuffix: '', height: 220,
+    });
+
+    drawJourney(document.getElementById('dag-j1'),
+      [
+        {id:'start',kind:'entry',title:'开始',sub:'事件: 获取报价未投保'},
+        {id:'w1',kind:'wait',title:'等待事件',sub:'24h 内等待: 是否投保'},
+        {id:'ok0',kind:'exitOk',title:'结束（已投保）',sub:'完成投保'},
+        {id:'p1',kind:'channel',title:'App Push',sub:'报价有效期剩N天'},
+        {id:'w2',kind:'wait',title:'等待事件',sub:'3天内等待: 是否投保'},
+        {id:'ok1',kind:'exitOk',title:'结束（已投保）',sub:'完成投保'},
+        {id:'em1',kind:'channel',title:'Email',sub:'保障对比+同类人群方案'},
+        {id:'w3',kind:'wait',title:'等待事件',sub:'7天内等待: 是否投保'},
+        {id:'ok2',kind:'exitOk',title:'结束（已投保）',sub:'完成投保'},
+        {id:'br1',kind:'branch',title:'条件分支',sub:'属性: 保费金额'},
+        {id:'wa1',kind:'channel',title:'WhatsApp',sub:'(高保费) 专属顾问1对1'},
+        {id:'p2',kind:'channel',title:'App Push',sub:'(常规) 报价即将失效'},
+        {id:'end',kind:'exitEnd',title:'结束',sub:'转沉默唤醒旅程'},
+      ],
+      [
+        {from:'start',to:'w1'},{from:'w1',to:'ok0',label:'已投保'},{from:'w1',to:'p1',label:'未投保'},
+        {from:'p1',to:'w2'},{from:'w2',to:'ok1',label:'已投保'},{from:'w2',to:'em1',label:'未投保'},
+        {from:'em1',to:'w3'},{from:'w3',to:'ok2',label:'已投保'},{from:'w3',to:'br1',label:'未投保'},
+        {from:'br1',to:'wa1',label:'高保费'},{from:'br1',to:'p2',label:'常规'},
+        {from:'wa1',to:'end'},{from:'p2',to:'end'},
+      ]);
+
+    drawJourney(document.getElementById('dag-j2'),
+      [
+        {id:'start',kind:'entry',title:'开始',sub:'事件: 投保成功'},
+        {id:'em0',kind:'channel',title:'Email',sub:'电子保单+条款凭证'},
+        {id:'p1',kind:'channel',title:'App Push',sub:'保单已生效·查看保障范围'},
+        {id:'w1',kind:'wait',title:'等待事件',sub:'7天内等待: 是否查看保单'},
+        {id:'p2',kind:'channel',title:'App Push',sub:'你的保单还含这些增值服务'},
+        {id:'w2',kind:'wait',title:'等待事件',sub:'30天内等待: 使用增值服务'},
+        {id:'ok',kind:'exitOk',title:'结束（已激活）',sub:'使用增值服务'},
+        {id:'em1',kind:'channel',title:'Email',sub:'保障范围解读+免责说明'},
+        {id:'w3',kind:'wait',title:'等待事件',sub:'30天内等待: 是否使用'},
+        {id:'ok2',kind:'exitOk',title:'结束（已激活）',sub:'使用增值服务'},
+        {id:'end',kind:'exitEnd',title:'结束',sub:'转续保提醒旅程'},
+      ],
+      [
+        {from:'start',to:'em0'},{from:'em0',to:'p1'},{from:'p1',to:'w1'},
+        {from:'w1',to:'p2',label:'已查看'},{from:'w1',to:'em1',label:'未查看'},
+        {from:'p2',to:'w2'},{from:'w2',to:'ok',label:'已使用'},{from:'w2',to:'end',label:'未使用'},
+        {from:'em1',to:'w3'},{from:'w3',to:'ok2',label:'已使用'},{from:'w3',to:'end',label:'未使用'},
+      ]);
+
+    drawJourney(document.getElementById('dag-j3'),
+      [
+        {id:'start',kind:'entry',title:'开始',sub:'属性: 保单到期前30天'},
+        {id:'br1',kind:'branch',title:'条件分支',sub:'属性: 上年是否理赔'},
+        {id:'pa',kind:'channel',title:'App Push',sub:'(未理赔) 无赔款优惠续保'},
+        {id:'pb',kind:'channel',title:'App Push',sub:'(已理赔) 保障已为你赔付X'},
+        {id:'w1',kind:'wait',title:'等待事件',sub:'T-15 前等待: 是否续保'},
+        {id:'ok0',kind:'exitOk',title:'结束（已续保）',sub:'完成续保'},
+        {id:'em1',kind:'channel',title:'Email',sub:'T-15 续保方案+保障对比'},
+        {id:'w2',kind:'wait',title:'等待事件',sub:'T-7 前等待: 是否续保'},
+        {id:'ok1',kind:'exitOk',title:'结束（已续保）',sub:'完成续保'},
+        {id:'p2',kind:'channel',title:'App Push',sub:'T-7 保单即将到期'},
+        {id:'w3',kind:'wait',title:'等待事件',sub:'T-1 前等待: 是否续保'},
+        {id:'ok2',kind:'exitOk',title:'结束（已续保）',sub:'完成续保'},
+        {id:'sms1',kind:'channel',title:'SMS',sub:'T-1 明日保障中断'},
+        {id:'end',kind:'exitEnd',title:'结束',sub:'转断保召回旅程'},
+      ],
+      [
+        {from:'start',to:'br1'},{from:'br1',to:'pa',label:'未理赔'},{from:'br1',to:'pb',label:'已理赔'},
+        {from:'pa',to:'w1'},{from:'pb',to:'w1'},
+        {from:'w1',to:'ok0',label:'已续保'},{from:'w1',to:'em1',label:'未续保'},
+        {from:'em1',to:'w2'},{from:'w2',to:'ok1',label:'已续保'},{from:'w2',to:'p2',label:'未续保'},
+        {from:'p2',to:'w3'},{from:'w3',to:'ok2',label:'已续保'},{from:'w3',to:'sms1',label:'未续保'},{from:'sms1',to:'end'},
+      ]);
+
+    drawJourney(document.getElementById('dag-j4'),
+      [
+        {id:'start',kind:'entry',title:'开始',sub:'事件: 提交理赔申请'},
+        {id:'p0',kind:'channel',title:'App Push+SMS',sub:'理赔已受理·案件号与进度'},
+        {id:'w1',kind:'wait',title:'等待事件',sub:'等待: 材料是否齐全'},
+        {id:'sms1',kind:'channel',title:'SMS+App Push',sub:'需补充材料·清单与入口'},
+        {id:'w2',kind:'wait',title:'等待事件',sub:'5天内等待: 材料补齐'},
+        {id:'p1',kind:'channel',title:'App Push',sub:'审核中·预计N个工作日'},
+        {id:'w3',kind:'wait',title:'等待',sub:'等待至审核完成'},
+        {id:'p2',kind:'channel',title:'App Push+SMS',sub:'赔款已到账'},
+        {id:'em1',kind:'channel',title:'Email',sub:'理赔结案通知书'},
+        {id:'w4',kind:'wait',title:'等待事件',sub:'3天内等待: 满意度回访'},
+        {id:'ok',kind:'exitOk',title:'结束（已结案）',sub:'理赔完成'},
+        {id:'end',kind:'exitEnd',title:'结束',sub:'转人工客服跟进'},
+      ],
+      [
+        {from:'start',to:'p0'},{from:'p0',to:'w1'},
+        {from:'w1',to:'p1',label:'材料齐全'},{from:'w1',to:'sms1',label:'需补充'},
+        {from:'sms1',to:'w2'},{from:'w2',to:'p1',label:'已补齐'},{from:'w2',to:'end',label:'未补齐'},
+        {from:'p1',to:'w3'},{from:'w3',to:'p2'},{from:'p2',to:'em1'},{from:'em1',to:'w4'},
+        {from:'w4',to:'ok',label:'已回访'},{from:'w4',to:'end',label:'未回访'},
+      ]);
+
+    drawJourney(document.getElementById('dag-j5'),
+      [
+        {id:'start',kind:'entry',title:'开始',sub:'属性: 已有保单·存在缺口'},
+        {id:'st1',kind:'sendtime',title:'可发送时间',sub:'每天 9:00-21:00 终端时区'},
+        {id:'br1',kind:'branch',title:'条件分支',sub:'属性: 缺口类型'},
+        {id:'pa',kind:'channel',title:'App Push',sub:'(有车无健康) 健康保障测评'},
+        {id:'pb',kind:'channel',title:'App Push',sub:'(个人无家庭) 家庭保障方案'},
+        {id:'pc',kind:'channel',title:'App Push',sub:'(无意外险) 意外保障补充'},
+        {id:'w1',kind:'wait',title:'等待事件',sub:'7天内等待: 报价/投保'},
+        {id:'ok0',kind:'exitOk',title:'结束（已转化）',sub:'获取报价或投保'},
+        {id:'em1',kind:'channel',title:'Email',sub:'保障缺口分析报告'},
+        {id:'w2',kind:'wait',title:'等待事件',sub:'14天内等待: 报价/投保'},
+        {id:'ok1',kind:'exitOk',title:'结束（已转化）',sub:'获取报价或投保'},
+        {id:'end',kind:'exitEnd',title:'结束',sub:'下轮再评估'},
+      ],
+      [
+        {from:'start',to:'st1'},{from:'st1',to:'br1'},
+        {from:'br1',to:'pa',label:'有车无健康'},{from:'br1',to:'pb',label:'个人无家庭'},{from:'br1',to:'pc',label:'无意外险'},
+        {from:'pa',to:'w1'},{from:'pb',to:'w1'},{from:'pc',to:'w1'},
+        {from:'w1',to:'ok0',label:'已转化'},{from:'w1',to:'em1',label:'未转化'},
+        {from:'em1',to:'w2'},{from:'w2',to:'ok1',label:'已转化'},{from:'w2',to:'end',label:'未转化'},
+      ]);
+
+    drawJourney(document.getElementById('dag-j6'),
+      [
+        {id:'start',kind:'entry',title:'开始',sub:'属性: 已断保/长期未活跃'},
+        {id:'br1',kind:'branch',title:'条件分支',sub:'属性: 断保时长'},
+        {id:'pa',kind:'channel',title:'App Push',sub:'(近期断保) 保障已中断·一键恢复'},
+        {id:'em1',kind:'channel',title:'Email',sub:'(长期沉默) 保障需求自测+新品'},
+        {id:'w1',kind:'wait',title:'等待事件',sub:'7天内等待: 报价/投保'},
+        {id:'w2',kind:'wait',title:'等待事件',sub:'14天内等待: 报价/投保'},
+        {id:'ok',kind:'exitOk',title:'结束（已回归）',sub:'重新投保或询价'},
+        {id:'br2',kind:'branch',title:'条件分支',sub:'属性: 历史客户价值'},
+        {id:'wa1',kind:'channel',title:'WhatsApp',sub:'(高价值) 专属顾问回访'},
+        {id:'sms1',kind:'channel',title:'SMS',sub:'(常规) 老客户专属费率'},
+        {id:'w3',kind:'wait',title:'等待事件',sub:'14天内等待: 报价/投保'},
+        {id:'ok2',kind:'exitOk',title:'结束（已回归）',sub:'重新投保或询价'},
+        {id:'end',kind:'exitEnd',title:'结束',sub:'标记深度流失·降频'},
+      ],
+      [
+        {from:'start',to:'br1'},{from:'br1',to:'pa',label:'近期断保'},{from:'br1',to:'em1',label:'长期沉默'},
+        {from:'pa',to:'w1'},{from:'em1',to:'w2'},
+        {from:'w1',to:'ok',label:'已回归'},{from:'w2',to:'ok',label:'已回归'},
+        {from:'w1',to:'br2',label:'未回归'},{from:'w2',to:'br2',label:'未回归'},
+        {from:'br2',to:'wa1',label:'高价值'},{from:'br2',to:'sms1',label:'常规'},
+        {from:'wa1',to:'w3'},{from:'sms1',to:'w3'},
+        {from:'w3',to:'ok2',label:'已回归'},{from:'w3',to:'end',label:'未回归'},
+      ]);
+
+  })();
+  </script>
+</body>
+</html>
