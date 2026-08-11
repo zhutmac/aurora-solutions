@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EngageLab MA · 企业差旅管理（TMC）增长方案</title>
+  <style>
+    :root {
+      --bg: #ffffff;
+      --bg-soft: #f7f8fa;
+      --bg-elev: #ffffff;
+      --border: #e5e7eb;
+      --border-strong: #d1d5db;
+      --text: #111827;
+      --text-2: #374151;
+      --text-3: #6b7280;
+      --text-4: #9ca3af;
+      --accent: #2563eb;
+      --accent-soft: #dbeafe;
+      --success: #16a34a;
+      --success-soft: #dcfce7;
+      --warning: #d97706;
+      --warning-soft: #fef3c7;
+      --info: #0369a1;
+      --info-soft: #e0f2fe;
+      --danger: #dc2626;
+      --danger-soft: #fee2e2;
+      --radius: 10px;
+      --radius-sm: 6px;
+      --shadow: 0 1px 2px rgba(16, 24, 40, 0.04);
+    }
+
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; background: var(--bg-soft); color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC",
+        "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", sans-serif;
+      line-height: 1.6; -webkit-font-smoothing: antialiased; font-size: 15px; }
+
+    main { max-width: 1180px; margin: 0 auto; padding: 32px 28px 80px; }
+
+    h1 { font-size: 30px; font-weight: 700; margin: 0 0 8px; letter-spacing: -0.01em; color: var(--text); }
+    h2 { font-size: 22px; font-weight: 700; margin: 0 0 12px; letter-spacing: -0.005em; color: var(--text); }
+    h3 { font-size: 17px; font-weight: 600; margin: 0 0 10px; color: var(--text); }
+    p { margin: 0 0 8px; color: var(--text-2); }
+    .muted { color: var(--text-3); }
+    .small { font-size: 13px; }
+    .bold { font-weight: 600; }
+
+    .section { background: var(--bg-elev); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 24px 26px; margin-bottom: 20px; }
+    .section-plain { padding: 6px 2px 18px; margin-bottom: 12px; }
+    .divider { height: 1px; background: var(--border); margin: 16px 0; border: none; }
+
+    .hero { background: linear-gradient(180deg, #fff 0%, #f0fdf4 100%);
+      border: 1px solid var(--border); border-radius: 14px; padding: 28px 30px;
+      margin-bottom: 24px; }
+    .hero-pills { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 14px; }
+    .hero-subtitle { color: var(--text-3); font-size: 15px; max-width: 900px; margin: 8px 0 18px; }
+
+    .pill { display: inline-flex; align-items: center; padding: 2px 10px;
+      font-size: 12px; border-radius: 999px; border: 1px solid var(--border-strong);
+      color: var(--text-2); background: #fff; font-weight: 500; }
+    .pill-accent { background: var(--accent-soft); border-color: var(--accent); color: var(--accent); }
+    .pill-info { background: var(--info-soft); border-color: var(--info); color: var(--info); }
+    .pill-success { background: var(--success-soft); border-color: var(--success); color: var(--success); }
+    .pill-warn { background: var(--warning-soft); border-color: var(--warning); color: var(--warning); }
+
+    .grid { display: grid; gap: 16px; }
+    .grid-4 { grid-template-columns: repeat(4, 1fr); }
+    .grid-3 { grid-template-columns: repeat(3, 1fr); }
+    .grid-2 { grid-template-columns: repeat(2, 1fr); }
+    .grid-5 { grid-template-columns: repeat(5, 1fr); }
+    .grid-1-2 { grid-template-columns: 1fr 2fr; }
+    .grid-2-1 { grid-template-columns: 1.4fr 1fr; }
+    .grid-12-1 { grid-template-columns: 1.2fr 1fr; }
+    .row { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+
+    .stat { padding: 14px 16px; background: var(--bg-elev); border: 1px solid var(--border);
+      border-radius: var(--radius); }
+    .stat-value { font-size: 26px; font-weight: 700; letter-spacing: -0.01em; color: var(--text);
+      line-height: 1.15; }
+    .stat-value.success { color: var(--success); }
+    .stat-value.info { color: var(--info); }
+    .stat-value.warn { color: var(--warning); }
+
+    .stat-label { font-size: 12px; color: var(--text-3); margin-top: 4px; }
+
+    .card { background: var(--bg-elev); border: 1px solid var(--border);
+      border-radius: var(--radius); overflow: hidden; }
+    .card-header { padding: 10px 16px; border-bottom: 1px solid var(--border);
+      background: #fafbfc; font-size: 13px; font-weight: 600; color: var(--text-2); }
+    .card-body { padding: 16px; }
+    .card-body.p-sm { padding: 12px; }
+    .card-body ul { margin: 0; padding-left: 18px; }
+    .card-body li { margin-bottom: 4px; font-size: 13.5px; color: var(--text-2); }
+
+    .callout { padding: 12px 14px; border-radius: var(--radius-sm);
+      border: 1px solid var(--border); border-left-width: 3px; background: var(--bg-soft); }
+    .callout-title { font-weight: 600; margin-bottom: 4px; font-size: 14px; }
+    .callout-body { font-size: 13px; color: var(--text-2); }
+    .callout-body p { font-size: 13px; color: var(--text-2); margin: 0 0 4px; }
+    .callout.info { border-left-color: var(--info); background: var(--info-soft); }
+    .callout.info .callout-title { color: var(--info); }
+    .callout.success { border-left-color: var(--success); background: var(--success-soft); }
+    .callout.success .callout-title { color: var(--success); }
+    .callout.warn { border-left-color: var(--warning); background: var(--warning-soft); }
+    .callout.warn .callout-title { color: var(--warning); }
+    .callout.neutral { border-left-color: var(--text-3); }
+
+    table { width: 100%; border-collapse: collapse; font-size: 13.5px;
+      background: var(--bg-elev); border: 1px solid var(--border); border-radius: var(--radius);
+      overflow: hidden; }
+    th, td { padding: 10px 12px; text-align: left; border-bottom: 1px solid var(--border);
+      color: var(--text-2); vertical-align: middle; }
+    th { background: #fafbfc; font-weight: 600; font-size: 12.5px; color: var(--text-3);
+      letter-spacing: 0.01em; text-transform: uppercase; }
+    tr:last-child td { border-bottom: 0; }
+    tr.tone-success td { background: rgba(22, 163, 74, 0.04); }
+    tr.tone-info td { background: rgba(3, 105, 161, 0.04); }
+
+    .signal-row { display: flex; gap: 10px; padding: 10px 0;
+      border-bottom: 1px solid var(--border); align-items: center; }
+    .signal-row:last-child { border-bottom: 0; }
+    .signal-row .left { flex: 1; min-width: 0; }
+    .signal-row .label { font-size: 13px; font-weight: 600; }
+    .signal-row .hint { font-size: 12px; color: var(--text-3); }
+    .signal-row .value { font-weight: 700; color: var(--text); font-size: 14px; white-space: nowrap; }
+
+    .chart { width: 100%; }
+    .chart svg { width: 100%; height: auto; display: block; }
+    .chart-legend { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--border); }
+    .chart-legend .leg-item { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--text-3); }
+    .chart-legend .dot { width: 10px; height: 10px; border-radius: 2px; }
+
+    .dag-wrap { overflow-x: auto; padding: 8px 2px; }
+    .dag-wrap svg { display: block; margin: 0 auto; }
+
+    .toc-bar { position: sticky; top: 0; background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(8px); border-bottom: 1px solid var(--border);
+      z-index: 10; padding: 10px 28px; margin: -32px -28px 24px;
+      font-size: 12.5px; }
+    .toc-bar .toc-inner { max-width: 1180px; margin: 0 auto; display: flex; gap: 14px;
+      align-items: center; overflow-x: auto; }
+    .toc-bar a { color: var(--text-3); text-decoration: none; white-space: nowrap; padding: 4px 2px; }
+    .toc-bar a:hover { color: var(--accent); }
+    .toc-bar .brand { font-weight: 700; color: var(--text); }
+
+    @page { size: A4; margin: 14mm; }
+    @media print {
+      body { background: #fff; }
+      main { max-width: none; padding: 0; }
+      .toc-bar { display: none; }
+      .section, .card, .hero { page-break-inside: avoid; box-shadow: none; }
+      h2 { page-break-after: avoid; }
+      .hero { break-before: avoid; }
+      .dag-wrap { overflow: visible; }
+      .dag-wrap svg { max-width: 100%; }
+    }
+
+    .spacer-sm { height: 6px; }
+    .spacer-md { height: 12px; }
+
+    .step-num { display: inline-flex; align-items: center; justify-content: center;
+      width: 22px; height: 22px; border-radius: 50%; background: var(--accent-soft);
+      color: var(--accent); font-weight: 700; font-size: 12px; margin-right: 8px; }
+
+    footer.site-footer { margin-top: 36px; padding-top: 16px; border-top: 1px solid var(--border);
+      font-size: 12px; color: var(--text-4); text-align: center; }
+  
+  .back-home {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    color: rgba(255,255,255,0.65);
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 500;
+    padding: 4px 10px 4px 6px;
+    border-radius: 6px;
+    border: 1px solid rgba(255,255,255,0.18);
+    margin-right: 16px;
+    white-space: nowrap;
+    transition: all 0.2s ease;
+    flex-shrink: 0;
+  }
+  .back-home:hover {
+    color: #fff;
+    background: rgba(255,255,255,0.12);
+    border-color: rgba(255,255,255,0.35);
+  }
+  .back-home svg {
+    width: 14px;
+    height: 14px;
+    opacity: 0.8;
+  }
+</style>
+</head>
+<body>
+  <nav class="toc-bar">
+    <div class="toc-inner">
+      <a class="back-home" href="../">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+        返回首页
+      </a>
+      <span class="brand">EngageLab MA · 企业差旅管理方案</span>
+      <a href="#s-market">市场机会</a><a href="#s-funnel">用户漏斗</a><a href="#s-why">为什么 EngageLab</a>
+      <a href="#s-scenarios">场景总览</a><a href="#s-journey">旅程编排</a><a href="#s-channel">渠道选型</a>
+      <a href="#s-compliance">合规安全</a><a href="#s-plan">测试计划</a>
+    </div>
+  </nav>
+  <main>
+    <section class="hero">
+      <div class="hero-pills">
+        <span class="pill pill-success">企业差旅 · TMC · 费控报销</span>
+        <span class="pill">全球 · 跨国企业</span>
+        <span class="pill pill-info">B 端采购 · 员工使用</span>
+      </div>
+      <h1>EngageLab MA · 企业差旅管理（TMC）增长方案</h1>
+      <p class="hero-subtitle">
+        企业差旅是典型的 B2B2E 场景——<span class="bold">企业采购、员工使用、财务管控</span>三方诉求不同：
+        企业要合规与省钱、员工要方便、财务要报销清晰。员工绕开平台自己订（线下预订）是最大的价值流失。
+        本方案以 <span class="bold">企业开通与员工激活、差旅预订引导与合规提示、行程履约与异常处理、报销与发票闭环、差旅政策与用量分析、企业续约与账户健康</span> 六大旅程切入，
+        统一编排 <span class="bold">Email（主力）+ App Push + SMS + 应用内</span> 四类通道。
+      </p>
+      <div class="row">
+        <span class="pill pill-accent">Email（B 端标准通道）</span>
+        <span class="pill pill-accent">App Push（员工行程）</span>
+        <span class="pill pill-accent">SMS（航变等紧急）</span>
+        <span class="pill pill-accent">应用内（预订引导）</span>
+      </div>
+    </section>
+
+    <section id="s-market" class="section">
+      <h2>一、为什么 TMC 必须做三方协同运营</h2>
+      <div class="grid grid-4" style="margin-bottom:16px">
+        <div class="stat"><div class="stat-value warn">员工绕开平台</div><div class="stat-label">线下自订是 TMC 最大的价值与数据流失</div></div>
+        <div class="stat"><div class="stat-value info">三方诉求不同</div><div class="stat-label">企业要合规省钱、员工要方便、财务要清晰</div></div>
+        <div class="stat"><div class="stat-value">渗透率决定价值</div><div class="stat-label">平台预订渗透率直接决定企业续约意愿</div></div>
+        <div class="stat"><div class="stat-value danger">异常即投诉</div><div class="stat-label">航变改签处理不及时会直接上升到企业层面</div></div>
+      </div>
+      <p class="muted small">注：下文所有转化率、提升幅度为企业差旅行业估算区间，落地以实测为准。</p>
+      <hr class="divider" />
+      <div class="grid grid-2">
+        <div class="callout neutral"><div class="callout-title">痛点 1 · 企业签约后员工不用</div><div class="callout-body"><p>企业开通了账户但员工不知道、不会用，平台渗透率低，企业续约时看不到价值。</p></div></div>
+        <div class="callout info"><div class="callout-title">解法 · 员工激活旅程</div><div class="callout-body"><p>批量激活员工账号并引导首次预订，用"免垫资、自动报销"等员工侧价值驱动使用。</p></div></div>
+        <div class="callout neutral"><div class="callout-title">痛点 2 · 员工绕开平台线下自订</div><div class="callout-body"><p>员工嫌平台麻烦或觉得外面更便宜就自己订，企业失去管控、TMC 失去交易额。</p></div></div>
+        <div class="callout info"><div class="callout-title">解法 · 预订引导 + 合规提示</div><div class="callout-body"><p>差旅申请通过后即引导在平台预订；超标或违规预订时实时提示，把行为拉回合规轨道。</p></div></div>
+        <div class="callout neutral"><div class="callout-title">痛点 3 · 行程异常处理慢</div><div class="callout-body"><p>航班变动、酒店问题若不及时通知与改签，员工滞留会直接引发企业层面的投诉。</p></div></div>
+        <div class="callout info"><div class="callout-title">解法 · 行程履约与异常处理</div><div class="callout-body"><p>值机、航变、改签全节点即时触达并直连客服，异常处理速度是 TMC 的核心竞争力。</p></div></div>
+        <div class="callout neutral"><div class="callout-title">痛点 4 · 报销拖延与续约风险</div><div class="callout-body"><p>员工不及时提交报销、财务对账困难；企业管理员看不到节省数据，续约时缺乏依据。</p></div></div>
+        <div class="callout info"><div class="callout-title">解法 · 报销闭环 + 账户健康预警</div><div class="callout-body"><p>行程结束自动催提交与生成发票；向企业管理员定期推送用量与节省报告，支撑续约。</p></div></div>
+      </div>
+    </section>
+
+    <section id="s-funnel" class="section">
+      <h2>二、企业漏斗：从开通到续约，每层都有增长空间</h2>
+      <p class="muted small">下图为企业差旅行业估算区间对比，非实测数据。</p>
+      <div class="chart" id="chart-funnel"></div>
+    </section>
+
+    <section id="s-why" class="section">
+      <h2>三、为什么选择 EngageLab MA</h2>
+      <div class="grid grid-3">
+        <div class="card"><div class="card-header">三方角色分层</div><div class="card-body p-sm"><ul><li>员工、企业管理员、财务三类角色分别编排</li><li>内容与渠道策略完全不同，避免错发</li></ul></div></div>
+        <div class="card"><div class="card-header">强时效异常触达</div><div class="card-body p-sm"><ul><li>航变、改签不可延误，Push 失败降级 SMS</li><li>响应 &lt;200ms，异常处理速度是核心竞争力</li></ul></div></div>
+        <div class="card"><div class="card-header">CDP 统一身份（EUID）</div><div class="card-body p-sm"><ul><li>企业账户、员工、预订记录、合规状态统一为属性</li><li>支撑企业级与个人级双维度分析</li></ul></div></div>
+        <div class="card"><div class="card-header">Email · B 端标准通道</div><div class="card-body p-sm"><ul><li>行程单、发票、对账单具备存证属性</li><li>企业管理员报告类内容的最佳载体</li></ul></div></div>
+        <div class="card"><div class="card-header">与 CSM 协同</div><div class="card-body p-sm"><ul><li>企业账户健康度下滑自动预警并转客户成功</li><li>自动化承接员工侧，人工聚焦企业关系</li></ul></div></div>
+        <div class="card"><div class="card-header">合规 · 企业级要求</div><div class="card-body p-sm"><ul><li>GDPR / SOC 2，企业采购必查项</li><li>差旅数据与员工隐私分级管控</li></ul></div></div>
+      </div>
+    </section>
+
+    <section id="s-scenarios" class="section">
+      <h2>四、高 ROI 运营场景总览</h2>
+      <table>
+        <thead><tr><th>#</th><th>场景</th><th>对象角色</th><th>核心触发</th><th>渠道组合</th><th>预期提升（估算）</th></tr></thead>
+        <tbody>
+          <tr class="tone-info"><td>J1</td><td>企业开通 + 员工激活</td><td>员工</td><td>企业开通后员工未激活</td><td>Email + App Push</td><td>员工激活 +30~50%</td></tr>
+          <tr class="tone-success"><td>J2</td><td>预订引导 + 合规提示</td><td>员工</td><td>差旅申请通过未预订</td><td>应用内 + App Push + Email</td><td>平台渗透率 +25~40%</td></tr>
+          <tr><td>J3</td><td>行程履约与异常处理</td><td>员工</td><td>出行前 / 航变改签</td><td>App Push + SMS</td><td>投诉下降、满意度提升</td></tr>
+          <tr class="tone-success"><td>J4</td><td>报销与发票闭环</td><td>员工 + 财务</td><td>行程结束未提交</td><td>App Push + Email</td><td>报销及时率 +35%↑</td></tr>
+          <tr><td>J5</td><td>企业用量与节省报告</td><td>企业管理员</td><td>月度 / 季度周期</td><td>Email + 应用内</td><td>续约依据、加购机会</td></tr>
+          <tr><td>J6</td><td>账户健康预警 + 续约保障</td><td>企业管理员 + CSM</td><td>用量下滑 / 续约前 60 天</td><td>Email + CSM 转人工</td><td>企业续约率 +10~20%</td></tr>
+        </tbody>
+      </table>
+      <p class="muted small" style="margin-top:8px">提升幅度为行业公开区间估算，最终以 4 周测试实测为准。</p>
+    </section>
+
+    <section id="s-journey" class="section-plain">
+      <h2>五、核心旅程详细编排</h2>
+      <div class="section" style="margin-top:16px;">
+        <h3>旅程 1：企业开通 + 员工激活</h3>
+        <div class="grid grid-2-1"><div class="dag-wrap" id="dag-j1"></div><div>
+          <div class="callout neutral" style="margin-bottom:12px"><div class="callout-title">业务痛点</div><div class="callout-body"><p>企业开通了账户但员工不知道、不会用，渗透率低，企业续约时看不到价值。</p></div></div>
+          <div class="callout info" style="margin-bottom:12px"><div class="callout-title">旅程组件配置</div><div class="callout-body">
+            <p><strong>进入条件：</strong>事件：企业开通后员工账号未激活</p>
+            <p><strong>提前退出：</strong>事件：员工完成首次登录并预订</p>
+            <p><strong>价值感：</strong>面向员工讲"免垫资、自动生成报销单"（而非企业省钱）</p>
+            <p><strong>渠道：</strong>Email 为主（企业邮箱可批量触达）</p>
+          </div></div>
+          <div class="callout success"><div class="callout-title">预期效益</div><div class="callout-body"><p>员工激活 +30~50%（估算）；对员工要讲员工的好处，而不是企业的好处。</p></div></div>
+        </div></div>
+      </div>
+      <div class="section">
+        <h3>旅程 2：预订引导 + 合规提示</h3>
+        <div class="grid grid-2-1"><div class="dag-wrap" id="dag-j2"></div><div>
+          <div class="callout neutral" style="margin-bottom:12px"><div class="callout-title">业务痛点</div><div class="callout-body"><p>员工绕开平台线下自订，企业失去管控、TMC 失去交易额与数据。</p></div></div>
+          <div class="callout info" style="margin-bottom:12px"><div class="callout-title">旅程组件配置</div><div class="callout-body">
+            <p><strong>进入条件：</strong>事件：差旅申请通过但未在平台预订</p>
+            <p><strong>分支：</strong>属性：预订行为（未预订催办 / 超标预订合规提示）</p>
+            <p><strong>提前退出：</strong>事件：完成平台预订</p>
+            <p><strong>内容：</strong>协议价对比 + 免垫资 + 一键报销的便利性</p>
+          </div></div>
+          <div class="callout success"><div class="callout-title">预期效益</div><div class="callout-body"><p>平台渗透率 +25~40%（估算）；渗透率是 TMC 商业价值与企业续约的核心指标。</p></div></div>
+        </div></div>
+      </div>
+      <div class="section">
+        <h3>旅程 3：行程履约与异常处理</h3>
+        <div class="grid grid-2-1"><div class="dag-wrap" id="dag-j3"></div><div>
+          <div class="callout neutral" style="margin-bottom:12px"><div class="callout-title">业务痛点</div><div class="callout-body"><p>航班变动不及时通知导致员工滞留，会直接上升为企业层面的投诉。</p></div></div>
+          <div class="callout info" style="margin-bottom:12px"><div class="callout-title">旅程组件配置</div><div class="callout-body">
+            <p><strong>进入条件：</strong>属性：出行前 24h / 事件：航变或行程异常</p>
+            <p><strong>时间轴：</strong>行前提醒 → 值机引导 → 异常即时通知 → 改签协助 → 行程结束</p>
+            <p><strong>异常优先级：</strong>Push + SMS 双通道确保触达，直连 24h 客服</p>
+            <p><strong>分类：</strong>服务类通知，不受任何退订与频控限制</p>
+          </div></div>
+          <div class="callout success"><div class="callout-title">预期效益</div><div class="callout-body"><p>投诉下降、满意度提升；异常处理速度是 TMC 区别于普通 OTA 的核心竞争力。</p></div></div>
+        </div></div>
+      </div>
+      <div class="section">
+        <h3>旅程 4：报销与发票闭环</h3>
+        <div class="grid grid-2-1"><div class="dag-wrap" id="dag-j4"></div><div>
+          <div class="callout neutral" style="margin-bottom:12px"><div class="callout-title">业务痛点</div><div class="callout-body"><p>员工拖延提交报销，财务月末对账困难，企业对平台的效率价值感知下降。</p></div></div>
+          <div class="callout info" style="margin-bottom:12px"><div class="callout-title">旅程组件配置</div><div class="callout-body">
+            <p><strong>进入条件：</strong>属性：行程结束后未提交报销</p>
+            <p><strong>递进：</strong>行程结束当天 → 3 天后 → 月末截止前（含财务抄送）</p>
+            <p><strong>内容：</strong>已自动生成的报销单与发票，一键提交</p>
+            <p><strong>提前退出：</strong>事件：完成报销提交</p>
+          </div></div>
+          <div class="callout success"><div class="callout-title">预期效益</div><div class="callout-body"><p>报销及时率 +35%↑（估算）；财务效率是企业续约时最直接的体感价值。</p></div></div>
+        </div></div>
+      </div>
+      <div class="section">
+        <h3>旅程 5：企业用量与节省报告</h3>
+        <div class="grid grid-2-1"><div class="dag-wrap" id="dag-j5"></div><div>
+          <div class="callout neutral" style="margin-bottom:12px"><div class="callout-title">业务痛点</div><div class="callout-body"><p>企业管理员看不到平台带来的节省与合规改善，续约时缺乏说服自己的依据。</p></div></div>
+          <div class="callout info" style="margin-bottom:12px"><div class="callout-title">旅程组件配置</div><div class="callout-body">
+            <p><strong>进入条件：</strong>属性：月度 / 季度报告周期</p>
+            <p><strong>对象：</strong>企业管理员与财务负责人（不发员工）</p>
+            <p><strong>内容：</strong>差旅总额、协议价节省、合规率、渗透率、Top 支出部门</p>
+            <p><strong>延伸：</strong>基于数据提出优化建议与增值服务推荐</p>
+          </div></div>
+          <div class="callout success"><div class="callout-title">预期效益</div><div class="callout-body"><p>续约依据与加购机会；量化的节省数据是 B 端续约最有力的武器。</p></div></div>
+        </div></div>
+      </div>
+      <div class="section">
+        <h3>旅程 6：账户健康预警 + 续约保障</h3>
+        <div class="grid grid-2-1"><div class="dag-wrap" id="dag-j6"></div><div>
+          <div class="callout neutral" style="margin-bottom:12px"><div class="callout-title">业务痛点</div><div class="callout-body"><p>企业用量下滑往往到续约时才发现，此时挽回已来不及。</p></div></div>
+          <div class="callout info" style="margin-bottom:12px"><div class="callout-title">旅程组件配置</div><div class="callout-body">
+            <p><strong>进入条件：</strong>属性：企业用量环比下滑 / 合同续约前 60 天</p>
+            <p><strong>分支：</strong>属性：企业规模与健康度（大客户转 CSM / 长尾走自动化）</p>
+            <p><strong>内容：</strong>渗透率诊断（哪些部门未使用）+ 改善方案</p>
+            <p><strong>协同：</strong>预警同步给 CSM 与销售，人工与自动化分工</p>
+          </div></div>
+          <div class="callout success"><div class="callout-title">预期效益</div><div class="callout-body"><p>企业续约率 +10~20%（估算）；提前 60 天预警给了充分的挽救窗口。</p></div></div>
+        </div></div>
+      </div>
+    </section>
+
+    <section id="s-channel" class="section-plain">
+      <h2>六、渠道选型参考</h2>
+      <div class="section">
+        <p class="muted small">企业差旅渠道适配相对值（示意）：Email 是 B 端标准通道（行程单、发票、对账、管理员报告均具存证属性），App Push 承载员工行程实时提醒，SMS 用于航变等紧急节点，应用内承载预订引导。</p>
+        <div class="chart" id="chart-channel"></div>
+        <div class="grid grid-2" style="margin-top:14px">
+          <div class="callout info"><div class="callout-title">主力通道</div><div class="callout-body"><p>Email（行程单、发票、对账单、管理员报告——B 端存证与决策载体）+ App Push（员工行程实时提醒）。</p></div></div>
+          <div class="callout warn"><div class="callout-title">三方角色不可混发</div><div class="callout-body"><p>员工收行程与报销、管理员收用量与节省报告、财务收对账——发错对象会造成困扰甚至合规问题。</p></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="s-compliance" class="section">
+      <h2>七、合规与安全（企业级）</h2>
+      <div class="grid grid-3">
+        <div class="card"><div class="card-header">企业采购必查项</div><div class="card-body p-sm"><ul><li>GDPR / SOC 2 Type II 认证</li><li>数据驻留与跨境传输合规</li><li>DPA 数据处理协议支持</li></ul></div></div>
+        <div class="card"><div class="card-header">差旅数据分级</div><div class="card-body p-sm"><ul><li>员工行程与个人信息分级管控</li><li>管理员仅可见汇总数据，不越权查看个人隐私</li><li>PII 脱敏、RBAC 权限、审计留痕</li></ul></div></div>
+        <div class="card"><div class="card-header">触达护栏</div><div class="card-body p-sm"><ul><li>行程与异常类通知不受退订限制（安全需要）</li><li>营销与报告类遵循退订与工作时间发送</li><li>记录留存可导出，满足企业审计</li></ul></div></div>
+      </div>
+    </section>
+
+    <section id="s-plan" class="section">
+      <h2>八、测试计划（4 周）</h2>
+      <table>
+        <thead><tr><th>周次</th><th>阶段</th><th>核心工作</th><th>验收指标</th></tr></thead>
+        <tbody>
+          <tr><td>第 1 周</td><td>启动 · 数据打通</td><td>确认埋点（企业开通、员工激活、差旅申请、预订、行程、报销）；三方角色映射</td><td>事件入库率 ≥95%；角色归属准确</td></tr>
+          <tr><td>第 2 周</td><td>核心旅程上线</td><td>J1 员工激活 + J3 行程异常（2 条，小流量）；服务类分类配置</td><td>旅程触发成功率 ≥98%；异常类 100% 送达</td></tr>
+          <tr><td>第 3 周</td><td>扩量 · A/B</td><td>J2 预订引导 + J4 报销闭环全量；员工价值话术 A/B</td><td>渗透率与报销及时率 uplift 显现</td></tr>
+          <tr><td>第 4 周</td><td>复盘 · 扩面</td><td>J5 企业报告 + J6 账户预警上线；与 CSM 流程对接</td><td>激活/渗透/报销/续约指标 uplift 可量化</td></tr>
+        </tbody>
+      </table>
+      <div class="callout success" style="margin-top:14px"><div class="callout-title">投入</div><div class="callout-body"><p>测试期授权费 $0，配置 2 人专属服务团队支撑埋点、三方角色建模与旅程交付。</p></div></div>
+    </section>
+    <footer class="site-footer">EngageLab MA · 企业差旅管理（TMC）增长方案 — 内部方案，转化/提升数据为行业估算或公开参考，落地以实测为准。</footer>
+  </main>
+  <script>
+  (function(){
+    // ========== Shared helpers ==========
+    const COLORS = {
+      accent: '#2563eb', info: '#0369a1', success: '#16a34a',
+      warning: '#d97706', neutral: '#94a3b8', muted: '#cbd5e1',
+      text: '#374151', textMute: '#9ca3af', grid: '#e5e7eb',
+    };
+    function svgEl(w, h) {
+      const s = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+      s.setAttribute('viewBox', '0 0 ' + w + ' ' + h);
+      s.setAttribute('width', '100%');
+      s.setAttribute('preserveAspectRatio', 'xMidYMid meet');
+      return s;
+    }
+    function el(tag, attrs) {
+      const e = document.createElementNS('http://www.w3.org/2000/svg', tag);
+      for (const k in attrs) e.setAttribute(k, attrs[k]);
+      return e;
+    }
+
+    // ========== Bar Chart ==========
+    function drawBarChart(mount, opts) {
+      const { categories, series, valueSuffix = '', height = 240 } = opts;
+      const W = 600, H = height, PAD_L = 44, PAD_R = 16, PAD_T = 12, PAD_B = 56;
+      const innerW = W - PAD_L - PAD_R, innerH = H - PAD_T - PAD_B;
+      const max = Math.max(...series.flatMap(s => s.data), 1);
+      const niceMax = Math.ceil(max / 20) * 20 || 100;
+      const groupCount = categories.length;
+      const barsPerGroup = series.length;
+      const groupW = innerW / groupCount;
+      const barW = Math.min(22, (groupW - 12) / barsPerGroup);
+      const s = svgEl(W, H);
+      for (let i = 0; i <= 4; i++) {
+        const v = (niceMax / 4) * i;
+        const y = PAD_T + innerH - (v / niceMax) * innerH;
+        s.appendChild(el('line', { x1: PAD_L, x2: W - PAD_R, y1: y, y2: y, stroke: COLORS.grid, 'stroke-width': 1 }));
+        const t = el('text', { x: PAD_L - 6, y: y + 4, 'text-anchor': 'end', 'font-size': 10, fill: COLORS.textMute });
+        t.textContent = Math.round(v) + valueSuffix;
+        s.appendChild(t);
+      }
+      categories.forEach((cat, ci) => {
+        const gx = PAD_L + groupW * ci;
+        series.forEach((se, si) => {
+          const v = se.data[ci] || 0;
+          const h = (v / niceMax) * innerH;
+          const x = gx + (groupW - barW * barsPerGroup) / 2 + si * barW;
+          const y = PAD_T + innerH - h;
+          const color = COLORS[se.tone] || COLORS.neutral;
+          s.appendChild(el('rect', { x, y, width: barW - 2, height: h, fill: color, rx: 2 }));
+          if (v > 0) {
+            const label = el('text', { x: x + (barW - 2) / 2, y: y - 2, 'text-anchor': 'middle', 'font-size': 8, fill: COLORS.text });
+            label.textContent = v + valueSuffix;
+            s.appendChild(label);
+          }
+        });
+        const t = el('text', { x: gx + groupW / 2, y: H - PAD_B + 14, 'text-anchor': 'middle', 'font-size': 10, fill: COLORS.text });
+        t.textContent = cat;
+        s.appendChild(t);
+      });
+      // Legend
+      let legX = PAD_L;
+      series.forEach((se) => {
+        const color = COLORS[se.tone] || COLORS.accent;
+        s.appendChild(el('rect', { x: legX, y: H - 18, width: 10, height: 10, rx: 2, fill: color }));
+        const t = el('text', { x: legX + 14, y: H - 10, 'font-size': 10, fill: COLORS.text });
+        t.textContent = se.name;
+        s.appendChild(t);
+        legX += 14 + (se.name.length * 7) + 16;
+      });
+      mount.innerHTML = '';
+      mount.appendChild(s);
+    }
+
+    // ========== Journey DAG renderer (same as fintech/security solution) ==========
+    const KIND_STYLE = {
+      entry:    { fill: '#f1f5f9', stroke: '#94a3b8', text: '#111827' },
+      wait:     { fill: '#fafafa', stroke: '#d1d5db', text: '#6b7280' },
+      branch:   { fill: '#f9fafb', stroke: '#475569', text: '#111827' },
+      channel:  { fill: '#dbeafe', stroke: '#2563eb', text: '#1e3a8a' },
+      sendtime: { fill: '#fef3c7', stroke: '#d97706', text: '#92400e' },
+      exitOk:   { fill: '#dcfce7', stroke: '#16a34a', text: '#14532d' },
+      exitEnd:  { fill: '#f3f4f6', stroke: '#9ca3af', text: '#4b5563' },
+    };
+
+    function drawJourney(mount, nodes, edges) {
+      const NODE_W = 176, NODE_H = 62, RANK_GAP = 42, NODE_GAP = 22;
+      const rankOf = {}, incoming = {};
+      nodes.forEach(n => { rankOf[n.id] = 0; incoming[n.id] = []; });
+      edges.forEach(e => { incoming[e.to].push(e.from); });
+      let changed = true;
+      while (changed) {
+        changed = false;
+        edges.forEach(e => {
+          if (rankOf[e.to] < rankOf[e.from] + 1) { rankOf[e.to] = rankOf[e.from] + 1; changed = true; }
+        });
+      }
+      const maxRank = Math.max(...Object.values(rankOf));
+      const ranks = [];
+      for (let r = 0; r <= maxRank; r++) ranks.push([]);
+      nodes.forEach(n => { ranks[rankOf[n.id]].push(n); });
+      const pos = {};
+      const rankWidths = ranks.map(r => r.length * NODE_W + (r.length - 1) * NODE_GAP);
+      const maxWidth = Math.max(...rankWidths, 400);
+      ranks.forEach((rankNodes, r) => {
+        const withAnchor = rankNodes.map(n => {
+          const parents = incoming[n.id].map(p => pos[p] ? pos[p].x + NODE_W / 2 : null).filter(x => x !== null);
+          const anchor = parents.length ? parents.reduce((a, b) => a + b, 0) / parents.length : null;
+          return { node: n, anchor };
+        });
+        withAnchor.sort((a, b) => {
+          if (a.anchor === null && b.anchor === null) return 0;
+          if (a.anchor === null) return 1;
+          if (b.anchor === null) return -1;
+          return a.anchor - b.anchor;
+        });
+        const totalW = withAnchor.length * NODE_W + (withAnchor.length - 1) * NODE_GAP;
+        const startX = (maxWidth - totalW) / 2 + 20;
+        withAnchor.forEach((it, i) => {
+          pos[it.node.id] = { x: startX + i * (NODE_W + NODE_GAP), y: 20 + r * (NODE_H + RANK_GAP) };
+        });
+      });
+      for (let pass = 0; pass < 3; pass++) {
+        ranks.forEach(rankNodes => {
+          const sorted = rankNodes.slice().sort((a, b) => pos[a.id].x - pos[b.id].x);
+          for (let i = 1; i < sorted.length; i++) {
+            const prev = pos[sorted[i - 1].id], cur = pos[sorted[i].id];
+            if (cur.x < prev.x + NODE_W + NODE_GAP) cur.x = prev.x + NODE_W + NODE_GAP;
+          }
+        });
+      }
+      const width = Math.max(...Object.values(pos).map(p => p.x)) + NODE_W + 20;
+      const height = Math.max(...Object.values(pos).map(p => p.y)) + NODE_H + 24;
+      const s = svgEl(width, height);
+      s.setAttribute('width', width);
+      s.setAttribute('height', height);
+      s.style.maxWidth = '100%';
+      s.style.height = 'auto';
+      const defs = el('defs');
+      const marker = el('marker', { id: 'arrow', viewBox: '0 0 10 10', refX: 9, refY: 5, markerWidth: 6, markerHeight: 6, orient: 'auto-start-reverse' });
+      marker.appendChild(el('path', { d: 'M 0 0 L 10 5 L 0 10 z', fill: '#94a3b8' }));
+      defs.appendChild(marker);
+      s.appendChild(defs);
+      edges.forEach(e => {
+        const from = pos[e.from], to = pos[e.to];
+        if (!from || !to) return;
+        const x1 = from.x + NODE_W / 2, y1 = from.y + NODE_H;
+        const x2 = to.x + NODE_W / 2, y2 = to.y;
+        const cy = (y1 + y2) / 2;
+        const d = 'M' + x1 + ',' + y1 + ' C' + x1 + ',' + cy + ' ' + x2 + ',' + cy + ' ' + x2 + ',' + y2;
+        s.appendChild(el('path', { d, fill: 'none', stroke: '#94a3b8', 'stroke-width': 1.25, 'marker-end': 'url(#arrow)' }));
+        if (e.label) {
+          const mx = (x1 + x2) / 2, my = cy;
+          const w = Math.max(e.label.length * 9 + 10, 28);
+          s.appendChild(el('rect', { x: mx - w / 2, y: my - 10, width: w, height: 18, rx: 4, fill: '#ffffff', stroke: '#e5e7eb' }));
+          const t = el('text', { x: mx, y: my + 3, 'text-anchor': 'middle', 'font-size': 11, fill: '#475569' });
+          t.textContent = e.label;
+          s.appendChild(t);
+        }
+      });
+      nodes.forEach(n => {
+        const p = pos[n.id];
+        const k = KIND_STYLE[n.kind] || KIND_STYLE.entry;
+        s.appendChild(el('rect', { x: p.x, y: p.y, width: NODE_W, height: NODE_H, rx: 10, fill: k.fill, stroke: k.stroke, 'stroke-width': n.kind === 'channel' ? 1.4 : 1 }));
+        const titleY = n.sub ? p.y + 24 : p.y + NODE_H / 2 + 4;
+        const title = el('text', { x: p.x + NODE_W / 2, y: titleY, 'text-anchor': 'middle', 'font-size': 12.5, 'font-weight': 600, fill: k.text });
+        title.textContent = n.title;
+        s.appendChild(title);
+        if (n.sub) {
+          const sub = el('text', { x: p.x + NODE_W / 2, y: p.y + 42, 'text-anchor': 'middle', 'font-size': 11, fill: k.text, opacity: 0.82 });
+          sub.textContent = n.sub;
+          s.appendChild(sub);
+        }
+      });
+      mount.innerHTML = '';
+      mount.appendChild(s);
+    }
+
+    drawBarChart(document.getElementById('chart-funnel'), {
+      categories: ['开通→员工激活', '激活→首次预订', '平台预订渗透率', '报销及时率', '企业续约率'],
+      series: [
+        { name: '当前基准（估算）',    data: [45, 50, 55, 50, 75], tone: 'neutral' },
+        { name: 'MA 自动化后（估算）', data: [62, 65, 72, 68, 85], tone: 'success' },
+      ], valueSuffix: '%', height: 260,
+    });
+    drawBarChart(document.getElementById('chart-channel'), {
+      categories: ['Email', 'App Push', 'SMS', '应用内', 'Web Push'],
+      series: [{ name: '企业差旅触达适配（相对值·示意）', data: [95, 82, 75, 70, 40], tone: 'info' }],
+      valueSuffix: '', height: 220,
+    });
+
+    drawJourney(document.getElementById('dag-j1'),
+      [
+        {id:'start',kind:'entry',title:'开始',sub:'事件: 企业开通·员工未激活'},
+        {id:'em0',kind:'channel',title:'Email（员工）',sub:'账号已开通·免垫资订差旅'},
+        {id:'w1',kind:'wait',title:'等待事件',sub:'3天内等待: 完成激活'},
+        {id:'ok0',kind:'exitOk',title:'结束（已激活）',sub:'登录并完成首次预订'},
+        {id:'p1',kind:'channel',title:'App Push',sub:'一键生成报销单·告别贴票'},
+        {id:'w2',kind:'wait',title:'等待事件',sub:'7天内等待: 完成激活'},
+        {id:'ok1',kind:'exitOk',title:'结束（已激活）',sub:'登录并完成首次预订'},
+        {id:'em1',kind:'channel',title:'Email（员工）',sub:'3分钟上手指南+协议价示例'},
+        {id:'w3',kind:'wait',title:'等待事件',sub:'14天内等待: 完成激活'},
+        {id:'ok2',kind:'exitOk',title:'结束（已激活）',sub:'登录并完成首次预订'},
+        {id:'em2',kind:'channel',title:'Email（管理员）',sub:'未激活员工名单+推动建议'},
+        {id:'end',kind:'exitEnd',title:'结束',sub:'转企业侧推动'},
+      ],
+      [
+        {from:'start',to:'em0'},{from:'em0',to:'w1'},{from:'w1',to:'ok0',label:'已激活'},{from:'w1',to:'p1',label:'未激活'},
+        {from:'p1',to:'w2'},{from:'w2',to:'ok1',label:'已激活'},{from:'w2',to:'em1',label:'未激活'},
+        {from:'em1',to:'w3'},{from:'w3',to:'ok2',label:'已激活'},{from:'w3',to:'em2',label:'未激活'},{from:'em2',to:'end'},
+      ]);
+
+    drawJourney(document.getElementById('dag-j2'),
+      [
+        {id:'start',kind:'entry',title:'开始',sub:'事件: 差旅申请通过'},
+        {id:'ia0',kind:'channel',title:'应用内消息',sub:'申请已通过·立即预订'},
+        {id:'w1',kind:'wait',title:'等待事件',sub:'24h 内等待: 平台预订'},
+        {id:'ok0',kind:'exitOk',title:'结束（已预订）',sub:'完成平台预订'},
+        {id:'br1',kind:'branch',title:'条件分支',sub:'属性: 预订行为'},
+        {id:'p1',kind:'channel',title:'App Push',sub:'(未预订) 协议价+免垫资提醒'},
+        {id:'p2',kind:'channel',title:'App Push',sub:'(超标预订) 超出差标·需审批'},
+        {id:'w2',kind:'wait',title:'等待事件',sub:'3天内等待: 完成合规预订'},
+        {id:'ok1',kind:'exitOk',title:'结束（已预订）',sub:'完成平台预订'},
+        {id:'em1',kind:'channel',title:'Email',sub:'出行临近·未预订将影响报销'},
+        {id:'w3',kind:'wait',title:'等待事件',sub:'出行前等待: 是否预订'},
+        {id:'ok2',kind:'exitOk',title:'结束（已预订）',sub:'完成平台预订'},
+        {id:'end',kind:'exitEnd',title:'结束',sub:'记录线下预订·企业报告体现'},
+      ],
+      [
+        {from:'start',to:'ia0'},{from:'ia0',to:'w1'},{from:'w1',to:'ok0',label:'已预订'},{from:'w1',to:'br1',label:'未预订'},
+        {from:'br1',to:'p1',label:'未预订'},{from:'br1',to:'p2',label:'超标'},
+        {from:'p1',to:'w2'},{from:'p2',to:'w2'},
+        {from:'w2',to:'ok1',label:'已预订'},{from:'w2',to:'em1',label:'未预订'},
+        {from:'em1',to:'w3'},{from:'w3',to:'ok2',label:'已预订'},{from:'w3',to:'end',label:'未预订'},
+      ]);
+
+    drawJourney(document.getElementById('dag-j3'),
+      [
+        {id:'start',kind:'entry',title:'开始',sub:'属性: 出行前24h'},
+        {id:'p1',kind:'channel',title:'App Push+Email',sub:'行程提醒+值机引导'},
+        {id:'w1',kind:'wait',title:'等待',sub:'等待至出行'},
+        {id:'br1',kind:'branch',title:'条件分支',sub:'属性: 是否发生异常'},
+        {id:'pe',kind:'channel',title:'App Push+SMS',sub:'(异常) 航变通知+改签入口'},
+        {id:'pn',kind:'channel',title:'App Push',sub:'(正常) 行程进行中·客服待命'},
+        {id:'w2',kind:'wait',title:'等待事件',sub:'2h 内等待: 异常是否解决'},
+        {id:'sms1',kind:'channel',title:'SMS+客服',sub:'升级人工·24h协助改签'},
+        {id:'p2',kind:'channel',title:'App Push',sub:'行程结束·生成报销单'},
+        {id:'ok',kind:'exitOk',title:'结束（已完成）',sub:'转报销闭环旅程'},
+      ],
+      [
+        {from:'start',to:'p1'},{from:'p1',to:'w1'},{from:'w1',to:'br1'},
+        {from:'br1',to:'pe',label:'有异常'},{from:'br1',to:'pn',label:'正常'},
+        {from:'pe',to:'w2'},{from:'w2',to:'p2',label:'已解决'},{from:'w2',to:'sms1',label:'未解决'},
+        {from:'sms1',to:'p2'},{from:'pn',to:'p2'},{from:'p2',to:'ok'},
+      ]);
+
+    drawJourney(document.getElementById('dag-j4'),
+      [
+        {id:'start',kind:'entry',title:'开始',sub:'属性: 行程结束未提交报销'},
+        {id:'p0',kind:'channel',title:'App Push',sub:'报销单已自动生成·一键提交'},
+        {id:'w1',kind:'wait',title:'等待事件',sub:'3天内等待: 是否提交'},
+        {id:'ok0',kind:'exitOk',title:'结束（已提交）',sub:'完成报销提交'},
+        {id:'em1',kind:'channel',title:'Email（员工）',sub:'发票已归集·点击提交'},
+        {id:'w2',kind:'wait',title:'等待事件',sub:'7天内等待: 是否提交'},
+        {id:'ok1',kind:'exitOk',title:'结束（已提交）',sub:'完成报销提交'},
+        {id:'em2',kind:'channel',title:'Email（员工+财务）',sub:'月末截止提醒·抄送财务'},
+        {id:'w3',kind:'wait',title:'等待事件',sub:'截止前等待: 是否提交'},
+        {id:'ok2',kind:'exitOk',title:'结束（已提交）',sub:'完成报销提交'},
+        {id:'end',kind:'exitEnd',title:'结束',sub:'转财务人工跟进'},
+      ],
+      [
+        {from:'start',to:'p0'},{from:'p0',to:'w1'},{from:'w1',to:'ok0',label:'已提交'},{from:'w1',to:'em1',label:'未提交'},
+        {from:'em1',to:'w2'},{from:'w2',to:'ok1',label:'已提交'},{from:'w2',to:'em2',label:'未提交'},
+        {from:'em2',to:'w3'},{from:'w3',to:'ok2',label:'已提交'},{from:'w3',to:'end',label:'未提交'},
+      ]);
+
+    drawJourney(document.getElementById('dag-j5'),
+      [
+        {id:'start',kind:'entry',title:'开始',sub:'属性: 月度/季度报告周期'},
+        {id:'st1',kind:'sendtime',title:'可发送时间',sub:'工作日 9:00-18:00'},
+        {id:'em1',kind:'channel',title:'Email（管理员）',sub:'差旅总额+协议价节省X'},
+        {id:'em2',kind:'channel',title:'Email（财务）',sub:'对账单+发票归集清单'},
+        {id:'w1',kind:'wait',title:'等待事件',sub:'7天内等待: 是否查看'},
+        {id:'ia1',kind:'channel',title:'应用内消息',sub:'渗透率诊断+优化建议'},
+        {id:'w2',kind:'wait',title:'等待事件',sub:'7天内等待: 是否互动'},
+        {id:'ok',kind:'exitOk',title:'结束（已查看）',sub:'管理员已阅报告'},
+        {id:'end',kind:'exitEnd',title:'结束',sub:'转 CSM 主动沟通'},
+      ],
+      [
+        {from:'start',to:'st1'},{from:'st1',to:'em1'},{from:'em1',to:'em2'},{from:'em2',to:'w1'},
+        {from:'w1',to:'ok',label:'已查看'},{from:'w1',to:'ia1',label:'未查看'},
+        {from:'ia1',to:'w2'},{from:'w2',to:'ok',label:'已互动'},{from:'w2',to:'end',label:'未互动'},
+      ]);
+
+    drawJourney(document.getElementById('dag-j6'),
+      [
+        {id:'start',kind:'entry',title:'开始',sub:'属性: 用量下滑/续约前60天'},
+        {id:'br1',kind:'branch',title:'条件分支',sub:'属性: 企业规模与健康度'},
+        {id:'csm',kind:'channel',title:'Email+CSM',sub:'(大客户) 转人工·健康度复盘'},
+        {id:'em1',kind:'channel',title:'Email（管理员）',sub:'(长尾) 渗透诊断+改善方案'},
+        {id:'w1',kind:'wait',title:'等待事件',sub:'14天内等待: 用量回升'},
+        {id:'ok0',kind:'exitOk',title:'结束（已改善）',sub:'用量回升或续约'},
+        {id:'ia1',kind:'channel',title:'应用内消息',sub:'未使用部门名单+激活工具'},
+        {id:'w2',kind:'wait',title:'等待事件',sub:'续约前等待: 是否续约'},
+        {id:'ok1',kind:'exitOk',title:'结束（已续约）',sub:'完成合同续约'},
+        {id:'em2',kind:'channel',title:'Email（管理员）',sub:'续约方案+年度价值报告'},
+        {id:'end',kind:'exitEnd',title:'结束',sub:'转销售挽回'},
+      ],
+      [
+        {from:'start',to:'br1'},{from:'br1',to:'csm',label:'大客户'},{from:'br1',to:'em1',label:'长尾'},
+        {from:'csm',to:'w1'},{from:'em1',to:'w1'},
+        {from:'w1',to:'ok0',label:'已改善'},{from:'w1',to:'ia1',label:'未改善'},
+        {from:'ia1',to:'w2'},{from:'w2',to:'ok1',label:'已续约'},{from:'w2',to:'em2',label:'未续约'},{from:'em2',to:'end'},
+      ]);
+
+  })();
+  </script>
+</body>
+</html>

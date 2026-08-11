@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EngageLab MA · 跨境物流 / 货代增长方案</title>
+  <style>
+    :root {
+      --bg: #ffffff;
+      --bg-soft: #f7f8fa;
+      --bg-elev: #ffffff;
+      --border: #e5e7eb;
+      --border-strong: #d1d5db;
+      --text: #111827;
+      --text-2: #374151;
+      --text-3: #6b7280;
+      --text-4: #9ca3af;
+      --accent: #2563eb;
+      --accent-soft: #dbeafe;
+      --success: #16a34a;
+      --success-soft: #dcfce7;
+      --warning: #d97706;
+      --warning-soft: #fef3c7;
+      --info: #0369a1;
+      --info-soft: #e0f2fe;
+      --danger: #dc2626;
+      --danger-soft: #fee2e2;
+      --radius: 10px;
+      --radius-sm: 6px;
+      --shadow: 0 1px 2px rgba(16, 24, 40, 0.04);
+    }
+
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; background: var(--bg-soft); color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC",
+        "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", sans-serif;
+      line-height: 1.6; -webkit-font-smoothing: antialiased; font-size: 15px; }
+
+    main { max-width: 1180px; margin: 0 auto; padding: 32px 28px 80px; }
+
+    h1 { font-size: 30px; font-weight: 700; margin: 0 0 8px; letter-spacing: -0.01em; color: var(--text); }
+    h2 { font-size: 22px; font-weight: 700; margin: 0 0 12px; letter-spacing: -0.005em; color: var(--text); }
+    h3 { font-size: 17px; font-weight: 600; margin: 0 0 10px; color: var(--text); }
+    p { margin: 0 0 8px; color: var(--text-2); }
+    .muted { color: var(--text-3); }
+    .small { font-size: 13px; }
+    .bold { font-weight: 600; }
+
+    .section { background: var(--bg-elev); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 24px 26px; margin-bottom: 20px; }
+    .section-plain { padding: 6px 2px 18px; margin-bottom: 12px; }
+    .divider { height: 1px; background: var(--border); margin: 16px 0; border: none; }
+
+    .hero { background: linear-gradient(180deg, #fff 0%, #f0fdf4 100%);
+      border: 1px solid var(--border); border-radius: 14px; padding: 28px 30px;
+      margin-bottom: 24px; }
+    .hero-pills { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 14px; }
+    .hero-subtitle { color: var(--text-3); font-size: 15px; max-width: 900px; margin: 8px 0 18px; }
+
+    .pill { display: inline-flex; align-items: center; padding: 2px 10px;
+      font-size: 12px; border-radius: 999px; border: 1px solid var(--border-strong);
+      color: var(--text-2); background: #fff; font-weight: 500; }
+    .pill-accent { background: var(--accent-soft); border-color: var(--accent); color: var(--accent); }
+    .pill-info { background: var(--info-soft); border-color: var(--info); color: var(--info); }
+    .pill-success { background: var(--success-soft); border-color: var(--success); color: var(--success); }
+    .pill-warn { background: var(--warning-soft); border-color: var(--warning); color: var(--warning); }
+
+    .grid { display: grid; gap: 16px; }
+    .grid-4 { grid-template-columns: repeat(4, 1fr); }
+    .grid-3 { grid-template-columns: repeat(3, 1fr); }
+    .grid-2 { grid-template-columns: repeat(2, 1fr); }
+    .grid-5 { grid-template-columns: repeat(5, 1fr); }
+    .grid-1-2 { grid-template-columns: 1fr 2fr; }
+    .grid-2-1 { grid-template-columns: 1.4fr 1fr; }
+    .grid-12-1 { grid-template-columns: 1.2fr 1fr; }
+    .row { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+
+    .stat { padding: 14px 16px; background: var(--bg-elev); border: 1px solid var(--border);
+      border-radius: var(--radius); }
+    .stat-value { font-size: 26px; font-weight: 700; letter-spacing: -0.01em; color: var(--text);
+      line-height: 1.15; }
+    .stat-value.success { color: var(--success); }
+    .stat-value.info { color: var(--info); }
+    .stat-value.warn { color: var(--warning); }
+
+    .stat-label { font-size: 12px; color: var(--text-3); margin-top: 4px; }
+
+    .card { background: var(--bg-elev); border: 1px solid var(--border);
+      border-radius: var(--radius); overflow: hidden; }
+    .card-header { padding: 10px 16px; border-bottom: 1px solid var(--border);
+      background: #fafbfc; font-size: 13px; font-weight: 600; color: var(--text-2); }
+    .card-body { padding: 16px; }
+    .card-body.p-sm { padding: 12px; }
+    .card-body ul { margin: 0; padding-left: 18px; }
+    .card-body li { margin-bottom: 4px; font-size: 13.5px; color: var(--text-2); }
+
+    .callout { padding: 12px 14px; border-radius: var(--radius-sm);
+      border: 1px solid var(--border); border-left-width: 3px; background: var(--bg-soft); }
+    .callout-title { font-weight: 600; margin-bottom: 4px; font-size: 14px; }
+    .callout-body { font-size: 13px; color: var(--text-2); }
+    .callout-body p { font-size: 13px; color: var(--text-2); margin: 0 0 4px; }
+    .callout.info { border-left-color: var(--info); background: var(--info-soft); }
+    .callout.info .callout-title { color: var(--info); }
+    .callout.success { border-left-color: var(--success); background: var(--success-soft); }
+    .callout.success .callout-title { color: var(--success); }
+    .callout.warn { border-left-color: var(--warning); background: var(--warning-soft); }
+    .callout.warn .callout-title { color: var(--warning); }
+    .callout.neutral { border-left-color: var(--text-3); }
+
+    table { width: 100%; border-collapse: collapse; font-size: 13.5px;
+      background: var(--bg-elev); border: 1px solid var(--border); border-radius: var(--radius);
+      overflow: hidden; }
+    th, td { padding: 10px 12px; text-align: left; border-bottom: 1px solid var(--border);
+      color: var(--text-2); vertical-align: middle; }
+    th { background: #fafbfc; font-weight: 600; font-size: 12.5px; color: var(--text-3);
+      letter-spacing: 0.01em; text-transform: uppercase; }
+    tr:last-child td { border-bottom: 0; }
+    tr.tone-success td { background: rgba(22, 163, 74, 0.04); }
+    tr.tone-info td { background: rgba(3, 105, 161, 0.04); }
+
+    .signal-row { display: flex; gap: 10px; padding: 10px 0;
+      border-bottom: 1px solid var(--border); align-items: center; }
+    .signal-row:last-child { border-bottom: 0; }
+    .signal-row .left { flex: 1; min-width: 0; }
+    .signal-row .label { font-size: 13px; font-weight: 600; }
+    .signal-row .hint { font-size: 12px; color: var(--text-3); }
+    .signal-row .value { font-weight: 700; color: var(--text); font-size: 14px; white-space: nowrap; }
+
+    .chart { width: 100%; }
+    .chart svg { width: 100%; height: auto; display: block; }
+    .chart-legend { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--border); }
+    .chart-legend .leg-item { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--text-3); }
+    .chart-legend .dot { width: 10px; height: 10px; border-radius: 2px; }
+
+    .dag-wrap { overflow-x: auto; padding: 8px 2px; }
+    .dag-wrap svg { display: block; margin: 0 auto; }
+
+    .toc-bar { position: sticky; top: 0; background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(8px); border-bottom: 1px solid var(--border);
+      z-index: 10; padding: 10px 28px; margin: -32px -28px 24px;
+      font-size: 12.5px; }
+    .toc-bar .toc-inner { max-width: 1180px; margin: 0 auto; display: flex; gap: 14px;
+      align-items: center; overflow-x: auto; }
+    .toc-bar a { color: var(--text-3); text-decoration: none; white-space: nowrap; padding: 4px 2px; }
+    .toc-bar a:hover { color: var(--accent); }
+    .toc-bar .brand { font-weight: 700; color: var(--text); }
+
+    @page { size: A4; margin: 14mm; }
+    @media print {
+      body { background: #fff; }
+      main { max-width: none; padding: 0; }
+      .toc-bar { display: none; }
+      .section, .card, .hero { page-break-inside: avoid; box-shadow: none; }
+      h2 { page-break-after: avoid; }
+      .hero { break-before: avoid; }
+      .dag-wrap { overflow: visible; }
+      .dag-wrap svg { max-width: 100%; }
+    }
+
+    .spacer-sm { height: 6px; }
+    .spacer-md { height: 12px; }
+
+    .step-num { display: inline-flex; align-items: center; justify-content: center;
+      width: 22px; height: 22px; border-radius: 50%; background: var(--accent-soft);
+      color: var(--accent); font-weight: 700; font-size: 12px; margin-right: 8px; }
+
+    footer.site-footer { margin-top: 36px; padding-top: 16px; border-top: 1px solid var(--border);
+      font-size: 12px; color: var(--text-4); text-align: center; }
+  
+  .back-home {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    color: rgba(255,255,255,0.65);
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 500;
+    padding: 4px 10px 4px 6px;
+    border-radius: 6px;
+    border: 1px solid rgba(255,255,255,0.18);
+    margin-right: 16px;
+    white-space: nowrap;
+    transition: all 0.2s ease;
+    flex-shrink: 0;
+  }
+  .back-home:hover {
+    color: #fff;
+    background: rgba(255,255,255,0.12);
+    border-color: rgba(255,255,255,0.35);
+  }
+  .back-home svg {
+    width: 14px;
+    height: 14px;
+    opacity: 0.8;
+  }
+</style>
+</head>
+<body>
+  <nav class="toc-bar">
+    <div class="toc-inner">
+      <a class="back-home" href="../">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+        返回首页
+      </a>
+      <span class="brand">EngageLab MA · 跨境物流 / 货代方案</span>
+      <a href="#s-market">市场机会</a><a href="#s-funnel">用户漏斗</a><a href="#s-why">为什么 EngageLab</a>
+      <a href="#s-scenarios">场景总览</a><a href="#s-journey">旅程编排</a><a href="#s-channel">渠道选型</a>
+      <a href="#s-compliance">合规安全</a><a href="#s-plan">测试计划</a>
+    </div>
+  </nav>
+  <main>
+    <section class="hero">
+      <div class="hero-pills">
+        <span class="pill pill-success">跨境物流 · 货代 · 海外仓</span>
+        <span class="pill">全球 · 中美欧主干线</span>
+        <span class="pill pill-info">B 端货主 + C 端收件人</span>
+      </div>
+      <h1>EngageLab MA · 跨境物流 / 货代增长方案</h1>
+      <p class="hero-subtitle">
+        跨境物流的竞争焦点是"<span class="bold">确定性</span>"——货主最怕的不是慢，而是不知道货在哪、会不会被卡关。
+        询价后长决策不下单、异常不主动告知引发投诉、旺季前不锁舱导致客户流失，都是可自动化解决的问题。
+        本方案以 <span class="bold">询价转化跟进、首单履约与信任建立、运单全程状态透明、异常与清关主动处理、旺季备货与舱位锁定、货量下滑预警与复购</span> 六大旅程切入，
+        统一编排 <span class="bold">Email（主力）+ App Push + SMS + WhatsApp</span> 四类通道。
+      </p>
+      <div class="row">
+        <span class="pill pill-accent">Email（货主主力/单证）</span>
+        <span class="pill pill-accent">App Push（运单状态）</span>
+        <span class="pill pill-accent">SMS（异常与派送）</span>
+        <span class="pill pill-accent">WhatsApp（客户经理）</span>
+      </div>
+    </section>
+
+    <section id="s-market" class="section">
+      <h2>一、为什么货代必须做确定性与主动告知运营</h2>
+      <div class="grid grid-4" style="margin-bottom:16px">
+        <div class="stat"><div class="stat-value warn">确定性优先</div><div class="stat-label">货主最怕的不是慢，而是不知道货在哪</div></div>
+        <div class="stat"><div class="stat-value info">长决策周期</div><div class="stat-label">询价到首单常需多轮沟通与比价</div></div>
+        <div class="stat"><div class="stat-value">强季节性</div><div class="stat-label">旺季舱位紧张，提前锁舱是竞争关键</div></div>
+        <div class="stat"><div class="stat-value danger">异常即投诉</div><div class="stat-label">清关卡关不主动告知会直接失去客户</div></div>
+      </div>
+      <p class="muted small">注：下文所有转化率、提升幅度为跨境物流行业估算区间，落地以实测为准。清关与申报相关触达遵循当地海关与贸易合规要求。</p>
+      <hr class="divider" />
+      <div class="grid grid-2">
+        <div class="callout neutral"><div class="callout-title">痛点 1 · 询价后长期不下单</div><div class="callout-body"><p>货主同时询多家比价，决策周期长，没有持续跟进就被竞争对手拿走。</p></div></div>
+        <div class="callout info"><div class="callout-title">解法 · 询价转化跟进旅程</div><div class="callout-body"><p>用"报价有效期、舱位紧张度、时效承诺"分阶段跟进，高货量客户转客户经理人工。</p></div></div>
+        <div class="callout neutral"><div class="callout-title">痛点 2 · 首单体验决定长期合作</div><div class="callout-body"><p>货代是长期合作生意，首票货的履约体验直接决定后续能否成为稳定客户。</p></div></div>
+        <div class="callout info"><div class="callout-title">解法 · 首单履约与信任建立</div><div class="callout-body"><p>首票货全程高频主动告知 + 客户经理介入，把首单做成信任样板。</p></div></div>
+        <div class="callout neutral"><div class="callout-title">痛点 3 · 运单状态不透明</div><div class="callout-body"><p>货主要反复查询或打电话问货在哪，客服成本高且体验差，确定性缺失。</p></div></div>
+        <div class="callout info"><div class="callout-title">解法 · 运单全程状态推送</div><div class="callout-body"><p>揽收、起运、到港、清关、派送全节点自动推送，把"客户来问"变成"我们先告知"。</p></div></div>
+        <div class="callout neutral"><div class="callout-title">痛点 4 · 异常被动 + 旺季客户流失</div><div class="callout-body"><p>清关卡关、超期仓储不主动告知就会爆发投诉；旺季前不提前锁舱，客户被抢走。</p></div></div>
+        <div class="callout info"><div class="callout-title">解法 · 异常主动处理 + 旺季锁舱</div><div class="callout-body"><p>异常即时告知并给解决方案；旺季前按历史货量提前触达锁舱，抢占客户预算。</p></div></div>
+      </div>
+    </section>
+
+    <section id="s-funnel" class="section">
+      <h2>二、客户漏斗：从询价到长期合作，每层都有增长空间</h2>
+      <p class="muted small">下图为跨境物流行业估算区间对比，非实测数据。</p>
+      <div class="chart" id="chart-funnel"></div>
+    </section>
+
+    <section id="s-why" class="section">
+      <h2>三、为什么选择 EngageLab MA</h2>
+      <div class="grid grid-3">
+        <div class="card"><div class="card-header">运单事件实时触发</div><div class="card-body p-sm"><ul><li>揽收、起运、到港、清关、派送秒级触发</li><li>主动告知把客服咨询转为自动化推送</li></ul></div></div>
+        <div class="card"><div class="card-header">B 端 + C 端双触达</div><div class="card-body p-sm"><ul><li>货主端看运单与账单，收件人端看派送</li><li>两端内容与渠道策略完全不同</li></ul></div></div>
+        <div class="card"><div class="card-header">CDP 统一身份（EUID）</div><div class="card-body p-sm"><ul><li>客户等级、历史货量、常走线路、账期统一为属性</li><li>支撑货量预测与旺季精准锁舱</li></ul></div></div>
+        <div class="card"><div class="card-header">与销售/客户经理协同</div><div class="card-body p-sm"><ul><li>大客户异常与询价自动转人工跟进</li><li>WhatsApp 承接客户经理与货主的日常沟通</li></ul></div></div>
+        <div class="card"><div class="card-header">高可靠 · 异常必达</div><div class="card-body p-sm"><ul><li>清关异常不可延误，Push 失败降级 SMS/邮件</li><li>响应 &lt;200ms，多通道确保触达</li></ul></div></div>
+        <div class="card"><div class="card-header">合规 · 贸易与海关</div><div class="card-body p-sm"><ul><li>申报与清关信息如实告知，不做违规指导</li><li>货物与客户商业信息严格保密与脱敏</li></ul></div></div>
+      </div>
+    </section>
+
+    <section id="s-scenarios" class="section">
+      <h2>四、高 ROI 运营场景总览</h2>
+      <table>
+        <thead><tr><th>#</th><th>场景</th><th>对象端</th><th>核心触发</th><th>渠道组合</th><th>预期提升（估算）</th></tr></thead>
+        <tbody>
+          <tr class="tone-info"><td>J1</td><td>询价转化跟进</td><td>货主</td><td>询价后未下单</td><td>Email + WhatsApp + App Push</td><td>询价→首单 +20~35%</td></tr>
+          <tr><td>J2</td><td>首单履约与信任建立</td><td>货主</td><td>首票货订舱成功</td><td>Email + App Push + WhatsApp</td><td>首单转长期客户 +25~40%</td></tr>
+          <tr class="tone-success"><td>J3</td><td>运单全程状态推送</td><td>货主 + 收件人</td><td>运单各状态节点</td><td>App Push + Email + SMS</td><td>客服咨询量 -30~50%</td></tr>
+          <tr class="tone-success"><td>J4</td><td>异常与清关主动处理</td><td>货主</td><td>清关异常 / 超期仓储</td><td>App Push + SMS + WhatsApp</td><td>投诉下降、留存提升</td></tr>
+          <tr><td>J5</td><td>旺季备货与舱位锁定</td><td>货主</td><td>旺季前 / 历史货量周期</td><td>Email + WhatsApp + App Push</td><td>旺季货量 +20~35%</td></tr>
+          <tr><td>J6</td><td>货量下滑预警与复购</td><td>货主 + 销售</td><td>货量环比下滑 / 长期未发货</td><td>Email + WhatsApp + 转人工</td><td>客户留存 +15~25%</td></tr>
+        </tbody>
+      </table>
+      <p class="muted small" style="margin-top:8px">提升幅度为行业公开区间估算，最终以 4 周测试实测为准。</p>
+    </section>
+
+    <section id="s-journey" class="section-plain">
+      <h2>五、核心旅程详细编排</h2>
+      <div class="section" style="margin-top:16px;">
+        <h3>旅程 1：询价转化跟进</h3>
+        <div class="grid grid-2-1"><div class="dag-wrap" id="dag-j1"></div><div>
+          <div class="callout neutral" style="margin-bottom:12px"><div class="callout-title">业务痛点</div><div class="callout-body"><p>货主同时询多家比价，长决策期无持续跟进就被竞争对手拿走。</p></div></div>
+          <div class="callout info" style="margin-bottom:12px"><div class="callout-title">旅程组件配置</div><div class="callout-body">
+            <p><strong>进入条件：</strong>事件：提交询价未下单</p>
+            <p><strong>分支：</strong>属性：预估货量（大货量转客户经理 / 常规走自动化）</p>
+            <p><strong>提前退出：</strong>事件：完成订舱</p>
+            <p><strong>内容：</strong>报价有效期、舱位紧张度、时效与保障承诺</p>
+          </div></div>
+          <div class="callout success"><div class="callout-title">预期效益</div><div class="callout-body"><p>询价→首单 +20~35%（估算）；大货量客户人工介入的 ROI 极高。</p></div></div>
+        </div></div>
+      </div>
+      <div class="section">
+        <h3>旅程 2：首单履约与信任建立</h3>
+        <div class="grid grid-2-1"><div class="dag-wrap" id="dag-j2"></div><div>
+          <div class="callout neutral" style="margin-bottom:12px"><div class="callout-title">业务痛点</div><div class="callout-body"><p>货代是长期合作生意，首票货体验直接决定能否成为稳定客户。</p></div></div>
+          <div class="callout info" style="margin-bottom:12px"><div class="callout-title">旅程组件配置</div><div class="callout-body">
+            <p><strong>进入条件：</strong>事件：首票货订舱成功</p>
+            <p><strong>机制：</strong>首单启用更高频的主动告知（每个节点都推）+ 客户经理主动联系</p>
+            <p><strong>提前退出：</strong>事件：首单妥投并完成评价</p>
+            <p><strong>承接：</strong>首单完成后引导第二票，把体验转成合作</p>
+          </div></div>
+          <div class="callout success"><div class="callout-title">预期效益</div><div class="callout-body"><p>首单转长期客户 +25~40%（估算）；首票货是货代最值得投入服务资源的一票。</p></div></div>
+        </div></div>
+      </div>
+      <div class="section">
+        <h3>旅程 3：运单全程状态推送</h3>
+        <div class="grid grid-2-1"><div class="dag-wrap" id="dag-j3"></div><div>
+          <div class="callout neutral" style="margin-bottom:12px"><div class="callout-title">业务痛点</div><div class="callout-body"><p>货主反复查询或打电话问货在哪，客服成本高且确定性体验差。</p></div></div>
+          <div class="callout info" style="margin-bottom:12px"><div class="callout-title">旅程组件配置</div><div class="callout-body">
+            <p><strong>进入条件：</strong>事件：运单创建</p>
+            <p><strong>时间轴：</strong>揽收 → 起运 → 到港 → 清关放行 → 派送中 → 已签收</p>
+            <p><strong>双端：</strong>货主收全流程，收件人仅收派送相关（SMS）</p>
+            <p><strong>分类：</strong>物流类通知，不受营销退订限制</p>
+          </div></div>
+          <div class="callout success"><div class="callout-title">预期效益</div><div class="callout-body"><p>客服咨询量 -30~50%（估算）；主动告知同时降本与提升体验。</p></div></div>
+        </div></div>
+      </div>
+      <div class="section">
+        <h3>旅程 4：异常与清关主动处理</h3>
+        <div class="grid grid-2-1"><div class="dag-wrap" id="dag-j4"></div><div>
+          <div class="callout neutral" style="margin-bottom:12px"><div class="callout-title">业务痛点</div><div class="callout-body"><p>清关卡关、超期仓储不主动告知，等货主发现时已经爆发投诉甚至丢失客户。</p></div></div>
+          <div class="callout info" style="margin-bottom:12px"><div class="callout-title">旅程组件配置</div><div class="callout-body">
+            <p><strong>进入条件：</strong>事件：清关异常 / 单证缺失 / 超期仓储 / 派送失败</p>
+            <p><strong>分支：</strong>属性：异常类型（单证补充 / 关税缴纳 / 查验 / 派送问题）</p>
+            <p><strong>时效：</strong>即时多通道（Push+SMS），大客户同步客户经理</p>
+            <p><strong>关键：</strong>不只告知问题，同时给出明确的解决动作与时限</p>
+          </div></div>
+          <div class="callout success"><div class="callout-title">预期效益</div><div class="callout-body"><p>投诉下降、留存提升；主动告知异常反而比隐瞒更能建立信任。</p></div></div>
+        </div></div>
+      </div>
+      <div class="section">
+        <h3>旅程 5：旺季备货与舱位锁定</h3>
+        <div class="grid grid-2-1"><div class="dag-wrap" id="dag-j5"></div><div>
+          <div class="callout neutral" style="margin-bottom:12px"><div class="callout-title">业务痛点</div><div class="callout-body"><p>旺季舱位紧张，不提前锁定客户预算与货量，客户就被抢走。</p></div></div>
+          <div class="callout info" style="margin-bottom:12px"><div class="callout-title">旅程组件配置</div><div class="callout-body">
+            <p><strong>进入条件：</strong>属性：旺季前（黑五、圣诞、春节前）/ 历史发货周期临近</p>
+            <p><strong>分支：</strong>属性：客户等级与历史货量（大客户优先锁舱 / 中小客户推早鸟价）</p>
+            <p><strong>内容：</strong>舱位预警、旺季价格趋势、提前锁舱优惠</p>
+            <p><strong>提前退出：</strong>事件：完成订舱或签订旺季协议</p>
+          </div></div>
+          <div class="callout success"><div class="callout-title">预期效益</div><div class="callout-body"><p>旺季货量 +20~35%（估算）；旺季前的提前锁定是全年最重要的销售动作。</p></div></div>
+        </div></div>
+      </div>
+      <div class="section">
+        <h3>旅程 6：货量下滑预警与复购</h3>
+        <div class="grid grid-2-1"><div class="dag-wrap" id="dag-j6"></div><div>
+          <div class="callout neutral" style="margin-bottom:12px"><div class="callout-title">业务痛点</div><div class="callout-body"><p>客户货量悄悄转给竞争对手，等发现时已经流失，而 B 端客户重获成本极高。</p></div></div>
+          <div class="callout info" style="margin-bottom:12px"><div class="callout-title">旅程组件配置</div><div class="callout-body">
+            <p><strong>进入条件：</strong>属性：月度货量环比下滑 / 超常规周期未发货</p>
+            <p><strong>分支：</strong>属性：客户价值（大客户转销售人工 / 中小客户自动化触达）</p>
+            <p><strong>内容：</strong>服务回顾 + 新线路/新价格 + 专属方案</p>
+            <p><strong>协同：</strong>预警同步销售与客户经理，人工与自动化分工</p>
+          </div></div>
+          <div class="callout success"><div class="callout-title">预期效益</div><div class="callout-body"><p>客户留存 +15~25%（估算）；B 端客户流失预警必须早于合同或旺季节点。</p></div></div>
+        </div></div>
+      </div>
+    </section>
+
+    <section id="s-channel" class="section-plain">
+      <h2>六、渠道选型参考</h2>
+      <div class="section">
+        <p class="muted small">跨境物流渠道适配相对值（示意）：Email 是 B 端货主主力（提单、报关单证、账单具存证属性），App Push 承载运单状态，SMS 用于异常与末端派送（收件人端必达），WhatsApp 是客户经理与货主日常沟通的主通道。</p>
+        <div class="chart" id="chart-channel"></div>
+        <div class="grid grid-2" style="margin-top:14px">
+          <div class="callout info"><div class="callout-title">主力通道</div><div class="callout-body"><p>Email（单证、账单、对账，B 端存证载体）+ App Push（运单状态实时推送）+ WhatsApp（客户经理日常沟通）。</p></div></div>
+          <div class="callout warn"><div class="callout-title">异常必须多通道</div><div class="callout-body"><p>清关异常、超期仓储等会产生额外费用的事件，必须多通道确保货主知悉并留存告知记录，避免后续费用争议。</p></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="s-compliance" class="section">
+      <h2>七、合规与安全</h2>
+      <div class="grid grid-3">
+        <div class="card"><div class="card-header">贸易与海关合规</div><div class="card-body p-sm"><ul><li>申报与清关信息如实告知，不做违规操作指导</li><li>管制品与制裁名单相关不做营销触达</li><li>遵循各国海关与贸易监管要求</li></ul></div></div>
+        <div class="card"><div class="card-header">商业信息保密</div><div class="card-body p-sm"><ul><li>货物品名、货值、客户商业信息严格保密</li><li>收件人端触达不泄露货主商业信息</li><li>PII 脱敏、RBAC 权限、审计留痕</li></ul></div></div>
+        <div class="card"><div class="card-header">触达与留痕</div><div class="card-body p-sm"><ul><li>费用相关告知必达并留存记录（避免争议）</li><li>物流类通知独立于营销退订</li><li>GDPR / SOC 2，企业客户采购必查项</li></ul></div></div>
+      </div>
+    </section>
+
+    <section id="s-plan" class="section">
+      <h2>八、测试计划（4 周）</h2>
+      <table>
+        <thead><tr><th>周次</th><th>阶段</th><th>核心工作</th><th>验收指标</th></tr></thead>
+        <tbody>
+          <tr><td>第 1 周</td><td>启动 · 数据打通</td><td>确认埋点（询价、订舱、运单各节点、异常、货量统计）；货主与收件人双端映射</td><td>事件入库率 ≥95%</td></tr>
+          <tr><td>第 2 周</td><td>核心旅程上线</td><td>J3 运单状态 + J4 异常处理（2 条，小流量）；物流类分类配置</td><td>旅程触发成功率 ≥98%；异常类 100% 送达</td></tr>
+          <tr><td>第 3 周</td><td>扩量 · A/B</td><td>J1 询价跟进 + J2 首单履约全量；客服咨询量对比</td><td>咨询量下降与询价转化 uplift 显现</td></tr>
+          <tr><td>第 4 周</td><td>复盘 · 扩面</td><td>J5 旺季锁舱 + J6 货量预警上线；与销售流程对接</td><td>询价转化/咨询量/货量 uplift 可量化</td></tr>
+        </tbody>
+      </table>
+      <div class="callout success" style="margin-top:14px"><div class="callout-title">投入</div><div class="callout-body"><p>测试期授权费 $0，配置 2 人专属服务团队支撑埋点、双端建模与旅程交付。</p></div></div>
+    </section>
+    <footer class="site-footer">EngageLab MA · 跨境物流 / 货代增长方案 — 内部方案，转化/提升数据为行业估算或公开参考，落地以实测为准。清关与申报相关触达遵循当地海关与贸易合规要求。</footer>
+  </main>
+  <script>
+  (function(){
+    // ========== Shared helpers ==========
+    const COLORS = {
+      accent: '#2563eb', info: '#0369a1', success: '#16a34a',
+      warning: '#d97706', neutral: '#94a3b8', muted: '#cbd5e1',
+      text: '#374151', textMute: '#9ca3af', grid: '#e5e7eb',
+    };
+    function svgEl(w, h) {
+      const s = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+      s.setAttribute('viewBox', '0 0 ' + w + ' ' + h);
+      s.setAttribute('width', '100%');
+      s.setAttribute('preserveAspectRatio', 'xMidYMid meet');
+      return s;
+    }
+    function el(tag, attrs) {
+      const e = document.createElementNS('http://www.w3.org/2000/svg', tag);
+      for (const k in attrs) e.setAttribute(k, attrs[k]);
+      return e;
+    }
+
+    // ========== Bar Chart ==========
+    function drawBarChart(mount, opts) {
+      const { categories, series, valueSuffix = '', height = 240 } = opts;
+      const W = 600, H = height, PAD_L = 44, PAD_R = 16, PAD_T = 12, PAD_B = 56;
+      const innerW = W - PAD_L - PAD_R, innerH = H - PAD_T - PAD_B;
+      const max = Math.max(...series.flatMap(s => s.data), 1);
+      const niceMax = Math.ceil(max / 20) * 20 || 100;
+      const groupCount = categories.length;
+      const barsPerGroup = series.length;
+      const groupW = innerW / groupCount;
+      const barW = Math.min(22, (groupW - 12) / barsPerGroup);
+      const s = svgEl(W, H);
+      for (let i = 0; i <= 4; i++) {
+        const v = (niceMax / 4) * i;
+        const y = PAD_T + innerH - (v / niceMax) * innerH;
+        s.appendChild(el('line', { x1: PAD_L, x2: W - PAD_R, y1: y, y2: y, stroke: COLORS.grid, 'stroke-width': 1 }));
+        const t = el('text', { x: PAD_L - 6, y: y + 4, 'text-anchor': 'end', 'font-size': 10, fill: COLORS.textMute });
+        t.textContent = Math.round(v) + valueSuffix;
+        s.appendChild(t);
+      }
+      categories.forEach((cat, ci) => {
+        const gx = PAD_L + groupW * ci;
+        series.forEach((se, si) => {
+          const v = se.data[ci] || 0;
+          const h = (v / niceMax) * innerH;
+          const x = gx + (groupW - barW * barsPerGroup) / 2 + si * barW;
+          const y = PAD_T + innerH - h;
+          const color = COLORS[se.tone] || COLORS.neutral;
+          s.appendChild(el('rect', { x, y, width: barW - 2, height: h, fill: color, rx: 2 }));
+          if (v > 0) {
+            const label = el('text', { x: x + (barW - 2) / 2, y: y - 2, 'text-anchor': 'middle', 'font-size': 8, fill: COLORS.text });
+            label.textContent = v + valueSuffix;
+            s.appendChild(label);
+          }
+        });
+        const t = el('text', { x: gx + groupW / 2, y: H - PAD_B + 14, 'text-anchor': 'middle', 'font-size': 10, fill: COLORS.text });
+        t.textContent = cat;
+        s.appendChild(t);
+      });
+      // Legend
+      let legX = PAD_L;
+      series.forEach((se) => {
+        const color = COLORS[se.tone] || COLORS.accent;
+        s.appendChild(el('rect', { x: legX, y: H - 18, width: 10, height: 10, rx: 2, fill: color }));
+        const t = el('text', { x: legX + 14, y: H - 10, 'font-size': 10, fill: COLORS.text });
+        t.textContent = se.name;
+        s.appendChild(t);
+        legX += 14 + (se.name.length * 7) + 16;
+      });
+      mount.innerHTML = '';
+      mount.appendChild(s);
+    }
+
+    // ========== Journey DAG renderer (same as fintech/security solution) ==========
+    const KIND_STYLE = {
+      entry:    { fill: '#f1f5f9', stroke: '#94a3b8', text: '#111827' },
+      wait:     { fill: '#fafafa', stroke: '#d1d5db', text: '#6b7280' },
+      branch:   { fill: '#f9fafb', stroke: '#475569', text: '#111827' },
+      channel:  { fill: '#dbeafe', stroke: '#2563eb', text: '#1e3a8a' },
+      sendtime: { fill: '#fef3c7', stroke: '#d97706', text: '#92400e' },
+      exitOk:   { fill: '#dcfce7', stroke: '#16a34a', text: '#14532d' },
+      exitEnd:  { fill: '#f3f4f6', stroke: '#9ca3af', text: '#4b5563' },
+    };
+
+    function drawJourney(mount, nodes, edges) {
+      const NODE_W = 176, NODE_H = 62, RANK_GAP = 42, NODE_GAP = 22;
+      const rankOf = {}, incoming = {};
+      nodes.forEach(n => { rankOf[n.id] = 0; incoming[n.id] = []; });
+      edges.forEach(e => { incoming[e.to].push(e.from); });
+      let changed = true;
+      while (changed) {
+        changed = false;
+        edges.forEach(e => {
+          if (rankOf[e.to] < rankOf[e.from] + 1) { rankOf[e.to] = rankOf[e.from] + 1; changed = true; }
+        });
+      }
+      const maxRank = Math.max(...Object.values(rankOf));
+      const ranks = [];
+      for (let r = 0; r <= maxRank; r++) ranks.push([]);
+      nodes.forEach(n => { ranks[rankOf[n.id]].push(n); });
+      const pos = {};
+      const rankWidths = ranks.map(r => r.length * NODE_W + (r.length - 1) * NODE_GAP);
+      const maxWidth = Math.max(...rankWidths, 400);
+      ranks.forEach((rankNodes, r) => {
+        const withAnchor = rankNodes.map(n => {
+          const parents = incoming[n.id].map(p => pos[p] ? pos[p].x + NODE_W / 2 : null).filter(x => x !== null);
+          const anchor = parents.length ? parents.reduce((a, b) => a + b, 0) / parents.length : null;
+          return { node: n, anchor };
+        });
+        withAnchor.sort((a, b) => {
+          if (a.anchor === null && b.anchor === null) return 0;
+          if (a.anchor === null) return 1;
+          if (b.anchor === null) return -1;
+          return a.anchor - b.anchor;
+        });
+        const totalW = withAnchor.length * NODE_W + (withAnchor.length - 1) * NODE_GAP;
+        const startX = (maxWidth - totalW) / 2 + 20;
+        withAnchor.forEach((it, i) => {
+          pos[it.node.id] = { x: startX + i * (NODE_W + NODE_GAP), y: 20 + r * (NODE_H + RANK_GAP) };
+        });
+      });
+      for (let pass = 0; pass < 3; pass++) {
+        ranks.forEach(rankNodes => {
+          const sorted = rankNodes.slice().sort((a, b) => pos[a.id].x - pos[b.id].x);
+          for (let i = 1; i < sorted.length; i++) {
+            const prev = pos[sorted[i - 1].id], cur = pos[sorted[i].id];
+            if (cur.x < prev.x + NODE_W + NODE_GAP) cur.x = prev.x + NODE_W + NODE_GAP;
+          }
+        });
+      }
+      const width = Math.max(...Object.values(pos).map(p => p.x)) + NODE_W + 20;
+      const height = Math.max(...Object.values(pos).map(p => p.y)) + NODE_H + 24;
+      const s = svgEl(width, height);
+      s.setAttribute('width', width);
+      s.setAttribute('height', height);
+      s.style.maxWidth = '100%';
+      s.style.height = 'auto';
+      const defs = el('defs');
+      const marker = el('marker', { id: 'arrow', viewBox: '0 0 10 10', refX: 9, refY: 5, markerWidth: 6, markerHeight: 6, orient: 'auto-start-reverse' });
+      marker.appendChild(el('path', { d: 'M 0 0 L 10 5 L 0 10 z', fill: '#94a3b8' }));
+      defs.appendChild(marker);
+      s.appendChild(defs);
+      edges.forEach(e => {
+        const from = pos[e.from], to = pos[e.to];
+        if (!from || !to) return;
+        const x1 = from.x + NODE_W / 2, y1 = from.y + NODE_H;
+        const x2 = to.x + NODE_W / 2, y2 = to.y;
+        const cy = (y1 + y2) / 2;
+        const d = 'M' + x1 + ',' + y1 + ' C' + x1 + ',' + cy + ' ' + x2 + ',' + cy + ' ' + x2 + ',' + y2;
+        s.appendChild(el('path', { d, fill: 'none', stroke: '#94a3b8', 'stroke-width': 1.25, 'marker-end': 'url(#arrow)' }));
+        if (e.label) {
+          const mx = (x1 + x2) / 2, my = cy;
+          const w = Math.max(e.label.length * 9 + 10, 28);
+          s.appendChild(el('rect', { x: mx - w / 2, y: my - 10, width: w, height: 18, rx: 4, fill: '#ffffff', stroke: '#e5e7eb' }));
+          const t = el('text', { x: mx, y: my + 3, 'text-anchor': 'middle', 'font-size': 11, fill: '#475569' });
+          t.textContent = e.label;
+          s.appendChild(t);
+        }
+      });
+      nodes.forEach(n => {
+        const p = pos[n.id];
+        const k = KIND_STYLE[n.kind] || KIND_STYLE.entry;
+        s.appendChild(el('rect', { x: p.x, y: p.y, width: NODE_W, height: NODE_H, rx: 10, fill: k.fill, stroke: k.stroke, 'stroke-width': n.kind === 'channel' ? 1.4 : 1 }));
+        const titleY = n.sub ? p.y + 24 : p.y + NODE_H / 2 + 4;
+        const title = el('text', { x: p.x + NODE_W / 2, y: titleY, 'text-anchor': 'middle', 'font-size': 12.5, 'font-weight': 600, fill: k.text });
+        title.textContent = n.title;
+        s.appendChild(title);
+        if (n.sub) {
+          const sub = el('text', { x: p.x + NODE_W / 2, y: p.y + 42, 'text-anchor': 'middle', 'font-size': 11, fill: k.text, opacity: 0.82 });
+          sub.textContent = n.sub;
+          s.appendChild(sub);
+        }
+      });
+      mount.innerHTML = '';
+      mount.appendChild(s);
+    }
+
+    drawBarChart(document.getElementById('chart-funnel'), {
+      categories: ['询价→首单', '首单→长期客户', '客服咨询量(相对)', '旺季锁舱率', '客户年度留存'],
+      series: [
+        { name: '当前基准（估算）',    data: [25, 40, 100, 30, 65], tone: 'neutral' },
+        { name: 'MA 自动化后（估算）', data: [32, 54, 60, 42, 78], tone: 'success' },
+      ], valueSuffix: '', height: 260,
+    });
+    drawBarChart(document.getElementById('chart-channel'), {
+      categories: ['Email', 'App Push', 'WhatsApp', 'SMS', '应用内'],
+      series: [{ name: '跨境物流触达适配（相对值·示意）', data: [94, 82, 80, 76, 45], tone: 'info' }],
+      valueSuffix: '', height: 220,
+    });
+
+    drawJourney(document.getElementById('dag-j1'),
+      [
+        {id:'start',kind:'entry',title:'开始',sub:'事件: 提交询价未下单'},
+        {id:'em0',kind:'channel',title:'Email',sub:'报价单+时效与保障说明'},
+        {id:'w1',kind:'wait',title:'等待事件',sub:'2天内等待: 是否订舱'},
+        {id:'ok0',kind:'exitOk',title:'结束（已订舱）',sub:'完成首次订舱'},
+        {id:'br1',kind:'branch',title:'条件分支',sub:'属性: 预估货量'},
+        {id:'wa1',kind:'channel',title:'WhatsApp',sub:'(大货量) 客户经理1对1议价'},
+        {id:'p1',kind:'channel',title:'App Push',sub:'(常规) 报价有效期剩N天'},
+        {id:'w2',kind:'wait',title:'等待事件',sub:'5天内等待: 是否订舱'},
+        {id:'ok1',kind:'exitOk',title:'结束（已订舱）',sub:'完成首次订舱'},
+        {id:'em1',kind:'channel',title:'Email',sub:'舱位紧张提醒+同行案例'},
+        {id:'w3',kind:'wait',title:'等待事件',sub:'7天内等待: 是否订舱'},
+        {id:'ok2',kind:'exitOk',title:'结束（已订舱）',sub:'完成首次订舱'},
+        {id:'end',kind:'exitEnd',title:'结束',sub:'转长期培育'},
+      ],
+      [
+        {from:'start',to:'em0'},{from:'em0',to:'w1'},{from:'w1',to:'ok0',label:'已订舱'},{from:'w1',to:'br1',label:'未订舱'},
+        {from:'br1',to:'wa1',label:'大货量'},{from:'br1',to:'p1',label:'常规'},
+        {from:'wa1',to:'w2'},{from:'p1',to:'w2'},
+        {from:'w2',to:'ok1',label:'已订舱'},{from:'w2',to:'em1',label:'未订舱'},
+        {from:'em1',to:'w3'},{from:'w3',to:'ok2',label:'已订舱'},{from:'w3',to:'end',label:'未订舱'},
+      ]);
+
+    drawJourney(document.getElementById('dag-j2'),
+      [
+        {id:'start',kind:'entry',title:'开始',sub:'事件: 首票货订舱成功'},
+        {id:'em0',kind:'channel',title:'Email',sub:'订舱确认+专属客户经理'},
+        {id:'wa1',kind:'channel',title:'WhatsApp',sub:'客户经理主动建联'},
+        {id:'w1',kind:'wait',title:'等待',sub:'首单全程高频主动告知'},
+        {id:'p1',kind:'channel',title:'App Push',sub:'每个节点主动推送(首单加强)'},
+        {id:'w2',kind:'wait',title:'等待事件',sub:'等待: 是否妥投'},
+        {id:'em1',kind:'channel',title:'Email',sub:'首单妥投报告+服务评价'},
+        {id:'w3',kind:'wait',title:'等待事件',sub:'14天内等待: 是否二次下单'},
+        {id:'ok',kind:'exitOk',title:'结束（已复购）',sub:'转长期合作客户'},
+        {id:'wa2',kind:'channel',title:'WhatsApp',sub:'客户经理回访+长期协议'},
+        {id:'end',kind:'exitEnd',title:'结束',sub:'转货量预警旅程'},
+      ],
+      [
+        {from:'start',to:'em0'},{from:'em0',to:'wa1'},{from:'wa1',to:'w1'},{from:'w1',to:'p1'},
+        {from:'p1',to:'w2'},{from:'w2',to:'em1'},{from:'em1',to:'w3'},
+        {from:'w3',to:'ok',label:'已复购'},{from:'w3',to:'wa2',label:'未复购'},{from:'wa2',to:'end'},
+      ]);
+
+    drawJourney(document.getElementById('dag-j3'),
+      [
+        {id:'start',kind:'entry',title:'开始',sub:'事件: 运单创建'},
+        {id:'p0',kind:'channel',title:'App Push（货主）',sub:'已揽收·运单号与预计时效'},
+        {id:'w1',kind:'wait',title:'等待事件',sub:'等待: 起运'},
+        {id:'p1',kind:'channel',title:'App Push（货主）',sub:'已起运·船期/航班信息'},
+        {id:'w2',kind:'wait',title:'等待事件',sub:'等待: 到港'},
+        {id:'p2',kind:'channel',title:'App Push+Email',sub:'已到港·清关中'},
+        {id:'w3',kind:'wait',title:'等待事件',sub:'等待: 清关结果'},
+        {id:'p3',kind:'channel',title:'App Push（货主）',sub:'清关放行·进入派送'},
+        {id:'sms1',kind:'channel',title:'SMS（收件人）',sub:'包裹派送中·预计送达'},
+        {id:'w4',kind:'wait',title:'等待事件',sub:'等待: 是否签收'},
+        {id:'ok',kind:'exitOk',title:'结束（已妥投）',sub:'签收+电子回单'},
+        {id:'end',kind:'exitEnd',title:'结束',sub:'转异常处理旅程'},
+      ],
+      [
+        {from:'start',to:'p0'},{from:'p0',to:'w1'},{from:'w1',to:'p1'},{from:'p1',to:'w2'},{from:'w2',to:'p2'},
+        {from:'p2',to:'w3'},{from:'w3',to:'p3',label:'放行'},{from:'w3',to:'end',label:'异常'},
+        {from:'p3',to:'sms1'},{from:'sms1',to:'w4'},
+        {from:'w4',to:'ok',label:'已签收'},{from:'w4',to:'end',label:'派送失败'},
+      ]);
+
+    drawJourney(document.getElementById('dag-j4'),
+      [
+        {id:'start',kind:'entry',title:'开始',sub:'事件: 清关异常/超期/派送失败'},
+        {id:'br1',kind:'branch',title:'条件分支',sub:'属性: 异常类型'},
+        {id:'pd',kind:'channel',title:'App Push+SMS',sub:'(单证缺失) 需补充资料清单'},
+        {id:'pt',kind:'channel',title:'App Push+SMS',sub:'(关税/查验) 费用与处理方案'},
+        {id:'pf',kind:'channel',title:'SMS（收件人）',sub:'(派送失败) 改约投递'},
+        {id:'em1',kind:'channel',title:'Email（货主）',sub:'异常说明+解决动作与时限'},
+        {id:'w1',kind:'wait',title:'等待事件',sub:'24h 内等待: 是否解决'},
+        {id:'ok',kind:'exitOk',title:'结束（已解决）',sub:'异常解除·恢复运输'},
+        {id:'wa1',kind:'channel',title:'WhatsApp+客户经理',sub:'升级人工·协助处理'},
+        {id:'w2',kind:'wait',title:'等待事件',sub:'48h 内等待: 是否解决'},
+        {id:'ok2',kind:'exitOk',title:'结束（已解决）',sub:'异常解除·恢复运输'},
+        {id:'end',kind:'exitEnd',title:'结束',sub:'转专案处理'},
+      ],
+      [
+        {from:'start',to:'br1'},{from:'br1',to:'pd',label:'单证缺失'},{from:'br1',to:'pt',label:'关税/查验'},{from:'br1',to:'pf',label:'派送失败'},
+        {from:'pd',to:'em1'},{from:'pt',to:'em1'},{from:'pf',to:'em1'},
+        {from:'em1',to:'w1'},{from:'w1',to:'ok',label:'已解决'},{from:'w1',to:'wa1',label:'未解决'},
+        {from:'wa1',to:'w2'},{from:'w2',to:'ok2',label:'已解决'},{from:'w2',to:'end',label:'未解决'},
+      ]);
+
+    drawJourney(document.getElementById('dag-j5'),
+      [
+        {id:'start',kind:'entry',title:'开始',sub:'属性: 旺季前/历史发货周期'},
+        {id:'st1',kind:'sendtime',title:'可发送时间',sub:'工作日 9:00-18:00'},
+        {id:'br1',kind:'branch',title:'条件分支',sub:'属性: 客户等级与货量'},
+        {id:'wa1',kind:'channel',title:'WhatsApp+客户经理',sub:'(大客户) 优先锁舱+专属协议'},
+        {id:'em1',kind:'channel',title:'Email',sub:'(中小客户) 旺季早鸟价+舱位预警'},
+        {id:'w1',kind:'wait',title:'等待事件',sub:'10天内等待: 是否锁舱'},
+        {id:'ok0',kind:'exitOk',title:'结束（已锁舱）',sub:'完成订舱或签协议'},
+        {id:'p1',kind:'channel',title:'App Push',sub:'舱位仅剩X%·价格将上调'},
+        {id:'w2',kind:'wait',title:'等待事件',sub:'10天内等待: 是否锁舱'},
+        {id:'ok1',kind:'exitOk',title:'结束（已锁舱）',sub:'完成订舱或签协议'},
+        {id:'end',kind:'exitEnd',title:'结束',sub:'转货量预警旅程'},
+      ],
+      [
+        {from:'start',to:'st1'},{from:'st1',to:'br1'},
+        {from:'br1',to:'wa1',label:'大客户'},{from:'br1',to:'em1',label:'中小客户'},
+        {from:'wa1',to:'w1'},{from:'em1',to:'w1'},
+        {from:'w1',to:'ok0',label:'已锁舱'},{from:'w1',to:'p1',label:'未锁舱'},
+        {from:'p1',to:'w2'},{from:'w2',to:'ok1',label:'已锁舱'},{from:'w2',to:'end',label:'未锁舱'},
+      ]);
+
+    drawJourney(document.getElementById('dag-j6'),
+      [
+        {id:'start',kind:'entry',title:'开始',sub:'属性: 货量下滑/超期未发货'},
+        {id:'br1',kind:'branch',title:'条件分支',sub:'属性: 客户价值'},
+        {id:'wa1',kind:'channel',title:'WhatsApp+销售',sub:'(大客户) 转人工·服务复盘'},
+        {id:'em1',kind:'channel',title:'Email',sub:'(中小客户) 新线路与价格方案'},
+        {id:'w1',kind:'wait',title:'等待事件',sub:'14天内等待: 是否恢复发货'},
+        {id:'ok0',kind:'exitOk',title:'结束（已恢复）',sub:'货量回升'},
+        {id:'p1',kind:'channel',title:'App Push',sub:'专属线路优惠+时效升级'},
+        {id:'w2',kind:'wait',title:'等待事件',sub:'14天内等待: 是否恢复发货'},
+        {id:'ok1',kind:'exitOk',title:'结束（已恢复）',sub:'货量回升'},
+        {id:'em2',kind:'channel',title:'Email',sub:'年度服务回顾+续约方案'},
+        {id:'end',kind:'exitEnd',title:'结束',sub:'转销售挽回'},
+      ],
+      [
+        {from:'start',to:'br1'},{from:'br1',to:'wa1',label:'大客户'},{from:'br1',to:'em1',label:'中小客户'},
+        {from:'wa1',to:'w1'},{from:'em1',to:'w1'},
+        {from:'w1',to:'ok0',label:'已恢复'},{from:'w1',to:'p1',label:'未恢复'},
+        {from:'p1',to:'w2'},{from:'w2',to:'ok1',label:'已恢复'},{from:'w2',to:'em2',label:'未恢复'},{from:'em2',to:'end'},
+      ]);
+
+  })();
+  </script>
+</body>
+</html>
