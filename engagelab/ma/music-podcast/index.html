@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EngageLab MA · 音乐 / 播客订阅出海增长方案</title>
+  <style>
+    :root {
+      --bg: #ffffff;
+      --bg-soft: #f7f8fa;
+      --bg-elev: #ffffff;
+      --border: #e5e7eb;
+      --border-strong: #d1d5db;
+      --text: #111827;
+      --text-2: #374151;
+      --text-3: #6b7280;
+      --text-4: #9ca3af;
+      --accent: #2563eb;
+      --accent-soft: #dbeafe;
+      --success: #16a34a;
+      --success-soft: #dcfce7;
+      --warning: #d97706;
+      --warning-soft: #fef3c7;
+      --info: #0369a1;
+      --info-soft: #e0f2fe;
+      --danger: #dc2626;
+      --danger-soft: #fee2e2;
+      --radius: 10px;
+      --radius-sm: 6px;
+      --shadow: 0 1px 2px rgba(16, 24, 40, 0.04);
+    }
+
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; background: var(--bg-soft); color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC",
+        "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", sans-serif;
+      line-height: 1.6; -webkit-font-smoothing: antialiased; font-size: 15px; }
+
+    main { max-width: 1180px; margin: 0 auto; padding: 32px 28px 80px; }
+
+    h1 { font-size: 30px; font-weight: 700; margin: 0 0 8px; letter-spacing: -0.01em; color: var(--text); }
+    h2 { font-size: 22px; font-weight: 700; margin: 0 0 12px; letter-spacing: -0.005em; color: var(--text); }
+    h3 { font-size: 17px; font-weight: 600; margin: 0 0 10px; color: var(--text); }
+    p { margin: 0 0 8px; color: var(--text-2); }
+    .muted { color: var(--text-3); }
+    .small { font-size: 13px; }
+    .bold { font-weight: 600; }
+
+    .section { background: var(--bg-elev); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 24px 26px; margin-bottom: 20px; }
+    .section-plain { padding: 6px 2px 18px; margin-bottom: 12px; }
+    .divider { height: 1px; background: var(--border); margin: 16px 0; border: none; }
+
+    .hero { background: linear-gradient(180deg, #fff 0%, #f0fdf4 100%);
+      border: 1px solid var(--border); border-radius: 14px; padding: 28px 30px;
+      margin-bottom: 24px; }
+    .hero-pills { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 14px; }
+    .hero-subtitle { color: var(--text-3); font-size: 15px; max-width: 900px; margin: 8px 0 18px; }
+
+    .pill { display: inline-flex; align-items: center; padding: 2px 10px;
+      font-size: 12px; border-radius: 999px; border: 1px solid var(--border-strong);
+      color: var(--text-2); background: #fff; font-weight: 500; }
+    .pill-accent { background: var(--accent-soft); border-color: var(--accent); color: var(--accent); }
+    .pill-info { background: var(--info-soft); border-color: var(--info); color: var(--info); }
+    .pill-success { background: var(--success-soft); border-color: var(--success); color: var(--success); }
+    .pill-warn { background: var(--warning-soft); border-color: var(--warning); color: var(--warning); }
+
+    .grid { display: grid; gap: 16px; }
+    .grid-4 { grid-template-columns: repeat(4, 1fr); }
+    .grid-3 { grid-template-columns: repeat(3, 1fr); }
+    .grid-2 { grid-template-columns: repeat(2, 1fr); }
+    .grid-5 { grid-template-columns: repeat(5, 1fr); }
+    .grid-1-2 { grid-template-columns: 1fr 2fr; }
+    .grid-2-1 { grid-template-columns: 1.4fr 1fr; }
+    .grid-12-1 { grid-template-columns: 1.2fr 1fr; }
+    .row { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+
+    .stat { padding: 14px 16px; background: var(--bg-elev); border: 1px solid var(--border);
+      border-radius: var(--radius); }
+    .stat-value { font-size: 26px; font-weight: 700; letter-spacing: -0.01em; color: var(--text);
+      line-height: 1.15; }
+    .stat-value.success { color: var(--success); }
+    .stat-value.info { color: var(--info); }
+    .stat-value.warn { color: var(--warning); }
+
+    .stat-label { font-size: 12px; color: var(--text-3); margin-top: 4px; }
+
+    .card { background: var(--bg-elev); border: 1px solid var(--border);
+      border-radius: var(--radius); overflow: hidden; }
+    .card-header { padding: 10px 16px; border-bottom: 1px solid var(--border);
+      background: #fafbfc; font-size: 13px; font-weight: 600; color: var(--text-2); }
+    .card-body { padding: 16px; }
+    .card-body.p-sm { padding: 12px; }
+    .card-body ul { margin: 0; padding-left: 18px; }
+    .card-body li { margin-bottom: 4px; font-size: 13.5px; color: var(--text-2); }
+
+    .callout { padding: 12px 14px; border-radius: var(--radius-sm);
+      border: 1px solid var(--border); border-left-width: 3px; background: var(--bg-soft); }
+    .callout-title { font-weight: 600; margin-bottom: 4px; font-size: 14px; }
+    .callout-body { font-size: 13px; color: var(--text-2); }
+    .callout-body p { font-size: 13px; color: var(--text-2); margin: 0 0 4px; }
+    .callout.info { border-left-color: var(--info); background: var(--info-soft); }
+    .callout.info .callout-title { color: var(--info); }
+    .callout.success { border-left-color: var(--success); background: var(--success-soft); }
+    .callout.success .callout-title { color: var(--success); }
+    .callout.warn { border-left-color: var(--warning); background: var(--warning-soft); }
+    .callout.warn .callout-title { color: var(--warning); }
+    .callout.neutral { border-left-color: var(--text-3); }
+
+    table { width: 100%; border-collapse: collapse; font-size: 13.5px;
+      background: var(--bg-elev); border: 1px solid var(--border); border-radius: var(--radius);
+      overflow: hidden; }
+    th, td { padding: 10px 12px; text-align: left; border-bottom: 1px solid var(--border);
+      color: var(--text-2); vertical-align: middle; }
+    th { background: #fafbfc; font-weight: 600; font-size: 12.5px; color: var(--text-3);
+      letter-spacing: 0.01em; text-transform: uppercase; }
+    tr:last-child td { border-bottom: 0; }
+    tr.tone-success td { background: rgba(22, 163, 74, 0.04); }
+    tr.tone-info td { background: rgba(3, 105, 161, 0.04); }
+
+    .signal-row { display: flex; gap: 10px; padding: 10px 0;
+      border-bottom: 1px solid var(--border); align-items: center; }
+    .signal-row:last-child { border-bottom: 0; }
+    .signal-row .left { flex: 1; min-width: 0; }
+    .signal-row .label { font-size: 13px; font-weight: 600; }
+    .signal-row .hint { font-size: 12px; color: var(--text-3); }
+    .signal-row .value { font-weight: 700; color: var(--text); font-size: 14px; white-space: nowrap; }
+
+    .chart { width: 100%; }
+    .chart svg { width: 100%; height: auto; display: block; }
+    .chart-legend { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--border); }
+    .chart-legend .leg-item { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--text-3); }
+    .chart-legend .dot { width: 10px; height: 10px; border-radius: 2px; }
+
+    .dag-wrap { overflow-x: auto; padding: 8px 2px; }
+    .dag-wrap svg { display: block; margin: 0 auto; }
+
+    .toc-bar { position: sticky; top: 0; background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(8px); border-bottom: 1px solid var(--border);
+      z-index: 10; padding: 10px 28px; margin: -32px -28px 24px;
+      font-size: 12.5px; }
+    .toc-bar .toc-inner { max-width: 1180px; margin: 0 auto; display: flex; gap: 14px;
+      align-items: center; overflow-x: auto; }
+    .toc-bar a { color: var(--text-3); text-decoration: none; white-space: nowrap; padding: 4px 2px; }
+    .toc-bar a:hover { color: var(--accent); }
+    .toc-bar .brand { font-weight: 700; color: var(--text); }
+
+    @page { size: A4; margin: 14mm; }
+    @media print {
+      body { background: #fff; }
+      main { max-width: none; padding: 0; }
+      .toc-bar { display: none; }
+      .section, .card, .hero { page-break-inside: avoid; box-shadow: none; }
+      h2 { page-break-after: avoid; }
+      .hero { break-before: avoid; }
+      .dag-wrap { overflow: visible; }
+      .dag-wrap svg { max-width: 100%; }
+    }
+
+    .spacer-sm { height: 6px; }
+    .spacer-md { height: 12px; }
+
+    .step-num { display: inline-flex; align-items: center; justify-content: center;
+      width: 22px; height: 22px; border-radius: 50%; background: var(--accent-soft);
+      color: var(--accent); font-weight: 700; font-size: 12px; margin-right: 8px; }
+
+    footer.site-footer { margin-top: 36px; padding-top: 16px; border-top: 1px solid var(--border);
+      font-size: 12px; color: var(--text-4); text-align: center; }
+  
+  .back-home {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    color: rgba(255,255,255,0.65);
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 500;
+    padding: 4px 10px 4px 6px;
+    border-radius: 6px;
+    border: 1px solid rgba(255,255,255,0.18);
+    margin-right: 16px;
+    white-space: nowrap;
+    transition: all 0.2s ease;
+    flex-shrink: 0;
+  }
+  .back-home:hover {
+    color: #fff;
+    background: rgba(255,255,255,0.12);
+    border-color: rgba(255,255,255,0.35);
+  }
+  .back-home svg {
+    width: 14px;
+    height: 14px;
+    opacity: 0.8;
+  }
+</style>
+</head>
+<body>
+  <nav class="toc-bar">
+    <div class="toc-inner">
+      <a class="back-home" href="../">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+        返回首页
+      </a>
+      <span class="brand">EngageLab MA · 音乐 / 播客订阅方案</span>
+      <a href="#s-market">市场机会</a><a href="#s-funnel">用户漏斗</a><a href="#s-why">为什么 EngageLab</a>
+      <a href="#s-scenarios">场景总览</a><a href="#s-journey">旅程编排</a><a href="#s-channel">渠道选型</a>
+      <a href="#s-compliance">合规安全</a><a href="#s-plan">测试计划</a>
+    </div>
+  </nav>
+  <main>
+    <section class="hero">
+      <div class="hero-pills">
+        <span class="pill pill-success">音乐 · 播客 · 音频订阅</span>
+        <span class="pill">全球 · 欧美 + 东南亚 + 拉美</span>
+        <span class="pill">免费增值 → 订阅</span>
+      </div>
+      <h1>EngageLab MA · 音乐 / 播客订阅出海增长方案</h1>
+      <p class="hero-subtitle">
+        音频产品的增长本质是"收听习惯与歌单资产的沉淀"——不建歌单/不关注节目就没有回访理由、
+        免费用户被广告打断却不转订阅、家庭与年付方案的升级空间被浪费。
+        本方案把"一次性播放"升级为"从首次收听到长期订阅的自动化音频生命周期运营"，
+        以 <span class="bold">首听激活与歌单沉淀、收听习惯唤醒、免费转订阅、新内容更新提醒、订阅续费与家庭升级、沉默分层召回</span> 六大旅程切入，
+        统一编排 <span class="bold">App Push（主力）+ 应用内 + Email + Web Push</span> 四类通道。
+      </p>
+      <div class="row">
+        <span class="pill pill-accent">极光 / App Push（iOS + Android）</span>
+        <span class="pill pill-accent">应用内消息</span>
+        <span class="pill pill-accent">Email（账单/周报）</span>
+        <span class="pill pill-accent">Web Push（网页端）</span>
+      </div>
+    </section>
+
+    <section id="s-market" class="section">
+      <h2>一、为什么音频平台必须做收听生命周期运营</h2>
+      <div class="grid grid-4" style="margin-bottom:16px">
+        <div class="stat"><div class="stat-value warn">资产沉淀</div><div class="stat-label">没建歌单/没关注节目的用户缺乏回访理由</div></div>
+        <div class="stat"><div class="stat-value info">场景化收听</div><div class="stat-label">通勤、运动、睡前是高度规律的收听场景</div></div>
+        <div class="stat"><div class="stat-value">免费增值</div><div class="stat-label">广告打断与功能限制是转订阅的核心动因</div></div>
+        <div class="stat"><div class="stat-value danger">切换成本低</div><div class="stat-label">音频平台同质化高，用户迁移成本极低</div></div>
+      </div>
+      <p class="muted small">注：下文所有转化率、提升幅度为音乐 / 播客行业估算区间，落地以实测为准。</p>
+      <hr class="divider" />
+      <div class="grid grid-2">
+        <div class="callout neutral"><div class="callout-title">痛点 1 · 听完就走、无资产沉淀</div><div class="callout-body"><p>用户听了几首就退出，没有收藏、没建歌单、没关注节目，下次就没有回来的理由。</p></div></div>
+        <div class="callout info"><div class="callout-title">解法 · 首听激活 + 歌单沉淀</div><div class="callout-body"><p>首次收听后引导收藏与建歌单，把"一次性播放"变成"个人音频资产"，显著提升回访。</p></div></div>
+        <div class="callout neutral"><div class="callout-title">痛点 2 · 收听习惯未形成</div><div class="callout-body"><p>通勤、运动、睡前是高度规律的收听场景，但缺乏场景化唤醒，习惯难以固化。</p></div></div>
+        <div class="callout info"><div class="callout-title">解法 · 场景化收听唤醒</div><div class="callout-body"><p>按个人历史收听时段与场景推送对应歌单（通勤/运动/助眠），把收听变成日常习惯。</p></div></div>
+        <div class="callout neutral"><div class="callout-title">痛点 3 · 免费用户不转订阅</div><div class="callout-body"><p>广告打断、跳过次数受限等痛点时刻，正是转订阅意愿最强的瞬间，却没有及时引导。</p></div></div>
+        <div class="callout info"><div class="callout-title">解法 · 痛点时刻订阅转化</div><div class="callout-body"><p>在广告打断、跳过用尽、离线下载受限等瞬间即时推会员，转化效率远高于泛推促销。</p></div></div>
+        <div class="callout neutral"><div class="callout-title">痛点 4 · 续费流失与升级机会浪费</div><div class="callout-body"><p>订阅到期静默流失；个人会员未被引导升级家庭/年付方案，ARPU 与留存双双受限。</p></div></div>
+        <div class="callout info"><div class="callout-title">解法 · 续费前置 + 家庭年付升级</div><div class="callout-body"><p>用"年度收听报告"做续费说服；对多设备/高时长用户推家庭方案与年付优惠。</p></div></div>
+      </div>
+    </section>
+
+    <section id="s-funnel" class="section">
+      <h2>二、用户漏斗：从首听到长期订阅，每层都有增长空间</h2>
+      <p class="muted small">下图为音乐 / 播客行业估算区间对比，非实测数据。</p>
+      <div class="chart" id="chart-funnel"></div>
+    </section>
+
+    <section id="s-why" class="section">
+      <h2>三、为什么选择 EngageLab MA</h2>
+      <div class="grid grid-3">
+        <div class="card"><div class="card-header">场景化智能时机</div><div class="card-body p-sm"><ul><li>按个人收听时段（通勤/运动/睡前）推送对应内容</li><li>终端时区适配，全球用户本地作息</li></ul></div></div>
+        <div class="card"><div class="card-header">内容偏好个性化</div><div class="card-body p-sm"><ul><li>收听曲风、关注节目、歌单作为用户属性</li><li>新内容推送按偏好分流，避免全量群发</li></ul></div></div>
+        <div class="card"><div class="card-header">CDP 统一身份（EUID）</div><div class="card-body p-sm"><ul><li>收听时长、歌单数、订阅状态、设备数统一为属性</li><li>支撑按收听深度的分层订阅引导</li></ul></div></div>
+        <div class="card"><div class="card-header">应用内 + Push 组合</div><div class="card-body p-sm"><ul><li>痛点时刻（广告打断）用应用内即时转化，路径最短</li><li>Push 负责场景唤起，组合效果最佳</li></ul></div></div>
+        <div class="card"><div class="card-header">AI 多语言文案</div><div class="card-body p-sm"><ul><li>音频出海覆盖多语种市场，一套旅程适配多国</li><li>内容推荐文案 AI 批量生成并 A/B</li></ul></div></div>
+        <div class="card"><div class="card-header">合规 · 内容与版权</div><div class="card-body p-sm"><ul><li>触达仅指向平台内已授权内容</li><li>GDPR/CCPA、一键退订、频控护栏</li></ul></div></div>
+      </div>
+    </section>
+
+    <section id="s-scenarios" class="section">
+      <h2>四、高 ROI 运营场景总览</h2>
+      <table>
+        <thead><tr><th>#</th><th>场景</th><th>生命周期阶段</th><th>核心触发</th><th>渠道组合</th><th>预期提升（估算）</th></tr></thead>
+        <tbody>
+          <tr class="tone-info"><td>J1</td><td>首听激活 + 歌单沉淀</td><td>激活</td><td>注册 / 首次播放</td><td>App Push + 应用内</td><td>歌单创建 +25~40%</td></tr>
+          <tr class="tone-success"><td>J2</td><td>场景化收听唤醒</td><td>留存 / 日活</td><td>个人收听时段临近</td><td>App Push（智能时机）</td><td>DAU/MAU +10~20%</td></tr>
+          <tr><td>J3</td><td>痛点时刻订阅转化</td><td>付费转化</td><td>广告打断 / 跳过用尽</td><td>应用内 + App Push + Email</td><td>订阅转化 +5~12%</td></tr>
+          <tr class="tone-success"><td>J4</td><td>新内容更新提醒（偏好分流）</td><td>活跃 / 复访</td><td>关注歌手/节目更新</td><td>App Push + Email</td><td>回访率 +15~30%</td></tr>
+          <tr><td>J5</td><td>订阅续费 + 家庭/年付升级</td><td>续费 / ARPU</td><td>到期前 7 天 / 多设备用户</td><td>App Push + Email + 应用内</td><td>续费率 +12~22%</td></tr>
+          <tr><td>J6</td><td>沉默用户分层召回</td><td>流失召回</td><td>最后收听 &gt;7 天</td><td>App Push → Email → Web Push</td><td>回归率 +20~40%</td></tr>
+        </tbody>
+      </table>
+      <p class="muted small" style="margin-top:8px">提升幅度为行业公开区间估算，最终以 4 周测试实测为准。</p>
+    </section>
+
+    <section id="s-journey" class="section-plain">
+      <h2>五、核心旅程详细编排</h2>
+      <div class="section" style="margin-top:16px;">
+        <h3>旅程 1：首听激活 + 歌单沉淀</h3>
+        <div class="grid grid-2-1"><div class="dag-wrap" id="dag-j1"></div><div>
+          <div class="callout neutral" style="margin-bottom:12px"><div class="callout-title">业务痛点</div><div class="callout-body"><p>听完就走、没有收藏与歌单，用户与平台之间没有资产绑定，下次就没有回来的理由。</p></div></div>
+          <div class="callout info" style="margin-bottom:12px"><div class="callout-title">旅程组件配置</div><div class="callout-body">
+            <p><strong>进入条件：</strong>事件：注册 / 首次播放</p>
+            <p><strong>提前退出：</strong>事件：创建歌单 / 关注节目</p>
+            <p><strong>分支：</strong>属性：是否有收藏行为（有收藏引导建歌单 / 无收藏先引导收藏）</p>
+            <p><strong>内容：</strong>基于已听内容的个性化推荐 + 一键生成歌单</p>
+          </div></div>
+          <div class="callout success"><div class="callout-title">预期效益</div><div class="callout-body"><p>歌单创建 +25~40%（估算）；歌单是音频平台最强的用户资产与迁移壁垒。</p></div></div>
+        </div></div>
+      </div>
+      <div class="section">
+        <h3>旅程 2：场景化收听唤醒</h3>
+        <div class="grid grid-2-1"><div class="dag-wrap" id="dag-j2"></div><div>
+          <div class="callout neutral" style="margin-bottom:12px"><div class="callout-title">业务痛点</div><div class="callout-body"><p>通勤、运动、睡前是规律的收听场景，缺乏场景化唤醒则习惯难以固化。</p></div></div>
+          <div class="callout info" style="margin-bottom:12px"><div class="callout-title">旅程组件配置</div><div class="callout-body">
+            <p><strong>进入条件：</strong>属性：个人历史收听时段临近且当日未收听</p>
+            <p><strong>分支：</strong>属性：场景类型（通勤 / 运动 / 睡前）</p>
+            <p><strong>智能时机：</strong>按个人收听规律推送，终端时区</p>
+            <p><strong>频控：</strong>每日 ≤2 条，开始收听即退出</p>
+          </div></div>
+          <div class="callout success"><div class="callout-title">预期效益</div><div class="callout-body"><p>DAU/MAU +10~20%（估算）；场景化推荐比泛泛"来听歌"有效得多。</p></div></div>
+        </div></div>
+      </div>
+      <div class="section">
+        <h3>旅程 3：痛点时刻订阅转化</h3>
+        <div class="grid grid-2-1"><div class="dag-wrap" id="dag-j3"></div><div>
+          <div class="callout neutral" style="margin-bottom:12px"><div class="callout-title">业务痛点</div><div class="callout-body"><p>广告打断、跳过受限等痛点瞬间是转订阅意愿最强的时刻，却常被浪费。</p></div></div>
+          <div class="callout info" style="margin-bottom:12px"><div class="callout-title">旅程组件配置</div><div class="callout-body">
+            <p><strong>进入条件：</strong>事件：广告打断累计 / 跳过次数用尽 / 尝试离线下载</p>
+            <p><strong>分支：</strong>属性：痛点类型（广告→无广告卖点 / 跳过→无限跳过 / 下载→离线权益）</p>
+            <p><strong>提前退出：</strong>事件：完成订阅</p>
+            <p><strong>机制：</strong>应用内即时优先，Push/Email 后续补触达</p>
+          </div></div>
+          <div class="callout success"><div class="callout-title">预期效益</div><div class="callout-body"><p>订阅转化 +5~12%（估算）；针对具体痛点讲卖点，比通用促销转化率高得多。</p></div></div>
+        </div></div>
+      </div>
+      <div class="section">
+        <h3>旅程 4：新内容更新提醒（偏好分流）</h3>
+        <div class="grid grid-2-1"><div class="dag-wrap" id="dag-j4"></div><div>
+          <div class="callout neutral" style="margin-bottom:12px"><div class="callout-title">业务痛点</div><div class="callout-body"><p>关注的歌手发新歌、订阅的播客更新却不知道，错过最强的回访动机。</p></div></div>
+          <div class="callout info" style="margin-bottom:12px"><div class="callout-title">旅程组件配置</div><div class="callout-body">
+            <p><strong>进入条件：</strong>事件：关注的歌手/节目有新内容</p>
+            <p><strong>分支：</strong>属性：内容类型（音乐新歌 / 播客更新）</p>
+            <p><strong>聚合：</strong>多条更新按日聚合，避免逐条打扰</p>
+            <p><strong>提前退出：</strong>事件：收听新内容</p>
+          </div></div>
+          <div class="callout success"><div class="callout-title">预期效益</div><div class="callout-body"><p>回访率 +15~30%（估算）；"你关注的 X 发新歌了"是音频最强的回访钩子。</p></div></div>
+        </div></div>
+      </div>
+      <div class="section">
+        <h3>旅程 5：订阅续费 + 家庭/年付升级</h3>
+        <div class="grid grid-2-1"><div class="dag-wrap" id="dag-j5"></div><div>
+          <div class="callout neutral" style="margin-bottom:12px"><div class="callout-title">业务痛点</div><div class="callout-body"><p>订阅到期静默流失；多设备/高时长用户未被引导升级家庭或年付方案。</p></div></div>
+          <div class="callout info" style="margin-bottom:12px"><div class="callout-title">旅程组件配置</div><div class="callout-body">
+            <p><strong>进入条件：</strong>属性：订阅到期前 7 天 / 多设备高时长用户</p>
+            <p><strong>分支：</strong>属性：用户特征（多设备推家庭方案 / 月费推年付 / 常规续费）</p>
+            <p><strong>内容：</strong>年度收听报告（时长、曲风、最爱歌手）作为续费说服力</p>
+            <p><strong>提前退出：</strong>事件：完成续费 / 升级</p>
+          </div></div>
+          <div class="callout success"><div class="callout-title">预期效益</div><div class="callout-body"><p>续费率 +12~22%（估算）；收听报告的情感价值是音频行业独有的续费利器。</p></div></div>
+        </div></div>
+      </div>
+      <div class="section">
+        <h3>旅程 6：沉默用户分层召回</h3>
+        <div class="grid grid-2-1"><div class="dag-wrap" id="dag-j6"></div><div>
+          <div class="callout neutral" style="margin-bottom:12px"><div class="callout-title">业务痛点</div><div class="callout-body"><p>音频平台同质化高、切换成本低，用户沉默后极易迁移到竞品。</p></div></div>
+          <div class="callout info" style="margin-bottom:12px"><div class="callout-title">旅程组件配置</div><div class="callout-body">
+            <p><strong>进入条件：</strong>属性：最后收听距今 &gt;7 天</p>
+            <p><strong>分支：</strong>属性：沉默深度 7-14 / 15-29 / ≥30 天</p>
+            <p><strong>内容：</strong>用歌单与关注节目的更新作为召回钩子（个人资产提醒）</p>
+            <p><strong>再次进入：</strong>可，间隔 15 天</p>
+          </div></div>
+          <div class="callout success"><div class="callout-title">预期效益</div><div class="callout-body"><p>回归率 +20~40%（估算）；"你的歌单有 N 首新歌"比促销更能唤回用户。</p></div></div>
+        </div></div>
+      </div>
+    </section>
+
+    <section id="s-channel" class="section-plain">
+      <h2>六、渠道选型参考</h2>
+      <div class="section">
+        <p class="muted small">音乐 / 播客渠道适配相对值（示意）：App Push 是场景唤醒与内容更新的绝对主力，应用内消息承接痛点时刻的订阅转化，Email 承载年度报告与账单，Web Push 覆盖网页端听众。</p>
+        <div class="chart" id="chart-channel"></div>
+        <div class="grid grid-2" style="margin-top:14px">
+          <div class="callout info"><div class="callout-title">主力通道</div><div class="callout-body"><p>App Push（场景化收听唤醒、新内容更新，按个人收听时段智能推送）+ 应用内消息（痛点时刻订阅转化）。</p></div></div>
+          <div class="callout neutral"><div class="callout-title">补充通道</div><div class="callout-body"><p>Email 承载年度收听报告（情感价值高、分享率高）与账单；Web Push 覆盖网页端听众。</p></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="s-compliance" class="section">
+      <h2>七、合规与安全</h2>
+      <div class="grid grid-3">
+        <div class="card"><div class="card-header">内容与版权</div><div class="card-body p-sm"><ul><li>触达仅指向平台内已授权内容</li><li>内容分级与未成年保护</li><li>各地版权与内容监管差异化适配</li></ul></div></div>
+        <div class="card"><div class="card-header">数据法规</div><div class="card-body p-sm"><ul><li>GDPR / CCPA：数据删除 / 导出 / 同意管理</li><li>收听偏好数据脱敏、PII 保护</li><li>已通过 GDPR、SOC 2 认证</li></ul></div></div>
+        <div class="card"><div class="card-header">触达护栏</div><div class="card-body p-sm"><ul><li>内容更新日聚合、每日频控、旅程内去重</li><li>勿扰时段（尤其助眠场景需谨慎）</li><li>一键退订、记录留存（如 60 天）</li></ul></div></div>
+      </div>
+    </section>
+
+    <section id="s-plan" class="section">
+      <h2>八、测试计划（4 周）</h2>
+      <table>
+        <thead><tr><th>周次</th><th>阶段</th><th>核心工作</th><th>验收指标</th></tr></thead>
+        <tbody>
+          <tr><td>第 1 周</td><td>启动 · 数据打通</td><td>确认埋点（注册、播放、收藏、歌单、关注、广告打断、订阅状态）；SDK 接入；EUID 映射</td><td>事件入库率 ≥95%</td></tr>
+          <tr><td>第 2 周</td><td>核心旅程上线</td><td>J1 首听激活 + J3 痛点时刻转化（2 条，小流量）；场景标签配置</td><td>旅程触发成功率 ≥98%</td></tr>
+          <tr><td>第 3 周</td><td>扩量 · A/B</td><td>J2 场景唤醒 + J4 内容更新全量；智能时机 vs 固定时段 A/B</td><td>Push 点击率 ≥6%；样本量 ≥1 万</td></tr>
+          <tr><td>第 4 周</td><td>复盘 · 扩面</td><td>J5 续费升级 + J6 沉默召回上线；输出订阅收入 uplift 报告</td><td>歌单/DAU/订阅/续费 uplift 可量化</td></tr>
+        </tbody>
+      </table>
+      <div class="callout success" style="margin-top:14px"><div class="callout-title">投入</div><div class="callout-body"><p>测试期授权费 $0，配置 2 人专属服务团队支撑埋点、旅程与多语言文案交付。</p></div></div>
+    </section>
+    <footer class="site-footer">EngageLab MA · 音乐 / 播客订阅出海增长方案 — 内部方案，转化/提升数据为行业估算或公开参考，落地以实测为准。</footer>
+  </main>
+  <script>
+  (function(){
+    // ========== Shared helpers ==========
+    const COLORS = {
+      accent: '#2563eb', info: '#0369a1', success: '#16a34a',
+      warning: '#d97706', neutral: '#94a3b8', muted: '#cbd5e1',
+      text: '#374151', textMute: '#9ca3af', grid: '#e5e7eb',
+    };
+    function svgEl(w, h) {
+      const s = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+      s.setAttribute('viewBox', '0 0 ' + w + ' ' + h);
+      s.setAttribute('width', '100%');
+      s.setAttribute('preserveAspectRatio', 'xMidYMid meet');
+      return s;
+    }
+    function el(tag, attrs) {
+      const e = document.createElementNS('http://www.w3.org/2000/svg', tag);
+      for (const k in attrs) e.setAttribute(k, attrs[k]);
+      return e;
+    }
+
+    // ========== Bar Chart ==========
+    function drawBarChart(mount, opts) {
+      const { categories, series, valueSuffix = '', height = 240 } = opts;
+      const W = 600, H = height, PAD_L = 44, PAD_R = 16, PAD_T = 12, PAD_B = 56;
+      const innerW = W - PAD_L - PAD_R, innerH = H - PAD_T - PAD_B;
+      const max = Math.max(...series.flatMap(s => s.data), 1);
+      const niceMax = Math.ceil(max / 20) * 20 || 100;
+      const groupCount = categories.length;
+      const barsPerGroup = series.length;
+      const groupW = innerW / groupCount;
+      const barW = Math.min(22, (groupW - 12) / barsPerGroup);
+      const s = svgEl(W, H);
+      for (let i = 0; i <= 4; i++) {
+        const v = (niceMax / 4) * i;
+        const y = PAD_T + innerH - (v / niceMax) * innerH;
+        s.appendChild(el('line', { x1: PAD_L, x2: W - PAD_R, y1: y, y2: y, stroke: COLORS.grid, 'stroke-width': 1 }));
+        const t = el('text', { x: PAD_L - 6, y: y + 4, 'text-anchor': 'end', 'font-size': 10, fill: COLORS.textMute });
+        t.textContent = Math.round(v) + valueSuffix;
+        s.appendChild(t);
+      }
+      categories.forEach((cat, ci) => {
+        const gx = PAD_L + groupW * ci;
+        series.forEach((se, si) => {
+          const v = se.data[ci] || 0;
+          const h = (v / niceMax) * innerH;
+          const x = gx + (groupW - barW * barsPerGroup) / 2 + si * barW;
+          const y = PAD_T + innerH - h;
+          const color = COLORS[se.tone] || COLORS.neutral;
+          s.appendChild(el('rect', { x, y, width: barW - 2, height: h, fill: color, rx: 2 }));
+          if (v > 0) {
+            const label = el('text', { x: x + (barW - 2) / 2, y: y - 2, 'text-anchor': 'middle', 'font-size': 8, fill: COLORS.text });
+            label.textContent = v + valueSuffix;
+            s.appendChild(label);
+          }
+        });
+        const t = el('text', { x: gx + groupW / 2, y: H - PAD_B + 14, 'text-anchor': 'middle', 'font-size': 10, fill: COLORS.text });
+        t.textContent = cat;
+        s.appendChild(t);
+      });
+      // Legend
+      let legX = PAD_L;
+      series.forEach((se) => {
+        const color = COLORS[se.tone] || COLORS.accent;
+        s.appendChild(el('rect', { x: legX, y: H - 18, width: 10, height: 10, rx: 2, fill: color }));
+        const t = el('text', { x: legX + 14, y: H - 10, 'font-size': 10, fill: COLORS.text });
+        t.textContent = se.name;
+        s.appendChild(t);
+        legX += 14 + (se.name.length * 7) + 16;
+      });
+      mount.innerHTML = '';
+      mount.appendChild(s);
+    }
+
+    // ========== Journey DAG renderer (same as fintech/security solution) ==========
+    const KIND_STYLE = {
+      entry:    { fill: '#f1f5f9', stroke: '#94a3b8', text: '#111827' },
+      wait:     { fill: '#fafafa', stroke: '#d1d5db', text: '#6b7280' },
+      branch:   { fill: '#f9fafb', stroke: '#475569', text: '#111827' },
+      channel:  { fill: '#dbeafe', stroke: '#2563eb', text: '#1e3a8a' },
+      sendtime: { fill: '#fef3c7', stroke: '#d97706', text: '#92400e' },
+      exitOk:   { fill: '#dcfce7', stroke: '#16a34a', text: '#14532d' },
+      exitEnd:  { fill: '#f3f4f6', stroke: '#9ca3af', text: '#4b5563' },
+    };
+
+    function drawJourney(mount, nodes, edges) {
+      const NODE_W = 176, NODE_H = 62, RANK_GAP = 42, NODE_GAP = 22;
+      const rankOf = {}, incoming = {};
+      nodes.forEach(n => { rankOf[n.id] = 0; incoming[n.id] = []; });
+      edges.forEach(e => { incoming[e.to].push(e.from); });
+      let changed = true;
+      while (changed) {
+        changed = false;
+        edges.forEach(e => {
+          if (rankOf[e.to] < rankOf[e.from] + 1) { rankOf[e.to] = rankOf[e.from] + 1; changed = true; }
+        });
+      }
+      const maxRank = Math.max(...Object.values(rankOf));
+      const ranks = [];
+      for (let r = 0; r <= maxRank; r++) ranks.push([]);
+      nodes.forEach(n => { ranks[rankOf[n.id]].push(n); });
+      const pos = {};
+      const rankWidths = ranks.map(r => r.length * NODE_W + (r.length - 1) * NODE_GAP);
+      const maxWidth = Math.max(...rankWidths, 400);
+      ranks.forEach((rankNodes, r) => {
+        const withAnchor = rankNodes.map(n => {
+          const parents = incoming[n.id].map(p => pos[p] ? pos[p].x + NODE_W / 2 : null).filter(x => x !== null);
+          const anchor = parents.length ? parents.reduce((a, b) => a + b, 0) / parents.length : null;
+          return { node: n, anchor };
+        });
+        withAnchor.sort((a, b) => {
+          if (a.anchor === null && b.anchor === null) return 0;
+          if (a.anchor === null) return 1;
+          if (b.anchor === null) return -1;
+          return a.anchor - b.anchor;
+        });
+        const totalW = withAnchor.length * NODE_W + (withAnchor.length - 1) * NODE_GAP;
+        const startX = (maxWidth - totalW) / 2 + 20;
+        withAnchor.forEach((it, i) => {
+          pos[it.node.id] = { x: startX + i * (NODE_W + NODE_GAP), y: 20 + r * (NODE_H + RANK_GAP) };
+        });
+      });
+      for (let pass = 0; pass < 3; pass++) {
+        ranks.forEach(rankNodes => {
+          const sorted = rankNodes.slice().sort((a, b) => pos[a.id].x - pos[b.id].x);
+          for (let i = 1; i < sorted.length; i++) {
+            const prev = pos[sorted[i - 1].id], cur = pos[sorted[i].id];
+            if (cur.x < prev.x + NODE_W + NODE_GAP) cur.x = prev.x + NODE_W + NODE_GAP;
+          }
+        });
+      }
+      const width = Math.max(...Object.values(pos).map(p => p.x)) + NODE_W + 20;
+      const height = Math.max(...Object.values(pos).map(p => p.y)) + NODE_H + 24;
+      const s = svgEl(width, height);
+      s.setAttribute('width', width);
+      s.setAttribute('height', height);
+      s.style.maxWidth = '100%';
+      s.style.height = 'auto';
+      const defs = el('defs');
+      const marker = el('marker', { id: 'arrow', viewBox: '0 0 10 10', refX: 9, refY: 5, markerWidth: 6, markerHeight: 6, orient: 'auto-start-reverse' });
+      marker.appendChild(el('path', { d: 'M 0 0 L 10 5 L 0 10 z', fill: '#94a3b8' }));
+      defs.appendChild(marker);
+      s.appendChild(defs);
+      edges.forEach(e => {
+        const from = pos[e.from], to = pos[e.to];
+        if (!from || !to) return;
+        const x1 = from.x + NODE_W / 2, y1 = from.y + NODE_H;
+        const x2 = to.x + NODE_W / 2, y2 = to.y;
+        const cy = (y1 + y2) / 2;
+        const d = 'M' + x1 + ',' + y1 + ' C' + x1 + ',' + cy + ' ' + x2 + ',' + cy + ' ' + x2 + ',' + y2;
+        s.appendChild(el('path', { d, fill: 'none', stroke: '#94a3b8', 'stroke-width': 1.25, 'marker-end': 'url(#arrow)' }));
+        if (e.label) {
+          const mx = (x1 + x2) / 2, my = cy;
+          const w = Math.max(e.label.length * 9 + 10, 28);
+          s.appendChild(el('rect', { x: mx - w / 2, y: my - 10, width: w, height: 18, rx: 4, fill: '#ffffff', stroke: '#e5e7eb' }));
+          const t = el('text', { x: mx, y: my + 3, 'text-anchor': 'middle', 'font-size': 11, fill: '#475569' });
+          t.textContent = e.label;
+          s.appendChild(t);
+        }
+      });
+      nodes.forEach(n => {
+        const p = pos[n.id];
+        const k = KIND_STYLE[n.kind] || KIND_STYLE.entry;
+        s.appendChild(el('rect', { x: p.x, y: p.y, width: NODE_W, height: NODE_H, rx: 10, fill: k.fill, stroke: k.stroke, 'stroke-width': n.kind === 'channel' ? 1.4 : 1 }));
+        const titleY = n.sub ? p.y + 24 : p.y + NODE_H / 2 + 4;
+        const title = el('text', { x: p.x + NODE_W / 2, y: titleY, 'text-anchor': 'middle', 'font-size': 12.5, 'font-weight': 600, fill: k.text });
+        title.textContent = n.title;
+        s.appendChild(title);
+        if (n.sub) {
+          const sub = el('text', { x: p.x + NODE_W / 2, y: p.y + 42, 'text-anchor': 'middle', 'font-size': 11, fill: k.text, opacity: 0.82 });
+          sub.textContent = n.sub;
+          s.appendChild(sub);
+        }
+      });
+      mount.innerHTML = '';
+      mount.appendChild(s);
+    }
+
+    drawBarChart(document.getElementById('chart-funnel'), {
+      categories: ['注册→首次播放', '播放→创建歌单', '免费→订阅', '订阅续费率', '沉默召回率'],
+      series: [
+        { name: '当前基准（估算）',    data: [65, 25, 5, 70, 12], tone: 'neutral' },
+        { name: 'MA 自动化后（估算）', data: [76, 35, 9, 82, 30], tone: 'success' },
+      ], valueSuffix: '%', height: 260,
+    });
+    drawBarChart(document.getElementById('chart-channel'), {
+      categories: ['App Push', '应用内消息', 'Email', 'Web Push', 'SMS'],
+      series: [{ name: '音乐播客触达适配（相对值·示意）', data: [94, 84, 70, 52, 25], tone: 'info' }],
+      valueSuffix: '', height: 220,
+    });
+
+    drawJourney(document.getElementById('dag-j1'),
+      [
+        {id:'start',kind:'entry',title:'开始',sub:'事件: 注册/首次播放'},
+        {id:'w1',kind:'wait',title:'等待事件',sub:'1h 内等待: 建歌单/关注'},
+        {id:'ok0',kind:'exitOk',title:'结束（已沉淀）',sub:'创建歌单或关注节目'},
+        {id:'br1',kind:'branch',title:'条件分支',sub:'属性: 是否有收藏行为'},
+        {id:'pa',kind:'channel',title:'应用内消息',sub:'(有收藏) 一键生成你的歌单'},
+        {id:'pb',kind:'channel',title:'App Push',sub:'(无收藏) 猜你喜欢·收藏解锁推荐'},
+        {id:'w2',kind:'wait',title:'等待事件',sub:'24h 内等待: 建歌单/关注'},
+        {id:'ok1',kind:'exitOk',title:'结束（已沉淀）',sub:'创建歌单或关注节目'},
+        {id:'st1',kind:'sendtime',title:'可发送时间',sub:'按收听时段 终端时区'},
+        {id:'p2',kind:'channel',title:'App Push',sub:'为你生成的专属每日推荐'},
+        {id:'w3',kind:'wait',title:'等待事件',sub:'3天内等待: 建歌单/关注'},
+        {id:'ok2',kind:'exitOk',title:'结束（已沉淀）',sub:'创建歌单或关注节目'},
+        {id:'end',kind:'exitEnd',title:'结束',sub:'转沉默召回旅程'},
+      ],
+      [
+        {from:'start',to:'w1'},{from:'w1',to:'ok0',label:'已沉淀'},{from:'w1',to:'br1',label:'未沉淀'},
+        {from:'br1',to:'pa',label:'有收藏'},{from:'br1',to:'pb',label:'无收藏'},
+        {from:'pa',to:'w2'},{from:'pb',to:'w2'},
+        {from:'w2',to:'ok1',label:'已沉淀'},{from:'w2',to:'st1',label:'未沉淀'},
+        {from:'st1',to:'p2'},{from:'p2',to:'w3'},{from:'w3',to:'ok2',label:'已沉淀'},{from:'w3',to:'end',label:'未沉淀'},
+      ]);
+
+    drawJourney(document.getElementById('dag-j2'),
+      [
+        {id:'start',kind:'entry',title:'开始',sub:'属性: 收听时段临近·当日未听'},
+        {id:'st1',kind:'sendtime',title:'可发送时间',sub:'按个人收听时段 终端时区'},
+        {id:'br1',kind:'branch',title:'条件分支',sub:'属性: 场景类型'},
+        {id:'pc',kind:'channel',title:'App Push',sub:'(通勤) 路上听·今日推荐歌单'},
+        {id:'ps',kind:'channel',title:'App Push',sub:'(运动) 运动节奏歌单已就绪'},
+        {id:'pn',kind:'channel',title:'App Push',sub:'(睡前) 助眠白噪音与轻音乐'},
+        {id:'w1',kind:'wait',title:'等待事件',sub:'2h 内等待: 是否收听'},
+        {id:'ok',kind:'exitOk',title:'结束（已收听）',sub:'计入 DAU'},
+        {id:'end',kind:'exitEnd',title:'结束',sub:'次日时段再触发'},
+      ],
+      [
+        {from:'start',to:'st1'},{from:'st1',to:'br1'},
+        {from:'br1',to:'pc',label:'通勤'},{from:'br1',to:'ps',label:'运动'},{from:'br1',to:'pn',label:'睡前'},
+        {from:'pc',to:'w1'},{from:'ps',to:'w1'},{from:'pn',to:'w1'},
+        {from:'w1',to:'ok',label:'已收听'},{from:'w1',to:'end',label:'未收听'},
+      ]);
+
+    drawJourney(document.getElementById('dag-j3'),
+      [
+        {id:'start',kind:'entry',title:'开始',sub:'事件: 广告打断/跳过用尽'},
+        {id:'br1',kind:'branch',title:'条件分支',sub:'属性: 痛点类型'},
+        {id:'ia',kind:'channel',title:'应用内消息',sub:'(广告) 会员免广告畅听'},
+        {id:'ib',kind:'channel',title:'应用内消息',sub:'(跳过用尽) 会员无限跳过'},
+        {id:'ic',kind:'channel',title:'应用内消息',sub:'(下载受限) 会员离线畅听'},
+        {id:'w1',kind:'wait',title:'等待事件',sub:'30min 内等待: 是否订阅'},
+        {id:'ok0',kind:'exitOk',title:'结束（已订阅）',sub:'完成订阅'},
+        {id:'p1',kind:'channel',title:'App Push',sub:'首月0.99体验会员'},
+        {id:'w2',kind:'wait',title:'等待事件',sub:'24h 内等待: 是否订阅'},
+        {id:'ok1',kind:'exitOk',title:'结束（已订阅）',sub:'完成订阅'},
+        {id:'em1',kind:'channel',title:'Email',sub:'会员权益对比+限时优惠'},
+        {id:'end',kind:'exitEnd',title:'结束',sub:'标记价格敏感'},
+      ],
+      [
+        {from:'start',to:'br1'},
+        {from:'br1',to:'ia',label:'广告打断'},{from:'br1',to:'ib',label:'跳过用尽'},{from:'br1',to:'ic',label:'下载受限'},
+        {from:'ia',to:'w1'},{from:'ib',to:'w1'},{from:'ic',to:'w1'},
+        {from:'w1',to:'ok0',label:'已订阅'},{from:'w1',to:'p1',label:'未订阅'},
+        {from:'p1',to:'w2'},{from:'w2',to:'ok1',label:'已订阅'},{from:'w2',to:'em1',label:'未订阅'},{from:'em1',to:'end'},
+      ]);
+
+    drawJourney(document.getElementById('dag-j4'),
+      [
+        {id:'start',kind:'entry',title:'开始',sub:'事件: 关注对象有新内容'},
+        {id:'w0',kind:'wait',title:'等待',sub:'按日聚合 避免逐条打扰'},
+        {id:'st1',kind:'sendtime',title:'可发送时间',sub:'按收听时段 终端时区'},
+        {id:'br1',kind:'branch',title:'条件分支',sub:'属性: 内容类型'},
+        {id:'pm',kind:'channel',title:'App Push',sub:'(音乐) {歌手}发新歌了'},
+        {id:'pp',kind:'channel',title:'App Push',sub:'(播客) {节目}更新了新一期'},
+        {id:'w1',kind:'wait',title:'等待事件',sub:'2天内等待: 是否收听'},
+        {id:'ok',kind:'exitOk',title:'结束（已收听）',sub:'收听新内容'},
+        {id:'em1',kind:'channel',title:'Email',sub:'本周关注更新汇总'},
+        {id:'end',kind:'exitEnd',title:'结束',sub:'结束'},
+      ],
+      [
+        {from:'start',to:'w0'},{from:'w0',to:'st1'},{from:'st1',to:'br1'},
+        {from:'br1',to:'pm',label:'音乐'},{from:'br1',to:'pp',label:'播客'},
+        {from:'pm',to:'w1'},{from:'pp',to:'w1'},
+        {from:'w1',to:'ok',label:'已收听'},{from:'w1',to:'em1',label:'未收听'},{from:'em1',to:'end'},
+      ]);
+
+    drawJourney(document.getElementById('dag-j5'),
+      [
+        {id:'start',kind:'entry',title:'开始',sub:'属性: 到期前7天/多设备用户'},
+        {id:'em1',kind:'channel',title:'Email',sub:'你的年度收听报告已生成'},
+        {id:'w1',kind:'wait',title:'等待事件',sub:'4天内等待: 续费/升级'},
+        {id:'ok0',kind:'exitOk',title:'结束（已转化）',sub:'续费或升级'},
+        {id:'br1',kind:'branch',title:'条件分支',sub:'属性: 用户特征'},
+        {id:'pf',kind:'channel',title:'App Push',sub:'(多设备) 家庭方案6人共享'},
+        {id:'py',kind:'channel',title:'App Push',sub:'(月费) 转年付省2个月'},
+        {id:'pr',kind:'channel',title:'App Push',sub:'(常规) 会员即将到期'},
+        {id:'w2',kind:'wait',title:'等待事件',sub:'T-1 前等待: 续费/升级'},
+        {id:'ok1',kind:'exitOk',title:'结束（已转化）',sub:'续费或升级'},
+        {id:'ia1',kind:'channel',title:'应用内消息',sub:'明日到期·歌单将受限'},
+        {id:'end',kind:'exitEnd',title:'结束',sub:'转沉默召回旅程'},
+      ],
+      [
+        {from:'start',to:'em1'},{from:'em1',to:'w1'},
+        {from:'w1',to:'ok0',label:'已转化'},{from:'w1',to:'br1',label:'未转化'},
+        {from:'br1',to:'pf',label:'多设备'},{from:'br1',to:'py',label:'月费'},{from:'br1',to:'pr',label:'常规'},
+        {from:'pf',to:'w2'},{from:'py',to:'w2'},{from:'pr',to:'w2'},
+        {from:'w2',to:'ok1',label:'已转化'},{from:'w2',to:'ia1',label:'未转化'},{from:'ia1',to:'end'},
+      ]);
+
+    drawJourney(document.getElementById('dag-j6'),
+      [
+        {id:'start',kind:'entry',title:'开始',sub:'属性: 最后收听>7天'},
+        {id:'br1',kind:'branch',title:'条件分支',sub:'属性: 沉默深度'},
+        {id:'p7',kind:'channel',title:'App Push',sub:'(7-14天) 你的歌单有N首新歌'},
+        {id:'p15',kind:'channel',title:'App Push',sub:'(15-29天) 关注的节目更新了'},
+        {id:'em30',kind:'channel',title:'Email',sub:'(≥30天) 为你重制的专属歌单'},
+        {id:'w1',kind:'wait',title:'等待事件',sub:'3天内等待: 是否收听'},
+        {id:'w2',kind:'wait',title:'等待事件',sub:'3天内等待: 是否收听'},
+        {id:'w3',kind:'wait',title:'等待事件',sub:'5天内等待: 是否收听'},
+        {id:'ok',kind:'exitOk',title:'结束（已回归）',sub:'恢复收听'},
+        {id:'wp1',kind:'channel',title:'Web Push',sub:'末次·网页端也能听'},
+        {id:'w4',kind:'wait',title:'等待事件',sub:'7天内等待: 是否收听'},
+        {id:'ok2',kind:'exitOk',title:'结束（已回归）',sub:'恢复收听'},
+        {id:'end',kind:'exitEnd',title:'结束',sub:'标记深度流失·降频'},
+      ],
+      [
+        {from:'start',to:'br1'},{from:'br1',to:'p7',label:'7-14天'},{from:'br1',to:'p15',label:'15-29天'},{from:'br1',to:'em30',label:'≥30天'},
+        {from:'p7',to:'w1'},{from:'p15',to:'w2'},{from:'em30',to:'w3'},
+        {from:'w1',to:'ok',label:'已回归'},{from:'w2',to:'ok',label:'已回归'},{from:'w3',to:'ok',label:'已回归'},
+        {from:'w1',to:'wp1',label:'未回归'},{from:'w2',to:'wp1',label:'未回归'},{from:'w3',to:'wp1',label:'未回归'},
+        {from:'wp1',to:'w4'},{from:'w4',to:'ok2',label:'已回归'},{from:'w4',to:'end',label:'未回归'},
+      ]);
+
+  })();
+  </script>
+</body>
+</html>
