@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MA · 小刀电动车（两轮电动车）车主运营增长方案</title>
+  <style>
+    :root {
+      --bg: #ffffff;
+      --bg-soft: #f7f8fa;
+      --bg-elev: #ffffff;
+      --border: #e5e7eb;
+      --border-strong: #d1d5db;
+      --text: #111827;
+      --text-2: #374151;
+      --text-3: #6b7280;
+      --text-4: #9ca3af;
+      --accent: #2563eb;
+      --accent-soft: #dbeafe;
+      --success: #16a34a;
+      --success-soft: #dcfce7;
+      --warning: #d97706;
+      --warning-soft: #fef3c7;
+      --info: #0369a1;
+      --info-soft: #e0f2fe;
+      --danger: #dc2626;
+      --danger-soft: #fee2e2;
+      --radius: 10px;
+      --radius-sm: 6px;
+      --shadow: 0 1px 2px rgba(16, 24, 40, 0.04);
+    }
+
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; background: var(--bg-soft); color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC",
+        "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", sans-serif;
+      line-height: 1.6; -webkit-font-smoothing: antialiased; font-size: 15px; }
+
+    main { max-width: 1180px; margin: 0 auto; padding: 32px 28px 80px; }
+
+    h1 { font-size: 30px; font-weight: 700; margin: 0 0 8px; letter-spacing: -0.01em; color: var(--text); }
+    h2 { font-size: 22px; font-weight: 700; margin: 0 0 12px; letter-spacing: -0.005em; color: var(--text); }
+    h3 { font-size: 17px; font-weight: 600; margin: 0 0 10px; color: var(--text); }
+    p { margin: 0 0 8px; color: var(--text-2); }
+    .muted { color: var(--text-3); }
+    .small { font-size: 13px; }
+    .bold { font-weight: 600; }
+
+    .section { background: var(--bg-elev); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 24px 26px; margin-bottom: 20px; }
+    .section-plain { padding: 6px 2px 18px; margin-bottom: 12px; }
+    .divider { height: 1px; background: var(--border); margin: 16px 0; border: none; }
+
+    .hero { background: linear-gradient(180deg, #fff 0%, #f0fdf4 100%);
+      border: 1px solid var(--border); border-radius: 14px; padding: 28px 30px;
+      margin-bottom: 24px; }
+    .hero-pills { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 14px; }
+    .hero-subtitle { color: var(--text-3); font-size: 15px; max-width: 900px; margin: 8px 0 18px; }
+
+    .pill { display: inline-flex; align-items: center; padding: 2px 10px;
+      font-size: 12px; border-radius: 999px; border: 1px solid var(--border-strong);
+      color: var(--text-2); background: #fff; font-weight: 500; }
+    .pill-accent { background: var(--accent-soft); border-color: var(--accent); color: var(--accent); }
+    .pill-info { background: var(--info-soft); border-color: var(--info); color: var(--info); }
+    .pill-success { background: var(--success-soft); border-color: var(--success); color: var(--success); }
+    .pill-warn { background: var(--warning-soft); border-color: var(--warning); color: var(--warning); }
+
+    .grid { display: grid; gap: 16px; }
+    .grid-4 { grid-template-columns: repeat(4, 1fr); }
+    .grid-3 { grid-template-columns: repeat(3, 1fr); }
+    .grid-2 { grid-template-columns: repeat(2, 1fr); }
+    .grid-5 { grid-template-columns: repeat(5, 1fr); }
+    .grid-1-2 { grid-template-columns: 1fr 2fr; }
+    .grid-2-1 { grid-template-columns: 1.4fr 1fr; }
+    .grid-12-1 { grid-template-columns: 1.2fr 1fr; }
+    .row { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+
+    .stat { padding: 14px 16px; background: var(--bg-elev); border: 1px solid var(--border);
+      border-radius: var(--radius); }
+    .stat-value { font-size: 26px; font-weight: 700; letter-spacing: -0.01em; color: var(--text);
+      line-height: 1.15; }
+    .stat-value.success { color: var(--success); }
+    .stat-value.info { color: var(--info); }
+    .stat-value.warn { color: var(--warning); }
+
+    .stat-label { font-size: 12px; color: var(--text-3); margin-top: 4px; }
+
+    .card { background: var(--bg-elev); border: 1px solid var(--border);
+      border-radius: var(--radius); overflow: hidden; }
+    .card-header { padding: 10px 16px; border-bottom: 1px solid var(--border);
+      background: #fafbfc; font-size: 13px; font-weight: 600; color: var(--text-2); }
+    .card-body { padding: 16px; }
+    .card-body.p-sm { padding: 12px; }
+    .card-body ul { margin: 0; padding-left: 18px; }
+    .card-body li { margin-bottom: 4px; font-size: 13.5px; color: var(--text-2); }
+
+    .callout { padding: 12px 14px; border-radius: var(--radius-sm);
+      border: 1px solid var(--border); border-left-width: 3px; background: var(--bg-soft); }
+    .callout-title { font-weight: 600; margin-bottom: 4px; font-size: 14px; }
+    .callout-body { font-size: 13px; color: var(--text-2); }
+    .callout-body p { font-size: 13px; color: var(--text-2); margin: 0 0 4px; }
+    .callout.info { border-left-color: var(--info); background: var(--info-soft); }
+    .callout.info .callout-title { color: var(--info); }
+    .callout.success { border-left-color: var(--success); background: var(--success-soft); }
+    .callout.success .callout-title { color: var(--success); }
+    .callout.warn { border-left-color: var(--warning); background: var(--warning-soft); }
+    .callout.warn .callout-title { color: var(--warning); }
+    .callout.neutral { border-left-color: var(--text-3); }
+
+    table { width: 100%; border-collapse: collapse; font-size: 13.5px;
+      background: var(--bg-elev); border: 1px solid var(--border); border-radius: var(--radius);
+      overflow: hidden; }
+    th, td { padding: 10px 12px; text-align: left; border-bottom: 1px solid var(--border);
+      color: var(--text-2); vertical-align: middle; }
+    th { background: #fafbfc; font-weight: 600; font-size: 12.5px; color: var(--text-3);
+      letter-spacing: 0.01em; text-transform: uppercase; }
+    tr:last-child td { border-bottom: 0; }
+    tr.tone-success td { background: rgba(22, 163, 74, 0.04); }
+    tr.tone-info td { background: rgba(3, 105, 161, 0.04); }
+
+    .signal-row { display: flex; gap: 10px; padding: 10px 0;
+      border-bottom: 1px solid var(--border); align-items: center; }
+    .signal-row:last-child { border-bottom: 0; }
+    .signal-row .left { flex: 1; min-width: 0; }
+    .signal-row .label { font-size: 13px; font-weight: 600; }
+    .signal-row .hint { font-size: 12px; color: var(--text-3); }
+    .signal-row .value { font-weight: 700; color: var(--text); font-size: 14px; white-space: nowrap; }
+
+    .chart { width: 100%; }
+    .chart svg { width: 100%; height: auto; display: block; }
+    .chart-legend { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--border); }
+    .chart-legend .leg-item { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--text-3); }
+    .chart-legend .dot { width: 10px; height: 10px; border-radius: 2px; }
+
+    .dag-wrap { overflow-x: auto; padding: 8px 2px; }
+    .dag-wrap svg { display: block; margin: 0 auto; }
+
+    .toc-bar { position: sticky; top: 0; background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(8px); border-bottom: 1px solid var(--border);
+      z-index: 10; padding: 10px 28px; margin: -32px -28px 24px;
+      font-size: 12.5px; }
+    .toc-bar .toc-inner { max-width: 1180px; margin: 0 auto; display: flex; gap: 14px;
+      align-items: center; overflow-x: auto; }
+    .toc-bar a { color: var(--text-3); text-decoration: none; white-space: nowrap; padding: 4px 2px; }
+    .toc-bar a:hover { color: var(--accent); }
+    .toc-bar .brand { font-weight: 700; color: var(--text); }
+
+    @page { size: A4; margin: 14mm; }
+    @media print {
+      body { background: #fff; }
+      main { max-width: none; padding: 0; }
+      .toc-bar { display: none; }
+      .section, .card, .hero { page-break-inside: avoid; box-shadow: none; }
+      h2 { page-break-after: avoid; }
+      .hero { break-before: avoid; }
+      .dag-wrap { overflow: visible; }
+      .dag-wrap svg { max-width: 100%; }
+    }
+
+    .spacer-sm { height: 6px; }
+    .spacer-md { height: 12px; }
+
+    .step-num { display: inline-flex; align-items: center; justify-content: center;
+      width: 22px; height: 22px; border-radius: 50%; background: var(--accent-soft);
+      color: var(--accent); font-weight: 700; font-size: 12px; margin-right: 8px; }
+
+    footer.site-footer { margin-top: 36px; padding-top: 16px; border-top: 1px solid var(--border);
+      font-size: 12px; color: var(--text-4); text-align: center; }
+  
+  .back-home {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    color: rgba(255,255,255,0.65);
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 500;
+    padding: 4px 10px 4px 6px;
+    border-radius: 6px;
+    border: 1px solid rgba(255,255,255,0.18);
+    margin-right: 16px;
+    white-space: nowrap;
+    transition: all 0.2s ease;
+    flex-shrink: 0;
+  }
+  .back-home:hover {
+    color: #fff;
+    background: rgba(255,255,255,0.12);
+    border-color: rgba(255,255,255,0.35);
+  }
+  .back-home svg {
+    width: 14px;
+    height: 14px;
+    opacity: 0.8;
+  }
+</style>
+</head>
+<body>
+  <nav class="toc-bar">
+    <div class="toc-inner">
+      <a class="back-home" href="../">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+        返回首页
+      </a>
+      <span class="brand">MA · 小刀电动车车主运营方案</span>
+      <a href="#s-market">业务现状</a><a href="#s-funnel">用户漏斗</a><a href="#s-why">为什么 MA</a>
+      <a href="#s-scenarios">场景总览</a><a href="#s-journey">旅程编排</a><a href="#s-channel">渠道选型</a>
+      <a href="#s-compliance">合规安全</a><a href="#s-plan">测试计划</a>
+    </div>
+  </nav>
+  <main>
+    <section class="hero">
+      <div class="hero-pills">
+        <span class="pill pill-success">两轮电动车 · 智能出行</span>
+        <span class="pill">国内市场</span>
+        <span class="pill pill-info">车主 App + 经销商门店双端</span>
+      </div>
+      <h1>MA · 小刀电动车（两轮电动车）车主运营增长方案</h1>
+      <p class="hero-subtitle">
+        两轮电动车是"<span class="bold">一次性高客单硬件 + 长周期售后服务</span>"的生意——车卖出去只是开始，
+        真正决定 LTV 的是：车主装没装 App、会不会用、保养回不回店、智能服务续不续费、3 年后换不换新车。
+        小刀智行 App 已具备远程控车、定位防盗、无感解锁、骑行数据与故障报修能力，
+        本方案以 <span class="bold">购车激活绑定、保养周期提醒、智能服务续费、设备离线与车况预警、以旧换新换购、经销商线索与履约</span> 六大旅程切入，
+        统一编排 <span class="bold">极光 App Push + 短信 + 应用内消息 + 经销商 App</span> 四类通道。
+      </p>
+      <div class="row">
+        <span class="pill pill-accent">极光 App Push（主力）</span>
+        <span class="pill pill-accent">短信（关键必达）</span>
+        <span class="pill pill-accent">应用内消息 / 运营位</span>
+        <span class="pill pill-accent">经销商 App（B 端）</span>
+      </div>
+    </section>
+
+    <section id="s-market" class="section">
+      <h2>一、业务现状与增长机会</h2>
+      <div class="grid grid-4" style="margin-bottom:16px">
+        <div class="stat"><div class="stat-value warn">绑定是入口</div><div class="stat-label">不绑 App 就触达不到车主，全部运营无从谈起</div></div>
+        <div class="stat"><div class="stat-value info">服务有到期日</div><div class="stat-label">智能服务到期即失去定位与远程控车能力</div></div>
+        <div class="stat"><div class="stat-value">周期高确定</div><div class="stat-label">保养、质保、车龄均可由购车日期精准推算</div></div>
+        <div class="stat"><div class="stat-value success">以旧换新</div><div class="stat-label">国补驱动的换购窗口，是当前最大增长抓手</div></div>
+      </div>
+      <div class="callout info" style="margin-bottom:16px">
+        <div class="callout-title">来自小刀智行 App 的现状观察</div>
+        <div class="callout-body">
+          <p>· 车主服务页显示「智能服务 · 服务中 · 服务有效期」——存在明确的<strong>到期与续费</strong>节点</p>
+          <p>· 个人页显示「拥有爱车的第 N 天」——已有精确购车日期，可推算保养、质保与车龄</p>
+          <p>· 车辆定位页出现「XX 天前更新 · 车辆网络信号弱」——<strong>设备长期离线</strong>是真实存在的状态</p>
+          <p>· 常见问题 Top 为「购车后保养周期」「电池耗电快」「APP 无法连接」，首页存在「不会使用 APP 怎么办」提示</p>
+        </div>
+      </div>
+      <p class="muted small">注：下文所有转化率、提升幅度为行业估算区间，落地以实测为准。智能服务的赠送期与续费价格以小刀官方政策为准（同类品牌通行为随车赠送一年、到期后按年续费）。</p>
+      <hr class="divider" />
+      <div class="grid grid-2">
+        <div class="callout neutral"><div class="callout-title">痛点 1 · 买了车不装 App、装了不会用</div><div class="callout-body"><p>车主在门店提车后未下载绑定，品牌方完全失去触达能力；即使绑定了，也常停留在"只看电量"，防盗、无感解锁等核心价值未被感知。</p></div></div>
+        <div class="callout info"><div class="callout-title">解法 · 购车激活与功能跑通旅程</div><div class="callout-body"><p>用购车预留手机号发短信引导绑定；绑定后按"是否用过核心功能"分层，逐个引导跑通设防、无感解锁、定位。</p></div></div>
+        <div class="callout neutral"><div class="callout-title">痛点 2 · 保养不回店，售后价值流失</div><div class="callout-body"><p>车主不清楚保养周期（这正是 App 常见问题第一条），到期不回店，保养与配件收入流向路边店。</p></div></div>
+        <div class="callout info"><div class="callout-title">解法 · 保养周期精准提醒</div><div class="callout-body"><p>按购车日期与骑行里程双维度推算首保与定期保养节点，提前提醒并直连门店预约，把车主留在官方体系内。</p></div></div>
+        <div class="callout neutral"><div class="callout-title">痛点 3 · 智能服务静默到期</div><div class="callout-body"><p>服务到期后定位、远程控车等功能失效，车主往往在"车找不到了"时才发现，体验受损且续费窗口已过。</p></div></div>
+        <div class="callout info"><div class="callout-title">解法 · 到期前置续费 + 宽限期挽回</div><div class="callout-body"><p>到期前多段提醒并说明"将失去定位与远程控车"，到期后宽限期内继续挽回，把续费做成默认动作。</p></div></div>
+        <div class="callout neutral"><div class="callout-title">痛点 4 · 换购需求无人承接</div><div class="callout-body"><p>车龄 3 年以上、电池明显衰减的车主正处于换购窗口，若品牌不主动触达，就会在别家门店完成以旧换新。</p></div></div>
+        <div class="callout info"><div class="callout-title">解法 · 以旧换新引导 + 门店线索闭环</div><div class="callout-body"><p>按车龄与电池状态识别换购人群，推旧车估值与国补活动，线索直达经销商 App 并催办跟进。</p></div></div>
+      </div>
+    </section>
+
+    <section id="s-funnel" class="section">
+      <h2>二、车主漏斗：从提车到换购，每层都有增长空间</h2>
+      <p class="muted small">下图为行业估算区间对比，用于说明各环节的自动化增长空间，非小刀实测数据。</p>
+      <div class="chart" id="chart-funnel"></div>
+    </section>
+
+    <section id="s-why" class="section">
+      <h2>三、为什么用营销自动化（MA）</h2>
+      <div class="grid grid-3">
+        <div class="card"><div class="card-header">车辆档案驱动</div><div class="card-body p-sm"><ul>
+          <li>购车日期、车型、里程、电池状态、服务到期日作为用户属性</li>
+          <li>保养、质保、续费、车龄多条周期自动推算并触发</li>
+        </ul></div></div>
+        <div class="card"><div class="card-header">设备事件实时触发</div><div class="card-body p-sm"><ul>
+          <li>绑定、骑行、离线、电量异常、设防状态秒级触发旅程</li>
+          <li>设备状态是续费流失与车况服务需求的最强信号</li>
+        </ul></div></div>
+        <div class="card"><div class="card-header">多周期去重护栏</div><div class="card-body p-sm"><ul>
+          <li>保养、续费、换购、活动可能同期触发，旅程间自动去重</li>
+          <li>每日/每周频控，避免同一车主被连续打扰</li>
+        </ul></div></div>
+        <div class="card"><div class="card-header">C 端 + B 端协同</div><div class="card-body p-sm"><ul>
+          <li>车主端做提醒与转化，经销商 App 端做线索催办与履约</li>
+          <li>线索从触达到到店核销形成闭环，可归因可考核</li>
+        </ul></div></div>
+        <div class="card"><div class="card-header">高可靠触达底座</div><div class="card-body p-sm"><ul>
+          <li>极光推送聚合华为/小米/OPPO/vivo/荣耀等厂商通道，送达有保障</li>
+          <li>关键节点 Push 失败自动降级短信，覆盖未装 App 车主</li>
+        </ul></div></div>
+        <div class="card"><div class="card-header">合规与数据安全</div><div class="card-body p-sm"><ul>
+          <li>车辆定位与轨迹属敏感个人信息，触达内容严格脱敏</li>
+          <li>营销短信合规退订、频控护栏、发送记录留存可审计</li>
+        </ul></div></div>
+      </div>
+    </section>
+
+    <section id="s-scenarios" class="section">
+      <h2>四、高 ROI 运营场景总览</h2>
+      <table>
+        <thead><tr><th>#</th><th>场景</th><th>对象端</th><th>核心触发</th><th>渠道组合</th><th>预期提升（估算）</th></tr></thead>
+        <tbody>
+          <tr class="tone-info"><td>J1</td><td>购车激活：App 绑定 + 功能跑通</td><td>车主</td><td>购车后未绑定 / 绑定后未用核心功能</td><td>短信 → App Push + 应用内</td><td>绑定率 +25~40%</td></tr>
+          <tr class="tone-success"><td>J2</td><td>首保与定期保养提醒</td><td>车主</td><td>按购车日期与里程推算</td><td>App Push + 短信 + 应用内</td><td>回店保养 +30~50%</td></tr>
+          <tr class="tone-success"><td>J3</td><td>智能服务到期续费</td><td>车主</td><td>服务到期前 30/7/1 天 + 宽限期</td><td>应用内 + App Push + 短信</td><td>续费率 +20~35%</td></tr>
+          <tr><td>J4</td><td>设备离线与车况预警</td><td>车主</td><td>长期未上报 / 电池异常</td><td>App Push + 短信</td><td>离线恢复、到店检测提升</td></tr>
+          <tr class="tone-success"><td>J5</td><td>以旧换新与换购引导</td><td>车主 + 门店</td><td>车龄达阈值 / 电池衰减 / 国补活动</td><td>App Push + 应用内 + 短信</td><td>换购线索 +25~40%</td></tr>
+          <tr><td>J6</td><td>经销商线索跟进与履约催办</td><td>经销商门店</td><td>线索分配 / 预约到店 / 工单超时</td><td>经销商 App + 短信</td><td>线索响应时效 +40%↑</td></tr>
+        </tbody>
+      </table>
+      <p class="muted small" style="margin-top:8px">提升幅度为行业公开区间估算，用于排期与目标设定，最终以 4 周测试实测为准。</p>
+    </section>
+
+    <section id="s-journey" class="section-plain">
+      <h2>五、核心旅程详细编排</h2>
+
+      <div class="section" style="margin-top:16px;">
+        <h3>旅程 1：购车激活 —— App 绑定 + 核心功能跑通</h3>
+        <div class="grid grid-2-1"><div class="dag-wrap" id="dag-j1"></div><div>
+          <div class="callout neutral" style="margin-bottom:12px"><div class="callout-title">业务痛点</div><div class="callout-body"><p>门店提车后不下载绑定，品牌完全失去触达能力；绑定后停留在"只看电量"，防盗与无感解锁的价值未被感知。</p></div></div>
+          <div class="callout info" style="margin-bottom:12px"><div class="callout-title">旅程组件配置</div><div class="callout-body">
+            <p><strong>进入条件：</strong>事件：购车开票 / 车辆激活但账号未绑定</p>
+            <p><strong>提前退出：</strong>事件：完成绑定且使用过核心功能</p>
+            <p><strong>分支：</strong>属性：绑定状态与已用功能（未绑定 / 已绑未设防 / 已绑未用无感解锁）</p>
+            <p><strong>渠道：</strong>未绑定阶段用购车预留手机号发短信，绑定后转 App Push 与应用内引导</p>
+          </div></div>
+          <div class="callout success"><div class="callout-title">预期效益</div><div class="callout-body"><p>绑定率 +25~40%（估算）；绑定与"会用"是后续保养、续费、换购全部运营的前提。</p></div></div>
+        </div></div>
+      </div>
+
+      <div class="section">
+        <h3>旅程 2：首保与定期保养提醒</h3>
+        <div class="grid grid-2-1"><div class="dag-wrap" id="dag-j2"></div><div>
+          <div class="callout neutral" style="margin-bottom:12px"><div class="callout-title">业务痛点</div><div class="callout-body"><p>「购车后保养周期」是 App 常见问题第一条——车主根本不清楚何时该保养，到期不回店，售后价值流向路边店。</p></div></div>
+          <div class="callout info" style="margin-bottom:12px"><div class="callout-title">旅程组件配置</div><div class="callout-body">
+            <p><strong>进入条件：</strong>属性：按购车日期与累计里程推算的保养节点临近</p>
+            <p><strong>分支：</strong>属性：保养类型（首保 / 定期保养 / 质保到期前检测）</p>
+            <p><strong>提前退出：</strong>事件：完成门店预约或到店保养</p>
+            <p><strong>递进：</strong>提前 15 天 App Push → 提前 3 天 Push+短信 → 逾期提醒</p>
+          </div></div>
+          <div class="callout success"><div class="callout-title">预期效益</div><div class="callout-body"><p>回店保养 +30~50%（估算）；这是两轮电动车确定性最高、ROI 最好的旅程。</p></div></div>
+        </div></div>
+      </div>
+
+      <div class="section">
+        <h3>旅程 3：智能服务到期续费</h3>
+        <div class="grid grid-2-1"><div class="dag-wrap" id="dag-j3"></div><div>
+          <div class="callout neutral" style="margin-bottom:12px"><div class="callout-title">业务痛点</div><div class="callout-body"><p>智能服务静默到期后，定位与远程控车失效，车主往往在"车找不到"时才发现，体验受损且续费窗口已过。</p></div></div>
+          <div class="callout info" style="margin-bottom:12px"><div class="callout-title">旅程组件配置</div><div class="callout-body">
+            <p><strong>进入条件：</strong>属性：智能服务到期前 30 天</p>
+            <p><strong>分支：</strong>属性：功能使用深度（常用定位防盗 / 低频使用）</p>
+            <p><strong>递进：</strong>T-30 应用内 → T-7 Push → T-1 Push+短信 → 到期后宽限期挽回</p>
+            <p><strong>说明：</strong>赠送期与续费价格以官方政策为准，文案中如实告知权益与到期影响</p>
+          </div></div>
+          <div class="callout success"><div class="callout-title">预期效益</div><div class="callout-body"><p>续费率 +20~35%（估算）；对高频使用定位防盗的车主，"功能将失效"比价格优惠更有说服力。</p></div></div>
+        </div></div>
+      </div>
+
+      <div class="section">
+        <h3>旅程 4：设备离线与车况预警</h3>
+        <div class="grid grid-2-1"><div class="dag-wrap" id="dag-j4"></div><div>
+          <div class="callout neutral" style="margin-bottom:12px"><div class="callout-title">业务痛点</div><div class="callout-body"><p>车辆长期不上报（App 显示"信号弱、N 天前更新"）意味着智能功能形同虚设，既影响体验也是续费流失前兆；「电池耗电快」也是高频问题。</p></div></div>
+          <div class="callout info" style="margin-bottom:12px"><div class="callout-title">旅程组件配置</div><div class="callout-body">
+            <p><strong>进入条件：</strong>事件/属性：车辆连续 N 天未上报数据 / 电池状态异常</p>
+            <p><strong>分支：</strong>属性：异常类型（设备离线排障 / 电池衰减到店检测）</p>
+            <p><strong>提前退出：</strong>事件：设备恢复上报 / 完成到店检测</p>
+            <p><strong>合规：</strong>触达仅提示"车辆状态异常"，不在消息中展示具体位置信息</p>
+          </div></div>
+          <div class="callout success"><div class="callout-title">预期效益</div><div class="callout-body"><p>离线恢复与到店检测提升；离线排障同时保住了智能服务续费与车主体验。</p></div></div>
+        </div></div>
+      </div>
+
+      <div class="section">
+        <h3>旅程 5：以旧换新与换购引导</h3>
+        <div class="grid grid-2-1"><div class="dag-wrap" id="dag-j5"></div><div>
+          <div class="callout neutral" style="margin-bottom:12px"><div class="callout-title">业务痛点</div><div class="callout-body"><p>车龄 3 年以上、电池明显衰减的车主正处于换购窗口，品牌不主动触达就会在别家门店完成以旧换新，老客白白流失。</p></div></div>
+          <div class="callout info" style="margin-bottom:12px"><div class="callout-title">旅程组件配置</div><div class="callout-body">
+            <p><strong>进入条件：</strong>属性：车龄达阈值（如 3 年+）/ 电池衰减明显 / 国补活动期</p>
+            <p><strong>分支：</strong>属性：换购意向信号（浏览过新车 / 仅车龄到期）</p>
+            <p><strong>内容：</strong>旧车估值 + 国补与品牌补贴 + 门店预约（承接门店引流）</p>
+            <p><strong>闭环：</strong>产生的换购线索实时同步经销商 App，进入 J6 跟进</p>
+          </div></div>
+          <div class="callout success"><div class="callout-title">预期效益</div><div class="callout-body"><p>换购线索 +25~40%（估算）；老客换购的成交率与获客成本都显著优于纯新客。</p></div></div>
+        </div></div>
+      </div>
+
+      <div class="section">
+        <h3>旅程 6：经销商线索跟进与履约催办（B 端）</h3>
+        <div class="grid grid-2-1"><div class="dag-wrap" id="dag-j6"></div><div>
+          <div class="callout neutral" style="margin-bottom:12px"><div class="callout-title">业务痛点</div><div class="callout-body"><p>线索派给门店后不及时跟进就快速冷却；保养预约与维修工单履约不透明，总部无法掌控终端服务质量。</p></div></div>
+          <div class="callout info" style="margin-bottom:12px"><div class="callout-title">旅程组件配置</div><div class="callout-body">
+            <p><strong>进入条件：</strong>事件：线索分配门店 / 车主预约到店 / 工单超时未处理</p>
+            <p><strong>递进：</strong>30min 未响应提醒 → 4h 未响应升级 → 24h 未响应建议重新分配</p>
+            <p><strong>分支：</strong>属性：任务类型（换购线索 / 保养预约 / 维修工单）</p>
+            <p><strong>渠道：</strong>经销商 App 推送为主，超时升级用短信触达店主</p>
+          </div></div>
+          <div class="callout success"><div class="callout-title">预期效益</div><div class="callout-body"><p>线索响应时效 +40%↑（估算）；终端响应速度直接决定 C 端触达带来的线索能否转成成交。</p></div></div>
+        </div></div>
+      </div>
+    </section>
+
+    <section id="s-channel" class="section-plain">
+      <h2>六、国内渠道选型参考</h2>
+      <div class="section">
+        <p class="muted small">国内两轮电动车场景的渠道适配相对值（示意）：极光 App Push 是车主端主力（成本近零、可承载全部周期提醒），短信用于未装 App 车主与到期类必达节点，应用内消息承接续费与换购转化，经销商 App 覆盖 B 端。</p>
+        <div class="chart" id="chart-channel"></div>
+        <div class="grid grid-2" style="margin-top:14px">
+          <div class="callout info"><div class="callout-title">主力通道</div><div class="callout-body"><p>极光 App Push（保养、续费、车况、活动全部周期提醒，聚合主流厂商通道保障送达）+ 应用内消息（续费与换购转化路径最短）。</p></div></div>
+          <div class="callout warn"><div class="callout-title">短信是覆盖缺口的关键</div><div class="callout-body"><p>大量车主提车后未装 App——购车激活阶段与智能服务到期等关键节点必须用购车预留手机号发短信兜底，否则这批人完全触达不到。</p></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="s-compliance" class="section">
+      <h2>七、合规与安全</h2>
+      <div class="grid grid-3">
+        <div class="card"><div class="card-header">车辆定位与轨迹</div><div class="card-body p-sm"><ul><li>定位与骑行轨迹属敏感个人信息，触达内容不展示具体位置</li><li>仅提示"车辆状态异常，请打开 App 查看"</li><li>遵循个人信息保护法与最小必要原则</li></ul></div></div>
+        <div class="card"><div class="card-header">营销触达合规</div><div class="card-body p-sm"><ul><li>营销短信需具备退订方式并遵守发送时段规范</li><li>服务类通知（保养、到期、车况）与营销类分类管理</li><li>如实告知服务权益与到期影响，不做误导性表述</li></ul></div></div>
+        <div class="card"><div class="card-header">数据与触达护栏</div><div class="card-body p-sm"><ul><li>多周期旅程去重与合并，避免同一车主被连续打扰</li><li>每日/每周频控、勿扰时段（避免夜间打扰）</li><li>PII 脱敏、权限管控、发送记录留存可审计</li></ul></div></div>
+      </div>
+    </section>
+
+    <section id="s-plan" class="section">
+      <h2>八、测试计划（4 周）</h2>
+      <table>
+        <thead><tr><th>周次</th><th>阶段</th><th>核心工作</th><th>验收指标</th></tr></thead>
+        <tbody>
+          <tr><td>第 1 周</td><td>启动 · 数据打通</td><td>确认埋点（购车/激活、App 绑定、功能使用、骑行里程、设备上报、服务到期日、门店预约）；周期推算规则与经销商系统对接</td><td>事件入库率 ≥95%；周期推算准确</td></tr>
+          <tr><td>第 2 周</td><td>核心旅程上线</td><td>J1 购车激活 + J2 保养提醒（2 条，小流量）；多周期去重与频控配置</td><td>旅程触发成功率 ≥98%；无重复打扰</td></tr>
+          <tr><td>第 3 周</td><td>扩量 · A/B</td><td>J3 智能服务续费 + J4 车况预警全量；"功能失效"话术 vs 价格优惠 A/B</td><td>绑定率与续费率 uplift 显现；样本量达标</td></tr>
+          <tr><td>第 4 周</td><td>复盘 · 扩面</td><td>J5 以旧换新 + J6 经销商催办上线；线索到店核销归因打通</td><td>绑定/保养/续费/换购线索 uplift 可量化</td></tr>
+        </tbody>
+      </table>
+      <div class="callout success" style="margin-top:14px"><div class="callout-title">投入</div><div class="callout-body"><p>测试期授权费 $0，配置 2 人专属服务团队支撑埋点、周期规则、双端建模与旅程交付。</p></div></div>
+    </section>
+    <footer class="site-footer">MA · 小刀电动车车主运营增长方案 — 内部方案，转化/提升数据为行业估算或公开参考，落地以实测为准。智能服务赠送期与续费政策以小刀官方为准；车辆定位与轨迹按敏感个人信息处理。</footer>
+  </main>
+  <script>
+  (function(){
+    // ========== Shared helpers ==========
+    const COLORS = {
+      accent: '#2563eb', info: '#0369a1', success: '#16a34a',
+      warning: '#d97706', neutral: '#94a3b8', muted: '#cbd5e1',
+      text: '#374151', textMute: '#9ca3af', grid: '#e5e7eb',
+    };
+    function svgEl(w, h) {
+      const s = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+      s.setAttribute('viewBox', '0 0 ' + w + ' ' + h);
+      s.setAttribute('width', '100%');
+      s.setAttribute('preserveAspectRatio', 'xMidYMid meet');
+      return s;
+    }
+    function el(tag, attrs) {
+      const e = document.createElementNS('http://www.w3.org/2000/svg', tag);
+      for (const k in attrs) e.setAttribute(k, attrs[k]);
+      return e;
+    }
+
+    // ========== Bar Chart ==========
+    function drawBarChart(mount, opts) {
+      const { categories, series, valueSuffix = '', height = 240 } = opts;
+      const W = 600, H = height, PAD_L = 44, PAD_R = 16, PAD_T = 12, PAD_B = 56;
+      const innerW = W - PAD_L - PAD_R, innerH = H - PAD_T - PAD_B;
+      const max = Math.max(...series.flatMap(s => s.data), 1);
+      const niceMax = Math.ceil(max / 20) * 20 || 100;
+      const groupCount = categories.length;
+      const barsPerGroup = series.length;
+      const groupW = innerW / groupCount;
+      const barW = Math.min(22, (groupW - 12) / barsPerGroup);
+      const s = svgEl(W, H);
+      for (let i = 0; i <= 4; i++) {
+        const v = (niceMax / 4) * i;
+        const y = PAD_T + innerH - (v / niceMax) * innerH;
+        s.appendChild(el('line', { x1: PAD_L, x2: W - PAD_R, y1: y, y2: y, stroke: COLORS.grid, 'stroke-width': 1 }));
+        const t = el('text', { x: PAD_L - 6, y: y + 4, 'text-anchor': 'end', 'font-size': 10, fill: COLORS.textMute });
+        t.textContent = Math.round(v) + valueSuffix;
+        s.appendChild(t);
+      }
+      categories.forEach((cat, ci) => {
+        const gx = PAD_L + groupW * ci;
+        series.forEach((se, si) => {
+          const v = se.data[ci] || 0;
+          const h = (v / niceMax) * innerH;
+          const x = gx + (groupW - barW * barsPerGroup) / 2 + si * barW;
+          const y = PAD_T + innerH - h;
+          const color = COLORS[se.tone] || COLORS.neutral;
+          s.appendChild(el('rect', { x, y, width: barW - 2, height: h, fill: color, rx: 2 }));
+          if (v > 0) {
+            const label = el('text', { x: x + (barW - 2) / 2, y: y - 2, 'text-anchor': 'middle', 'font-size': 8, fill: COLORS.text });
+            label.textContent = v + valueSuffix;
+            s.appendChild(label);
+          }
+        });
+        const t = el('text', { x: gx + groupW / 2, y: H - PAD_B + 14, 'text-anchor': 'middle', 'font-size': 10, fill: COLORS.text });
+        t.textContent = cat;
+        s.appendChild(t);
+      });
+      // Legend
+      let legX = PAD_L;
+      series.forEach((se) => {
+        const color = COLORS[se.tone] || COLORS.accent;
+        s.appendChild(el('rect', { x: legX, y: H - 18, width: 10, height: 10, rx: 2, fill: color }));
+        const t = el('text', { x: legX + 14, y: H - 10, 'font-size': 10, fill: COLORS.text });
+        t.textContent = se.name;
+        s.appendChild(t);
+        legX += 14 + (se.name.length * 7) + 16;
+      });
+      mount.innerHTML = '';
+      mount.appendChild(s);
+    }
+
+    // ========== Journey DAG renderer (same as fintech/security solution) ==========
+    const KIND_STYLE = {
+      entry:    { fill: '#f1f5f9', stroke: '#94a3b8', text: '#111827' },
+      wait:     { fill: '#fafafa', stroke: '#d1d5db', text: '#6b7280' },
+      branch:   { fill: '#f9fafb', stroke: '#475569', text: '#111827' },
+      channel:  { fill: '#dbeafe', stroke: '#2563eb', text: '#1e3a8a' },
+      sendtime: { fill: '#fef3c7', stroke: '#d97706', text: '#92400e' },
+      exitOk:   { fill: '#dcfce7', stroke: '#16a34a', text: '#14532d' },
+      exitEnd:  { fill: '#f3f4f6', stroke: '#9ca3af', text: '#4b5563' },
+    };
+
+    function drawJourney(mount, nodes, edges) {
+      const NODE_W = 176, NODE_H = 62, RANK_GAP = 42, NODE_GAP = 22;
+      const rankOf = {}, incoming = {};
+      nodes.forEach(n => { rankOf[n.id] = 0; incoming[n.id] = []; });
+      edges.forEach(e => { incoming[e.to].push(e.from); });
+      let changed = true;
+      while (changed) {
+        changed = false;
+        edges.forEach(e => {
+          if (rankOf[e.to] < rankOf[e.from] + 1) { rankOf[e.to] = rankOf[e.from] + 1; changed = true; }
+        });
+      }
+      const maxRank = Math.max(...Object.values(rankOf));
+      const ranks = [];
+      for (let r = 0; r <= maxRank; r++) ranks.push([]);
+      nodes.forEach(n => { ranks[rankOf[n.id]].push(n); });
+      const pos = {};
+      const rankWidths = ranks.map(r => r.length * NODE_W + (r.length - 1) * NODE_GAP);
+      const maxWidth = Math.max(...rankWidths, 400);
+      ranks.forEach((rankNodes, r) => {
+        const withAnchor = rankNodes.map(n => {
+          const parents = incoming[n.id].map(p => pos[p] ? pos[p].x + NODE_W / 2 : null).filter(x => x !== null);
+          const anchor = parents.length ? parents.reduce((a, b) => a + b, 0) / parents.length : null;
+          return { node: n, anchor };
+        });
+        withAnchor.sort((a, b) => {
+          if (a.anchor === null && b.anchor === null) return 0;
+          if (a.anchor === null) return 1;
+          if (b.anchor === null) return -1;
+          return a.anchor - b.anchor;
+        });
+        const totalW = withAnchor.length * NODE_W + (withAnchor.length - 1) * NODE_GAP;
+        const startX = (maxWidth - totalW) / 2 + 20;
+        withAnchor.forEach((it, i) => {
+          pos[it.node.id] = { x: startX + i * (NODE_W + NODE_GAP), y: 20 + r * (NODE_H + RANK_GAP) };
+        });
+      });
+      for (let pass = 0; pass < 3; pass++) {
+        ranks.forEach(rankNodes => {
+          const sorted = rankNodes.slice().sort((a, b) => pos[a.id].x - pos[b.id].x);
+          for (let i = 1; i < sorted.length; i++) {
+            const prev = pos[sorted[i - 1].id], cur = pos[sorted[i].id];
+            if (cur.x < prev.x + NODE_W + NODE_GAP) cur.x = prev.x + NODE_W + NODE_GAP;
+          }
+        });
+      }
+      const width = Math.max(...Object.values(pos).map(p => p.x)) + NODE_W + 20;
+      const height = Math.max(...Object.values(pos).map(p => p.y)) + NODE_H + 24;
+      const s = svgEl(width, height);
+      s.setAttribute('width', width);
+      s.setAttribute('height', height);
+      s.style.maxWidth = '100%';
+      s.style.height = 'auto';
+      const defs = el('defs');
+      const marker = el('marker', { id: 'arrow', viewBox: '0 0 10 10', refX: 9, refY: 5, markerWidth: 6, markerHeight: 6, orient: 'auto-start-reverse' });
+      marker.appendChild(el('path', { d: 'M 0 0 L 10 5 L 0 10 z', fill: '#94a3b8' }));
+      defs.appendChild(marker);
+      s.appendChild(defs);
+      edges.forEach(e => {
+        const from = pos[e.from], to = pos[e.to];
+        if (!from || !to) return;
+        const x1 = from.x + NODE_W / 2, y1 = from.y + NODE_H;
+        const x2 = to.x + NODE_W / 2, y2 = to.y;
+        const cy = (y1 + y2) / 2;
+        const d = 'M' + x1 + ',' + y1 + ' C' + x1 + ',' + cy + ' ' + x2 + ',' + cy + ' ' + x2 + ',' + y2;
+        s.appendChild(el('path', { d, fill: 'none', stroke: '#94a3b8', 'stroke-width': 1.25, 'marker-end': 'url(#arrow)' }));
+        if (e.label) {
+          const mx = (x1 + x2) / 2, my = cy;
+          const w = Math.max(e.label.length * 9 + 10, 28);
+          s.appendChild(el('rect', { x: mx - w / 2, y: my - 10, width: w, height: 18, rx: 4, fill: '#ffffff', stroke: '#e5e7eb' }));
+          const t = el('text', { x: mx, y: my + 3, 'text-anchor': 'middle', 'font-size': 11, fill: '#475569' });
+          t.textContent = e.label;
+          s.appendChild(t);
+        }
+      });
+      nodes.forEach(n => {
+        const p = pos[n.id];
+        const k = KIND_STYLE[n.kind] || KIND_STYLE.entry;
+        s.appendChild(el('rect', { x: p.x, y: p.y, width: NODE_W, height: NODE_H, rx: 10, fill: k.fill, stroke: k.stroke, 'stroke-width': n.kind === 'channel' ? 1.4 : 1 }));
+        const titleY = n.sub ? p.y + 24 : p.y + NODE_H / 2 + 4;
+        const title = el('text', { x: p.x + NODE_W / 2, y: titleY, 'text-anchor': 'middle', 'font-size': 12.5, 'font-weight': 600, fill: k.text });
+        title.textContent = n.title;
+        s.appendChild(title);
+        if (n.sub) {
+          const sub = el('text', { x: p.x + NODE_W / 2, y: p.y + 42, 'text-anchor': 'middle', 'font-size': 11, fill: k.text, opacity: 0.82 });
+          sub.textContent = n.sub;
+          s.appendChild(sub);
+        }
+      });
+      mount.innerHTML = '';
+      mount.appendChild(s);
+    }
+
+    drawBarChart(document.getElementById('chart-funnel'), {
+      categories: ['购车→App绑定', '绑定→用核心功能', '保养回店率', '智能服务续费率', '老客换购率'],
+      series: [
+        { name: '当前基准（估算）',    data: [40, 45, 35, 45, 15], tone: 'neutral' },
+        { name: 'MA 自动化后（估算）', data: [55, 60, 50, 58, 21], tone: 'success' },
+      ], valueSuffix: '%', height: 260,
+    });
+    drawBarChart(document.getElementById('chart-channel'), {
+      categories: ['极光 App Push', '短信', '应用内消息', '经销商App(B端)', '微信生态'],
+      series: [{ name: '国内两轮电动车适配（相对值·示意）', data: [93, 85, 78, 70, 55], tone: 'info' }],
+      valueSuffix: '', height: 220,
+    });
+
+    // J1 购车激活：绑定 + 功能跑通
+    drawJourney(document.getElementById('dag-j1'),
+      [
+        {id:'start',kind:'entry',title:'开始',sub:'事件: 购车开票/车辆激活'},
+        {id:'w1',kind:'wait',title:'等待事件',sub:'24h 内等待: 完成绑定'},
+        {id:'sms1',kind:'channel',title:'短信',sub:'下载小刀智行·绑定看车况防盗'},
+        {id:'w2',kind:'wait',title:'等待事件',sub:'3天内等待: 完成绑定'},
+        {id:'sms2',kind:'channel',title:'短信',sub:'绑定享定位防盗与保养提醒'},
+        {id:'end0',kind:'exitEnd',title:'结束',sub:'未绑定·转门店二次引导'},
+        {id:'br1',kind:'branch',title:'条件分支',sub:'属性: 已使用的核心功能'},
+        {id:'p1',kind:'channel',title:'App Push',sub:'(未设防) 一键设防·离车自动落锁'},
+        {id:'p2',kind:'channel',title:'App Push',sub:'(未用无感解锁) 靠近即开·免掏钥匙'},
+        {id:'ia1',kind:'channel',title:'应用内消息',sub:'新手教学视频·3分钟上手'},
+        {id:'w3',kind:'wait',title:'等待事件',sub:'7天内等待: 使用核心功能'},
+        {id:'ok',kind:'exitOk',title:'结束（已激活）',sub:'绑定且用过核心功能'},
+        {id:'end',kind:'exitEnd',title:'结束',sub:'转低活跃车主培育'},
+      ],
+      [
+        {from:'start',to:'w1'},
+        {from:'w1',to:'br1',label:'已绑定'},{from:'w1',to:'sms1',label:'未绑定'},
+        {from:'sms1',to:'w2'},{from:'w2',to:'br1',label:'已绑定'},{from:'w2',to:'sms2',label:'未绑定'},
+        {from:'sms2',to:'end0'},
+        {from:'br1',to:'p1',label:'未设防'},{from:'br1',to:'p2',label:'未用无感解锁'},
+        {from:'p1',to:'ia1'},{from:'p2',to:'ia1'},{from:'ia1',to:'w3'},
+        {from:'w3',to:'ok',label:'已使用'},{from:'w3',to:'end',label:'未使用'},
+      ]);
+
+    // J2 保养提醒
+    drawJourney(document.getElementById('dag-j2'),
+      [
+        {id:'start',kind:'entry',title:'开始',sub:'属性: 保养节点临近'},
+        {id:'st1',kind:'sendtime',title:'可发送时间',sub:'每天 9:00-20:00'},
+        {id:'br1',kind:'branch',title:'条件分支',sub:'属性: 保养类型'},
+        {id:'pf',kind:'channel',title:'App Push',sub:'(首保) 免费首保·预约享优先'},
+        {id:'pr',kind:'channel',title:'App Push',sub:'(定期) 该保养了·套餐与门店'},
+        {id:'pw',kind:'channel',title:'App Push',sub:'(质保到期前) 免费检测提醒'},
+        {id:'w1',kind:'wait',title:'等待事件',sub:'7天内等待: 预约/到店'},
+        {id:'ok0',kind:'exitOk',title:'结束（已到店）',sub:'完成预约或保养'},
+        {id:'ia1',kind:'channel',title:'应用内消息',sub:'附近门店与可预约时段'},
+        {id:'w2',kind:'wait',title:'等待事件',sub:'5天内等待: 预约/到店'},
+        {id:'ok1',kind:'exitOk',title:'结束（已到店）',sub:'完成预约或保养'},
+        {id:'sms1',kind:'channel',title:'短信',sub:'保养已逾期·影响质保与安全'},
+        {id:'w3',kind:'wait',title:'等待事件',sub:'7天内等待: 预约/到店'},
+        {id:'ok2',kind:'exitOk',title:'结束（已到店）',sub:'完成预约或保养'},
+        {id:'end',kind:'exitEnd',title:'结束',sub:'下周期再提醒'},
+      ],
+      [
+        {from:'start',to:'st1'},{from:'st1',to:'br1'},
+        {from:'br1',to:'pf',label:'首保'},{from:'br1',to:'pr',label:'定期保养'},{from:'br1',to:'pw',label:'质保到期前'},
+        {from:'pf',to:'w1'},{from:'pr',to:'w1'},{from:'pw',to:'w1'},
+        {from:'w1',to:'ok0',label:'已到店'},{from:'w1',to:'ia1',label:'未到店'},
+        {from:'ia1',to:'w2'},{from:'w2',to:'ok1',label:'已到店'},{from:'w2',to:'sms1',label:'未到店'},
+        {from:'sms1',to:'w3'},{from:'w3',to:'ok2',label:'已到店'},{from:'w3',to:'end',label:'未到店'},
+      ]);
+
+    // J3 智能服务续费
+    drawJourney(document.getElementById('dag-j3'),
+      [
+        {id:'start',kind:'entry',title:'开始',sub:'属性: 智能服务到期前30天'},
+        {id:'br1',kind:'branch',title:'条件分支',sub:'属性: 功能使用深度'},
+        {id:'iah',kind:'channel',title:'应用内消息',sub:'(常用定位防盗) 本年已为你定位N次'},
+        {id:'ial',kind:'channel',title:'应用内消息',sub:'(低频) 这些智能功能你还没试过'},
+        {id:'w1',kind:'wait',title:'等待事件',sub:'T-7 前等待: 是否续费'},
+        {id:'ok0',kind:'exitOk',title:'结束（已续费）',sub:'完成智能服务续费'},
+        {id:'p1',kind:'channel',title:'App Push',sub:'T-7 到期后将无法定位与远程控车'},
+        {id:'w2',kind:'wait',title:'等待事件',sub:'T-1 前等待: 是否续费'},
+        {id:'ok1',kind:'exitOk',title:'结束（已续费）',sub:'完成智能服务续费'},
+        {id:'sms1',kind:'channel',title:'短信+App Push',sub:'T-1 明日到期·一键续费'},
+        {id:'w3',kind:'wait',title:'等待事件',sub:'到期前等待: 是否续费'},
+        {id:'ok2',kind:'exitOk',title:'结束（已续费）',sub:'完成智能服务续费'},
+        {id:'p2',kind:'channel',title:'App Push',sub:'宽限期内续费可立即恢复功能'},
+        {id:'w4',kind:'wait',title:'等待事件',sub:'宽限期内等待: 是否续费'},
+        {id:'ok3',kind:'exitOk',title:'结束（已挽回）',sub:'宽限期内完成续费'},
+        {id:'end',kind:'exitEnd',title:'结束',sub:'标记流失·换购时再触达'},
+      ],
+      [
+        {from:'start',to:'br1'},{from:'br1',to:'iah',label:'高频使用'},{from:'br1',to:'ial',label:'低频'},
+        {from:'iah',to:'w1'},{from:'ial',to:'w1'},
+        {from:'w1',to:'ok0',label:'已续费'},{from:'w1',to:'p1',label:'未续费'},
+        {from:'p1',to:'w2'},{from:'w2',to:'ok1',label:'已续费'},{from:'w2',to:'sms1',label:'未续费'},
+        {from:'sms1',to:'w3'},{from:'w3',to:'ok2',label:'已续费'},{from:'w3',to:'p2',label:'已到期'},
+        {from:'p2',to:'w4'},{from:'w4',to:'ok3',label:'已续费'},{from:'w4',to:'end',label:'未续费'},
+      ]);
+
+    // J4 设备离线与车况预警
+    drawJourney(document.getElementById('dag-j4'),
+      [
+        {id:'start',kind:'entry',title:'开始',sub:'事件: 长期未上报/电池异常'},
+        {id:'br1',kind:'branch',title:'条件分支',sub:'属性: 异常类型'},
+        {id:'po',kind:'channel',title:'App Push',sub:'(设备离线) 车辆状态异常·排障指引'},
+        {id:'pb',kind:'channel',title:'App Push',sub:'(电池衰减) 续航下降·免费检测'},
+        {id:'w1',kind:'wait',title:'等待事件',sub:'3天内等待: 恢复/到店'},
+        {id:'ok0',kind:'exitOk',title:'结束（已处理）',sub:'设备恢复或完成检测'},
+        {id:'ia1',kind:'channel',title:'应用内消息',sub:'常见排障步骤+附近门店'},
+        {id:'w2',kind:'wait',title:'等待事件',sub:'5天内等待: 恢复/到店'},
+        {id:'ok1',kind:'exitOk',title:'结束（已处理）',sub:'设备恢复或完成检测'},
+        {id:'sms1',kind:'channel',title:'短信',sub:'车辆长期离线·建议到店检测'},
+        {id:'w3',kind:'wait',title:'等待事件',sub:'7天内等待: 恢复/到店'},
+        {id:'ok2',kind:'exitOk',title:'结束（已处理）',sub:'设备恢复或完成检测'},
+        {id:'end',kind:'exitEnd',title:'结束',sub:'转门店人工回访'},
+      ],
+      [
+        {from:'start',to:'br1'},{from:'br1',to:'po',label:'设备离线'},{from:'br1',to:'pb',label:'电池衰减'},
+        {from:'po',to:'w1'},{from:'pb',to:'w1'},
+        {from:'w1',to:'ok0',label:'已处理'},{from:'w1',to:'ia1',label:'未处理'},
+        {from:'ia1',to:'w2'},{from:'w2',to:'ok1',label:'已处理'},{from:'w2',to:'sms1',label:'未处理'},
+        {from:'sms1',to:'w3'},{from:'w3',to:'ok2',label:'已处理'},{from:'w3',to:'end',label:'未处理'},
+      ]);
+
+    // J5 以旧换新与换购
+    drawJourney(document.getElementById('dag-j5'),
+      [
+        {id:'start',kind:'entry',title:'开始',sub:'属性: 车龄达阈值/电池衰减'},
+        {id:'st1',kind:'sendtime',title:'可发送时间',sub:'每天 9:00-20:00'},
+        {id:'p1',kind:'channel',title:'App Push',sub:'旧车可估值·国补叠加品牌补贴'},
+        {id:'w1',kind:'wait',title:'等待事件',sub:'7天内等待: 估值/预约'},
+        {id:'br1',kind:'branch',title:'条件分支',sub:'属性: 是否浏览过新车'},
+        {id:'ia1',kind:'channel',title:'应用内消息',sub:'(已浏览) 你看的车型换购价'},
+        {id:'ia2',kind:'channel',title:'应用内消息',sub:'(未浏览) 同价位新款推荐'},
+        {id:'w2',kind:'wait',title:'等待事件',sub:'7天内等待: 是否预约到店'},
+        {id:'lead',kind:'channel',title:'线索同步',sub:'换购线索推送经销商App'},
+        {id:'sms1',kind:'channel',title:'短信',sub:'补贴活动即将结束·预约到店'},
+        {id:'w3',kind:'wait',title:'等待事件',sub:'14天内等待: 是否到店'},
+        {id:'ok',kind:'exitOk',title:'结束（已到店）',sub:'到店估值或成交'},
+        {id:'end',kind:'exitEnd',title:'结束',sub:'下轮活动再触达'},
+      ],
+      [
+        {from:'start',to:'st1'},{from:'st1',to:'p1'},{from:'p1',to:'w1'},
+        {from:'w1',to:'lead',label:'已估值/预约'},{from:'w1',to:'br1',label:'无动作'},
+        {from:'br1',to:'ia1',label:'已浏览新车'},{from:'br1',to:'ia2',label:'未浏览'},
+        {from:'ia1',to:'w2'},{from:'ia2',to:'w2'},
+        {from:'w2',to:'lead',label:'已预约'},{from:'w2',to:'sms1',label:'未预约'},
+        {from:'sms1',to:'w3'},{from:'lead',to:'w3'},
+        {from:'w3',to:'ok',label:'已到店'},{from:'w3',to:'end',label:'未到店'},
+      ]);
+
+    // J6 经销商线索与履约（B端）
+    drawJourney(document.getElementById('dag-j6'),
+      [
+        {id:'start',kind:'entry',title:'开始',sub:'事件: 线索分配/预约/工单'},
+        {id:'br1',kind:'branch',title:'条件分支',sub:'属性: 任务类型'},
+        {id:'pl',kind:'channel',title:'经销商App',sub:'(换购线索) 新线索·30分钟内联系'},
+        {id:'pa',kind:'channel',title:'经销商App',sub:'(保养预约) 车主将到店·请备件'},
+        {id:'pw',kind:'channel',title:'经销商App',sub:'(维修工单) 待处理工单提醒'},
+        {id:'w1',kind:'wait',title:'等待事件',sub:'30min 内等待: 是否响应'},
+        {id:'ok0',kind:'exitOk',title:'结束（已响应）',sub:'门店已跟进'},
+        {id:'p2',kind:'channel',title:'经销商App',sub:'任务超时·车主正在等待'},
+        {id:'w2',kind:'wait',title:'等待事件',sub:'4h 内等待: 是否响应'},
+        {id:'ok1',kind:'exitOk',title:'结束（已响应）',sub:'门店已跟进'},
+        {id:'sms1',kind:'channel',title:'短信（店主）',sub:'超时未处理·影响门店考核'},
+        {id:'w3',kind:'wait',title:'等待事件',sub:'24h 内等待: 是否响应'},
+        {id:'ok2',kind:'exitOk',title:'结束（已响应）',sub:'门店已跟进'},
+        {id:'end',kind:'exitEnd',title:'结束',sub:'建议重新分配·总部介入'},
+      ],
+      [
+        {from:'start',to:'br1'},
+        {from:'br1',to:'pl',label:'换购线索'},{from:'br1',to:'pa',label:'保养预约'},{from:'br1',to:'pw',label:'维修工单'},
+        {from:'pl',to:'w1'},{from:'pa',to:'w1'},{from:'pw',to:'w1'},
+        {from:'w1',to:'ok0',label:'已响应'},{from:'w1',to:'p2',label:'未响应'},
+        {from:'p2',to:'w2'},{from:'w2',to:'ok1',label:'已响应'},{from:'w2',to:'sms1',label:'未响应'},
+        {from:'sms1',to:'w3'},{from:'w3',to:'ok2',label:'已响应'},{from:'w3',to:'end',label:'未响应'},
+      ]);
+
+  })();
+  </script>
+</body>
+</html>
